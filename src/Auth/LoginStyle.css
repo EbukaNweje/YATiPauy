@@ -1,7 +1,7 @@
 .MainBody {
     width: 100%;
     height: 100vh;
-    background: #110E33;
+    background: #f1f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,8 @@
 
 .Wrapper {
     width: 50%;
-    height: 50%;
+    height: max-content;
+    padding: 10px;
     /* background: white; */
 }
 
@@ -28,8 +29,8 @@
 }
 
 .navBack:hover{
-    background: #ffffff;
-    color: black;
+    background: #012306;
+    color: white;
 }
 
 .AuthHader {
@@ -41,7 +42,7 @@
         font-size: 32px;
         font-weight: 600;
         line-height: 44.2667px;
-        color: rgb(255, 255, 255);
+        color: #022e09;
         font-family: "Exo", sans-serif;
         font-optical-sizing: auto;
     }
@@ -70,7 +71,7 @@
 
 .divInputWrapper {
     width: 100%;
-    height: 40%;
+    height: 9vh;
     /* background: blue; */
     display: flex;
     justify-content: space-between;
@@ -81,13 +82,14 @@
 .divInput {
     width: 48%;
     height: 60%;
-    background: #E7F0FE;
+    background: #e7f0fe00;
     border-radius: 15px;
     display: flex;
     align-items: center;
     padding: 5px;
     gap: 10px;
     padding-left: 8px;
+    border: 1px solid #035611;
 }
 
 .IconFont {
@@ -118,7 +120,7 @@
         }
 
         & span {
-            color: lightgray;
+            color: #012306;
             cursor: pointer;
         }
 
@@ -133,7 +135,7 @@
     height: 50px;
     margin-top: 17px;
     cursor: pointer;
-    background: #614BFF;
+    background: #022e09;
     color: white;
     border-radius: 10px;
     border: none;
@@ -142,6 +144,6 @@
 }
 
 .Btn:hover {
-    background: white;
-    color: black;
+    background: #035611;
+    color: white;
 }

@@ -1,0 +1,91 @@
+/* Media Query Styling for Small Desktop  */
+
+@media only screen and (max-width: 1200px){
+
+
+
+}
+
+/* End of Media Query Styling for Tablet Device */
+
+
+/* Media Query Styling for Big Tablet Device */
+
+@media only screen and (max-width: 900px){
+    .Wrapper {
+        width: 90%;
+        min-height: max-content;
+        /* background: #000; */
+        padding-inline: 20px;
+    }
+
+    .navBack {
+        margin-bottom: 14%;
+    }
+
+    .AuthHader {
+        width: 100%;
+        
+        & p {
+            font-size: 12px;
+        }
+    }
+
+    .divInputWrapper {
+        flex-direction: column;
+        width: 100%;
+        min-height: max-content;
+        /* background: #000; */
+    }
+
+    .divInput {
+        width: 100%;
+        margin-top: 10px;
+        min-height: 7vh;
+    }
+
+    .Not {
+        margin-top: 10%;
+        width: 100%;
+        font-size: 10px;
+        
+        & p {
+            font-size: 14px;
+        }
+    }
+
+}
+
+/* End of Media Query Styling for Tablet Device */
+/* Media Query Styling for Tablet Device */
+
+@media only screen and (max-width: 760px){
+    .Not {
+        margin-top: 10%;
+        width: 100%;
+        font-size: 10px;
+    }
+
+}
+
+/* End of Media Query Styling for Tablet Device */
+
+/* Media Query Styling for Mobile Device */
+
+@media only screen and (max-width: 480px) {
+    .Not {
+        width: 100%;
+        margin-top: 10%;
+        font-size: 10px;
+    }
+}
+
+
+/* End of Media Query Styling for Mobile Device */
+
+
+/* Media Query Styling for Mobile Device */
+
+@media only screen and (max-width: 379px) {
+
+}
