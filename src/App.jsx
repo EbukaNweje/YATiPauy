@@ -4,6 +4,7 @@ import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
 import Layout from './pages/Layout';
 import Home from './pages/Home'
+import Product from './pages/Product';
 
 const App = () => {
   const router = createHashRouter([
@@ -16,7 +17,8 @@ const App = () => {
       element: <Signup/>
     },
     { path: 'dashboard', element: <Layout/>, children:[
-    {path: '', element: <Home/>}
+    {path: '', element: <Home/>},
+    {path: 'vip', element: <Product/>},
     ] }
   ])
   return (

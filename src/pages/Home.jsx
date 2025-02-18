@@ -22,6 +22,7 @@ const Home = () =>{
     { id: 7, name: "Product 7" }
   ];
   
+  
   const ITEMS_PER_PAGE = 5;
   const [index, setIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -92,7 +93,7 @@ const Home = () =>{
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i}
-              className={i === currentPage ? "active" : "btn"}
+              className={i === currentPage ? "active" : ""}
               onClick={() => setCurrentPage(i)}
             >
               {i + 1}
