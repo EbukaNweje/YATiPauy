@@ -1,6 +1,6 @@
 import React, { useState } from 'react' 
-import "../Auth/LoginStyle.css"
-import "../MobileStyle/AllMobileStyle.css"
+import "./LoginStyle.css"
+import '../../MobileStyle/AllMobileStyle.css'
 import { IoMdArrowDropleft } from "react-icons/io";
 import { FaRegUser, FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";

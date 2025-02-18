@@ -1,6 +1,6 @@
 import React, { useState } from 'react' 
-import "../Auth/LoginStyle.css"
-import "../MobileStyle/AllMobileStyle.css"
+import "./LoginStyle.css"
+import '../../MobileStyle/AllMobileStyle.css'
 import { IoMdArrowDropleft } from "react-icons/io";
 import { FaRegUser, FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
@@ -18,7 +18,7 @@ const Login = () => {
     <div className='MainBody'>
         <div className='Wrapper'>
             <div className='navBack'>
-                <IoMdArrowDropleft/>
+                <IoMdArrowDropleft size={40}/>
             </div>
             
             <div className='AuthHader'>
@@ -45,7 +45,7 @@ const Login = () => {
                         <div className='forgot'>
                             <p>Forgot password?</p>
                         </div>
-                            <button className='Btn'>Sign In</button>
+                            <button className='Btn' onClick={()=>Nav('/dashboard')}>Sign In</button>
 
                             <div className='Not'>
                             <p>Not a member?  <small>Create an new account? <span onClick={()=> Nav("/Sign-up")}>Sign Up</span></small></p>

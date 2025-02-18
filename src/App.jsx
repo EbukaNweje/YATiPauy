@@ -1,7 +1,9 @@
 import React from 'react'
-import Login from './Auth/Login'
 import {RouterProvider, createHashRouter} from "react-router-dom";
-import Signup from './Auth/Signup';
+import Login from './pages/Auth/Login'
+import Signup from './pages/Auth/Signup'
+import Layout from './pages/Layout';
+import Home from './pages/Home'
 
 const App = () => {
   const router = createHashRouter([
@@ -12,11 +14,14 @@ const App = () => {
     {
       path : "/Sign-up",
       element: <Signup/>
-    }
+    },
+    { path: 'dashboard', element: <Layout/>, children:[
+    {path: '', element: <Home/>}
+    ] }
   ])
   return (
     <>
-            <RouterProvider router={router} />
+     <RouterProvider router={router} />
     </>
   )
 }

@@ -1,37 +1,66 @@
 .MainBody {
     width: 100%;
     height: 100vh;
-    background: #f1f0f0;
+    /* background: rgb(1, 1, 38); */
+    background: rgb(235, 233, 233);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .Wrapper {
-    width: 50%;
+    width: 60%;
     height: max-content;
     padding: 10px;
-    /* background: white; */
+    /* background: #ebebeb; */
 }
 
 .navBack {
-    width: 50px;
-    height: 50px;
-    background: #b6b4b465;
+    width: 70px;
+    height: 70px;
+    background: #022e09;
+    color: white; 
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: gray;
     font-size: 30px;
     cursor: pointer;
-    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s ease-in-out;
 }
 
-.navBack:hover{
-    background: #012306;
-    color: white;
+.navBack::before {
+    content: "";
+    position: absolute;
+    width: 200%; 
+    height: 200%;
+    background: white;
+    top: 100%;
+    left: -100%;
+    transform: rotate(25deg);
+    transition: top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
+    border-radius: 50%;
+    z-index: 0;
 }
+
+.navBack:hover::before {
+    top: -50%;
+    left: -50%;
+    transform: rotate(180deg); 
+}
+
+.navBack:hover {
+    color: #022e09; 
+}
+
+.navBack > * {  
+    position: relative; 
+    z-index: 1; 
+}
+
+
 
 .AuthHader {
     margin-top: 20px;
@@ -39,10 +68,11 @@
     color: #ffffff;
 
     & h3 {
-        font-size: 32px;
+        font-size: 35px;
         font-weight: 600;
         line-height: 44.2667px;
         color: #022e09;
+        /* color: white; */
         font-family: "Exo", sans-serif;
         font-optical-sizing: auto;
     }
@@ -67,11 +97,14 @@
     width: 95%;
     height: 100%;
     /* background: green; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .divInputWrapper {
     width: 100%;
-    height: 9vh;
+    height: 15vh;
     /* background: blue; */
     display: flex;
     justify-content: space-between;
@@ -87,14 +120,17 @@
     display: flex;
     align-items: center;
     padding: 5px;
+    font-size: 18px;
     gap: 10px;
     padding-left: 8px;
-    border: 1px solid #035611;
+    border: 1px solid grey;
 }
 
 .IconFont {
-    font-size:  20px;
-    color: rgba(128, 128, 128, 0.596);
+    font-size: 25px;
+    /* color: rgba(128, 128, 128, 0.596); */
+    /* color: rgb(255, 255, 255); */
+    color: grey;
     cursor: pointer;
 }
 
@@ -102,6 +138,9 @@
     width: 90%;
     height: 99%;
     border: 1px;
+    font-size: 20px;
+    /* color: rgb(255, 255, 255); */
+    color: grey;
     background-color: transparent;
     outline: none;
 }
@@ -112,11 +151,11 @@
     justify-content: flex-end;
     color: gray;
     cursor: pointer;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 
         & p{
             transition: all 0.5s ease;
-            font-size: 15px;
+            font-size: 18px;
         }
 
         & span {
@@ -132,18 +171,32 @@
 
 .Btn {
     width: 100%;
-    height: 50px;
-    margin-top: 17px;
+    height: 65px;
+    padding: 20px;
     cursor: pointer;
-    background: #022e09;
+    background:#022e09;
     color: white;
-    border-radius: 10px;
+    border-radius: 30px;
     border: none;
-    font-size: 18px;
-    transition: all 0.5s ease;
+    font-size: 20px;
+    line-height: 21px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
 }
 
-.Btn:hover {
-    background: #035611;
-    color: white;
+.Btn::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2); 
+    transform: rotate(25deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+.Btn:hover::before {
+    transform: translateX(100%) translateY(100%);
 }

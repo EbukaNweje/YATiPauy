@@ -1,0 +1,46 @@
+.Layout{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #ebe9e9; */
+    background-color: #022e09;
+    overflow: hidden;
+}
+
+.Layout header{
+    width: 100%;
+    height: 15%;
+    /* background-color: #054510; */
+    background-color: #05451091;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 20px;
+    top: 0%;
+    position: static;
+    z-index: 9999;
+}
+.Layout footer{
+    width: 100%;
+    height: 15%;
+    background-color: #05451091;
+    /* background-color: rgba(255, 255, 255, 0.263); */
+
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    padding: 20px;
+    top: 0%;
+    position: static;
+    z-index: 9999;
+}
+
+.Layout main{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+
+}
