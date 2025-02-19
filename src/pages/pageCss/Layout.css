@@ -14,18 +14,19 @@
     width: 100%;
     height: 15%;
     /* background-color: #054510; */
-    background-color: #05451091;
+    background-color: #022308f5;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
     padding: 20px;
     top: 0%;
     position: static;
     z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .Layout footer{
     width: 100%;
     height: 25%;
-    background-color: #05451091;
+    background-color: #022308f5;
     /* background-color: rgba(255, 255, 255, 0.263); */
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
@@ -33,6 +34,7 @@
     top: 0%;
     position: static;
     z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 
@@ -93,25 +95,56 @@
     }
 }
 
-.header-btn{
-    width: 50px;
-        height: 50px;
-        border-radius: 100%;
-        display: flex;
-        color: white;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #022e09;
-        background-color: rgba(255, 255, 255, 0.231); 
+.navBack {
+    width: 70px;
+    height: 70px;
+    background: #022e09;
+    color: white; 
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s ease-in-out;
 }
 
+.navBack::before {
+    content: "";
+    position: absolute;
+    width: 200%; 
+    height: 200%;
+    background: white;
+    top: 100%;
+    left: -100%;
+    transform: rotate(25deg);
+    transition: top 0.5s ease-in-out, left 0.5s ease-in-out, transform 0.5s ease-in-out;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.navBack:hover::before {
+    top: -50%;
+    left: -50%;
+    transform: rotate(180deg); 
+}
+
+.navBack:hover {
+    color: #022e09; 
+}
+
+.navBack > * {  
+    position: relative; 
+    z-index: 1; 
+}
 
 .Layout main{
     width: 100%;
     height: 70%;
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
 
 }
 

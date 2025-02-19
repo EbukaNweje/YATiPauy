@@ -81,3 +81,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.productWrap{
+    padding: 20px;
+    width: 90%;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    padding-top: 50px;
+    margin-bottom: 20px;
+
+}

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaWallet, FaMoneyBillWave, FaUniversity, FaUsers, FaBell } from "react-icons/fa";
 import "./pageCss/Home.css";
 import Product from "./Product";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () =>{
@@ -41,6 +42,8 @@ const Home = () =>{
     (currentPage + 1) * ITEMS_PER_PAGE
   );
 
+  const Nav = useNavigate()
+
   return (
     <div className="Home">
       <div className="carousel-container">
@@ -60,15 +63,15 @@ const Home = () =>{
       </div>
 
       <nav>
-        <ul>
+        <ul onClick={()=>Nav('recharge')}>
           <div className="iconBox"><FaWallet size={30} color="grey" /></div>
           <li>Recharge</li>
         </ul>
-        <ul>
+        <ul onClick={()=>Nav('withdraw')}>
           <div className="iconBox"><FaMoneyBillWave  size={30} color="grey" /></div>
           <li>Withdraw</li>
         </ul>
-        <ul>
+        <ul onClick={()=> Nav('bankDetails')}>
           <div className="iconBox"><FaUniversity  size={30} color="grey"/></div>
           <li>Bank Account</li>
         </ul>

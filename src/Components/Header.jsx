@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaHeadphones, FaUser } from 'react-icons/fa';
 import '../pages/pageCss/Layout.css';
+import { IoMdArrowDropleft } from "react-icons/io";
+
 
 
 const Header = () => {
@@ -18,7 +20,7 @@ const Header = () => {
       {isHomePage ? (
         <div className='homeHcontent'>
             <div className="header-content">
-            <div className='profile'> <FaUser size={30} color='grey'/></div>
+            <div className='profile' onClick={()=> navigate('Profile')}> <FaUser size={30} color='grey'/></div>
             <div className="info">
             <h3>Hello, {userPhone}</h3>
             <button disabled>{accountBalance}</button>
@@ -33,11 +35,11 @@ const Header = () => {
         </div>
       ) : (
         <div className='pageContent'>
-          <button className="header-btn" onClick={() => navigate(-1)}>
-            <FaArrowLeft size={24} />
-          </button>
+         <div className='navBack' onClick={() => navigate(-1)}>
+                        <IoMdArrowDropleft size={40}/>
+                    </div>
 
-          <h3 className="header-title">{location.pathname.replace("/dashboard/", "").toUpperCase()}</h3>
+          <h3 style={{color: 'white', fontSize: '20px'}}>{location.pathname.replace("/dashboard/", "").toUpperCase()}</h3>
         </div>
       )}
     </div>

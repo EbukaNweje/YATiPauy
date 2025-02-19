@@ -1,0 +1,368 @@
+.Recharge, .Withdraw{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    padding-bottom: 50px;
+}
+
+.Recharge .paymentSection, .Withdraw .paymentSection{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Recharge .paymentSection .amountWrap, .Withdraw .paymentSection .amountWrap{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    background-color: #05451091;
+    border-radius: 20px;
+    padding: 30px;
+
+    h3{
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        line-height: 21px;
+    }
+
+    hr{
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.295);
+    }
+}
+
+.paymentSection .amountWrap .amountDiv{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+    button{
+        width: 33.3333333%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        
+        h3{
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .amountButtonSelected{
+        border: 2px solid teal;
+        border-radius: 20px;
+    }
+
+}
+
+.paymentSection section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #05451091;
+    border-radius: 20px;
+    padding: 30px;
+
+    h3{
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        line-height: 21px;  
+    }
+
+    hr{
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.295);
+        
+    }
+
+    input{
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.295);
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    select{
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.295);
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    select option {
+        background-color: teal; 
+        color: white; 
+        padding: 10px;
+    }
+    
+    select option:hover {
+        background-color: darkcyan;
+    }
+}
+
+
+.paymentSection .btn {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #008080, #005555);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out;
+}
+
+.paymentSection .btn:hover {
+    background: linear-gradient(135deg, #00a0a0, #006666);
+}
+
+.paymentSection .btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 150%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-25deg);
+    transition: left 0.5s ease-in-out;
+}
+
+.paymentSection .btn:hover::before {
+    left: 100%;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.paymentSection .btn:active {
+    transform: scale(0.95);
+}
+
+.paymentWarnings{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    color: grey;
+    gap: 10px;
+    font-size: 16px;
+    line-height: 21px;
+}
+
+.Bank, .Change{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin: 10%;
+
+    h3{
+        color: grey;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 21px;
+    }
+}
+
+.Bank section, .Change section{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+.inputWrapper {
+    position: relative;
+    width: 49%;
+    
+}
+
+.inputDiv{
+    width: 49%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-right: 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.295);
+    border: 1px solid rgba(255, 255, 255, 0.337);
+
+
+    span{
+       color: white; 
+
+    }
+}
+
+
+.inputIcon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 30px;
+}
+
+
+
+.inputDiv aside{
+    width: 90%;
+    /* padding: 20px; */
+    height: 60px;
+    border-radius: 20px;
+    color: white;
+    background: none;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.inputDiv input {
+    width: 90%;
+    padding: 20px;
+    padding-left: 50px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.inputDiv aside input{
+    width: 90%;
+    padding: 20px;
+    padding-left: 50px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border: none;
+    background: none;
+    outline: none;
+}
+.inputWrapper input,
+.inputWrapper select {
+    width: 100%;
+    padding: 20px;
+    padding-left: 50px;
+    background-color: rgba(255, 255, 255, 0.295);
+    height: 60px;
+    border-radius: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.337);
+    outline: none;
+
+}
+
+.inputWrapper select option {
+    background-color: teal;
+    color: white;
+    padding: 10px;
+}
+
+.inputWrapper select option:hover {
+    background-color: darkcyan;
+}
+
+    
+}
+
+.Bank section button, .Change section button {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #008080, #005555);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: background 0.3s ease-in-out;
+}
+
+.Bank section button,  .Change section button:hover {
+    background: linear-gradient(135deg, #00a0a0, #006666);
+}
+
+.Bank section button, .Change section button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 150%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(-25deg);
+    transition: left 0.5s ease-in-out;
+}
+
+.Bank section button, .Change section button:hover::before {
+    left: 100%;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.Bank section button, .Change section button:active {
+    transform: scale(0.95);
+}
+

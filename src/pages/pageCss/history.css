@@ -1,0 +1,175 @@
+.history{
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.history .balanceDiv{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    align-self: center;
+    background-color: #05451091;
+    border-radius: 20px;
+
+    hr{
+        height: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.449);
+    }
+
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        span{
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 21px;
+            color: rgba(255, 255, 255, 0.48);
+        }
+
+        h3{
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+        }
+    }
+}
+
+.history .btnHolder{
+    width: 80%;
+    display: flex;
+    align-self: center;
+    gap: 20px;
+    align-items: center;
+
+    button{
+        width: 18%;
+        height: 60px;
+        padding: 20px;
+        border: 3px solid teal;
+        border-radius: 50px;
+        background: none;
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.history table{
+    width: 100%;
+    height: 60%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.history table thead{
+    width: 100%;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.225) ;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    tr{
+        width: 80%;
+        /* padding: 20px; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        select{
+            width: max-content;
+            padding: 10px;
+            background-color: #05451091;
+            color: white;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        select option {
+            background-color: #05451091;
+            color: white; 
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        select option:hover {
+            cursor: pointer;
+            background-color: darkcyan;
+        }
+    }
+}
+
+.history table tbody{
+    width: 100%;
+    height: max-content;
+    /* max-height: 90%; */
+    /* min-height: 90%; */
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    tr{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        section{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+
+            span{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                font-size: 20px;
+                color: white;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+        }
+
+        span{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: grey;
+            text-transform: capitalize;
+            text-decoration: none;
+        }
+    }
+}

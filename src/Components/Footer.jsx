@@ -32,7 +32,7 @@ const Footer = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
+          <NavLink to="/dashboard/Profile" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
             <FaUser size={30} />
             <h3>Mine</h3>
           </NavLink>
