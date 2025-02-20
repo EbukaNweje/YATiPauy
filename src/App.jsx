@@ -12,6 +12,7 @@ import Bank from './pages/Bank';
 import Profile from './pages/Profile';
 import History from './pages/history';
 import Change from './pages/Auth/Change';
+import Vip from './pages/Vip';
 
 const App = () => {
   const router = createHashRouter([
@@ -25,12 +26,13 @@ const App = () => {
     },
     { path: 'dashboard', element: <Layout/>, children:[
     {path: '', element: <Home/>},
-    {path: 'vip', element: <ProductS/>},
+    {path: 'Products', element: <ProductS/>},
     {path: 'recharge', element: <Recharge/>},
     {path: 'withdraw', element: <Withdraw/>},
     {path: 'bankDetails', element: <Bank/>},
     {path: 'Profile', element: <Profile/>},
     {path: 'history', element: <History/>},
+    {path: 'Vip', element: <Vip/>},
     {path: 'changePassword', element: <Change/>},
     ] }
   ])

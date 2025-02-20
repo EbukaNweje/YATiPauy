@@ -1,5 +1,6 @@
 import React from 'react';
 import './pageCss/Product.css';
+import speaker from '../assets/speaker.png'
 
 const ProductS = () => {
 
@@ -27,7 +28,7 @@ const ProductS = () => {
             <h3>{product.name || "ZenithVault"}</h3>
           </div>
           <div className="imgBox">
-            <img src={product.image || "https://zensartech.top/storage/plans/Zenith%20Vault1737234553.png"} alt="product" />
+            <img src={product.image || speaker} alt="product" />
           </div>
           <div className="productDetails">
             <li>

@@ -31,7 +31,15 @@ const Signup = () => {
                         <div className='divInputWrapper'> 
                             <div className='divInput'>
                                 <FaRegUser className='IconFont'/>
+                                <input type="text"  className='Input' placeholder='Enter your full Name'/>
+                            </div>
+                            <div className='divInput'>
+                                <FaRegUser className='IconFont'/>
                                 <input type="text"  className='Input' placeholder='Enter your mobile'/>
+                            </div>
+                            <div className='divInput'>
+                                <MdOutlineAttachEmail className='IconFont'/>
+                                <input type="email"  className='Input' placeholder='Enter your email address'/>
                             </div>
                             <div className='divInput'>
                                  <MdOutlineAttachEmail className='IconFont'/>
