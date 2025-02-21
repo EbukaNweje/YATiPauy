@@ -6,7 +6,8 @@
     align-items: center;
     justify-content: space-between;
     /* background-color: #ebe9e9; */
-    background-color: #022e09;
+    /* background-color: #022e09; */
+    background: rgb(235, 233, 233);
     overflow: hidden;
 }
 
