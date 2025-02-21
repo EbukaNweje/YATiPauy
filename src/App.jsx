@@ -10,7 +10,7 @@ import Recharge from './pages/Recharge';
 import Withdraw from './pages/Withdraw';
 import Bank from './pages/Bank';
 import Profile from './pages/Profile';
-import History from './pages/history';
+import History from './pages/History';
 import Change from './pages/Auth/Change';
 import Vip from './pages/Vip';
 
