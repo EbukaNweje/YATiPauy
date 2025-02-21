@@ -14,7 +14,7 @@ const Product = ({ displayedProducts }) => {
         <section key={i}>
           <div className='productHead'>
             <div className="iconBox"></div>
-            <h3>{product.name || "ZenithVault"}</h3>
+            <h3 style={{color: 'white'}}>{product.name || "ZenithVault"}</h3>
           </div>
           <div className="imgBox">
             <img src={product.image || speaker} alt="product" />

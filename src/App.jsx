@@ -14,6 +14,8 @@ import History from './pages/History';
 import Change from './pages/Auth/Change';
 import Vip from './pages/Vip';
 import Forgot from './pages/Auth/Forgot';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 
 const App = () => {
   const router = createHashRouter([
@@ -39,6 +41,8 @@ const App = () => {
     {path: 'history', element: <History/>},
     {path: 'Vip', element: <Vip/>},
     {path: 'changePassword', element: <Change/>},
+    {path: 'terms', element: <Terms/>},
+    {path: 'Privacy', element: <Privacy/>},
     ] }
   ])
   return (

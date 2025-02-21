@@ -127,4 +127,12 @@
         background-color: #066a18c2; 
 }
 
+@media (min-width:320px) and (max-width: 768px){
+    .Profile{
+        padding: 20px;
+    }
 
+    .Profile .smallBox{
+        width: 95%;
+    }
+}

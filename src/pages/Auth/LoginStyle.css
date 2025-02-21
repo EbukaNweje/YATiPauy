@@ -287,3 +287,36 @@
     align-items: center;
 }
 
+@media (min-width:320px)  and (max-width: 768px){
+
+    .MainBody{
+        height: max-content;
+        min-height: 100vh;
+    }
+
+    .AuthHader h3{
+        font-size: 30px;
+    }
+
+    .MyFormWrapper{
+        gap: 15px;
+    }
+
+    .divInputWrapper{
+        height: max-content;
+        flex-direction: column;
+    }
+
+    .divInput{
+        width: 100%;
+    }
+
+    .Btn{
+        border-radius: 15px;
+    }
+
+    .modalContent{
+        max-width: 90%;
+    }
+}
+

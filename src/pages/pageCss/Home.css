@@ -137,5 +137,16 @@
   color: white;
 }
 
+@media (min-width:320px)  and (max-width: 768px){
+  .Home{
+    width: 100%;
+  }
 
+  .carousel-container{
+    height: 350px;
+  }
+  .Home nav{
+    display: none;
+  }
+}
 

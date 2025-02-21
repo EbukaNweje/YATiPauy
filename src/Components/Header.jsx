@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaHeadphones, FaUser } from 'react-icons/fa';
+import { FaArrowLeft, FaHeadphones, FaUser, FaBars } from 'react-icons/fa';
 import '../pages/pageCss/Layout.css';
 import { IoMdArrowDropleft } from "react-icons/io";
-
+import { FaWallet, FaMoneyBillWave, FaUniversity, FaUsers, FaBell, FaFileContract, FaShieldAlt } from "react-icons/fa";
 
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const userPhone = "+1234567890";
   const accountBalance = "$500.00";
@@ -31,7 +32,21 @@ const Header = () => {
             <FaHeadphones size={24} />
           </button>
 
-        
+          <div className="menu-container">
+            <button className="Menu" onClick={() => setMenuOpen(!menuOpen)}>
+              <FaBars size={24} />
+            </button> 
+            {menuOpen && (
+              <div className="dropdown-menu">
+                <button onClick={() => navigate('recharge')}><FaWallet size={30} color="grey" />Recharge</button>
+                <button onClick={() => navigate('withdraw')}><FaMoneyBillWave size={30} color="grey" />Withdraw</button>
+                <button onClick={() => navigate('bankDetails')}><FaUniversity size={30} color="grey" />Bank Account</button>
+                <button onClick={() => navigate('community')}><FaUsers size={30} color="grey" />Community</button>
+                <button onClick={() => navigate('terms')}><FaFileContract size={30} color="grey" />Terms & Conditions</button>
+                <button onClick={() => navigate('Privacy')}><FaShieldAlt size={30} color="grey" />Privacy Policy</button>
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <div className='pageContent'>
