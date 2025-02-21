@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import History from './pages/History';
 import Change from './pages/Auth/Change';
 import Vip from './pages/Vip';
+import Forgot from './pages/Auth/Forgot';
 
 const App = () => {
   const router = createHashRouter([
@@ -23,6 +24,10 @@ const App = () => {
     {
       path : "/Sign-up",
       element: <Signup/>
+    },
+    {
+      path : "/Forgottenpassword",
+      element: <Forgot/>
     },
     { path: 'dashboard', element: <Layout/>, children:[
     {path: '', element: <Home/>},

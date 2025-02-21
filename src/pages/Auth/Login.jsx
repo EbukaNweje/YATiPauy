@@ -42,7 +42,7 @@ const Login = () => {
                                 
                             </div>
                         </div>
-                        <div className='forgot'>
+                        <div className='forgot' onClick={()=> Nav('/Forgottenpassword')}>
                             <p>Forgot password?</p>
                         </div>
                             <button className='Btn' onClick={()=>Nav('/dashboard')}>Sign In</button>
