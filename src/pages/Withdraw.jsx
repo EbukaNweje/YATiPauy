@@ -17,7 +17,7 @@ const Withdraw = () => {
     "Heritage Bank", "Jaiz Bank", "Keystone Bank", "Parallex Bank", "Polaris Bank",
     "Providus Bank", "Stanbic IBTC Bank", "Standard Chartered Bank", "Sterling Bank",
     "SunTrust Bank", "Titan Trust Bank", "Union Bank", "United Bank for Africa (UBA)", 
-    "Unity Bank", "Wema Bank", "Zenith Bank"
+    "Unity Bank", "Wema Bank", "Zenith Bank, Paycom(opay), palmpay, KUDA microfinance Bank, Moniepoint microfinance Bank"
   ];
 
   return (

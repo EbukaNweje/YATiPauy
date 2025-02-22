@@ -372,6 +372,13 @@
 
 @media (min-width: 320px)  and (max-width: 768px){
 
+    .paymentSection .amountWrap .amountDiv{
+
+        button{
+            width: 50%;
+        }
+    }
+
     .paymentWarnings{
         width: 100%;
     }

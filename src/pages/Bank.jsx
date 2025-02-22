@@ -28,6 +28,10 @@ const Bank = () => {
             <option value="Polaris Bank">Polaris Bank</option>
             <option value="Union Bank">Union Bank</option>
             <option value="Keystone Bank">Keystone Bank</option>
+            <option value="Paycom(opay)">Paycom(opay)</option>
+            <option value="Palmpay">Palmpay</option>
+            <option value="Moniepoint microfinance Bank">Moniepoint microfinance Bank</option>
+            <option value="KUDA microfinance Bank">KUDA microfinance Bank</option>
           </select>
         </div>
 
