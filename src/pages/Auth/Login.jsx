@@ -1,19 +1,12 @@
-import React, { useState } from 'react' 
-import "./LoginStyle.css"
-import '../../MobileStyle/AllMobileStyle.css'
-import { IoMdArrowDropleft } from "react-icons/io";
-import { FaRegUser, FaRegEyeSlash } from "react-icons/fa";
-import { FaRegEye } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
-
+import React from 'react'
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Form, Input, Flex } from 'antd';
+import { IoMdArrowDropleft } from 'react-icons/io';
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false)
-    const Nav = useNavigate()
-    const changePassword = () => { 
-        setShowPassword(!showPassword)
-    }
-
+    const onFinish = (values) => {
+        console.log('Received values of form: ', values);
+      };
   return (
     <div className='MainBody'>
         <div className='Wrapper'>
@@ -26,35 +19,59 @@ const Login = () => {
                 <p>Let’s us know what your mobile and your password</p>
             </div>
 
-                <form className='MyForm'>
-                    <div className='MyFormWrapper'>
-                        <div className='divInputWrapper'> 
-                            <div className='divInput'>
-                                <FaRegUser className='IconFont'/>
-                                <input type="text"  className='Input' placeholder='Enter your mobile'/>
-                            </div>
-                            <div className='divInput'>
-                                <input type={showPassword ? "text" : "password"}  className='Input' placeholder='Enter your password'/>
-                                {
-                                    showPassword ? <FaRegEyeSlash onClick={changePassword}/> : <FaRegEye className='IconFont' onClick={changePassword}/>
-                                }
-                               
-                                
-                            </div>
-                        </div>
-                        <div className='forgot' onClick={()=> Nav('/Forgottenpassword')}>
-                            <p>Forgot password?</p>
-                        </div>
-                            <button className='Btn' onClick={()=>Nav('/dashboard')}>Sign In</button>
+    <Form
+      name="login"
+      initialValues={{
+        remember: true,
+      }}
+      style={{
+        maxWidth: 360,
+      }}
+      onFinish={onFinish}
+      className='MyForm'
+    >
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Username!',
+          },
+        ]}
+      >
+        <Input prefix={<UserOutlined />} placeholder="Username" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Password!',
+          },
+        ]}
+      >
+        <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
+      </Form.Item>
+      <Form.Item>
+        <Flex justify="space-between" align="center">
+          <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+          <a href="">Forgot password</a>
+        </Flex>
+      </Form.Item>
 
-                            <div className='Not'>
-                            <p>Not a member?  <small>Create an new account? <span onClick={()=> Nav("/Sign-up")}>Sign Up</span></small></p>
-                        </div>
-                    </div>
-                </form> 
+      <Form.Item>
+        <Button block type="primary" htmlType="submit">
+          Log in
+        </Button>
+        or <a href="">Register now!</a>
+      </Form.Item>
+    </Form>
 
         </div>
     </div>
+
   )
 }
 
