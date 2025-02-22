@@ -62,31 +62,31 @@ const Home = () => {
 
       <nav>
         <ul onClick={() => Nav('recharge')}>
-          <div className="iconBox"><FaWallet size={30} color="grey" /></div>
+          <div className="iconBox"><FaWallet size={25} color="grey" /></div>
           <li>Recharge</li>
         </ul>
         <ul onClick={() => Nav('withdraw')}>
-          <div className="iconBox"><FaMoneyBillWave size={30} color="grey" /></div>
+          <div className="iconBox"><FaMoneyBillWave size={25} color="grey" /></div>
           <li>Withdraw</li>
         </ul>
         <ul onClick={() => Nav('bankDetails')}>
-          <div className="iconBox"><FaUniversity size={30} color="grey" /></div>
+          <div className="iconBox"><FaUniversity size={25} color="grey" /></div>
           <li>Bank Account</li>
         </ul>
         <ul onClick={() => Nav('plan')}>
-          <div className="iconBox"><FaUniversity size={30} color="grey" /></div>
+          <div className="iconBox"><FaUniversity size={25} color="grey" /></div>
           <li>Plans</li>
         </ul>
         <ul>
-          <div className="iconBox"><FaUsers size={30} color="grey" /></div>
+          <div className="iconBox"><FaUsers size={25} color="grey" /></div>
           <li>Community</li>
         </ul>
         <ul onClick={()=> Nav('terms')}>
-          <div className="iconBox"><FaFileContract size={30} color="grey" /></div>
+          <div className="iconBox"><FaFileContract size={25} color="grey" /></div>
           <li>Terms & Conditions</li>
         </ul>
         <ul onClick={()=> Nav('Privacy')}>
-          <div className="iconBox"><FaShieldAlt size={30} color="grey" /></div>
+          <div className="iconBox"><FaShieldAlt size={25} color="grey" /></div>
           <li>Privacy Policy</li>
         </ul>
       </nav>

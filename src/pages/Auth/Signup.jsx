@@ -46,7 +46,7 @@ const Signup = () => {
                                 <input type="text" className='Input' placeholder='Enter your invite code'/>
                             </div>
                         </div>
-                        <div className='divInputWrapper'> 
+                        <div className='divInputWrapper' style={{marginTop: '-10px'}}> 
                         <div className='divInput'>
                                 <input type={showPassword ? "text" : "password"}  className='Input' placeholder='Enter your password'/>
                                 {

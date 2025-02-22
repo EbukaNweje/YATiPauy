@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./pageCss/Plan.css";
+import { FaChevronRight } from "react-icons/fa";
 
 const plans = [
   {
@@ -66,15 +67,28 @@ const Plan = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
 
   return (
-    <div className="plan-container">
+    <div className="Plan">
+
+        {/* <div className="planTop">
+    <section>
+        <h3>YatiCares</h3>
+        <span> is a foundation, birthed for the purpose of creating connections and enhancing financial growth to individuals and businesses. </span>
+    </section>
+        </div> */}
+      
+      <div className="plan-container">
       {plans.map((plan, index) => (
         <div 
           key={index} 
           className="plan-box" 
           onClick={() => setSelectedPlan(plan)}
         >
-          <h3 className="plan-title">{plan.name}</h3>
-          <p className="plan-amount">{plan.minAmount} - {plan.maxAmount}</p>
+        <div className="planBoxInfo">
+        <h3 className="plan-title">{plan.name}</h3>
+        <p className="plan-amount">{plan.minAmount} - {plan.maxAmount}</p>
+        </div>
+            <FaChevronRight className="arrowIcon" />
+          
         </div>
       ))}
 
@@ -97,6 +111,7 @@ const Plan = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };
