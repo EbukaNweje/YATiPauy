@@ -128,11 +128,16 @@
 }
 
 @media (min-width:320px) and (max-width: 768px){
+
+    .Profile .profileInfo{
+        width: 100%;
+    }
+
     .Profile{
         padding: 20px;
     }
 
     .Profile .smallBox{
-        width: 95%;
+        width: 100%;
     }
 }

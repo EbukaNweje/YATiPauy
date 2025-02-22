@@ -100,6 +100,10 @@
 
 @media (min-width:320px)  and (max-width: 768px){
 
+    .productWrap{
+        width: 100%;
+    }
+
     .Product section .imgBox{
         height: 250px;
     }

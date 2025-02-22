@@ -217,7 +217,8 @@
 .inputWrapper {
     position: relative;
     width: 49%;
-    
+    border: 2px solid grey;
+
 }
 
 .inputDiv{
@@ -272,8 +273,7 @@
     font-size: 18px;
     font-weight: 600;
     border: none;
-    border: none;
-    background: none;
+    background: red;
     outline: none;
 }
 
@@ -298,12 +298,13 @@
     background: none;
     height: 60px;
     border-radius: 20px;
-    color: white;
+    color: grey;
     font-size: 18px;
     font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.337);
+    /* border: 2px solid grey; */
     outline: none;
 
+    border: none;
 }
 
 .inputWrapper select option {
@@ -369,3 +370,39 @@
     transform: scale(0.95);
 }
 
+@media (min-width: 320px)  and (max-width: 768px){
+
+    .paymentWarnings{
+        width: 100%;
+    }
+
+    .Recharge .paymentSection .amountWrap, .Withdraw .paymentSection .amountWrap, .paymentSection section {
+        padding: 15px;
+    }
+
+    .Recharge .paymentSection, .Withdraw .paymentSection{
+        width: 100%;
+    }
+
+    .Bank, .Change{
+        width: 100%;
+        margin: 0%;
+        padding: 20px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        
+    }
+
+    .Bank section, .Change section{
+        flex-direction: column;
+        width: 100%;
+
+        .inputDiv, .inputWrapper{
+            width: 100%;
+        }
+    
+    }
+
+  
+    
+}

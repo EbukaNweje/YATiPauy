@@ -2,11 +2,14 @@ import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex } from 'antd';
 import { IoMdArrowDropleft } from 'react-icons/io';
+import "./LoginStyle.css"
+
 
 const Login = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
       };
+
   return (
     <div className='MainBody'>
         <div className='Wrapper'>
@@ -37,9 +40,10 @@ const Login = () => {
             required: true,
             message: 'Please input your Username!',
           },
+          // className='MyFormWrapper'
         ]}
       >
-        <Input prefix={<UserOutlined />} placeholder="Username" />
+        <Input prefix={<UserOutlined />} placeholder="Username" className='divInput' />
       </Form.Item>
       <Form.Item
         name="password"

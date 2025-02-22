@@ -175,15 +175,27 @@
 }
 
 @media (min-width:320px) and (max-width: 768px){
+
+    /* .history table{
+        height: 70%;
+    } */
+
     .history{
         height: max-content;
     }
 
     .balanceDiv{
-        width: 90%;
+        width: 95%;
     }
 
-    .btnHolder{
+    .history .btnHolder{
         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button{
+            width: max-content;
+        }
     }
 }

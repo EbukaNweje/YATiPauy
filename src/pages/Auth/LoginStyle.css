@@ -15,6 +15,7 @@
     /* background: #671212; */
 }
 
+
 .navBack {
     width: 70px;
     height: 70px;
@@ -146,13 +147,17 @@
     outline: none;
 }
 
+.Not{
+    margin-top: 10px;
+
+}
+
 .forgot, .Not {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     color: gray;
     cursor: pointer;
-    /* margin-top: 10px; */
 
         & p{
             transition: all 0.5s ease;
@@ -204,6 +209,8 @@
 .Btn:hover::before {
     transform: translateX(100%) translateY(100%);
 }
+
+
 
 .modalOverlay {
     position: fixed;

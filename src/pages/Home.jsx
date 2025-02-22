@@ -73,6 +73,10 @@ const Home = () => {
           <div className="iconBox"><FaUniversity size={30} color="grey" /></div>
           <li>Bank Account</li>
         </ul>
+        <ul onClick={() => Nav('plan')}>
+          <div className="iconBox"><FaUniversity size={30} color="grey" /></div>
+          <li>Plans</li>
+        </ul>
         <ul>
           <div className="iconBox"><FaUsers size={30} color="grey" /></div>
           <li>Community</li>

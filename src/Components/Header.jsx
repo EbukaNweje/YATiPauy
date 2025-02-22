@@ -28,19 +28,20 @@ const Header = () => {
             </div>
           </div>
 
-         <button className="header-btn">
+         {/* <button className="header-btn">
             <FaHeadphones size={24} />
-          </button>
+          </button> */}
 
           <div className="menu-container">
-            <button className="Menu" onClick={() => setMenuOpen(!menuOpen)}>
-              <FaBars size={24} />
-            </button> 
+            <div className="Menu" onClick={() => setMenuOpen(!menuOpen)}>
+              <FaBars size={35} color='white'/>
+            </div> 
             {menuOpen && (
               <div className="dropdown-menu">
                 <button onClick={() => navigate('recharge')}><FaWallet size={30} color="grey" />Recharge</button>
                 <button onClick={() => navigate('withdraw')}><FaMoneyBillWave size={30} color="grey" />Withdraw</button>
                 <button onClick={() => navigate('bankDetails')}><FaUniversity size={30} color="grey" />Bank Account</button>
+                <button onClick={() => navigate('plan')}><FaUniversity size={30} color="grey" />Plans</button>
                 <button onClick={() => navigate('community')}><FaUsers size={30} color="grey" />Community</button>
                 <button onClick={() => navigate('terms')}><FaFileContract size={30} color="grey" />Terms & Conditions</button>
                 <button onClick={() => navigate('Privacy')}><FaShieldAlt size={30} color="grey" />Privacy Policy</button>

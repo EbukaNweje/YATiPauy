@@ -3,8 +3,8 @@ import './pageCss/Recharge.css';
 import { FaCircleCheck } from 'react-icons/fa6';
 
 const Withdraw = () => {
-  const amounts = [3000, 5000, 10000, 20000, 50000, 100000];
-  const [selectedAmount, setSelectedAmount] = useState(3000);
+  const amounts = [ 5000, 10000, 20000, 50000, 100000, 150000];
+  const [selectedAmount, setSelectedAmount] = useState(5000);
   const [selectedBank, setSelectedBank] = useState('');
 
   const handleSelectAmount = (amount) => {
@@ -46,7 +46,7 @@ const Withdraw = () => {
           <input
             type='number'
             value={selectedAmount}
-            onChange={(e) => setSelectedAmount(Number(e.target.value) || 3000)}
+            onChange={(e) => setSelectedAmount(Number(e.target.value) || 5000)}
           />
 
           <select
@@ -68,9 +68,9 @@ const Withdraw = () => {
         <button className='btn'>Continue</button>
       </div>
       <div className='paymentWarnings'>
-        <li>1. Minimum Withdraw amount ₦2,000.00. if payment is less than ₦2,000.00, the amount will not be reflected.</li>
+        <li>1. Minimum Withdraw amount ₦5,000.00. if payment is less than ₦5,000.00, the amount will not be reflected.</li>
         <li>2. Maximum Withdraw amount ₦500,000.00. if withdrawal is greater than ₦500,000.00, the withdrawal will not be processed.</li>
-        <li>3. Withdraw can only be done inside the payment channels on YATipauy platform.</li>
+        <li>3. Withdraw can only be done inside the payment channels on YATicare platform.</li>
         <li>4. Withdrawal charges is 0% of the amount you're withdrawing.</li>
 
       </div>

@@ -210,6 +210,33 @@
 
 @media (min-width:320px) and (max-width: 768px){
 
+    .footer-link h3{
+        display: none;
+    }
+
+    .footer-link-active{
+        color: #18872b91;
+        
+        h3{
+            display: none;
+        }
+    }
+
+    .Header{
+        padding: 0%;
+    }
+
+    .header-content{
+        width: 90%;
+
+        .info{
+
+            button{
+                width: 120px;
+            }
+        }
+    }
+
     .menu-container {
         position: relative;
         display: flex;

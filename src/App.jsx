@@ -1,6 +1,6 @@
 import React from 'react'
 import {RouterProvider, createHashRouter} from "react-router-dom";
-import Login from './pages/Auth/Login'
+import Login2 from './pages/Auth/Login2'
 import Signup from './pages/Auth/Signup'
 import Layout from './pages/Layout';
 import Home from './pages/Home'
@@ -16,12 +16,13 @@ import Vip from './pages/Vip';
 import Forgot from './pages/Auth/Forgot';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import Plan from './pages/Plan';
 
 const App = () => {
   const router = createHashRouter([
     {
       path : "/",
-      element: <Login/>
+      element: <Login2/>
     },
     {
       path : "/Sign-up",
@@ -40,6 +41,7 @@ const App = () => {
     {path: 'Profile', element: <Profile/>},
     {path: 'history', element: <History/>},
     {path: 'Vip', element: <Vip/>},
+    {path: 'plan', element: <Plan/>},
     {path: 'changePassword', element: <Change/>},
     {path: 'terms', element: <Terms/>},
     {path: 'Privacy', element: <Privacy/>},
