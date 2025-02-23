@@ -26,9 +26,14 @@
     align-items: center;
     gap: 20px;
 
-    h3{
+    .profileI{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         color: white;
-
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
     }
 
 }

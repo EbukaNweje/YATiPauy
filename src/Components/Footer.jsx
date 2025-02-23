@@ -16,13 +16,13 @@ const Footer = () => {
         <li>
           <NavLink to="/dashboard/Products" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
             <FaShoppingBag size={30} />
-            <h3>Product</h3>
+            <h3>Packages</h3>
           </NavLink>
         </li>
         <li>
           <NavLink  to="/dashboard/Vip" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
             <FaCrown size={30} />
-            <h3>Vip</h3>
+            <h3>My packages</h3>
           </NavLink>
         </li>
         <li>
@@ -36,7 +36,7 @@ const Footer = () => {
         <li>
           <NavLink to="/dashboard/Profile" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
             <FaUser size={30} />
-            <h3>Mine</h3>
+            <h3>Profile</h3>
           </NavLink>
         </li>
       </nav>

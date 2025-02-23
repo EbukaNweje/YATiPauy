@@ -33,7 +33,7 @@ const History = () => {
 
             <div className="btnHolder">
                 <button style={{border: 'none', backgroundColor: 'teal'}}>Recharge</button>
-                <button>Withdraw</button>
+                <button style={{color: '#012306'}}>Withdraw</button>
             </div>
 
             <table>
@@ -57,7 +57,7 @@ const History = () => {
                                 <BsArrowDownLeftCircle size={45} color='teal'/>
                                <span>
                                <td>{txn.type}</td>
-                               <td style={{color: "#ffffff4b"}}>ID: {txn.id}</td>
+                               <td style={{color: "grey"}}>ID: {txn.id}</td>
                                <td>{txn.description || 'no description'}</td>
                                </span>
                                </section>

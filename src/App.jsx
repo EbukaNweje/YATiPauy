@@ -32,6 +32,7 @@ const App = () => {
       path : "/Forgottenpassword",
       element: <Forgot/>
     },
+    {path: 'terms', element: <Terms/>},
     { path: 'dashboard', element: <Layout/>, children:[
     {path: '', element: <Home/>},
     {path: 'Products', element: <ProductS/>},
@@ -43,7 +44,7 @@ const App = () => {
     {path: 'Vip', element: <Vip/>},
     {path: 'plan', element: <Plan/>},
     {path: 'changePassword', element: <Change/>},
-    {path: 'terms', element: <Terms/>},
+
     {path: 'Privacy', element: <Privacy/>},
     ] }
   ])

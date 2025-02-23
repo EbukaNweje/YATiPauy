@@ -71,10 +71,13 @@ const Signup = () => {
                             </div>
                         </div> */}
 
-                            <button className='Btn'>Sign In</button>
+                            <button className='Btn'>Sign up</button>
 
                             <div className='Not'>
-                            <p>Not a member?  <small>Already have an account?<span onClick={()=> Nav("/")}> Sign in</span></small></p>
+                            <div>Not a member?  <small>Already have an account?<span onClick={()=> Nav("/")}> Sign in</span></small></div>
+                        </div>
+                        <div className="Not">
+                            I agree to YATicare <h3 onClick={()=>Nav('/terms')}>Terms & Conditions</h3>
                         </div>
                     </div>
                 </form> 

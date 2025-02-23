@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import "./pageCss/Plan.css";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronRight, FaCheck } from "react-icons/fa";
 
 const plans = [
   {
     name: "YATI STARTER",
-    minAmount: "₦5,000",
-    maxAmount: "₦9,000",
-    benefits: [
-      "Local transport",
-      "Basic daily feeding",
-    ],
+    minAmount: 5000,
+    maxAmount: 9000,
+    amounts: [5000, 6000, 7000, 8000, 9000],
+    benefits: ["Local transport", "Basic daily feeding"],
   },
   {
     name: "YATI HOPE EXPLORER",
-    minAmount: "₦10,000",
-    maxAmount: "₦49,000",
-    benefits: [
-      "Short local trips",
-      "Budget-friendly rental accommodation",
-    ],
+    minAmount: 10000,
+    maxAmount: 49000,
+    amounts: [10000, 20000, 30000, 40000, 49000],
+    benefits: ["Short local trips", "Budget-friendly rental accommodation"],
   },
   {
     name: "YATI BRIGHTER HORIZON",
-    minAmount: "₦50,000",
-    maxAmount: "₦99,000",
+    minAmount: 50000,
+    maxAmount: 99000,
+    amounts: [50000, 60000, 70000, 80000, 90000, 99000],
     benefits: [
       "Expanded interstate travel",
       "Partial support for asset acquisition",
@@ -34,8 +31,9 @@ const plans = [
   },
   {
     name: "YATI EMPOWER PASS",
-    minAmount: "₦100,000",
-    maxAmount: "₦399,000",
+    minAmount: 100000,
+    maxAmount: 399000,
+    amounts: [100000, 150000, 200000, 300000, 399000],
     benefits: [
       "Premium local and international travel support",
       "Quality vacation packages",
@@ -44,73 +42,96 @@ const plans = [
   },
   {
     name: "YATI ELITE STARS",
-    minAmount: "₦400,000",
-    maxAmount: "₦799,000",
-    benefits: [
-      "Top-tier travel experience",
-      "Car projects",
-      "Quality healthcare",
-    ],
+    minAmount: 400000,
+    maxAmount: 799000,
+    amounts: [400000, 500000, 600000, 700000, 799000],
+    benefits: ["Top-tier travel experience", "Car projects", "Quality healthcare"],
   },
   {
     name: "YATI DIAMOND",
-    minAmount: "₦800,000",
-    maxAmount: "₦1,000,000",
-    benefits: [
-      "Exclusive premium benefits",
-      "VIP support",
-    ],
+    minAmount: 800000,
+    maxAmount: 1000000,
+    amounts: [800000, 850000, 900000, 950000, 1000000],
+    benefits: ["Exclusive premium benefits", "VIP support"],
   },
 ];
 
 const Plan = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedAmount, setSelectedAmount] = useState(null);
+  const [customAmount, setCustomAmount] = useState("");
+
+  const handleAmountSelection = (amount) => {
+    setSelectedAmount(amount);
+    setCustomAmount(amount); 
+  };
+
+  const handleCustomAmountChange = (e) => {
+    const value = e.target.value;
+    setCustomAmount(value);
+    setSelectedAmount(value); 
+  };
 
   return (
     <div className="Plan">
-
-        {/* <div className="planTop">
-    <section>
-        <h3>YatiCares</h3>
-        <span> is a foundation, birthed for the purpose of creating connections and enhancing financial growth to individuals and businesses. </span>
-    </section>
-        </div> */}
-      
       <div className="plan-container">
-      {plans.map((plan, index) => (
-        <div 
-          key={index} 
-          className="plan-box" 
-          onClick={() => setSelectedPlan(plan)}
-        >
-        <div className="planBoxInfo">
-        <h3 className="plan-title">{plan.name}</h3>
-        <p className="plan-amount">{plan.minAmount} - {plan.maxAmount}</p>
-        </div>
+        {plans.map((plan, index) => (
+          <div
+            key={index}
+            className="plan-box"
+            onClick={() => {
+              setSelectedPlan(plan);
+              setSelectedAmount(null);
+              setCustomAmount("");
+            }}
+          >
+            <div className="planBoxInfo">
+              <h3 className="plan-title">{plan.name}</h3>
+              <p className="plan-amount">
+                ₦{plan.minAmount.toLocaleString()} - ₦{plan.maxAmount.toLocaleString()}
+              </p>
+            </div>
             <FaChevronRight className="arrowIcon" />
-          
-        </div>
-      ))}
-
-      {selectedPlan && (
-        <div className="modal-overlay">
-          <div className="plan-modal">
-            <h3 className="modal-title">{selectedPlan.name}</h3>
-            <p className="modal-amount">
-              {selectedPlan.minAmount} - {selectedPlan.maxAmount}
-            </p>
-            <ul className="benefits-list">
-              {selectedPlan.benefits.map((benefit, index) => (
-                <li key={index}>{benefit}</li>
-              ))}
-            </ul>
-            <button className="subscribe-btn">Subscribe</button>
-            <button className="close-btn" onClick={() => setSelectedPlan(null)}>
-              Close
-            </button>
           </div>
-        </div>
-      )}
+        ))}
+
+        {selectedPlan && (
+          <div className="modal-overlay">
+            <div className="plan-modal">
+              <h3 className="modal-title">{selectedPlan.name}</h3>
+              <p className="modal-amount">
+                ₦{selectedPlan.minAmount.toLocaleString()} - ₦{selectedPlan.maxAmount.toLocaleString()}
+              </p>
+
+              <div className="amount-options">
+                {selectedPlan.amounts.map((amount, index) => (
+                  <div
+                    key={index}
+                    className={`amount-box ${selectedAmount === amount ? "selected" : ""}`}
+                    onClick={() => handleAmountSelection(amount)}
+                  >
+                    ₦{amount.toLocaleString()}
+                    {selectedAmount === amount && <FaCheck className="check-icon" />}
+                  </div>
+                ))}
+              </div>
+
+              <div className="custom-amount">
+                <input
+                  type="number"
+                  placeholder="Enter custom amount"
+                  value={customAmount}
+                  onChange={handleCustomAmountChange}
+                />
+              </div>
+
+              <button className="subscribe-btn">Subscribe</button>
+              <button className="close-btn" onClick={() => setSelectedPlan(null)}>
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

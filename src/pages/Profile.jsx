@@ -19,7 +19,10 @@ const Profile = () => {
       <div className="smallBox">
         <section>
           <div className="profile"></div>
+          <div className="profileI">
           <h3>ID: 07023456789</h3>
+          <h3>userName: john</h3>
+          </div>
         </section>
         <div className="balance">
           <button disabled>

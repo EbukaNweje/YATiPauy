@@ -81,10 +81,10 @@ const Home = () => {
           <div className="iconBox"><FaUsers size={25} color="grey" /></div>
           <li>Community</li>
         </ul>
-        <ul onClick={()=> Nav('terms')}>
+        {/* <ul onClick={()=> Nav('terms')}>
           <div className="iconBox"><FaFileContract size={25} color="grey" /></div>
           <li>Terms & Conditions</li>
-        </ul>
+        </ul> */}
         <ul onClick={()=> Nav('Privacy')}>
           <div className="iconBox"><FaShieldAlt size={25} color="grey" /></div>
           <li>Privacy Policy</li>

@@ -11,7 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const userPhone = "+1234567890";
+  const userPhone = "John Doe";
   const accountBalance = "$500.00";
 
   const isHomePage = location.pathname === "/dashboard";
@@ -43,7 +43,7 @@ const Header = () => {
                 <button onClick={() => navigate('bankDetails')}><FaUniversity size={30} color="grey" />Bank Account</button>
                 <button onClick={() => navigate('plan')}><FaUniversity size={30} color="grey" />Plans</button>
                 <button onClick={() => navigate('community')}><FaUsers size={30} color="grey" />Community</button>
-                <button onClick={() => navigate('terms')}><FaFileContract size={30} color="grey" />Terms & Conditions</button>
+                {/* <button onClick={() => navigate('terms')}><FaFileContract size={30} color="grey" />Terms & Conditions</button> */}
                 <button onClick={() => navigate('Privacy')}><FaShieldAlt size={30} color="grey" />Privacy Policy</button>
               </div>
             )}

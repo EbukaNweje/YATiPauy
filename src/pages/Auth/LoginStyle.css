@@ -156,6 +156,7 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     color: gray;
     cursor: pointer;
 
@@ -164,16 +165,18 @@
             font-size: 18px;
         }
 
-        & span {
+        & span, h3 {
+            font-size: 18px;
             color: #012306;
             cursor: pointer;
         }
 
+         p:hover, span:hover, h3:hover {
+            text-decoration: underline;
+        }
+
 }
 
-.forgot > p:hover, span:hover {
-    text-decoration: underline;
-}
 
 .Btn {
     width: 100%;
