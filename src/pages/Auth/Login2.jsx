@@ -50,9 +50,9 @@ const Login = () => {
                             <div className='Not'>
                             <div>Not a member?  <small>Create an new account? <span onClick={()=> Nav("/Sign-up")}>Sign Up</span></small></div>
                         </div>
-                        <div className="Not">
+                        {/* <div className="Not">
                             I agree to YATicare <h3 onClick={()=>Nav('/terms')}>Terms & Conditions</h3>
-                        </div>
+                        </div> */}
                     </div>
                 </form> 
 

@@ -12,38 +12,37 @@
 /* Media Query Styling for Big Tablet Device */
 
 @media only screen and (max-width: 900px){
-    .Wrapper {
+    /* .Wrapper {
         width: 90%;
         min-height: max-content;
-        /* background: #000; */
         padding-inline: 20px;
-    }
+    } */
 
-    .navBack {
+    /* .navBack {
         margin-bottom: 14%;
-    }
-
+    } */
+/* 
     .AuthHader {
         width: 100%;
         
         & p {
             font-size: 12px;
         }
-    }
+    } */
 
-    .divInputWrapper {
+    /* .divInputWrapper {
         flex-direction: column;
         width: 100%;
         min-height: max-content;
         /* background: #000; */
-    }
+    /* } */
 
-    .divInput {
+    /* .divInput {
         width: 100%;
         margin-top: 10px;
         min-height: 7vh;
-    }
-
+    } */
+/* 
     .Not {
         margin-top: 10%;
         width: 100%;
@@ -52,7 +51,23 @@
         & p {
             font-size: 14px;
         }
+    } */
+    
+    .AuthBody {
+        width: 100%;
+        height: 100vh;
+        background: #000;
     }
+
+    .AuthWrapper {
+        width: 90%;
+    }
+
+    Form {
+        width: 200px;
+    }
+
+    
 
 }
 

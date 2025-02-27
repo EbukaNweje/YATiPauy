@@ -31,7 +31,6 @@ const Login = () => {
         maxWidth: 360,
       }}
       onFinish={onFinish}
-      className='MyForm'
     >
       <Form.Item
         name="username"
@@ -43,7 +42,7 @@ const Login = () => {
           // className='MyFormWrapper'
         ]}
       >
-        <Input prefix={<UserOutlined />} placeholder="Username" className='divInput' />
+        <Input prefix={<UserOutlined />} placeholder="Username"/>
       </Form.Item>
       <Form.Item
         name="password"

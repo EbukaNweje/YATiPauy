@@ -1,7 +1,7 @@
 import React from 'react'
 import {RouterProvider, createHashRouter} from "react-router-dom";
-import Login2 from './pages/Auth/Login2'
-import Signup from './pages/Auth/Signup'
+import Login2 from './Components/Auth/Login'
+import Signup from './Components/Auth/SignUp'
 import Layout from './pages/Layout';
 import Home from './pages/Home'
 import Product from './pages/Product';
@@ -13,10 +13,11 @@ import Profile from './pages/Profile';
 import History from './pages/History';
 import Change from './pages/Auth/Change';
 import Vip from './pages/Vip';
-import Forgot from './pages/Auth/Forgot';
+import Forgot from './Components/Auth/Forgotpassword';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Plan from './pages/Plan';
+import Resetpass from "./Components/Auth/Resetpassword"
 
 const App = () => {
   const router = createHashRouter([
@@ -25,12 +26,16 @@ const App = () => {
       element: <Login2/>
     },
     {
-      path : "/Sign-up",
+      path : "/auth/Sign-up",
       element: <Signup/>
     },
     {
-      path : "/Forgottenpassword",
+      path : "/auth/Forgottenpassword",
       element: <Forgot/>
+    },
+    {
+      path : "/auth/Resetpassword",
+      element: <Resetpass/>
     },
     {path: 'terms', element: <Terms/>},
     { path: 'dashboard', element: <Layout/>, children:[
