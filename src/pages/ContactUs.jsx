@@ -53,7 +53,7 @@ const ContactUs = () => {
             <b>Phone</b>
             <p style={{ fontWeight: 400 }}>Mon-Fri 8am to 5pm.</p>
             <a href="tel:+3197005032009">+3197005032009</a>
-            <a href="tel:+3197005032009">+3197005032009</a>
+            <a href="tel:+491636219338">+491636219338</a>
           </div>
 
           <div className="emaillink2">

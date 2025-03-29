@@ -12,6 +12,17 @@
        height: 70%;
        width: 200px;
    }
+
+   .Logo {
+    width: 30%;
+    height: 80%;
+}
+
+.Logo img {
+    width: 100%;
+}
+
+
 }
 @media only screen and (max-width: 1200px){
     .HeroMainBody {
@@ -53,8 +64,13 @@
      }
  
      .Logo {
-         width: 10%;
-     }
+        width: 20%;
+        height: 80%;
+    }
+    
+    .Logo img {
+        width: 100%;
+    }
 
      .Icon {
         display: block;
@@ -120,7 +136,12 @@
     }
 
     .Logo {
-        width: 10%;
+        width: 20%;
+        height: 80%;
+    }
+    
+    .Logo img {
+        width: 100%;
     }
     
 }
@@ -130,7 +151,12 @@
 
 @media only screen and (max-width: 760px){
     .Logo {
-        width: 20%;
+        width: 40%;
+        height: 80%;
+    }
+    
+    .Logo img {
+        width: 100%;
     }
 
 }
@@ -140,7 +166,14 @@
 /* Media Query Styling for Mobile Device */
 
 @media only screen and (max-width: 480px) {
-
+    .Logo {
+        width: 40%;
+        height: 80%;
+    }
+    
+    .Logo img {
+        width: 100%;
+    }
 }
 
 
@@ -150,5 +183,12 @@
 /* Media Query Styling for Mobile Device */
 
 @media only screen and (max-width: 379px) {
-
+    .Logo {
+        width: 40%;
+        height: 80%;
+    }
+    
+    .Logo img {
+        width: 100%;
+    }
 }

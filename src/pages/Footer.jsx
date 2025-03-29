@@ -45,7 +45,8 @@ const Footer = () => {
             <p>
               Support email: <a href="mailto:yatihelpdesk@gmail.com ">yatihelpdesk@gmail.com </a> <br />
               Email: <a href="mailto:yaticares.hq@gmail.com">yaticares.hq@gmail.com</a> <br />
-              +31 970 050 32009
+              +31 970 050 32009 <br />
+              +49 163 621 9338
             </p>
           </div>
         </div>
