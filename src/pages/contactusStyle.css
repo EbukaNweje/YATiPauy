@@ -1,0 +1,411 @@
+.contactuswrapper{
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.contactusinner1{
+    width: 87%;
+    height: 20%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    
+    h2{
+        
+        font-family: Satoshi, sans-serif;
+        font-size: 32px;
+        font-weight: 400;
+        color: rgb(16, 24, 40);
+        
+    }
+}
+p{
+    font-family: Satoshi, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgba(16, 24, 40, 0.75);
+}
+.contactusinner2{
+    width: 87%;
+    height: 80%;
+    /* background-color: violet; */
+    display: flex;
+    justify-content: space-between;
+}
+.innerdetails{
+    width: 48%;
+    height: 97%;
+    background-color: #F9FAFB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgb(202, 200, 200);
+    gap: 20px;
+
+    h2{
+        width: 80%;
+        text-align: start;
+    }
+}
+.emailinput{
+    width: 80%;
+    height: 10%;
+    border-radius: 5px;
+    border: none;
+    background-color: #F2F4F7;
+    color: gray;
+    padding: 10px;
+}
+.textinput{
+    width: 80%;
+    height: 18%;
+    border-radius: 5px;
+    border: none;
+    background-color: #F2F4F7;
+    color: gray;
+    padding: 10px;
+}
+.termsnpolicies{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.submitbtn{
+    width: 80%;
+    height: 10%;
+    background-color: green;
+    color: white;
+    border-radius: 25px;
+    border: none;
+}
+.innerdetailslink{
+    width: 48%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    gap: 15px;
+}
+.emaillink{
+    width: 50%;
+    height: 55%;
+    background: #F9FAFB;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgb(202, 200, 200);
+    gap: 10px;
+}
+.emaillink1{
+    width: 45%;
+    height: 48%;
+    background: #F9FAFB;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgb(200, 194, 194);
+    gap: 10px;
+}
+.emaillink2{
+    width: 100%;
+    height: 40%;
+    background: #F9FAFB;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgb(200, 194, 194);
+    gap: 10px;
+}
+.socialicons{
+    width: 20%;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+/* Media Query Styling for Small Desktop  */
+
+@media only screen and (max-width: 1440px){
+    .contactusinner1{
+        width: 100%;
+        padding: 20px;
+        margin: 30px;
+        
+        h2{
+            font-size: 22px;
+        }
+    }
+    .contactusinner2{
+        width: 87%;
+        display: flex;
+        gap: 60px;
+    }
+    .innerdetails{
+        width: 100%;
+        
+    }
+    .termsnpolicies{
+        width: 100%;
+        padding: 10px;
+        
+    }
+    .innerdetailslink{
+        width: 90%;
+        display: flex;
+        
+    }
+    .emaillink{
+        width: 50%;
+        
+    }
+    .emaillink1{
+        width: 40%;
+        
+    }
+}
+@media only screen and (max-width: 1200px){
+    .contactusinner1{
+        width: 100%;
+        padding: 20px;
+        margin: 30px;
+        
+        h2{
+            font-size: 22px;
+        }
+    }
+    .contactusinner2{
+        width: 87%;
+        display: flex;
+        gap: 60px;
+    }
+    .innerdetails{
+        width: 100%;
+        
+    }
+    .termsnpolicies{
+        width: 100%;
+        padding: 10px;
+        
+    }
+    .innerdetailslink{
+        width: 90%;
+        display: flex;
+        
+    }
+    .emaillink{
+        width: 50%;
+        
+    }
+    .emaillink1{
+        width: 40%;
+        
+    }
+}
+
+/* End of Media Query Styling for Tablet Device */
+
+
+/* Media Query Styling for Big Tablet Device */
+
+@media only screen and (max-width: 900px){  
+    .contactusinner1{
+        width: 70%;
+        padding: 20px;
+        margin: 30px;
+
+        h2{
+            font-size: 22px;
+            text-align: left;
+            
+        }
+    }
+    .contactusinner2{
+        width: 67%;
+        display: flex;
+        gap: 60px;
+    }
+    .innerdetails{
+        width: 100%;
+        
+    }
+    .termsnpolicies{
+        width: 100%;
+        padding: 10px;
+        
+    }
+    .innerdetailslink{
+        width: 100%;
+        height: 80%;
+        display: flex;
+        
+    }
+    .emaillink{
+        width: 50%;
+        a{
+            font-size: 10px;
+        }
+        
+    }
+    .emaillink1{
+        width: 40%;
+
+        p{
+            font-size: 15px;
+        };
+        a{
+            font-size: 8px;
+        }
+    }
+    
+}
+
+/* End of Media Query Styling for Tablet Device */
+/* Media Query Styling for Tablet Device */
+
+@media only screen and (max-width: 760px){
+    .contactusinner1{
+        width: 70%;
+        padding: 20px;
+        margin: 30px;
+
+        h2{
+            font-size: 22px;
+            text-align: left;
+            
+        }
+    }
+    .contactusinner2{
+        width: 67%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+    .innerdetails{
+        width: 100%;
+        
+    }
+    .termsnpolicies{
+        width: 100%;
+        padding: 10px;
+        
+    }
+    .innerdetailslink{
+        width: 100%;
+        
+    }
+    .emaillink{
+        width: 100%;
+        
+    }
+    .emaillink1{
+        width: 100%;
+        
+    }
+}
+
+/* End of Media Query Styling for Tablet Device */
+
+/* Media Query Styling for Mobile Device */
+
+@media only screen and (max-width: 480px) {
+    
+    .contactusinner1{
+        width: 100%;
+        padding: 20px;
+        margin: 30px;
+        
+        h2{
+            font-size: 22px;
+        }
+    }
+    .contactusinner2{
+        width: 87%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+    .innerdetails{
+        width: 100%;
+        
+    }
+    .termsnpolicies{
+        width: 100%;
+        padding: 10px;
+        
+    }
+    .innerdetailslink{
+        width: 100%;
+        
+    }
+    .emaillink{
+        width: 100%;
+        
+    }
+    .emaillink1{
+        width: 100%;
+        
+    }
+    
+}
+
+
+/* End of Media Query Styling for Mobile Device */
+
+
+/* Media Query Styling for Mobile Device */
+
+@media only screen and (max-width: 379px) {
+    .contactusinner1{
+        width: 100%;
+        padding: 20px;
+        margin: 30px;
+        
+        h2{
+            font-size: 22px;
+        }
+    }
+    .contactusinner2{
+        width: 87%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+    .innerdetails{
+        width: 100%;
+        
+    }
+    .termsnpolicies{
+        width: 100%;
+        padding: 10px;
+        
+    }
+    .innerdetailslink{
+        width: 100%;
+        
+    }
+    .emaillink{
+        width: 100%;
+        
+    }
+    .emaillink1{
+        width: 100%;
+        
+    }
+    
+}

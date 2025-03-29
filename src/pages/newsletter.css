@@ -1,0 +1,224 @@
+.newsletter-bg{
+    width: 100%;
+    height: max-content;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+.newsletter-wrap{
+
+    width: 100%;
+    height: max-content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.047);
+    h4{
+        font-family: Satoshi, sans-serif;
+        font-size: 28px;
+font-weight: 500;
+line-height: 33.6px;
+color: rgb(16, 24, 40);
+    }
+    p{
+        font-family: Satoshi, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: rgb(102, 112, 133);
+        text-align: center;
+    }
+}
+
+
+.input-submit-wrap{
+    width: 100%;
+    height: 80px;
+    /* border: 5px solid blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     gap: 1%;
+  
+
+    input{
+        width: 60%;
+        height: 20%;
+        padding: 18px;
+        border: none;
+        border-radius: 20px;
+        background-color: rgba(128, 128, 128, 0.249);
+    }
+
+    input::placeholder{
+        font-size: 17px;
+        color: rgba(0, 0, 0, 0.564);
+        font-family: Satoshi, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: rgb(16, 24, 40);        
+    }
+    button{
+        width: 8%;
+        height: 60%;
+         border-radius: 30px;
+         color: white;
+         border: none;
+         font-family: Satoshi, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(126, 9, 236);
+    }
+}
+
+
+ @media only screen and (max-width: 1440px){
+    br{
+        display: none;
+    }
+   .newsletter-bg{
+    width: 100%;
+    height: max-content;
+    
+   }
+
+   .newsletter-wrap{
+    width: 100%;
+    height:max-content ;
+   }
+
+   p{
+    text-align: center;
+   }
+
+   .input-submit-wrap{
+    width: 100%;
+
+    input{
+
+    }
+    button{
+        width: 30%;
+    }
+   }
+} 
+
+
+
+
+@media only screen and (max-width: 1200px){
+    br{
+        display: none;
+    }
+   .newsletter-wrap{
+    width: 100%;
+    height:max-content ;
+   }
+
+   p{
+    text-align: center;
+   }
+
+   .input-submit-wrap{
+    width: 100%;
+
+    input{
+
+    }
+    button{
+        width: 30%;
+    }
+   }
+   
+} 
+
+
+
+
+ @media only screen and (max-width: 900px){  
+    br{
+        display: none;
+    }
+  
+    .newsletter-wrap{
+        width: 100%;
+        height:max-content ;
+       }
+    
+       p{
+        text-align: center;
+       }
+    
+       .input-submit-wrap{
+        width: 100%;
+    
+        input{
+    
+        }
+        button{
+            width: 30%;
+        }
+       }
+} 
+
+
+
+
+ @media only screen and (max-width: 480px) {
+    br{
+        display: none;
+    }
+    .newsletter-wrap{
+        width: 100%;
+        height:max-content ;
+       }
+    
+       p{
+        text-align: center;
+       }
+    
+       .input-submit-wrap{
+        width: 100%;
+    
+        input{
+    
+        }
+        button{
+            width: 30%;
+        }
+       }
+} 
+
+
+@media only screen and (max-width: 379px) {
+    br{
+        display: none;
+    }
+    .newsletter-wrap{
+        width: 100%;
+        height:max-content ;
+       }
+    
+       p{
+        text-align: center;
+       }
+    
+       .input-submit-wrap{
+        width: 100%;
+    
+        input{
+    
+        }
+        button{
+            width: 30%;
+        }
+       }
+} 

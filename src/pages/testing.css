@@ -1,0 +1,122 @@
+/* Default styles for large screens */
+.MainWrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+}
+
+.wrapper {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Left text section */
+.HeroPageleft {
+    flex: 1;
+    padding: 20px;
+}
+
+.HeroPageleft h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.HeroPageleft p {
+    font-size: 1rem;
+    color: #f4f4f4;
+    margin-bottom: 20px;
+}
+
+.Btn {
+    background-color: #022308f5;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.Btn:hover {
+    background-color: #02310bf5;
+}
+
+/* Right image section */
+.HeroPageRight {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 100vh;
+    /* background: #000; */
+    background: url("../assets/grow.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+/* .imge {
+    max-width:  60%;
+    height: auto;
+    border-radius: 10px;
+} */
+
+/* ✅ Responsive for Tablets (Max Width: 1024px) */
+@media screen and (max-width: 1024px) {
+    .wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .HeroPageleft h1 {
+        font-size: 2.5rem;
+    }
+
+    .HeroPageleft h3 {
+        font-size: 1.3rem;
+    }
+
+    .Btn {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+    }
+}
+
+/* ✅ Responsive for Mobile Phones (Max Width: 768px) */
+@media screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .HeroPageleft h1 {
+        font-size: 2rem;
+    }
+
+    .HeroPageleft h3 {
+        font-size: 1.1rem;
+    }
+
+    .Btn {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .imge {
+        width: 90%;
+    }
+}

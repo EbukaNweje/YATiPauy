@@ -1,0 +1,80 @@
+/* 🌍 Global Footer Styles */
+footer {
+    background: #222;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .footerbody {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* 📌 Footer Wrapper */
+  .footerwrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #444;
+  }
+  
+  /* 📌 Footer Content Boxes */
+  .footercontent {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+  }
+  
+  .footercontent h3,
+  .footercontent h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .footercontent p {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.5;
+  }
+  
+  .footercontent a {
+    color: #ff6f61;
+    text-decoration: none;
+  }
+  
+  .footercontent a:hover {
+    text-decoration: underline;
+  }
+  
+  /* 📌 Social Icons */
+  .social-icons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* 📌 Footer Bottom */
+  .footeraddress {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #bbb;
+  }
+  
+  /* 📌 Responsive Design */
+  @media (max-width: 768px) {
+    .footerwrapper {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .footercontent {
+      text-align: center;
+    }
+  }
+  

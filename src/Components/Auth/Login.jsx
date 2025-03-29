@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <div  className='AuthBody'> 
         <div className='Logo'>
-          <img src={Logo} alt="" />
+          <img src={Logo} alt=""  onClick={() => Nav("/")}/>
         </div>
         <div className='AuthWrapper'>
             <div className='AuhHeader'>

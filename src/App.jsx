@@ -18,11 +18,18 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Plan from './pages/Plan';
 import Resetpass from "./Components/Auth/Resetpassword"
+import LandingPage from './pages/LandingPage'
+import ContactUs from './pages/ContactUs'
+// import FAQ from './pages/FAQ';
 
 const App = () => {
   const router = createHashRouter([
+
     {
       path : "/",
+      element: <LandingPage/>},
+    {
+      path : "/auth/login",
       element: <Login2/>
     },
     {
@@ -36,6 +43,10 @@ const App = () => {
     {
       path : "/auth/Resetpassword",
       element: <Resetpass/>
+    },
+    {
+      path : "/contact-us",
+      element: <ContactUs/>
     },
     {path: 'terms', element: <Terms/>},
     { path: 'dashboard', element: <Layout/>, children:[

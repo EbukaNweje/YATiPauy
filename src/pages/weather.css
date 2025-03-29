@@ -1,0 +1,178 @@
+/* 🌍 Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+.container {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  padding: 20px;
+  background: #f4f4f4;
+}
+
+/* 🏗 Wrapper */
+.wraper {
+  width: 90%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🏠 Left Section (About Us) */
+.left-section {
+  flex: 1;
+  padding: 20px;
+  background: #03260A;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.left-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.left-section p {
+  font-size: 16px;
+  line-height: 30px;
+}
+
+/* 📌 Right Section */
+.right-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 🔼 Navigation Tabs (Top-Right) */
+.nav-tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+.nav-tabs h2 {
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-tabs h2:hover {
+  color: #ff6f61;
+}
+
+.active-tab {
+  color: #ff6f61;
+  border-bottom: 3px solid #ff6f61;
+}
+
+/* 📌 Content Section (Bottom-Right) */
+.content-section {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff7f6;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content-box {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.content-box h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.content-box p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.content-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.content-box li {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* 🎯 Responsive Design */
+@media (max-width: 1024px) {
+  .wraper {
+    flex-direction: column;
+  }
+
+  .left-section {
+    width: 100%;
+  }
+
+  .right-section {
+    width: 100%;
+  }
+
+  .nav-tabs {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .wraper {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .left-section {
+    text-align: center;
+  }
+
+  .nav-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-tabs h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-tabs h2 {
+    font-size: 16px;
+  }
+}
+
+/* 🔥 Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

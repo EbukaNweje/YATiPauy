@@ -1,7 +1,14 @@
+@import "tailwindcss";
+
+
 *{
   padding: 0px;
   margin: 0px;
   font-family: Lato, sans-serif;
   box-sizing: border-box;
   
+}
+
+html {
+  scroll-behavior: smooth;
 }

@@ -1,0 +1,85 @@
+.mainBody{
+    width: 100%;
+    height: auto;
+    /* background-color: pink; */
+}
+
+.header-container{
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+
+}
+
+.header-wrapper{
+    width: 90%;
+    height: 100%;
+    /* background-color: white; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-holder{
+    width: 150px;
+
+    & img {
+        width: 100%;
+    }
+ }
+
+.navList{
+    display: flex;
+    width: 40%;
+    gap: 20px;
+    align-items: center;
+
+
+   & ul {
+        display: flex;
+        gap: 20px;
+        list-style-type: none;
+
+
+        & li {
+            cursor: pointer;
+        }
+    }
+}
+
+.Button {
+    background: green;
+    color: white;
+}
+
+.Icon {
+    font-size: 30px;
+    display: none;
+}
+
+
+.HerroPage {
+    width: 100%;
+    height: 100vh;
+    background: #0D2D13;
+    position: relative;
+}
+
+
+.Text {
+    width: 40%;
+    height: 50%;
+    background: red;
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+}
+
+.Bg {
+    background: #00000065;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}

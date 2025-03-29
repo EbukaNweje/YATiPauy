@@ -28,7 +28,7 @@ const SignUp = () => {
   return (
     <div  className='AuthBody'> 
         <div className='Logo'>
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="" onClick={() => Nav("/")} />
         </div>
         <div className='AuthWrapper'>
         <div className='AuhHeader'>
@@ -91,7 +91,7 @@ const SignUp = () => {
         <Input.Password prefix={<LockOutlined />}  placeholder="Password" />
       </Form.Item>
       <Form.Item
-        name="password"
+        name="confirmpassword"
         rules={[
           {
             required: true,
