@@ -16,7 +16,7 @@ const ContactUs = () => {
     <Header/>
         <div className="contactuswrapper">
       <div className="contactusinner1">
-        <h2>Chat to our friendly team</h2>
+        <h2>Chat with our friendly team</h2>
         <p style={{ fontWeight: 400 }}>
           We'd love to hear from you. Please fill out this form or shoot us an
           email.
