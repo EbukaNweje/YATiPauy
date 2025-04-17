@@ -62,20 +62,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 100vh;
-    /* background: #000; */
+    min-height: 700px; /* Flexible height */
+    width: 80%; /* Adjust image section to take 80% of the container */
     background: url("../assets/grow.jpg");
-    background-size: cover;
+    background-size: cover; /* Ensure the image covers the container */
     background-position: center;
     border-radius: 10px;
 }
-
-/* .imge {
-    max-width:  60%;
-    height: auto;
-    border-radius: 10px;
-} */
 
 /* ✅ Responsive for Tablets (Max Width: 1024px) */
 @media screen and (max-width: 1024px) {
@@ -88,13 +81,19 @@
         font-size: 2.5rem;
     }
 
-    .HeroPageleft h3 {
+    .HeroPageleft p {
         font-size: 1.3rem;
     }
 
     .Btn {
         font-size: 1.1rem;
         padding: 10px 20px;
+    }
+
+    .HeroPageRight {
+        min-height: 350px;
+        width: 80%; /* Image section should still be 80% of container */
+        margin-top: 20px; /* Add some space between text and image */
     }
 }
 
@@ -109,8 +108,8 @@
         font-size: 2rem;
     }
 
-    .HeroPageleft h3 {
-        font-size: 1.1rem;
+    .HeroPageleft p {
+        font-size: 1rem;
     }
 
     .Btn {
@@ -118,7 +117,10 @@
         padding: 8px 16px;
     }
 
-    .imge {
-        width: 90%;
+    .HeroPageRight {
+        min-height: 350px; /* Adjust image section height for mobile */
+        margin-top: 20px; /* Add margin between text and image */
+        width: 80%; /* Keep image section 80% of the container */
+        border-radius: 8px; /* Optional: Radius for smooth corners */
     }
 }

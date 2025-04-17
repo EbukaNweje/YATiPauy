@@ -22,11 +22,13 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+}
 
-    & img {
-        width: 100%;
-        height: 100%;
-    }
+.Logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* prevents stretching */
+    cursor: pointer; /* adds visual feedback */
 }
 
 .Navs {

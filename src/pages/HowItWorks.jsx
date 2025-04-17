@@ -1,6 +1,6 @@
 import React from "react";
 import "./howItWorks.css";
-import heroImg from "../assets/heroImg.jpeg"; // Ensure correct image path
+import heroImg from "../assets/WEPROVIDE.png"; // Ensure correct image path
 
 const HowItWorks = () => {
   return (

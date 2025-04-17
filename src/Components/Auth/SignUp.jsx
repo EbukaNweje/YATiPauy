@@ -121,14 +121,14 @@ const SignUp = () => {
 
 
       <Form.Item>
-        <Button block color="green" variant="solid" htmlType="submit">
+        <Button className="custom-btn" block htmlType="submit">
           Create account
         </Button>
         or <span style={{
           color: "#180169",
           cursor: "pointer"
         }}
-        onClick={()=>Nav("/")}
+        onClick={()=>Nav("/auth/login")}
         >Login!</span>
       </Form.Item>
     </Form>
