@@ -111,7 +111,7 @@ body {
 /* 🖥️ Medium Screens (Tablets & Small Laptops) */
 @media (max-width: 1024px) {
     .HowItWorksWrapper {
-        flex-direction: column-reverse;
+        flex-direction: column;
         padding: 40px 20px;
     }
     .leftSide {
