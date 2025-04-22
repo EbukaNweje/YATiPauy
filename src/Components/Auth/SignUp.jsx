@@ -23,6 +23,7 @@ const SignUp = () => {
   const Nav = useNavigate()
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
+        Nav("/dashboard");
       };
 
   return (
@@ -31,10 +32,10 @@ const SignUp = () => {
           <img src={Logo} alt="" onClick={() => Nav("/")} />
         </div>
         <div className='AuthWrapper'>
-        <div className='AuhHeader'>
+        <div className='AuthHeader'>
                 <h3>Create Account</h3>
                 <p>Please enter your appropriate details to continue</p>
-            </div>
+        </div>
         <Form
         name="SignUp"
         style={{
@@ -47,15 +48,15 @@ const SignUp = () => {
       onFinish={onFinish}
     >
       <Form.Item
-        name="fullName"
+        name="userName"
         rules={[
           {
             required: true,
-            message: 'Please input your FullName!',
+            message: 'Please input your userName!',
           },
         ]}
       >
-        <Input prefix={<UserOutlined />} placeholder="FullName" />
+        <Input prefix={<UserOutlined />} placeholder="userName" />
       </Form.Item>
       <Form.Item
         name="email"
@@ -100,6 +101,17 @@ const SignUp = () => {
         ]}
       >
         <Input.Password prefix={<LockOutlined />}  placeholder="Confirm password" />
+      </Form.Item>
+      <Form.Item
+        name="referralCode"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Referral Code!',
+          },
+        ]}
+      >
+        <Input prefix={<UserOutlined />} placeholder="Referral Code" />
       </Form.Item>
 
 

@@ -77,7 +77,7 @@ const MobileMenu = () => {
 
         <div className="Auth">
           <button className="auth-btn" onClick={() => navigate("/auth/login")}>Login</button>
-          <button className="auth-btn active" onClick={() => navigate("/auth/signup")}>Create account</button>
+          <button className="auth-btn active" onClick={() => navigate("/auth/sign-up")}>Create account</button>
         </div>
       </div>
     </div>

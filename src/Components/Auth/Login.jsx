@@ -38,6 +38,7 @@ const Login = () => {
           <Form.Item
             name="email"
             rules={[{ required: true, message: 'Please input your Email Address!' }]}
+            className = "FromInput"
           >
             <Input prefix={<PhoneOutlined />} placeholder="Email" />
           </Form.Item>
@@ -45,6 +46,7 @@ const Login = () => {
           <Form.Item
             name="password"
             rules={[{ required: true, message: 'Please input your Password!' }]}
+            className = "FromInput"
           >
             <Input.Password prefix={<LockOutlined />} placeholder="Password" />
           </Form.Item>
