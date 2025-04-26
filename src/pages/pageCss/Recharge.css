@@ -190,6 +190,12 @@
     line-height: 21px;
 }
 
+.chanPass{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .Bank, .Change{
     width: 80%;
     display: flex;
@@ -200,7 +206,7 @@
 
     h3{
         color: grey;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 600;
         line-height: 21px;
     }
@@ -209,7 +215,7 @@
 .Bank section, .Change section{
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
@@ -234,7 +240,7 @@
 
 
     span{
-       color: white; 
+       color: gray; 
 
     }
 }
@@ -245,8 +251,8 @@
     top: 50%;
     left: 15px;
     transform: translateY(-50%);
-    color: white;
-    font-size: 30px;
+    color: gray;
+    font-size: 25px;
 }
 
 
@@ -269,7 +275,7 @@
     width: 90%;
     padding: 20px;
     padding-left: 50px;
-    color: white;
+    color: gray;
     font-size: 18px;
     font-weight: 600;
     border: none;
@@ -281,7 +287,7 @@
     width: 90%;
     padding: 20px;
     padding-left: 50px;
-    color: white;
+    color: gray;
     font-size: 18px;
     font-weight: 600;
     border: none;
@@ -320,10 +326,10 @@
     
 }
 
-.Bank section button, .Change section button {
-    width: 100%;
+.Bank section .buttTag, .Change section button {
+    width: 50%;
     padding: 20px;
-    background: linear-gradient(135deg, #008080, #005555);
+    background: linear-gradient(135deg, green, rgb(11,43,17));
     color: white;
     font-size: 20px;
     font-weight: 600;
@@ -338,11 +344,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
     overflow: hidden;
-    transition: background 0.3s ease-in-out;
+    transition: background 250ms ease-in-out;
 }
 
-.Bank section button,  .Change section button:hover {
-    background: linear-gradient(135deg, #00a0a0, #006666);
+.Bank section .buttTag:hover,  .Change section button:hover {
+    background: linear-gradient(135deg, rgb(11,43,17), green);
 }
 
 .Bank section button, .Change section button::before {

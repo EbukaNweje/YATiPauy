@@ -64,7 +64,7 @@
     align-items: center;
 
     button{
-        width: 50%;
+        width: 100%;
         padding: 20px;
         border: none;
         outline: none;
@@ -136,6 +136,30 @@
 .Profile .profileInfo section:hover {
     transform: scale(0.95);
         background-color: #066a18c2; 
+}
+
+.refCode {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h3{
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    p {
+        width: 50%;
+        display: flex;
+        gap: 20px;
+        font-size: 18px;
+        font-weight: 600;
+
+        & span {
+            margin-top: 2px;
+            cursor: pointer;
+        }
+    }
 }
 
 @media (min-width:320px) and (max-width: 768px){

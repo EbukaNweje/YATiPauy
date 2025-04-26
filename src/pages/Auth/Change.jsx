@@ -5,14 +5,18 @@ import '../pageCss/Recharge.css';
 const Change = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className='Change'>
         <h3>Please provide the following details below to proceed</h3>
-        <section>
+        <section className='chanPass'>
           <div className="inputDiv">
             <FaLock className="inputIcon" />
-            <input type="password" placeholder="Enter current password" />
+            <input type={showNewPassword ? "text" : "password"} placeholder="Enter current password" />
+            <span className="toggleIcon" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash size={25} cursor={'pointer'}/> : <FaEye size={25} cursor={'pointer'}/>}
+            </span>
           </div>
 
           <div className="inputDiv">

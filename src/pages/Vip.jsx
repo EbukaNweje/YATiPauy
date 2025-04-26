@@ -1,7 +1,6 @@
-import React from 'react';
-import { FaCrown } from 'react-icons/fa'; 
-import './pageCss/Product.css';
-import speaker from '../assets/speaker.png'
+import React from "react";
+import "./pageCss/Product.css";
+import speaker from "../assets/speaker.png";
 
 const Vip = () => {
   const products = [
@@ -11,26 +10,30 @@ const Vip = () => {
     { id: 4, name: "Product 4" },
     { id: 5, name: "Product 5" },
     { id: 6, name: "Product 6" },
-    { id: 7, name: "Product 7" }
+    { id: 7, name: "Product 7" },
   ];
 
   if (products.length === 0) {
-    return <p style={{ fontSize: '20px', color: 'lightgray', padding: '20px' }}>No products available</p>;
+    return (
+      <p style={{ fontSize: "20px", color: "lightgray", padding: "20px" }}>
+        No products available
+      </p>
+    );
   }
 
   return (
     <div className="productWrap">
-      <div className='Product'>
+      <div className="Products">
         {products.map((product, i) => (
-          <section key={i}>
-            <div className='productHead'>
-              <div className="iconBox">
-                <FaCrown color='yellow' size={35}/> 
+          <section key={i} className="productCon">
+            <div className="leftBody">
+              <div className="imgBox">
+                <img src={product.image || speaker} alt="product" />
               </div>
-              <h3>{product.name || "ZenithVault"}</h3>
-            </div>
-            <div className="imgBox">
-              <img src={product.image || speaker} alt="product" />
+              <div className="productHead">
+                <div className="iconBox"></div>
+                <h3>{product.name || "ZenithVault"}</h3>
+              </div>
             </div>
             <div className="productDetails">
               <li>
@@ -49,8 +52,8 @@ const Vip = () => {
                 <h4>Total Income</h4>
                 <h3>₦{product.totalIncome || "90,000.00"}</h3>
               </li>
+              <button className="purchButton">Purchase</button>
             </div>
-            <button>Purchase</button>
           </section>
         ))}
       </div>

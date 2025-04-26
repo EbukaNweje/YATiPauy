@@ -39,8 +39,7 @@ const Bank = () => {
           <FaUser className="inputIcon" />
           <input type="text" placeholder="Enter your Bank Account Name" />
         </div>
-
-        <button>Save</button>
+        <div className="buttTag">Save</div>
       </section>
     </div>
   );

@@ -57,7 +57,7 @@ const App = () => {
     {path: 'bankDetails', element: <Bank/>},
     {path: 'Profile', element: <Profile/>},
     {path: 'history', element: <History/>},
-    {path: 'Vip', element: <Vip/>},
+    {path: 'myPackages', element: <Vip/>},
     {path: 'plan', element: <Plan/>},
     {path: 'changePassword', element: <Change/>},
 
