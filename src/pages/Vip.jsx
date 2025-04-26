@@ -4,18 +4,18 @@ import speaker from "../assets/speaker.png";
 
 const Vip = () => {
   const products = [
-    { id: 1, name: "Product 1" },
-    { id: 2, name: "Product 2" },
-    { id: 3, name: "Product 3" },
-    { id: 4, name: "Product 4" },
-    { id: 5, name: "Product 5" },
-    { id: 6, name: "Product 6" },
-    { id: 7, name: "Product 7" },
+    // { id: 1, name: "Product 1" },
+    // { id: 2, name: "Product 2" },
+    // { id: 3, name: "Product 3" },
+    // { id: 4, name: "Product 4" },
+    // { id: 5, name: "Product 5" },
+    // { id: 6, name: "Product 6" },
+    // { id: 7, name: "Product 7" },
   ];
 
   if (products.length === 0) {
     return (
-      <p style={{ fontSize: "20px", color: "lightgray", padding: "20px" }}>
+      <p style={{ fontSize: "20px", color: "black", padding: "20px" }}>
         No products available
       </p>
     );
@@ -25,7 +25,7 @@ const Vip = () => {
     <div className="productWrap">
       <div className="Products">
         {products.map((product, i) => (
-          <section key={i} className="productCon">
+          <section key={i} className="productCons">
             <div className="leftBody">
               <div className="imgBox">
                 <img src={product.image || speaker} alt="product" />
