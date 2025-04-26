@@ -1,20 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./AuthStyle.css";
 import { LockOutlined, PhoneOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Logo from "../../assets/logo.png";
+import { loginSuccess } from '../../pages/Global/Slice';
+import axios from 'axios';
 // import { isAuth } from '../../Pages/global/features'; // Uncomment when needed
 
 const Login = () => {
   const dispatch = useDispatch();
   const Nav = useNavigate();
+const [loading, setLoading] = useState(false);
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-    // dispatch(isAuth()); // Uncomment if using Redux for auth
-    Nav("/dashboard");
+
+  const onFinish = async (values) => {
+    setLoading(true);
+    // console.log('Received values of form: ', values);
+    try {
+      // Make an API request to your backend to create a new user
+        const response = await axios.post('https://yaticare-back-end.vercel.app/api/auth/login', values);
+        console.log(response.data.data)
+        dispatch(loginSuccess(response.data.data))
+        // setLoading(false);
+         Nav("/dashboard");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,7 +81,7 @@ const Login = () => {
 
           <Form.Item>
             <Button className="custom-btn" block htmlType="submit">
-              Log in
+              {loading ? "Loading..." : "Login"}
             </Button>
             or{" "}
             <span

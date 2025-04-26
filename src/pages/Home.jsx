@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaWallet, FaMoneyBillWave, FaUniversity, FaUsers, FaBell, FaFileContract, FaShieldAlt } from "react-icons/fa";
+import { FaWallet, FaMoneyBillWave, FaUniversity, FaUsers, FaBell, FaShieldAlt } from "react-icons/fa";
 import "./pageCss/Home.css";
 import Product from "./Product";
 import { useNavigate } from "react-router-dom";
@@ -13,13 +13,13 @@ const Home = () => {
   ];
 
   const products = [
-    { id: 1, name: "Product 1" },
-    { id: 2, name: "Product 2" },
-    { id: 3, name: "Product 3" },
-    { id: 4, name: "Product 4" },
-    { id: 5, name: "Product 5" },
-    { id: 6, name: "Product 6" },
-    { id: 7, name: "Product 7" }
+    // { id: 1, name: "Product 1" },
+    // { id: 2, name: "Product 2" },
+    // { id: 3, name: "Product 3" },
+    // { id: 4, name: "Product 4" },
+    // { id: 5, name: "Product 5" },
+    // { id: 6, name: "Product 6" },
+    // { id: 7, name: "Product 7" }
   ];
 
   const ITEMS_PER_PAGE = 5;
@@ -44,6 +44,7 @@ const Home = () => {
 
   return (
     <div className="Home">
+      {/* Carousel */}
       <div className="carousel-container">
         <motion.div
           className="carousel"
@@ -60,6 +61,7 @@ const Home = () => {
         </motion.div>
       </div>
 
+      {/* Navigation */}
       <nav>
         <ul onClick={() => Nav('recharge')}>
           <div className="iconBox"><FaWallet size={25} color="grey" /></div>
@@ -81,16 +83,13 @@ const Home = () => {
           <div className="iconBox"><FaUsers size={25} color="grey" /></div>
           <li>Community</li>
         </ul>
-        {/* <ul onClick={()=> Nav('terms')}>
-          <div className="iconBox"><FaFileContract size={25} color="grey" /></div>
-          <li>Terms & Conditions</li>
-        </ul> */}
-        <ul onClick={()=> Nav('Privacy')}>
+        <ul onClick={() => Nav('Privacy')}>
           <div className="iconBox"><FaShieldAlt size={25} color="grey" /></div>
           <li>Privacy Policy</li>
         </ul>
       </nav>
 
+      {/* Marquee Button */}
       <button className="margueBtn" disabled>
         <div className="iconBox"><FaBell size={30} color="white" /></div>
         <marquee behavior="scroll" direction="left">
@@ -98,10 +97,12 @@ const Home = () => {
         </marquee>
       </button>
 
+      {/* Products */}
       <div className="productDiv">
         <h3>Top Rated Products</h3>
         <Product displayedProducts={displayedProducts} />
 
+        {/* Pagination */}
         <div className="pagination">
           {Array.from({ length: totalPages }, (_, i) => (
             <button
