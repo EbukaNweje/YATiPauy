@@ -17,7 +17,7 @@ const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
     setLoading(true);
-    // console.log('Received values of form: ', values);
+    // console.log('Received values of form: ', values)
     try {
       // Make an API request to your backend to create a new user
         const response = await axios.post('https://yaticare-back-end.vercel.app/api/auth/login', values);

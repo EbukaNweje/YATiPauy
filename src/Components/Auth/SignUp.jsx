@@ -7,6 +7,7 @@ import Logo from "../../assets/logo.png"
 import axios from 'axios';
 import {loginSuccess} from "../../pages/Global/Slice"
 import { useDispatch } from 'react-redux';
+import toast from "react-hot-toast"
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -31,19 +32,25 @@ const [loading, setLoading] = useState(false);
 
     const onFinish = async (values) => {
       setLoading(true);
+      if(values.password !== values.confirmpassword){
+        setLoading(false);
+        toast.error("Password does not match")
+      }else{
         // console.log('Received values of form: ', values);
         try {
           // Make an API request to your backend to create a new user
             const response = await axios.post('https://yaticare-back-end.vercel.app/api/auth/register', values);
             console.log(response.data.data)
-            dispatch(loginSuccess(response.data.data))
+            // dispatch(loginSuccess(response.data.data))
+            toast.success(response.data.message)
             // setLoading(false);
-             Nav("/dashboard");
+             Nav("/auth/login");
 
         } catch (error) {
           console.log(error);
           setLoading(false);
         }
+      }
       };
 
   return (
