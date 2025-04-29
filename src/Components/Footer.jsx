@@ -24,15 +24,15 @@ const Footer = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/Products" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
+          <NavLink to="plan" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
             <FaShoppingBag size={30} />
-            <h3>Packages</h3>
+            <h3>Plans</h3>
           </NavLink>
         </li>
         <li>
-          <NavLink  to="/dashboard/myPackages" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
+          <NavLink  to="/dashboard/myPlans" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
             <FaCrown size={30} />
-            <h3>My packages</h3>
+            <h3>My Plans</h3>
           </NavLink>
         </li>
         <li>
@@ -42,14 +42,14 @@ const Footer = () => {
           </NavLink>
         </li>
 
-        <li>
+        {/* <li>
           <NavLink 
           onClick={handleLogout}
           className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
             <FaPowerOff size={30} />
             <h3>Logout</h3>
           </NavLink>
-        </li>
+        </li> */}
       </nav>
     </div>
   );

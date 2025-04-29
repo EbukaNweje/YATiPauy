@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import Logo from "../../assets/logo.png";
 import { loginSuccess } from '../../pages/Global/Slice';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 // import { isAuth } from '../../Pages/global/features'; // Uncomment when needed
 
 const Login = () => {
@@ -21,13 +22,16 @@ const [loading, setLoading] = useState(false);
     try {
       // Make an API request to your backend to create a new user
         const response = await axios.post('https://yaticare-back-end.vercel.app/api/auth/login', values);
-        console.log(response.data.data)
+        console.log(response)
+        toast.success("Login Successfull")
         dispatch(loginSuccess(response.data.data))
+        localStorage.setItem("refLink", JSON.stringify(response.data.data.referralLink));
         // setLoading(false);
          Nav("/dashboard");
     } catch (error) {
       console.log(error);
       setLoading(false);
+      toast.error(error?.response?.data?.error?.message)
     }
   };
 

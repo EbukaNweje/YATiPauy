@@ -2,39 +2,26 @@ import React, { useEffect, useState } from "react";
 import {
   FaUserFriends,
   FaFileInvoice,
-  FaLock,
   FaSignOutAlt,
   FaChevronRight,
-  FaRegCopy,
 } from "react-icons/fa";
 import "./pageCss/Profile.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./Global/Slice";
 import axios from "axios";
-import { Modal } from "antd";
+import { MdManageAccounts } from "react-icons/md";
 
 const Profile = () => {
   const Nav = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.YATipauy.user);
   const [userInfo, setUserInfo] = useState(null);
-  const [showRef, setShowRef] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
     Nav("/");
   };
-
-  const copy = (userInfo) => {
-    navigator.clipboard.writeText(userInfo?.inviteCode)
-    alert("copied successfully")
-    setShowRef(false)
-  }
-
-  const handleCancel = () =>{
-    setShowRef(false)
-  }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -78,7 +65,7 @@ const Profile = () => {
       </div>
 
       <div className="profileInfo">
-        <section onClick={() => setShowRef(true)}>
+        <section onClick={() => Nav("/dashboard/referrals")}>
           <div className="iconBox">
             <FaUserFriends className="profileIcon" />
             <h3>Invite</h3>
@@ -92,10 +79,17 @@ const Profile = () => {
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>
-        <section onClick={() => Nav("/dashboard/changePassword")}>
+        {/* <section onClick={() => Nav("/dashboard/changePassword")}>
           <div className="iconBox">
             <FaLock className="profileIcon" />
             <h3>Change password</h3>
+          </div>
+          <FaChevronRight className="arrowIcon" />
+        </section> */}
+        <section onClick={() => Nav("/dashboard/accountSettings")}>
+          <div className="iconBox">
+            <MdManageAccounts className="profileIcon" />
+            <h3>Profile Settings</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>
@@ -107,23 +101,6 @@ const Profile = () => {
           <FaChevronRight className="arrowIcon" />
         </section>
       </div>
-      <Modal
-        open={showRef}
-        onCancel={handleCancel}
-        okButtonProps={{ style: { display: "none" } }}
-        cancelButtonProps={{ style: { display: "none" } }}
-        width={500}
-      >
-        <div className="refCode">
-          <h3>Referral Code:</h3>
-          <p>
-            {userInfo?.inviteCode}
-            <span onClick={() => copy(userInfo)}>
-              <FaRegCopy />
-            </span>
-          </p>
-        </div>
-      </Modal>
     </div>
   );
 };

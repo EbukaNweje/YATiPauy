@@ -20,6 +20,8 @@ import Plan from './pages/Plan';
 import Resetpass from "./Components/Auth/Resetpassword"
 import LandingPage from './pages/LandingPage'
 import ContactUs from './pages/ContactUs'
+import ProfileSettings from './pages/ProfileSettings';
+import RefPage from './pages/RefPage';
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -55,9 +57,11 @@ const App = () => {
     {path: 'recharge', element: <Recharge/>},
     {path: 'withdraw', element: <Withdraw/>},
     {path: 'bankDetails', element: <Bank/>},
+    {path: 'referrals', element: <RefPage/>},
     {path: 'Profile', element: <Profile/>},
+    {path: 'accountSettings', element: <ProfileSettings/>},
     {path: 'history', element: <History/>},
-    {path: 'myPackages', element: <Vip/>},
+    {path: 'myPlans', element: <Vip/>},
     {path: 'plan', element: <Plan/>},
     {path: 'changePassword', element: <Change/>},
 

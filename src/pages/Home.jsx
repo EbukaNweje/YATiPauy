@@ -71,7 +71,7 @@ const Home = () => {
           <div className="iconBox"><FaMoneyBillWave size={25} color="grey" /></div>
           <li>Withdraw</li>
         </ul>
-        <ul onClick={() => Nav('bankDetails')}>
+        {/* <ul onClick={() => Nav('bankDetails')}>
           <div className="iconBox"><FaUniversity size={25} color="grey" /></div>
           <li>Bank Account</li>
         </ul>
@@ -86,7 +86,7 @@ const Home = () => {
         <ul onClick={() => Nav('Privacy')}>
           <div className="iconBox"><FaShieldAlt size={25} color="grey" /></div>
           <li>Privacy Policy</li>
-        </ul>
+        </ul> */}
       </nav>
 
       {/* Marquee Button */}

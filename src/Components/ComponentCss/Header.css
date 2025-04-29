@@ -22,6 +22,24 @@
     align-items: center;
     gap: 16px;
   }
+
+  .refinfo{
+    width: max-content;
+    display: flex;
+    gap: 10px;
+  }
+
+  .reflink{
+    width: max-content;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 12px;
+
+    span {
+      cursor: pointer;
+    }
+  }
   
   .profile {
     background-color: #2e2e42;
