@@ -1,25 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./pageCss/profilepage.css"
+import "./pageCss/profilepage.css";
 import { FiEdit2 } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 function ProfileInfo() {
+  const user = useSelector((state) => state.YATipauy.user);
+  console.log(user)
   const [details, setDetails] = useState({
-    fullName:  "",
-    email: "",
-    street: "",
+    UserName: user.user.userName || "",
+    email: user.user.email || "",
+    PhoneNumber: user.user.phoneNumber || "",
     locality: "",
     state: "",
   });
   const [editMode, setEditMode] = useState({
-    fullName: true,
-    street: true,
+    UserName: true,
+    PhoneNumber: true,
     locality: true,
     state: true,
   });
-  const [profileExists, setProfileExists] = useState(false);
-  const fileInputRef = useRef(null);
-  const [profileId, setProfileId] = useState(null);
 
+   const updateInfo = async () => {
+      try{
+        const response = await axios.post(`https://yaticare-back-end.vercel.app/api/user/updateuser/${user.user._id}`, details)
+        console.log(response)
+      }catch(error){
+        console.log(error)
+      }
+    }
 
   const handleInputChange = (field) => (e) => {
     setDetails({ ...details, [field]: e.target.value });
@@ -31,22 +39,18 @@ function ProfileInfo() {
 
   const handleCancel = () => {
     setDetails({
-      fullName: name,
+      UserName: name,
       email: mail,
-      street: "",
+      PhoneNumber: "",
       locality: "",
       state: "",
     });
     setEditMode({
-      fullName: true,
-      street: true,
+      UserName: true,
+      PhoneNumber: true,
       locality: true,
       state: true,
     });
-    setImage(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = null;
-    }
   };
 
   const renderField = (label, value, fieldKey) => (
@@ -71,19 +75,14 @@ function ProfileInfo() {
 
   return (
     <div>
-      {loading && (
-        <div className="uploadOverlay">
-          <Loadscreen />
-        </div>
-      )}
       <div className="informationdetailcont">
         <h1
           style={{ marginLeft: "30px", paddingTop: "10px", fontSize: "27px" }}
         >
           My Profile
         </h1>
-        <form className="profileform" onSubmit={handleSubmitProfile}>
-          {renderField("Full Name", details.fullName, "fullName")}
+        <form className="profileform" onSubmit={""}>
+          {renderField("Full Name", details.UserName, "UserName")}
 
           <div className="inforcontainer">
             <h2>Email</h2>
@@ -92,63 +91,10 @@ function ProfileInfo() {
             </div>
           </div>
 
-          {renderField("Street", details.street, "street")}
+          {renderField("PhoneNumber", details.PhoneNumber, "PhoneNumber")}
 
-          <div className="origindetailswrap">
-            <div className="localitycontwrap">
-              <h2>Locality</h2>
-              {editMode.locality ? (
-                <div className="readonly-field">
-                  <span>{details.locality || "N/A"}</span>
-                  <FiEdit2
-                    className="edit-icon"
-                    onClick={() => toggleEdit("locality")}
-                  />
-                </div>
-              ) : (
-                <input
-                  className="localityinputwrapper"
-                  type="text"
-                  value={details.locality}
-                  onChange={handleInputChange("locality")}
-                  placeholder="Locality"
-                />
-              )}
-            </div>
-
-            <div className="statecontwrap">
-              <h2>State</h2>
-              {editMode.state ? (
-                <div className="readonly-field">
-                  <span>{details.state || "N/A"}</span>
-                  <FiEdit2
-                    className="edit-icon"
-                    onClick={() => toggleEdit("state")}
-                  />
-                </div>
-              ) : (
-                <input
-                  className="stateinputwrapper"
-                  type="text"
-                  value={details.state}
-                  onChange={handleInputChange("state")}
-                  placeholder="State"
-                />
-              )}
-            </div>
-          </div>
 
           <div className="actionbtn">
-            <div className="profileupload">
-              <h4>Upload Picture</h4>
-              <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleImageChange}
-              />
-            </div>
-
             <div className="actionbuttonwrapper1">
               <button
                 type="button"
@@ -157,8 +103,8 @@ function ProfileInfo() {
               >
                 Clear
               </button>
-              <button type="submit" className="submitbtn">
-                {profileExists ? "Update" : "Create"}
+              <button type="submit" className="submitbtn" onClick={updateInfo}>
+                Update
               </button>
             </div>
           </div>
