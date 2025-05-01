@@ -5,8 +5,8 @@ import { FaRegCopy } from "react-icons/fa";
 const RefPage = () => {
   const referralLink = JSON.parse(localStorage.getItem("refLink"));
   const [referrals] = useState([
-    { name: "John Doe", joined: "April 15, 2025" },
-    { name: "Jane Smith", joined: "April 20, 2025" },
+    // { name: "John Doe", joined: "April 15, 2025" },
+    // { name: "Jane Smith", joined: "April 20, 2025" },
   ]);
 
   const handleCopy = () => {

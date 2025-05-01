@@ -25,11 +25,12 @@ const Header = () => {
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
   const refLink = JSON.parse(localStorage.getItem("refLink"));
+  console.log(user)
 
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        `https://yaticare-back-end.vercel.app/api/user/userdata/${user._id}`
+        `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
       );
       const data = response?.data?.data;
       setUserData(data);
@@ -46,7 +47,7 @@ const Header = () => {
   }
 
   React.useEffect(() => {
-    if (user?._id) {
+    if (user?.user?._id) {
       fetchUserData();
     }
   }, [user]);

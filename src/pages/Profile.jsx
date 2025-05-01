@@ -27,7 +27,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user._id}`
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
         );
         const data = response?.data?.data;
         setUserInfo(data);
@@ -36,7 +36,7 @@ const Profile = () => {
         console.error("Error fetching user data:", error);
       }
     };
-    if (user?._id) {
+    if (user?.user?._id) {
       fetchUserData();
     }
   }, []);
