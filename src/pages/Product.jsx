@@ -31,7 +31,7 @@ const Product = ({ displayedProducts }) => {
             <span>
               Price: <FaNairaSign size={15} />{product.price1} - <FaNairaSign size={15} />{product.price2}
             </span>
-            <button onClick={() => Nav("/plan")}>Get Started</button>
+            <button onClick={() => Nav("/dashboard/plan")}>Get Started</button>
           </div>
         </div>
       ))}
