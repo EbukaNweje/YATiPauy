@@ -43,7 +43,7 @@ const SignUp = () => {
 
     else if (values.userName.length < 3) {
       toast.error("UserName must be at least 3 characters long");
-      return;
+      // return;
     }
 
     else if (values.phoneNumber.length < 11) {
