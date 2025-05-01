@@ -24,8 +24,8 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
-  const refLink = JSON.parse(localStorage.getItem("refLink"));
-  console.log(user)
+  const refLink = user.referralLink
+  // console.log(user)
 
   const fetchUserData = async () => {
     try {

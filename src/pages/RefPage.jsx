@@ -1,36 +1,44 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegCopy } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const RefPage = () => {
-  const referralLink = JSON.parse(localStorage.getItem("refLink"));
-  const [referrals] = useState([
-    // { name: "John Doe", joined: "April 15, 2025" },
-    // { name: "Jane Smith", joined: "April 20, 2025" },
-  ]);
+  const user = useSelector((state) => state.YATipauy.user);
+  const referralLink = user.referralLink;
+  const userInvited = user.user.inviteCode.userInvited
+  const [referrals] = useState(userInvited);
+  console.log(user)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);
     toast.success("Referral link copied!");
   };
 
+
   return (
     <div className="w-full h-screen flex flex-col items-center p-6">
       <div className="w-full max-w-3xl p-6 flex flex-col gap-2">
         <h1 className="text-2xl font-bold mb-4">My Referral</h1>
 
-        <div className="flex flex-col sm:flex-row items-center gap-2.5  p-4 rounded-lg mb-6">
+        <div className="w-full  flex items-center gap-2.5  p-4 rounded-lg mb-6">
           <div className=" font-semibold mb-2">Referral Link:</div>
-          <div className="">
+          <div className="w-160 flex gap-10">
             <input
               type="text"
               readOnly
               value={referralLink}
-              className=" rounded-lg p-2 w-130 text-blue-600"
+              className=" rounded-lg p-2 w-full text-blue-600"
             />
             <button onClick={handleCopy} className="cursor-pointer">
               <FaRegCopy />
             </button>
+          </div>
+        </div>
+        <div className="w-full  flex items-center gap-2.5  p-4 rounded-lg mb-6">
+          <div className=" font-semibold mb-2">No of referrals:</div>
+          <div className="w-100 flex gap-10">
+              {user.user.referralCount}
           </div>
         </div>
 

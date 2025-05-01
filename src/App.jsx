@@ -22,6 +22,7 @@ import LandingPage from './pages/LandingPage'
 import ContactUs from './pages/ContactUs'
 import ProfileSettings from './pages/ProfileSettings';
 import RefPage from './pages/RefPage';
+import ProfileInfo from './pages/ProfileInfo';
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
     {path: 'withdraw', element: <Withdraw/>},
     {path: 'bankDetails', element: <Bank/>},
     {path: 'referrals', element: <RefPage/>},
+    {path: 'profileinfo', element: <ProfileInfo />},
     {path: 'Profile', element: <Profile/>},
     {path: 'accountSettings', element: <ProfileSettings/>},
     {path: 'history', element: <History/>},

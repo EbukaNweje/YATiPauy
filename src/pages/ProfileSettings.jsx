@@ -15,7 +15,7 @@ const ProfileSettings = () => {
     <div className="Profile">
 
       <div className="profileInfo">
-        <section>
+        <section onClick={() => Nav("/dashboard/profileinfo")}>
           <div className="iconBox">
             <FaUser className="profileIcon" />
             <h3>Personal Information</h3>
