@@ -199,7 +199,7 @@ const SignUp = () => {
           >
             <Checkbox>
               I have read and agree to YATicare{" "}
-              <a onClick={() => Nav("/terms")}>Terms & Conditions</a>
+              <a onClick={() => Nav("/terms")}>Terms & Conditions/Privacy Policy</a>
             </Checkbox>
           </Form.Item>
 
