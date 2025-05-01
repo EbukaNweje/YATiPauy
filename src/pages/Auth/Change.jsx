@@ -13,7 +13,7 @@ const Change = () => {
         <section className='chanPass'>
           <div className="inputDiv">
             <FaLock className="inputIcon" />
-            <input type={showNewPassword ? "text" : "password"} placeholder="Enter current password" />
+            <input type={showPassword ? "text" : "password"} placeholder="Enter current password" />
             <span className="toggleIcon" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <FaEyeSlash size={25} cursor={'pointer'}/> : <FaEye size={25} cursor={'pointer'}/>}
             </span>
