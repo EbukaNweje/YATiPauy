@@ -10,7 +10,10 @@ const History = () => {
         { id: 1, type: "Deposit", amount: "₦5,000", date: "2024-02-18" },
         { id: 2, type: "Withdraw", amount: "₦2,000", date: "2024-02-17" },
         { id: 3, type: "Transaction", amount: "₦1,500", date: "2024-02-16" },
-        { id: 4, type: "Deposit", amount: "₦10,000", date: "2024-02-15" },
+        { id: 5, type: "Deposit", amount: "₦10,000", date: "2024-02-15" },
+        { id: 6, type: "Commission", amount: "₦10,000", date: "2024-02-15" },
+        { id: 7, type: "Withdraw", amount: "₦10,000", date: "2024-04-25" },
+        { id: 8, type: "Income", amount: "₦100,000", date: "2024-04-15" },
     ];
 
     const filteredTransactions = filter === "All" 
@@ -42,10 +45,11 @@ const History = () => {
                         
                             <h3>Transactions</h3>
                             <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-                                <option value="All">All</option>
-                                <option value="Deposit">Deposit</option>
-                                <option value="Transaction">Transaction</option>
-                                <option value="Withdraw">Withdraw</option>
+                                <option value="All">All Records</option>
+                                <option value="Deposit">Deposit Records</option>
+                                <option value="Income">Income Records</option>
+                                <option value="Commission">Commission Records</option>
+                                <option value="Withdraw">Withdrawal Records</option>
                             </select>
                     </tr>
                 </thead>

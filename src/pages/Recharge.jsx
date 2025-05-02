@@ -14,7 +14,7 @@ const Recharge = () => {
   return (
     <div className='Recharge'>
       <div className='paymentSection'>
-        <div className='amountWrap'>
+        {/* <div className='amountWrap'>
           <h3>Select an amount to recharge</h3>
           <hr />
           <div className='amountDiv'>
@@ -29,7 +29,7 @@ const Recharge = () => {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
 
         <section>
           <h3>Amount To Deposit</h3>

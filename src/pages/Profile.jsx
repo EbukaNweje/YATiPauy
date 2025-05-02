@@ -59,7 +59,7 @@ const Profile = () => {
                 ? `${Number(userInfo?.accountBalance).toLocaleString()}.00`
                 : "Loading..."}
             </h3>
-            <span>Total Recharge (₦)</span>
+            <span>Total Withdrawal (₦)</span>
           </button>
         </div>
       </div>
@@ -75,7 +75,7 @@ const Profile = () => {
         <section onClick={() => Nav("/dashboard/history")}>
           <div className="iconBox">
             <FaFileInvoice className="profileIcon" />
-            <h3>Total Bills</h3>
+            <h3>Transaction Records</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>

@@ -6,6 +6,83 @@
   gap: 20px;
 }
 
+.Products{
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.productCons{
+  width: 1200px;
+  height: max-content;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  font-size: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.leftBody{
+  width: 40%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+
+  .imgBox{
+    width: 30%;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: contain;
+    object-position: center;
+  
+    & img{
+      width: 80%;
+      height: 80%;
+      object-position: center;
+      border-radius: 10px;
+    }
+  }
+}
+
+.productHead{
+  width: 50%;
+  height: 100%;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.productDetails{
+  width: 70%;
+  height: 150px;
+  font-size: 17px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  span {
+    margin-left: 20%;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+  }
+
+  span:hover {
+    transform: scale(1.5);
+  }
+}
+
 .productCard{
   width: 100%;
   height: max-content;
@@ -19,7 +96,6 @@
 .imgBox{
   width: 45%;
   height: 300px;
-  background-color: red;
   border-radius: 10px;
 
   & img{
