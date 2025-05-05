@@ -22,7 +22,7 @@ const Product = ({ displayedProducts }) => {
             <img src={product.image} alt="" />
           </div>
           <div className="textCon">
-            <h3>{product.name}</h3>
+            <h3 style={{fontSize: "16px"}}>{product.name}</h3>
             <h2>{product.prodText}</h2>
             <h4>{product.prodIdeal}</h4>
             {product.prodList.map((text, index) => (

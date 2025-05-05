@@ -84,7 +84,7 @@
 }
 
 .productCard{
-  width: 100%;
+  width: 49%;
   height: max-content;
   background-color: white;
   display: flex;
@@ -108,24 +108,25 @@
 }
 
 .textCon{
-  width: 40%;
-  height: 300px;
+  width: 50%;
+  height: max-content;
   /* background: red; */
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
 
   h2 {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 14px;
   }
+  
   li {
     color: rgb(3, 68, 3);
   }
 
   span{
-    font-size: 20px;
+    font-size: 14px;
     width: 100%;
     display: flex;
     align-items: center;
