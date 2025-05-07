@@ -25,6 +25,7 @@ import RefPage from "./pages/RefPage";
 import ProfileInfo from "./pages/ProfileInfo";
 import ScrollToTop from "./Components/ScrollToTop";
 import PlanDetails from "./pages/PlanDetails";
+import ChangePhone from "./pages/Auth/ChangePhone";
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -73,6 +74,7 @@ const App = () => {
             { path: "history", element: <History /> },
             { path: "plandetails/:id", element: <PlanDetails /> },
             { path: "myPlans", element: <Vip /> },
+            { path: "changephoneNumber", element: <ChangePhone /> },
             { path: "plan", element: <Plan /> },
             { path: "changePassword", element: <Change /> },
 

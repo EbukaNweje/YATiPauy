@@ -198,7 +198,7 @@
 
 .Bank, .Change{
     width: 45%;
-    height: 65vh;
+    height: 70vh;
     background-color: white;
     display: flex;
     flex-direction: column;

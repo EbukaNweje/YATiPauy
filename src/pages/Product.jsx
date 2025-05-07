@@ -24,7 +24,7 @@ const Product = ({ displayedProducts }) => {
           <div className="textCon">
             <h3 style={{fontSize: "16px"}}>{product.name}</h3>
             <h2>{product.prodText}</h2>
-            <h4>{product.prodIdeal}</h4>
+            <h4 style={{fontSize: "14px"}}>{product.prodIdeal}</h4>
             {product.prodList.map((text, index) => (
             <li>{text}</li>
             ))}

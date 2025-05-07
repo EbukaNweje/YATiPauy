@@ -60,11 +60,11 @@ const Header = () => {
         <div className="homeHcontent">
           <div className="header-content">
             <div
-              className="profile"
+              className="profileler"
               onClick={() => navigate("Profile")}
               title="Go to Profile"
             >
-              <FaUser size={30} color="grey" />
+              <FaUser size={20} color="grey" />
             </div>
             <div className="info">
               <h3>Hello, {userData ? userData.userName : "Loading..."}</h3>

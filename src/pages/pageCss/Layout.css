@@ -205,7 +205,7 @@
   
   .Footer nav {
     display: flex;
-    gap: 40px;
+    gap: 10px;
   }
   
   .Footer nav li,
@@ -222,6 +222,7 @@
     font-weight: 600;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 14px;
   }
   .footer-link-active {
     width: max-content;
@@ -237,6 +238,7 @@
     font-weight: 600;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 14px;
   }
   
   .footer-link-active h3 {

@@ -15,7 +15,7 @@ const Footer = () => {
     };
 
   return (
-    <div className="Footer">
+    <div className="Footer" style={{height: "70px"}}>
       <nav>
         <li>
           <NavLink to="/dashboard" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>

@@ -2,32 +2,37 @@ import React, { useState, useEffect, useRef } from "react";
 import "./pageCss/profilepage.css";
 import { FiEdit2 } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function ProfileInfo() {
   const user = useSelector((state) => state.YATipauy.user);
-  console.log(user)
+  console.log(user);
   const [details, setDetails] = useState({
     UserName: user.user.userName || "",
     email: user.user.email || "",
     PhoneNumber: user.user.phoneNumber || "",
-    locality: "",
-    state: "",
+    bankDetails: "" || "",
+    KYC: "" || "",
+    uplineUserName: "" || "",
+    uplinePhoneNumber: "" || "",
   });
   const [editMode, setEditMode] = useState({
     UserName: true,
     PhoneNumber: true,
-    locality: true,
-    state: true,
   });
+  const Nav = useNavigate()
 
-   const updateInfo = async () => {
-      try{
-        const response = await axios.post(`https://yaticare-back-end.vercel.app/api/user/updateuser/${user.user._id}`, details)
-        console.log(response)
-      }catch(error){
-        console.log(error)
-      }
+  const updateInfo = async () => {
+    try {
+      const response = await axios.post(
+        `https://yaticare-back-end.vercel.app/api/user/updateuser/${user.user._id}`,
+        details
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
   const handleInputChange = (field) => (e) => {
     setDetails({ ...details, [field]: e.target.value });
@@ -39,17 +44,13 @@ function ProfileInfo() {
 
   const handleCancel = () => {
     setDetails({
-      UserName: name,
-      email: mail,
-      PhoneNumber: "",
-      locality: "",
-      state: "",
+      UserName: user.user.userName,
+      email: user.user.email,
+      PhoneNumber: user.user.phoneNumber,
     });
     setEditMode({
       UserName: true,
       PhoneNumber: true,
-      locality: true,
-      state: true,
     });
   };
 
@@ -82,7 +83,7 @@ function ProfileInfo() {
           My Profile
         </h1>
         <form className="profileform" onSubmit={""}>
-          {renderField("Full Name", details.UserName, "UserName")}
+          {renderField("UserName", details.UserName, "UserName")}
 
           <div className="inforcontainer">
             <h2>Email</h2>
@@ -91,8 +92,11 @@ function ProfileInfo() {
             </div>
           </div>
 
-          {renderField("PhoneNumber", details.PhoneNumber, "PhoneNumber")}
-
+          {renderField("Phone Number", details.PhoneNumber, "PhoneNumber")}
+          {renderField("Bank Details", details.bankDetails, "bankDetails")}
+          {renderField("KYC", details.KYC, "KYC")}
+          {renderField("Upline Username", details.uplineUserName, "uplineUserName")}
+          {renderField("Upline PhoneNumber", details.uplinePhoneNumber, "uplinePhoneNumber")}
 
           <div className="actionbtn">
             <div className="actionbuttonwrapper1">
@@ -101,7 +105,7 @@ function ProfileInfo() {
                 className="cancelbtn1"
                 onClick={handleCancel}
               >
-                Clear
+                Cancel
               </button>
               <button type="submit" className="submitbtn" onClick={updateInfo}>
                 Update
@@ -110,6 +114,11 @@ function ProfileInfo() {
           </div>
         </form>
       </div>
+      <section onClick={() => Nav("/dashboard/accountSettings")} style={{cursor: "pointer", marginTop: "10px"}}>
+        <div className="iconBoxs">
+          <h3 style={{fontWeight: "600"}}>PROFILE SETTINGS</h3>
+        </div>
+      </section>
     </div>
   );
 }

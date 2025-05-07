@@ -4,6 +4,7 @@ import {
   FaFileInvoice,
   FaSignOutAlt,
   FaChevronRight,
+  FaUser,
 } from "react-icons/fa";
 import "./pageCss/Profile.css";
 import { useNavigate } from "react-router-dom";
@@ -86,10 +87,10 @@ const Profile = () => {
           </div>
           <FaChevronRight className="arrowIcon" />
         </section> */}
-        <section onClick={() => Nav("/dashboard/accountSettings")}>
+        <section onClick={() => Nav("/dashboard/profileinfo")}>
           <div className="iconBox">
-            <MdManageAccounts className="profileIcon" />
-            <h3>Profile Settings</h3>
+            <FaUser className="profileIcon" />
+            <h3>Personal Information</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>
