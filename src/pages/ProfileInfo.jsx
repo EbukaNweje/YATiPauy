@@ -9,9 +9,9 @@ function ProfileInfo() {
   console.log(user);
   const [details, setDetails] = useState({
     UserName: user.user.userName || "",
-    email: user.user.email || "",
-    PhoneNumber: user.user.phoneNumber || "",
-    bankDetails: "" || "",
+    email: user.user.email,
+    PhoneNumber: user.user.phoneNumber,
+    bankDetails: "",
     KYC: "" || "",
     uplineUserName: "" || "",
     uplinePhoneNumber: "" || "",
@@ -92,11 +92,40 @@ function ProfileInfo() {
             </div>
           </div>
 
-          {renderField("Phone Number", details.PhoneNumber, "PhoneNumber")}
-          {renderField("Bank Details", details.bankDetails, "bankDetails")}
-          {renderField("KYC", details.KYC, "KYC")}
-          {renderField("Upline Username", details.uplineUserName, "uplineUserName")}
-          {renderField("Upline PhoneNumber", details.uplinePhoneNumber, "uplinePhoneNumber")}
+          <div className="inforcontainer">
+            <h2>Phone Number</h2>
+            <div className="readonly-field">
+              <span>{details.PhoneNumber}</span>
+            </div>
+          </div>
+
+          <div className="inforcontainer">
+            <h2>Bank Details</h2>
+            <div className="readonly-field">
+              <span>{details.bankDetails || "bank details"}</span>
+            </div>
+          </div>
+
+          <div className="inforcontainer">
+            <h2>KYC</h2>
+            <div className="readonly-field">
+              <span>{details.KYC || "status"}</span>
+            </div>
+          </div>
+
+          <div className="inforcontainer">
+            <h2>Upline Username</h2>
+            <div className="readonly-field">
+              <span>{details.uplineUserName || "Username" }</span>
+            </div>
+          </div>
+
+          <div className="inforcontainer">
+            <h2>Upline PhoneNumber</h2>
+            <div className="readonly-field">
+              <span>{details.uplinePhoneNumber || "PhoneNumber"}</span>
+            </div>
+          </div>
 
           <div className="actionbtn">
             <div className="actionbuttonwrapper1">
