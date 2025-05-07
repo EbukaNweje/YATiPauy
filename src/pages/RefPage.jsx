@@ -50,17 +50,27 @@ const RefPage = () => {
               {referrals.map((referral, index) => (
                 <li
                   key={index}
-                  className="h-15 flex items-center justify-between bg-white"
+                  className="h-15 flex w-max gap-10 px-3 items-center justify-between bg-white"
                   style={{padding: "10px"}}
                 >
                   <div>
-                    <p>
+                    <p style={{fontWeight: "600"}}>
                       {referral.name}
                     </p>
                   </div>
                   <div>
                     <p>
-                      Joined: {referral.joined}
+                      <span style={{fontWeight: "600"}}>PhoneNumber:</span> {referral.phoneNumber}
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                     <span style={{fontWeight: "600"}}>Plan:</span> {referral.plan}
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                     <span style={{fontWeight: "600"}}>Joined:</span> {referral.joined}
                     </p>
                   </div>
                 </li>
