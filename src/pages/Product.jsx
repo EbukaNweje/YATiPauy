@@ -1,6 +1,4 @@
-import React from "react";
 import "./pageCss/Product.css";
-import speaker from "../assets/speaker.png";
 import { FaNairaSign } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +10,7 @@ const Product = ({ displayedProducts }) => {
       </p>
     );
   }
-  const Nav = useNavigate()
+  const Nav = useNavigate();
 
   return (
     <div className="Product">
@@ -22,14 +20,18 @@ const Product = ({ displayedProducts }) => {
             <img src={product.image} alt="" />
           </div>
           <div className="textCon">
-            <h3 style={{fontSize: "16px"}}>{product.name}</h3>
+            <h3>{product.name}</h3>
             <h2>{product.prodText}</h2>
-            <h4 style={{fontSize: "14px"}}>{product.prodIdeal}</h4>
-            {product.prodList.map((text, index) => (
-            <li>{text}</li>
-            ))}
+            <h4>{product.prodIdeal}</h4>
+            <ul>
+              {product.prodList.map((text, idx) => (
+                <li key={idx}>{text}</li>
+              ))}
+            </ul>
             <span>
-              Price: <FaNairaSign size={15} />{product.price1} - <FaNairaSign size={15} />{product.price2}
+              Price: <FaNairaSign size={14} />
+              {product.price1} - <FaNairaSign size={14} />
+              {product.price2}
             </span>
             <button onClick={() => Nav("/dashboard/plan")}>Get Started</button>
           </div>

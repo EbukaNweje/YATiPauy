@@ -1,155 +1,284 @@
-.Product{
+.product-wrap {
+  width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+}
+
+.no-products {
+  font-size: 1.25rem;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.product-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.product-card:hover {
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+}
+
+.product-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 40%;
+}
+
+.image-container {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.image-container img {
   width: 100%;
-  height: max-content;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-title h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  width: 55%;
+  padding: 0;
+  margin: 0;
+}
+
+.product-details li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #4b5563;
+  font-size: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.value {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #111827;
+}
+
+.navigate-icon {
+  margin-left: auto;
+  color: #3b82f6;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.navigate-icon:hover {
+  transform: scale(1.4);
+}
+
+@media (max-width: 1024px) {
+  .product-card {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .product-left, .product-details {
+    width: 100%;
+  }
+
+  .product-details {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-details {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .navigate-icon {
+    align-self: flex-end;
+  }
+}
+
+.Product {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-}
-
-.Products{
-  width: 100%;
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.productCons{
-  width: 1200px;
-  height: max-content;
-  background-color: white;
-  border-radius: 5px;
-  display: flex;
-  padding: 10px;
-  justify-content: space-between;
-  font-size: 10px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.leftBody{
-  width: 40%;
-  height: 150px;
-  display: flex;
-  align-items: center;
-
-  .imgBox{
-    width: 30%;
-    height: 150px;
-    border-radius: 10px;
-    object-fit: contain;
-    object-position: center;
-  
-    & img{
-      width: 80%;
-      height: 80%;
-      object-position: center;
-      border-radius: 10px;
-    }
-  }
-}
-
-.productHead{
-  width: 50%;
-  height: 100%;
-  font-size: 30px;
-  display: flex;
-  flex-direction: column;
+  gap: 24px;
   padding: 20px;
+  background-color: #f9f9f9;
 }
 
-.productDetails{
-  width: 70%;
-  height: 150px;
-  font-size: 17px;
-  list-style: none;
+.productCard {
+  width: calc(50% - 12px);
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
   display: flex;
-  align-items: center;
-  gap: 50px;
-
-  li {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  span {
-    margin-left: 20%;
-    cursor: pointer;
-    transition: all 0.3s ease-in;
-  }
-
-  span:hover {
-    transform: scale(1.5);
-  }
+  flex-direction: row;
+  gap: 16px;
+  padding: 16px;
+  transition: transform 0.3s ease;
 }
 
-.productCard{
-  width: 49%;
-  height: max-content;
-  background-color: white;
-  display: flex;
-  padding: 10px;
-  justify-content: space-between;
-  font-size: 10px;
+.productCard:hover {
+  transform: translateY(-4px);
 }
 
-.imgBox{
-  width: 45%;
-  height: 300px;
+.imgBox {
+  flex: 1;
+  max-width: 45%;
+  height: 240px;
   border-radius: 10px;
-
-  & img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 10px;
-  }
+  overflow: hidden;
 }
 
-.textCon{
-  width: 50%;
-  height: max-content;
-  /* background: red; */
-  padding: 10px 20px;
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textCon {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 10px 0;
+}
 
-  h2 {
-    font-weight: 600;
+.textCon h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+.textCon h2 {
+  font-size: 16px;
+  color: #555;
+}
+
+.textCon h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #777;
+}
+
+.textCon li {
+  font-size: 13px;
+  color: #064e3b;
+  list-style: disc;
+  margin-left: 16px;
+  margin-bottom: 4px;
+}
+
+.textCon span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.textCon button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background-color: #047857;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+.textCon button:hover {
+  background-color: transparent;
+  color: #047857;
+  border: 1px solid #047857;
+}
+
+@media (max-width: 768px) {
+  .Product {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .productCard {
+    width: 100%;
+    flex-direction: column;
+    padding: 12px;
+    align-items: center;
+  }
+
+  .imgBox {
+    max-width: 70%;
+    height: 200px;
+  }
+
+  .textCon {
+    max-width: 100%;
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .textCon h3 {
+    font-size: 16px;
+  }
+
+  .textCon h2 {
     font-size: 14px;
   }
-  
-  li {
-    color: rgb(3, 68, 3);
-    font-weight: 600;
+
+  .textCon h4 {
+    font-size: 13px;
+  }
+
+  .textCon li {
     font-size: 12px;
   }
 
-  span{
-    font-size: 14px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 3px;
+  .textCon span {
+    font-size: 13px;
   }
 
-  button {
-    width: max-content;
-    height: max-content;
-    padding: 10px 20px;
-    background-color: green;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: all 250ms ease-in-out;
-    font-weight: 600;
-  }
-
-  button:hover{
-    background: transparent;
-    border: 1px solid green;
-    color: green;
+  .textCon button {
+    font-size: 13px;
+    padding: 8px 16px;
   }
 }
