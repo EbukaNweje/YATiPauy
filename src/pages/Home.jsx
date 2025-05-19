@@ -28,7 +28,7 @@ const Home = () => {
     },
     { 
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.11.53_75aba231.jpg",
-      name: "YATI HOPE EXPLORER:",
+      name: "YATI HOPE EXPLORER",
       prodText: "Explore Limitless Possibilities.",
       prodIdeal: "Ideal For: Adventurers seeking affordable exploration.",
       prodList: [
@@ -41,7 +41,7 @@ const Home = () => {
     },
     { 
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.12.53_f34d84e9.jpg",
-      name: "YATI BRIGHTER HORIZON:",
+      name: "YATI BRIGHTER HORIZON",
       prodText: "Invest In Tomorrow, Today.",
       prodIdeal: "Ideal For: Professionals aiming for growth.",
       prodList: [
@@ -54,7 +54,7 @@ const Home = () => {
     },
     { 
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.13.48_57ab3a06.jpg",
-      name: "YATI EMPOWER PASS:",
+      name: "YATI EMPOWER PASS",
       prodText: "Unlock Global Opportunities.",
       prodIdeal: "Ideal For: Ambitious individuals and entrepreneurs.",
       prodList: [
@@ -82,7 +82,7 @@ const Home = () => {
     },
     { 
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.15.12_35ea150a.jpg",
-      name: "YATI DIAMOND PARTNERS 🔒",
+      name: "YATI DIAMOND PARTNERS",
       prodText: "Redefine Excellence, Craft Your Legacy.",
       prodIdeal: "Ideal For: Visionaries building legacies.",
       prodList: [

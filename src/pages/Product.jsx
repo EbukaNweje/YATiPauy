@@ -33,7 +33,15 @@ const Product = ({ displayedProducts }) => {
               {product.price1} - <FaNairaSign size={14} />
               {product.price2}
             </span>
-            <button onClick={() => Nav("/dashboard/plan")}>Get Started</button>
+            <button
+              onClick={() =>
+                Nav("/dashboard/plan", {
+                  state: { selectedPlanName: product.name },
+                })
+              }
+            >
+              Get Started
+            </button>
           </div>
         </div>
       ))}

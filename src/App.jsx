@@ -75,7 +75,7 @@ const App = () => {
             { path: "plandetails/:id", element: <PlanDetails /> },
             { path: "myPlans", element: <Vip /> },
             { path: "changephoneNumber", element: <ChangePhone /> },
-            { path: "plan", element: <Plan /> },
+            { path: "plan", element: <Plan key={location.key} /> },
             { path: "changePassword", element: <Change /> },
 
             { path: "Privacy", element: <Privacy /> },

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./pageCss/Plan.css";
 import { FaChevronRight, FaCheck } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const plans = [
   {
@@ -61,15 +62,32 @@ const Plan = () => {
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
 
+  const location = useLocation();
+  const { selectedPlanName } = location.state || {};
+  console.log(selectedPlanName)
+  
+  useEffect(() => {
+    if (selectedPlanName) {
+      const matchingPlan = plans.find(
+        (plan) => plan.name.toLowerCase() === selectedPlanName.toLowerCase()
+      );
+      if (matchingPlan) {
+        setSelectedPlan(matchingPlan);
+        setSelectedAmount(null);
+        setCustomAmount("");
+      }
+    }
+  }, [location.key]); 
+
   const handleAmountSelection = (amount) => {
     setSelectedAmount(amount);
-    setCustomAmount(amount); 
+    setCustomAmount(amount);
   };
 
   const handleCustomAmountChange = (e) => {
     const value = e.target.value;
     setCustomAmount(value);
-    setSelectedAmount(value); 
+    setSelectedAmount(value);
   };
 
   return (
