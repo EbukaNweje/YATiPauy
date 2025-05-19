@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const Vip = () => {
   const products = [
-    { id: 1, name: "Plan 1" },
-    { id: 2, name: "Plan 2" },
-    { id: 3, name: "Plan 3" },
-    { id: 4, name: "Plan 4" },
-    { id: 5, name: "Plan 5" },
-    { id: 6, name: "Plan 6" },
-    { id: 7, name: "Plan 7" },
+    // { id: 1, name: "Plan 1" },
+    // { id: 2, name: "Plan 2" },
+    // { id: 3, name: "Plan 3" },
+    // { id: 4, name: "Plan 4" },
+    // { id: 5, name: "Plan 5" },   
+    // { id: 6, name: "Plan 6" },
+    // { id: 7, name: "Plan 7" },
   ];
 
   const navigate = useNavigate();
