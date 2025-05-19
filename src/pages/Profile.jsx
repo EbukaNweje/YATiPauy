@@ -4,6 +4,7 @@ import {
   FaFileInvoice,
   FaSignOutAlt,
   FaChevronRight,
+  FaUser,
 } from "react-icons/fa";
 import "./pageCss/Profile.css";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +28,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user._id}`
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
         );
         const data = response?.data?.data;
         setUserInfo(data);
@@ -36,7 +37,7 @@ const Profile = () => {
         console.error("Error fetching user data:", error);
       }
     };
-    if (user?._id) {
+    if (user?.user?._id) {
       fetchUserData();
     }
   }, []);
@@ -59,7 +60,7 @@ const Profile = () => {
                 ? `${Number(userInfo?.accountBalance).toLocaleString()}.00`
                 : "Loading..."}
             </h3>
-            <span>Total Recharge (₦)</span>
+            <span>Total Withdrawal (₦)</span>
           </button>
         </div>
       </div>
@@ -75,7 +76,7 @@ const Profile = () => {
         <section onClick={() => Nav("/dashboard/history")}>
           <div className="iconBox">
             <FaFileInvoice className="profileIcon" />
-            <h3>Total Bills</h3>
+            <h3>Transaction Records</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>
@@ -86,10 +87,10 @@ const Profile = () => {
           </div>
           <FaChevronRight className="arrowIcon" />
         </section> */}
-        <section onClick={() => Nav("/dashboard/accountSettings")}>
+        <section onClick={() => Nav("/dashboard/profileinfo")}>
           <div className="iconBox">
-            <MdManageAccounts className="profileIcon" />
-            <h3>Profile Settings</h3>
+            <FaUser className="profileIcon" />
+            <h3>Personal Information</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>

@@ -15,29 +15,29 @@ const Footer = () => {
     };
 
   return (
-    <div className="Footer">
+    <div className="Footer" style={{height: "70px"}}>
       <nav>
         <li>
           <NavLink to="/dashboard" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
-            <FaHome size={30} />
+            <FaHome size={20} />
             <h3>Home</h3>
           </NavLink>
         </li>
         <li>
           <NavLink to="plan" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
-            <FaShoppingBag size={30} />
+            <FaShoppingBag size={20} />
             <h3>Plans</h3>
           </NavLink>
         </li>
         <li>
           <NavLink  to="/dashboard/myPlans" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
-            <FaCrown size={30} />
+            <FaCrown size={20} />
             <h3>My Plans</h3>
           </NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/Profile" className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
-            <FaUser size={30} />
+            <FaUser size={20} />
             <h3>Profile</h3>
           </NavLink>
         </li>

@@ -31,7 +31,7 @@ const [loading, setLoading] = useState(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
-      toast.error(error?.response?.data?.error?.message)
+      toast.error(error?.response?.data?.message || "Network Error")
     }
   };
 

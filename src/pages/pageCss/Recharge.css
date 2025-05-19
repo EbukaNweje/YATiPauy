@@ -198,7 +198,7 @@
 
 .Bank, .Change{
     width: 45%;
-    height: 65vh;
+    height: 70vh;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -354,7 +354,7 @@
     background: linear-gradient(135deg, rgb(11,43,17), green);
 }
 
-.Bank section button, .Change section button::before {
+.Bank section button::before, .Change section button::before {
     content: "";
     position: absolute;
     top: 0;

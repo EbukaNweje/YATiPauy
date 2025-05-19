@@ -27,6 +27,7 @@ const tailFormItemLayout = {
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
   const hasNumber = /\d/;
   const hasUpperCase = /[A-Z]/;
@@ -70,6 +71,10 @@ const SignUp = () => {
 
     else if (!specialCharacterRegex.test(values.password)) {
       toast.error("Password must contain at least one special character.");
+      return;
+    }
+    else if (!regex.test(values.email)) {
+      toast.error("Email must be valid");
       return;
     }
     setLoading(true);
@@ -194,7 +199,7 @@ const SignUp = () => {
           >
             <Checkbox>
               I have read and agree to YATicare{" "}
-              <a onClick={() => Nav("/terms")}>Terms & Conditions</a>
+              <a onClick={() => Nav("/terms")}>Terms & Conditions/Privacy Policy</a>
             </Checkbox>
           </Form.Item>
 

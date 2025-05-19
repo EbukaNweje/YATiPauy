@@ -58,6 +58,7 @@
   .plan-amount {
     font-size: 16px;
     margin-top: 5px;
+    color: lightgray;
   }
   
   .modal-overlay {

@@ -205,25 +205,44 @@
   
   .Footer nav {
     display: flex;
-    gap: 40px;
+    gap: 10px;
   }
   
   .Footer nav li,
-  .footer-link,
-  .footer-link-active {
+  .footer-link {
+    width: max-content;
+    height: max-content;
+    padding: 5px 10px;
     list-style: none;
     text-decoration: none;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
     font-weight: 600;
     cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .footer-link-active {
+    width: max-content;
+    height: max-content;
+    background-color: rgb(48,75,53);
+    padding: 5px 10px;
+    list-style: none;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
   }
   
   .footer-link-active h3 {
-    color: #18872b91;
+    /* color: #18872b91; */
   }
   
   /* Animations */

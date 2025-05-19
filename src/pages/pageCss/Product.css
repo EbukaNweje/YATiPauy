@@ -1,123 +1,284 @@
-.Products {
-    width: 1400px;
-    display: flex;
+.product-wrap {
+  width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+}
+
+.no-products {
+  font-size: 1.25rem;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.product-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.product-card:hover {
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+}
+
+.product-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 40%;
+}
+
+.image-container {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-title h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  width: 55%;
+  padding: 0;
+  margin: 0;
+}
+
+.product-details li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #4b5563;
+  font-size: 1rem;
+}
+
+.label {
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.value {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #111827;
+}
+
+.navigate-icon {
+  margin-left: auto;
+  color: #3b82f6;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.navigate-icon:hover {
+  transform: scale(1.4);
+}
+
+@media (max-width: 1024px) {
+  .product-card {
     flex-direction: column;
-    align-items: center ;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-.Product {
-    width: 1400px;
-    display: flex;
-    justify-content: center ;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-  
-  .productCard {
-    background-color: #022308f5;
-    padding: 20px;
-    border-radius: 20px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    gap: 16px;
   }
 
-  .productCon{
-    width: 48%;
-    height: 300px;
-    display: flex;
+  .product-left, .product-details {
+    width: 100%;
+  }
+
+  .product-details {
     justify-content: space-between;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    border-radius: 5px;
-  }
-  .productCons{
-    width: 100%;
-    height: 300px;
-    display: flex;
-    justify-content: space-between;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    border-radius: 5px;
-  }
-
-  .leftBody{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .productHead {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-  }
-  
-  .imgBox {
-    width: 100%;
-    height: 70%;
-    display: flex;
-
-    img {
-    width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    border-radius: 10px;
   }
 }
-  
-  .productDetails {
-    width: 50%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    padding: 20px;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-  
-  .productDetails li h4 {
-    font-size: 18px;
-    color: green;
-    margin-bottom: 5px;
+
+@media (max-width: 480px) {
+  .product-details {
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .purchButton {
-    width: max-content;
-    height: max-content;
-    padding: 15px 40px;
-    background: green;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    color: white;
-    transition: all 250ms ease-in-out;
+  .navigate-icon {
+    align-self: flex-end;
   }
-  
-  .purchButton:hover{
-    background: transparent;
-    color: green;
-    border: 1px solid green;
+}
+
+.Product {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.productCard {
+  width: calc(50% - 12px);
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding: 16px;
+  transition: transform 0.3s ease;
+}
+
+.productCard:hover {
+  transform: translateY(-4px);
+}
+
+.imgBox {
+  flex: 1;
+  max-width: 45%;
+  height: 240px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textCon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.textCon h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+.textCon h2 {
+  font-size: 16px;
+  color: #555;
+}
+
+.textCon h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #777;
+}
+
+.textCon li {
+  font-size: 13px;
+  color: #064e3b;
+  list-style: disc;
+  margin-left: 16px;
+  margin-bottom: 4px;
+}
+
+.textCon span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.textCon button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background-color: #047857;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+.textCon button:hover {
+  background-color: transparent;
+  color: #047857;
+  border: 1px solid #047857;
+}
+
+@media (max-width: 768px) {
+  .Product {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
   }
-  
-  .purchaseBtn {
-    background-color: #ffbb00;
-    border: none;
-    border-radius: 10px;
+
+  .productCard {
+    width: 100%;
+    flex-direction: column;
     padding: 12px;
-    font-weight: bold;
-    color: black;
-    cursor: pointer;
-    transition: background 0.3s;
+    align-items: center;
   }
-  
-  .purchaseBtn:hover {
-    background-color: #ffaa00;
+
+  .imgBox {
+    max-width: 70%;
+    height: 200px;
   }
-  
+
+  .textCon {
+    max-width: 100%;
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .textCon h3 {
+    font-size: 16px;
+  }
+
+  .textCon h2 {
+    font-size: 14px;
+  }
+
+  .textCon h4 {
+    font-size: 13px;
+  }
+
+  .textCon li {
+    font-size: 12px;
+  }
+
+  .textCon span {
+    font-size: 13px;
+  }
+
+  .textCon button {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}

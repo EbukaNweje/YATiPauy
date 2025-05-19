@@ -24,12 +24,13 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
-  const refLink = JSON.parse(localStorage.getItem("refLink"));
+  const refLink = user.referralLink
+  // console.log(user)
 
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        `https://yaticare-back-end.vercel.app/api/user/userdata/${user._id}`
+        `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
       );
       const data = response?.data?.data;
       setUserData(data);
@@ -46,7 +47,7 @@ const Header = () => {
   }
 
   React.useEffect(() => {
-    if (user?._id) {
+    if (user?.user?._id) {
       fetchUserData();
     }
   }, [user]);
@@ -59,11 +60,11 @@ const Header = () => {
         <div className="homeHcontent">
           <div className="header-content">
             <div
-              className="profile"
+              className="profileler"
               onClick={() => navigate("Profile")}
               title="Go to Profile"
             >
-              <FaUser size={30} color="grey" />
+              <FaUser size={20} color="grey" />
             </div>
             <div className="info">
               <h3>Hello, {userData ? userData.userName : "Loading..."}</h3>

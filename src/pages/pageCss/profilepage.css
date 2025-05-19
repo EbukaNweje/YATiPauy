@@ -1,0 +1,392 @@
+.informationdetailcont {
+    width: 700px;
+    height: max-content;
+    background-color: white;
+    border: 1px solid #1E1E1E66;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+  }
+  
+  .profileform {
+    width: 90%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+  }
+  
+  .inforcontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    h2 {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+  
+  .containerwrap {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 15px;
+    border: 1px solid gray;
+    background: transparent;
+    outline: none;
+  }
+  
+  .containerwarpper {
+    width: 50%;
+    border-radius: 5px;
+    height: 50px;
+    font-size: 15px;
+    padding-left: 10px;
+    border: 1px solid gray;
+    background: transparent;
+    outline: none;
+  }
+  
+  .origindetailswrap {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    gap: 28px;
+  }
+  
+  .localitycontwrap {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    h2 {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+  
+  .localityinputwrapper {
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    padding-left: 11px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    background: transparent;
+    outline: none;
+  }
+  
+  .statecontwrap {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    h2 {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+  
+  .stateinputwrapper {
+    width: 100%;
+    height: 50px;
+    font-size: 17px;
+    padding-left: 11px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    background: transparent;
+    outline: none;
+  }
+  
+  .actionbtn {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  
+  
+  .actionbuttonwrapper1 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+  
+    button{
+      width: 90px;
+      height: 40px;
+      margin-top: 30px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid lightgray;
+    }
+  }
+  
+  .cancelbtn1 {
+    width: 120px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: transparent;
+    margin-left: 90px;
+    margin-top: 20px;
+    border: 1px solid ;
+    transition: all 250ms ease-in-out;
+    font-weight: 600;
+  }
+  
+  .cancelbtn1:hover {
+    cursor: pointer;
+    background-color: green;
+    color: black;
+  }
+  
+  .submitbtn {
+    width: 120px;
+    height: 50px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    border: none;
+    background-color: green;
+    transition: all 250ms ease-in-out;
+    font-weight: 600;
+  }
+  
+  .submitbtn:hover {
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid green;
+    color: green;
+  }
+
+  .iconBoxs {
+    width: max-content;
+    height: max-content;
+    padding: 5px;
+    background: green;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease-in;
+  }
+
+  .iconBoxs:hover{
+    border: 1px solid green;
+    background-color: transparent;
+    color: green;
+  }
+  
+  @media (max-width: 390px) {
+    .informationdetailcont {
+      width: 90%;
+      padding: 8px;
+      margin: 0 auto;
+    }
+  
+    .profileform {
+      width: 100%;
+    }
+  
+    .actionbuttonwrapper1 {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; 
+      margin-top: 20px;
+      padding: 0;
+    }
+  
+    .cancelbtn1,
+    .submitbtn {
+      width: 48%; 
+      height: 45px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      margin: 0;
+    }
+  
+    .profileupload {
+      width: 100%;
+      margin-top: -10px;
+  
+      h4 {
+        font-size: 13px;
+      }
+    }
+  
+    .imagefilebtncont {
+      width: 100%;
+      height: 32px;
+    }
+  
+    .actionbtn {
+      width: 96%;
+    }
+  }
+  
+  
+  @media (max-width: 460px) {
+    .informationdetailcont {
+      width: 85%;
+      padding: 10px;
+      margin: 0 auto;
+    }
+  
+    .profileform {
+      width: 100%;
+    }
+  
+    .actionbuttonwrapper1 {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      padding: 0px;
+      margin: 0px;
+      
+    }
+  
+    
+  
+    .cancelbtn1 {
+      height: 50px;
+      font-size: 14px;
+      padding: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      padding: 10px;
+    }
+  
+    .submitbtn {
+      height: 50px; 
+      font-size: 14px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      margin-right: 0px;
+      
+    }
+    .profileupload {
+      width: 100%;
+      margin-top: -10px;
+  
+      h4 {
+        font-size: 14px;
+      }
+    }
+  
+    .imagefilebtncont {
+      width: 100%;
+      height: 35px;
+    }
+  
+    .actionbtn{
+      width: 96%;
+    }
+  }
+  
+  .readonly-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  .edit-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .uploadOverlay{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(168, 165, 165, 0.459);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+  }
+  
+  @media (max-width: 500px) {
+    .informationdetailcont {
+      width: 97%;
+      padding: 0px;
+      margin: 0px;
+    }
+  
+    .profileform {
+      width: 100%;
+    }
+  
+    .submitbtn{
+      width: 70px;
+      height: 40px;
+      font-size: 14px;
+      flex: 1;
+    }
+    .cancelbtn {
+      width: 80px;
+      height: 40px;
+      font-size: 14px;
+      flex: 1;
+      
+    }
+  
+    .actionbuttonwrapper1 {
+      width: 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      gap: 5px;
+      margin-left: 15px;
+  
+      button {
+        width: 70px;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 2px solid lightgray;
+        background-color: #00bcd4;
+        margin-right: 10px;
+      }
+    }
+  
+    .profileupload {
+      width: 60%;
+      margin-bottom: 10px;
+  
+      h4 {
+        font-size: 14px;
+      }
+    }
+  
+    .imagefilebtncont {
+      width: 100%;
+      height: 35px;
+    }
+  }
+  
