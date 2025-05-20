@@ -1,34 +1,88 @@
-import React, { useState } from 'react';
-import './pageCss/Recharge.css';
-import { FaCircleCheck } from 'react-icons/fa6';
+import React, { useState } from "react";
+import "./pageCss/Recharge.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Withdraw = () => {
   const [selectedAmount, setSelectedAmount] = useState(5000);
-
+  const [showPin, setShowPin] = useState(false);
 
   return (
-    <div className='Withdraw'>
-      <div className='paymentSection'>
-
+    <div className="Withdraw">
+      <div className="paymentSection">
         <section>
           <h3>Fill The Details</h3>
           <hr />
           <input
-            type='number'
+            type="number"
             value={selectedAmount}
             onChange={(e) => setSelectedAmount(Number(e.target.value) || 5000)}
           />
-          <input type="text" placeholder='Bank account details' />
+          <input type="text" placeholder="Bank account details" />
         </section>
 
-        <button className='btn'>Continue</button>
+        <button className="btn" onClick={() => setShowPin(true)}>
+          Continue
+        </button>
       </div>
-      <div className='paymentWarnings'>
-        <li> Minimum Withdraw amount ₦2,000.00. if payment is less than ₦2,000.00, the amount will not be reflected.</li>
+      <div className="paymentWarnings">
+        <li>
+          {" "}
+          Minimum Withdraw amount ₦2,000.00. if payment is less than ₦2,000.00,
+          the amount will not be reflected.
+        </li>
         <li> Maximum Withdraw amount unlimited.</li>
-        <li> Withdraw can only be done inside the payment channels on YATicare platform.</li>
+        <li>
+          {" "}
+          Withdraw can only be done inside the payment channels on YATicare
+          platform.
+        </li>
         <li> Withdrawal charges is 10% of the amount you're withdrawing.</li>
       </div>
+      {showPin ? (
+        <div
+          style={{
+            backdropFilter: "blur(2px)",
+          }}
+          className="h-screen w-full absolute flex justify-center px-4"
+        >
+          <div className="w-120 h-70 bg-white flex flex-col gap-5 shadow-md items-center justify-center">
+            <h2 className="text-2xl font-bold text-center mb-6">
+              Enter Transaction PIN
+            </h2>
+
+            <div className="w-90 h-15 flex items-center justify-center border border-gray-400 rounded-sm">
+              <input
+                type={showPin ? "text" : "password"}
+                maxLength={4}
+                className="w-75 h-full px-4 py-3 text-center text-2xl tracking-widest focus:outline-none mb-6"
+                placeholder="••••"
+              />
+              <span onClick={() => setShowPin(!showPin)}>
+                {showPin ? (
+                  <FaEye
+                    size={20}
+                    cursor={"pointer"}
+                    style={{ color: "gray" }}
+                  />
+                ) : (
+                  <FaEyeSlash
+                    size={20}
+                    cursor={"pointer"}
+                    style={{ color: "gray" }}
+                  />
+                )}
+              </span>
+            </div>
+
+            <button
+              className="w-90 h-15 bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
+              onClick={() => setShowPin(false)}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

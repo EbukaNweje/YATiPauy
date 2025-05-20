@@ -26,6 +26,8 @@ import ProfileInfo from "./pages/ProfileInfo";
 import ScrollToTop from "./Components/ScrollToTop";
 import PlanDetails from "./pages/PlanDetails";
 import ChangePhone from "./pages/Auth/ChangePhone";
+import TransactionPin from "./Components/Auth/TransactionPin";
+import ChangePin from "./pages/ChangePin";
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -40,6 +42,10 @@ const App = () => {
         {
           path: "/auth/login",
           element: <Login2 />,
+        },
+        {
+          path: "/auth/Pin",
+          element: <TransactionPin />,
         },
         {
           path: "/auth/Sign-up",
@@ -71,6 +77,7 @@ const App = () => {
             { path: "profileinfo", element: <ProfileInfo /> },
             { path: "Profile", element: <Profile /> },
             { path: "accountSettings", element: <ProfileSettings /> },
+            { path: "changePin", element: <ChangePin /> },
             { path: "history", element: <History /> },
             { path: "plandetails/:id", element: <PlanDetails /> },
             { path: "myPlans", element: <Vip /> },

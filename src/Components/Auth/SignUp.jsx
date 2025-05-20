@@ -86,7 +86,7 @@ const SignUp = () => {
         console.log(response.data.data);
         toast.success(response.data.message);
         // setLoading(false);
-        Nav("/auth/login");
+        Nav("/auth/Pin");
       } catch (error) {
         console.log(error);
         setLoading(false);

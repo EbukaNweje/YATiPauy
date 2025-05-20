@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   FaLock,
   FaChevronRight,
@@ -8,6 +7,7 @@ import {
 import "./pageCss/Profile.css";
 import { useNavigate } from "react-router-dom";
 import { IoCallSharp } from "react-icons/io5";
+import { GrTransaction } from "react-icons/gr";
 
 const ProfileSettings = () => {
   const Nav = useNavigate();
@@ -34,6 +34,13 @@ const ProfileSettings = () => {
           <div className="iconBox">
             <FaUniversity className="profileIcon logoutIcon" />
             <h3>Bank</h3>
+          </div>
+          <FaChevronRight className="arrowIcon" />
+        </section>
+        <section onClick={() => Nav("/dashboard/changePin")}>
+          <div className="iconBox">
+            <GrTransaction className="profileIcon logoutIcon" />
+            <h3>Change PIN</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>
