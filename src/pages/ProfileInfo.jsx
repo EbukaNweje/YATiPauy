@@ -83,8 +83,13 @@ function ProfileInfo() {
           My Profile
         </h1>
         <form className="profileform" onSubmit={""}>
-          {renderField("UserName", details.UserName, "UserName")}
 
+          <div className="inforcontainer">
+            <h2>UserName</h2>
+            <div className="readonly-field">
+              <span>{details.UserName}</span>
+            </div>
+          </div>
           <div className="inforcontainer">
             <h2>Email</h2>
             <div className="readonly-field">
@@ -126,28 +131,8 @@ function ProfileInfo() {
               <span>{details.uplinePhoneNumber || "PhoneNumber"}</span>
             </div>
           </div>
-
-          <div className="actionbtn">
-            <div className="actionbuttonwrapper1">
-              <button
-                type="button"
-                className="cancelbtn1"
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-              <button type="submit" className="submitbtn" onClick={updateInfo}>
-                Update
-              </button>
-            </div>
-          </div>
         </form>
       </div>
-      <section onClick={() => Nav("/dashboard/accountSettings")} style={{cursor: "pointer", marginTop: "10px"}}>
-        <div className="iconBoxs">
-          <h3 style={{fontWeight: "600"}}>PROFILE SETTINGS</h3>
-        </div>
-      </section>
     </div>
   );
 }

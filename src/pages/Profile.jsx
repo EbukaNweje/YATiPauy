@@ -80,17 +80,17 @@ const Profile = () => {
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>
-        {/* <section onClick={() => Nav("/dashboard/changePassword")}>
-          <div className="iconBox">
-            <FaLock className="profileIcon" />
-            <h3>Change password</h3>
-          </div>
-          <FaChevronRight className="arrowIcon" />
-        </section> */}
         <section onClick={() => Nav("/dashboard/profileinfo")}>
           <div className="iconBox">
             <FaUser className="profileIcon" />
             <h3>Personal Information</h3>
+          </div>
+          <FaChevronRight className="arrowIcon" />
+        </section>
+        <section onClick={() => Nav("/dashboard/accountSettings")}>
+          <div className="iconBox">
+            <MdManageAccounts className="profileIcon" />
+            <h3>Profile Settings</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>

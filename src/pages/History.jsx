@@ -44,10 +44,10 @@ const History = () => {
                 </section>
             </div>
 
-            <div className="btnHolder">
+            {/* <div className="btnHolder">
                 <button style={{border: 'none', backgroundColor: 'teal'}}>Recharge</button>
                 <button style={{color: '#012306'}}>Withdraw</button>
-            </div>
+            </div> */}
 
             <table>
                 <thead>

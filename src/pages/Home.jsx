@@ -82,7 +82,7 @@ const Home = () => {
     },
     { 
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.15.12_35ea150a.jpg",
-      name: "YATI DIAMOND PARTNERS",
+      name: "YATI DIAMOND",
       prodText: "Redefine Excellence, Craft Your Legacy.",
       prodIdeal: "Ideal For: Visionaries building legacies.",
       prodList: [
@@ -139,7 +139,7 @@ const Home = () => {
       <nav>
         <ul onClick={() => Nav('recharge')}>
           <div className="iconBox"><FaWallet size={25} color="grey" /></div>
-          <li>Recharge</li>
+          <li>Add Funds</li>
         </ul>
         <ul onClick={() => Nav('withdraw')}>
           <div className="iconBox"><FaMoneyBillWave size={25} color="grey" /></div>

@@ -1,10 +1,33 @@
 import React, { useState } from "react";
 import "./pageCss/Recharge.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Withdraw = () => {
-  const [selectedAmount, setSelectedAmount] = useState(5000);
+  const [selectedAmount, setSelectedAmount] = useState("");
+  const [bankDetails, setBankDetails] = useState("");
   const [showPin, setShowPin] = useState(false);
+
+  const handleWithdraw = () => {
+    if (!selectedAmount && !bankDetails) {
+      toast.error("Please fill in all fields before proceeding.");
+      return;
+    }
+    else if (!selectedAmount) {
+      toast.error("Please fill in amount before proceeding.");
+      return;
+    }
+    else if (!bankDetails) {
+      toast.error("Please enter bank details before proceeding.");
+      return;
+    }
+    else if (selectedAmount < 2000) {
+      toast.error("Minimum withdraw amount is ₦2,000.00");
+      return;
+    }else {
+    setShowPin(true);
+  }
+  }
 
   return (
     <div className="Withdraw">
@@ -14,13 +37,19 @@ const Withdraw = () => {
           <hr />
           <input
             type="number"
+            placeholder="Enter amount to withdraw"
             value={selectedAmount}
             onChange={(e) => setSelectedAmount(Number(e.target.value) || 5000)}
           />
-          <input type="text" placeholder="Bank account details" />
+          <input
+            type="text"
+            placeholder="Bank account details"
+            value={bankDetails}
+            onChange={(e) => setBankDetails(e.target.value)}
+          />
         </section>
 
-        <button className="btn" onClick={() => setShowPin(true)}>
+        <button className="btn" onClick={handleWithdraw}>
           Continue
         </button>
       </div>
