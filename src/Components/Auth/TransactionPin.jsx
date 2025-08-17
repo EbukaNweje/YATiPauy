@@ -17,7 +17,8 @@ const TransactionPin = () => {
     confirmPin: "",
   });
 
-  const API_URL = `https://yaticare-back-end.vercel.app/api/auth/create-pin${user.user._id}`;
+  console.log("myuse", user);
+  const API_URL = `https://yaticare-back-end.vercel.app/api/auth/create-pin${user.user.id}`;
   const submitPin = async () => {
     if (!userInput.pin || !userInput.confirmPin) {
       toast.error("Please fill in all fields");
@@ -52,7 +53,7 @@ const TransactionPin = () => {
           Create Transaction PIN
         </h2>
 
-        <div className="w-90 h-15 flex items-center justify-center border border-gray-400 rounded-sm">
+        <div className="w-90 h-12 flex items-center justify-center border border-gray-400 rounded-sm">
           <input
             type={showPin ? "text" : "password"}
             maxLength={4}
@@ -74,7 +75,7 @@ const TransactionPin = () => {
             )}
           </span>
         </div>
-        <div className="w-90 h-15 flex items-center justify-center border border-gray-400 rounded-sm">
+        <div className="w-90 h-12 flex items-center justify-center border border-gray-400 rounded-sm">
           <input
             type={showConfirmPin ? "text" : "password"}
             maxLength={4}
@@ -101,7 +102,7 @@ const TransactionPin = () => {
           onClick={submitPin}
           disabled={loading}
           style={{ cursor: loading ? "not-allowed" : "pointer" }}
-          className="w-90 h-15 bg-green-700 cursor-pointer flex items-center justify-center text-white py-3 rounded-xl hover:bg-green-800 transition"
+          className="w-90 h-13 bg-green-700 cursor-pointer flex items-center justify-center text-white py-3 rounded-xl hover:bg-green-800 transition"
         >
           {loading ? <PuffLoader color="white" /> : "Continue"}
         </button>

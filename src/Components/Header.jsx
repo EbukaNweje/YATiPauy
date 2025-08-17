@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaHeadphones, FaUser, FaBars, FaRegCopy } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaHeadphones,
+  FaUser,
+  FaBars,
+  FaRegCopy,
+} from "react-icons/fa";
 // import '../pages/pageCss/Layout.css';
 import "./ComponentCss/Header.css";
 import { IoMdArrowDropleft } from "react-icons/io";
@@ -24,7 +30,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
-  const refLink = user.referralLink
+  const refLink = user.referralLink;
   // console.log(user)
 
   const fetchUserData = async () => {
@@ -41,10 +47,10 @@ const Header = () => {
   };
 
   const copy = (refLink) => {
-    navigator.clipboard.writeText(refLink)
-    toast.success("copied successfully")
-    setShowRef(false)
-  }
+    navigator.clipboard.writeText(refLink);
+    toast.success("copied successfully");
+    setShowRef(false);
+  };
 
   React.useEffect(() => {
     if (user?.user?._id) {
@@ -69,7 +75,7 @@ const Header = () => {
             <div className="info">
               <h3>Hello, {userData ? userData.userName : "Loading..."}</h3>
               <div className="refinfo">
-                <button disabled>
+                <button disabled className="Btn">
                   Available Balance:
                   <FaNairaSign />{" "}
                   {userData ? `${userData.accountBalance}.00` : "0.00"}

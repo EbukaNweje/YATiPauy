@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../pages/Global/Slice";
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
@@ -34,64 +35,53 @@ const SignUp = () => {
   const hasLowerCase = /[a-z]/;
 
   const Nav = useNavigate();
+  const dispatch = useDispatch();
 
   const onFinish = async (values) => {
-
     if (values.password !== values.confirmpassword) {
       toast.error("Passwords do not match.");
       return;
-    }
-
-    else if (values.userName.length < 3) {
+    } else if (values.userName.length < 3) {
       toast.error("UserName must be at least 3 characters long");
       // return;
-    }
-
-    else if (values.phoneNumber.length < 11) {
+    } else if (values.phoneNumber.length < 11) {
       toast.error("PhoneNumber must be at least 11 digits");
       return;
-    }
-
-    else if (values.password.length < 6) {
+    } else if (values.password.length < 6) {
       toast.error("Password must be at least 6 characters long.");
       return;
-    }
-    else if (!hasUpperCase.test(values.password)) {
+    } else if (!hasUpperCase.test(values.password)) {
       toast.error("Password must contain at least one uppercase letter.");
       return;
-    }
-    else if (!hasLowerCase.test(values.password)) {
+    } else if (!hasLowerCase.test(values.password)) {
       toast.error("Password must contain at least one lowercase letter.");
       return;
-    }
-    else if (!hasNumber.test(values.password)) {
+    } else if (!hasNumber.test(values.password)) {
       toast.error("Password must contain at least one number.");
       return;
-    }
-
-    else if (!specialCharacterRegex.test(values.password)) {
+    } else if (!specialCharacterRegex.test(values.password)) {
       toast.error("Password must contain at least one special character.");
       return;
-    }
-    else if (!regex.test(values.email)) {
+    } else if (!regex.test(values.email)) {
       toast.error("Email must be valid");
       return;
     }
     setLoading(true);
-      try {
-        const response = await axios.post(
-          "https://yaticare-back-end.vercel.app/api/auth/register",
-          values
-        );
-        console.log(response.data.data);
-        toast.success(response.data.message);
-        // setLoading(false);
-        Nav("/auth/Pin");
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-        toast.error(error?.response?.data?.message);
-      }
+    try {
+      const response = await axios.post(
+        "https://yaticare-back-end.vercel.app/api/auth/register",
+        values
+      );
+      console.log(response.data.data);
+      toast.success(response.data.message);
+      // setLoading(false);
+      dispatch(loginSuccess(response.data.data));
+      Nav("/auth/Pin");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   return (
@@ -199,7 +189,9 @@ const SignUp = () => {
           >
             <Checkbox>
               I have read and agree to YATicare{" "}
-              <a onClick={() => Nav("/terms")}>Terms & Conditions/Privacy Policy</a>
+              <a onClick={() => Nav("/terms")}>
+                Terms & Conditions/Privacy Policy
+              </a>
             </Checkbox>
           </Form.Item>
 

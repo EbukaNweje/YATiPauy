@@ -1,166 +1,155 @@
-/* Layout.css */
-
+/* ===== Header Base ===== */
 .Header {
-    /* background-color: #262682; */
-    padding: 16px;
-    color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 90px;
-    width: 100%;
-  }
-  
+  width: 100%;
+  background: #1f2937; /* dark bg */
+  color: white;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Home page content ===== */
+.homeHcontent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* profile icon */
+.profileler {
+  background: white;
+  border-radius: 50%;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* user info */
+.info {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.info h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: #f9fafb;
+}
+
+.refinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.refinfo .Btn {
+  background: #f5f5f547;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%; /* takes full width on mobile */
+  max-width: 250px; /* but not too large */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reflink {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #9ca3af;
+}
+
+/* ===== Menu ===== */
+.menu-container {
+  margin-left: auto;
+}
+
+.Menu {
+  cursor: pointer;
+}
+
+/* dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 16px;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  z-index: 10;
+}
+
+.dropdown-menu button {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background: #f3f4f6;
+}
+
+/* ===== Back button for subpages ===== */
+.pageContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navBack {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 768px) {
   .homeHcontent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .header-content {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .refinfo{
-    width: max-content;
-    display: flex;
-    gap: 10px;
-  }
-
-  .reflink{
-    width: max-content;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding: 8px 12px;
-
-    span {
-      cursor: pointer;
-    }
-  }
-  
-  .profileler {
-    background-color: #2e2e42;
-    padding: 14px;
-    border-radius: 50%;
-    border: 1px solid gray;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  .profileler:hover {
-    transform: scale(1.05);
-  }
-  
-  .info h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-  
-  .info .refinfo button {
-    border: none;
-    color: #fff;
-    padding: 8px 12px;
-    font-size: 1rem;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: not-allowed;
-  }
-  
-  .menu-container {
-    position: relative;
-  }
-  
-  .Menu {
-    cursor: pointer;
-    display: none;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    background-color: #0B2B11 !important;
-    border-radius: 12px;
-    padding: 10px 0;
-    display: flex;
     flex-direction: column;
-    width: 200px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  .dropdown-menu button {
-    background: none;
-    border: none;
-    color: #eee !important;
-    text-align: left;
-    padding: 12px 16px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  
-  /* .dropdown-menu button:hover {
-    background-color: #adabab !important;
-    color: #fff !important;
-  } */
-  
-  .pageContent {
-    display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
   }
-  
-  .navBack {
-    cursor: pointer;
-    background-color: #2e2e42;
-    padding: 6px;
-    border-radius: 10px;
-    transition: background 0.2s ease;
-  }
-  .navBack:hover {
-    background-color: #3b3b58;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Responsive */
-  @media (max-width: 600px) {
-    .homeHcontent {
-      flex-direction: column;
-      align-items: flex-start;
-    }
 
-    .Menu {
-      display: block;
-    }
-  
-    .dropdown-menu {
-      right: 10px;
-      width: 90vw;
-    }
-  
-    .header-content {
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-    }
+  .info {
+    margin-left: 0;
   }
-  
+
+  .refinfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .refinfo .Btn {
+    font-size: 13px;
+    padding: 8px 12px;
+    width: 100%; /* full width on mobile */
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    right: 0;
+    top: 70px;
+  }
+}
