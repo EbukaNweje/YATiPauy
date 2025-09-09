@@ -1,9 +1,4 @@
-import {
-  FaLock,
-  FaChevronRight,
-  FaUniversity,
-  FaUser,
-} from "react-icons/fa";
+import { FaLock, FaChevronRight, FaUniversity, FaUser } from "react-icons/fa";
 import "./pageCss/Profile.css";
 import { useNavigate } from "react-router-dom";
 import { IoCallSharp } from "react-icons/io5";
@@ -14,7 +9,6 @@ const ProfileSettings = () => {
 
   return (
     <div className="Profile">
-
       <div className="profileInfo">
         <section onClick={() => Nav("/dashboard/changePassword")}>
           <div className="iconBox">
@@ -30,10 +24,10 @@ const ProfileSettings = () => {
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>
-        <section onClick={() => Nav("/dashboard/bankDetails")}>
+        <section onClick={() => Nav("/dashboard/WalletAddress")}>
           <div className="iconBox">
             <FaUniversity className="profileIcon logoutIcon" />
-            <h3>Bank</h3>
+            <h3>Change Wallet Address</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>

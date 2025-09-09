@@ -1,0 +1,132 @@
+.Bank {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  .inputWrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .inputWrapper select {
+    color: rgba(255, 255, 255, 0.6);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255, 255, 255, 0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    padding-right: 45px;
+  }
+
+  .inputWrapper select option {
+    background-color: #0b331d;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.bank-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #0b331d;
+}
+
+.bank-header h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.bank-header p {
+  color: #666;
+}
+
+.bank-form {
+  background-color: #0b331d;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.inputWrapper {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.inputWrapper input,
+.inputWrapper select {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.inputWrapper input::placeholder,
+.inputWrapper select {
+  color: rgba(255, 255, 255, 0.907);
+}
+
+.inputWrapper input.filled,
+.inputWrapper select.filled {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.inputIcon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 20px;
+}
+.save-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #1a5f36;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: #237544;
+}
+
+.save-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.save-button .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bank-notice {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.bank-notice p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}

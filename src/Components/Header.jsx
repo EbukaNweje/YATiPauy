@@ -23,6 +23,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { FaNairaSign } from "react-icons/fa6";
 import toast from "react-hot-toast";
+import { BsCurrencyDollar } from "react-icons/bs";
 
 const Header = () => {
   const location = useLocation();
@@ -31,7 +32,7 @@ const Header = () => {
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
   const refLink = user.referralLink;
-  // console.log(user)
+  console.log(userData);
 
   const fetchUserData = async () => {
     try {
@@ -40,7 +41,7 @@ const Header = () => {
       );
       const data = response?.data?.data;
       setUserData(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -77,7 +78,7 @@ const Header = () => {
               <div className="refinfo">
                 <button disabled className="Btn">
                   Available Balance:
-                  <FaNairaSign />{" "}
+                  <BsCurrencyDollar />{" "}
                   {userData ? `${userData.accountBalance}.00` : "0.00"}
                 </button>
                 <div className="reflink">
@@ -100,30 +101,46 @@ const Header = () => {
             </div>
             {menuOpen && (
               <div className="dropdown-menu">
-                <button onClick={() => navigate("recharge")}>
+                <button
+                  onClick={() => {
+                    navigate("recharge"), setMenuOpen(false);
+                  }}
+                >
                   <FaWallet size={30} color="grey" />
                   Recharge
                 </button>
-                <button onClick={() => navigate("withdraw")}>
+                <button
+                  onClick={() => {
+                    navigate("withdraw"), setMenuOpen(false);
+                  }}
+                >
                   <FaMoneyBillWave size={30} color="grey" />
                   Withdraw
                 </button>
-                <button onClick={() => navigate("bankDetails")}>
+                <button
+                  onClick={() => {
+                    navigate("bankDetails"), setMenuOpen(false);
+                  }}
+                >
                   <FaUniversity size={30} color="grey" />
                   Bank Account
                 </button>
-                <button onClick={() => navigate("plan")}>
+                <button
+                  onClick={() => {
+                    navigate("plan"), setMenuOpen(false);
+                  }}
+                >
                   <FaUniversity size={30} color="grey" />
                   Plans
                 </button>
-                <button onClick={() => navigate("community")}>
+                {/* <button onClick={() => navigate("community")}>
                   <FaUsers size={30} color="grey" />
                   Community
                 </button>
                 <button onClick={() => navigate("Privacy")}>
                   <FaShieldAlt size={30} color="grey" />
                   Privacy Policy
-                </button>
+                </button> */}
               </div>
             )}
           </div>

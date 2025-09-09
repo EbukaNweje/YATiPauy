@@ -1,236 +1,390 @@
-.Recharge, .Withdraw{
+.Recharge,
+.Withdraw {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+
+  .paymentWarnings {
     width: 100%;
+    max-width: 600px;
+    background-color: rgba(11, 51, 29, 0.1);
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    overflow-y: scroll;
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
-    padding-bottom: 50px;
-}
+    border-radius: 10px;
+    color: #0b331d;
+  }
 
-.Recharge .paymentSection, .Withdraw .paymentSection{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+  .paymentWarnings li {
+    margin-bottom: 10px;
+    list-style: none;
+    position: relative;
+    padding-left: 20px;
+  }
 
-.Recharge .paymentSection .amountWrap, .Withdraw .paymentSection .amountWrap{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    /* background-color: #05451091; */
-    background-color: #022308f5;
-    border-radius: 20px;
-    padding: 30px;
+  .paymentWarnings li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0b331d;
+  }
 
-    h3{
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-        line-height: 21px;
-    }
-
-    hr{
-        width: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.295);
-    }
-}
-
-.paymentSection .amountWrap .amountDiv{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    
-    button{
-        width: 33.3333333%;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        background: none;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        
-        h3{
-            width: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-
-    .amountButtonSelected{
-        border: 2px solid teal;
-        border-radius: 20px;
-    }
-
-}
-
-.paymentSection section{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* background-color: #05451091; */
-    background-color: #022308f5;
-    border-radius: 20px;
-    padding: 30px;
-
-    h3{
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-        line-height: 21px;  
-    }
-
-    hr{
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.295);
-        
-    }
-
-    input{
-        width: 100%;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.295);
-        color: white;
-        border: none;
-        outline: none;
-        border-radius: 10px;
-        font-size: 20px;
-        font-weight: 600;
-    }
-    select{
-        width: 100%;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.295);
-        color: white;
-        border: none;
-        outline: none;
-        border-radius: 10px;
-        font-size: 20px;
-        font-weight: 600;
-    }
-    select option {
-        background-color: teal; 
-        color: white; 
-        padding: 10px;
-    }
-    
-    select option:hover {
-        background-color: darkcyan;
-    }
-}
-
-
-.paymentSection .btn {
-    width: 100%;
+  .gst-notice {
+    margin-top: 25px;
     padding: 20px;
-    background: linear-gradient(135deg, #008080, #005555);
+    background-color: rgba(11, 51, 29, 0.05);
+    border-left: 4px solid #0b331d;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .gst-notice h4 {
+    color: #0b331d;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .gst-notice p {
+    color: #0b331d;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .gst-notice p:last-child {
+    margin-bottom: 0;
+    font-weight: 500;
+  }
+
+  .paymentSection {
+    background-color: #0b331d;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .paymentSection h3 {
     color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .paymentSection input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .paymentSection input[type="number"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .wallet-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  .wallet-selection label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .wallet-selection label:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .wallet-selection input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 50%;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .wallet-selection input[type="radio"]:checked {
+    background-color: white;
+    border: 2px solid white;
+  }
+
+  .wallet-selection input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #0b331d;
+    border-radius: 50%;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #1a5f36;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+
+  .btn:hover {
+    background-color: #237544;
+  }
+  -ms-overflow-style: none;
+  padding-bottom: 50px;
+}
+
+.Recharge .paymentSection,
+.Withdraw .paymentSection {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Recharge .paymentSection .amountWrap,
+.Withdraw .paymentSection .amountWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  /* background-color: #05451091; */
+  background-color: #022308f5;
+  border-radius: 20px;
+  padding: 30px;
+
+  h3 {
     font-size: 20px;
     font-weight: 600;
+    color: white;
+    line-height: 21px;
+  }
+
+  hr {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.295);
+  }
+}
+
+.paymentSection .amountWrap .amountDiv {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  button {
+    width: 33.3333333%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background: none;
     border: none;
     outline: none;
     cursor: pointer;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: background 0.3s ease-in-out;
+
+    h3 {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .amountButtonSelected {
+    border: 2px solid teal;
+    border-radius: 20px;
+  }
+}
+
+.paymentSection section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* background-color: #05451091; */
+  background-color: #022308f5;
+  border-radius: 20px;
+  padding: 30px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    line-height: 21px;
+  }
+
+  hr {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.295);
+  }
+
+  input {
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.295);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  select {
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.295);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  select option {
+    background-color: teal;
+    color: white;
+    padding: 10px;
+  }
+
+  select option:hover {
+    background-color: darkcyan;
+  }
+}
+
+.paymentSection .btn {
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(135deg, #008080, #005555);
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: background 0.3s ease-in-out;
 }
 
 .paymentSection .btn:hover {
-    background: linear-gradient(135deg, #00a0a0, #006666);
+  background: linear-gradient(135deg, #00a0a0, #006666);
 }
 
 .paymentSection .btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 150%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: skewX(-25deg);
-    transition: left 0.5s ease-in-out;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 150%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease-in-out;
 }
 
 .paymentSection .btn:hover::before {
-    left: 100%;
+  left: 100%;
 }
 
 @keyframes shine {
-    0% { left: -100%; }
-    100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .paymentSection .btn:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
-.paymentWarnings{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    color: grey;
-    gap: 10px;
-    font-size: 16px;
+.paymentWarnings {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  color: grey;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.chanPass {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Bank,
+.Change {
+  width: 45%;
+  height: 70vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
     line-height: 21px;
+  }
 }
 
-.chanPass{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
+.Bank section,
+.Change section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 
-.Bank, .Change{
-    width: 45%;
-    height: 70vh;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-
-    h3{
-        color: black;
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 21px;
-    }
-}
-
-.Bank section, .Change section{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-
-.inputWrapper {
+  .inputWrapper {
     position: relative;
     width: 80%;
     border: 2px solid grey;
+  }
 
-}
-
-.inputDiv{
+  .inputDiv {
     width: 80%;
     display: flex;
     align-items: center;
@@ -241,26 +395,21 @@
     /* background-color: grey; */
     border: 1px solid grey;
 
-
-    span{
-       color: gray; 
-
+    span {
+      color: gray;
     }
-}
+  }
 
-
-.inputIcon {
+  .inputIcon {
     position: absolute;
     top: 50%;
     left: 15px;
     transform: translateY(-50%);
     color: gray;
     font-size: 25px;
-}
+  }
 
-
-
-.inputDiv aside{
+  .inputDiv aside {
     width: 90%;
     /* padding: 20px; */
     height: 60px;
@@ -272,9 +421,9 @@
     border: none;
     background: none;
     outline: none;
-}
+  }
 
-.inputDiv input {
+  .inputDiv input {
     width: 90%;
     padding: 20px;
     padding-left: 50px;
@@ -284,9 +433,9 @@
     border: none;
     background: none;
     outline: none;
-}
+  }
 
-.inputDiv aside input{
+  .inputDiv aside input {
     width: 90%;
     padding: 20px;
     padding-left: 50px;
@@ -297,9 +446,9 @@
     border: none;
     background: none;
     outline: none;
-}
-.inputWrapper input,
-.inputWrapper select {
+  }
+  .inputWrapper input,
+  .inputWrapper select {
     width: 100%;
     padding: 20px;
     padding-left: 50px;
@@ -314,136 +463,142 @@
     outline: none;
 
     border: none;
-}
+  }
 
-.inputWrapper select option {
+  .inputWrapper select option {
     background-color: teal;
     color: white;
     padding: 10px;
-}
+  }
 
-.inputWrapper select option:hover {
+  .inputWrapper select option:hover {
     background-color: darkcyan;
+  }
 }
 
-    
-}
-
-.buttTag{
-    width: 80%;
-    padding: 20px;
-    background: linear-gradient(135deg, green, rgb(11,43,17));
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: background 250ms ease-in-out;
+.buttTag {
+  width: 80%;
+  padding: 20px;
+  background: linear-gradient(135deg, green, rgb(11, 43, 17));
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: background 250ms ease-in-out;
 }
 
 .buttTag:hover {
-    background: linear-gradient(135deg, rgb(11,43,17), green);
+  background: linear-gradient(135deg, rgb(11, 43, 17), green);
 }
 
-.Bank section .buttTag, .Change section button {
-    width: 80%;
-    padding: 20px;
-    background: linear-gradient(135deg, green, rgb(11,43,17));
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: background 250ms ease-in-out;
+.Bank section .buttTag,
+.Change section button {
+  width: 80%;
+  padding: 20px;
+  background: linear-gradient(135deg, green, rgb(11, 43, 17));
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: background 250ms ease-in-out;
 }
 
-.Bank section .buttTag:hover,  .Change section button:hover {
-    background: linear-gradient(135deg, rgb(11,43,17), green);
+.Bank section .buttTag:hover,
+.Change section button:hover {
+  background: linear-gradient(135deg, rgb(11, 43, 17), green);
 }
 
-.Bank section button::before, .Change section button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 150%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: skewX(-25deg);
-    transition: left 0.5s ease-in-out;
+.Bank section button::before,
+.Change section button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 150%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease-in-out;
 }
 
-.Bank section button, .Change section button:hover::before {
-    left: 100%;
+.Bank section button,
+.Change section button:hover::before {
+  left: 100%;
 }
 
 @keyframes shine {
-    0% { left: -100%; }
-    100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
-.Bank section button, .Change section button:active {
-    transform: scale(0.95);
+.Bank section button,
+.Change section button:active {
+  transform: scale(0.95);
 }
 
-@media (min-width: 320px)  and (max-width: 768px){
-
-    .paymentSection .amountWrap .amountDiv{
-
-        button{
-            width: 50%;
-        }
+@media (min-width: 320px) and (max-width: 768px) {
+  .paymentSection .amountWrap .amountDiv {
+    button {
+      width: 50%;
     }
+  }
 
-    .paymentWarnings{
-        width: 100%;
+  .paymentWarnings {
+    width: 100%;
+  }
+
+  .Recharge .paymentSection .amountWrap,
+  .Withdraw .paymentSection .amountWrap,
+  .paymentSection section {
+    padding: 15px;
+  }
+
+  .Recharge .paymentSection,
+  .Withdraw .paymentSection {
+    width: 100%;
+  }
+
+  .Bank,
+  .Change {
+    width: 100%;
+    margin: 0%;
+    padding: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .Bank section,
+  .Change section {
+    flex-direction: column;
+    width: 100%;
+
+    .inputDiv,
+    .inputWrapper {
+      width: 100%;
     }
-
-    .Recharge .paymentSection .amountWrap, .Withdraw .paymentSection .amountWrap, .paymentSection section {
-        padding: 15px;
-    }
-
-    .Recharge .paymentSection, .Withdraw .paymentSection{
-        width: 100%;
-    }
-
-    .Bank, .Change{
-        width: 100%;
-        margin: 0%;
-        padding: 20px;
-        padding-top: 50px;
-        padding-bottom: 50px;
-        
-    }
-
-    .Bank section, .Change section{
-        flex-direction: column;
-        width: 100%;
-
-        .inputDiv, .inputWrapper{
-            width: 100%;
-        }
-    
-    }
-
-  
-    
+  }
 }

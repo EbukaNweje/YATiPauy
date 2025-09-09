@@ -1,0 +1,196 @@
+.Deposit {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.depositSection h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.Amount_Show {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Amount_Show .amount {
+  font-size: 20px;
+  font-weight: bold;
+  color: #05451091;
+  margin-bottom: 10px;
+}
+
+.methodSwitch {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.methodSwitch label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+}
+
+.methodSwitch input {
+  margin-right: 6px;
+}
+
+.addressBox {
+  margin: 15px 0;
+  padding: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.address {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  word-break: break-all;
+  flex: 1;
+}
+
+.bankDetails {
+  font-size: 14px;
+  color: #111;
+  line-height: 1.4;
+}
+
+.bankDetails p {
+  margin: 2px 0;
+}
+
+.copyBtn {
+  border: none;
+  background: #05451091;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.copyBtn:hover {
+  background: #014b0ff5;
+}
+
+.timer {
+  font-size: 13px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.copyMsg {
+  font-size: 13px;
+  color: green;
+  margin-top: 5px;
+}
+
+.proofUpload {
+  margin: 20px 0;
+}
+
+.proofUpload input[type="file"] {
+  display: block;
+  margin-top: 8px;
+}
+
+.paidBtn {
+  width: 100%;
+  background: #014b0ff5;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.paidBtn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.paidBtn:hover:not(:disabled) {
+  background: #05451091;
+}
+
+.paymentWarnings {
+  margin-top: 25px;
+  font-size: 13px;
+  color: #444;
+  background: #f1f5f9;
+  border-radius: 10px;
+  padding: 15px;
+  list-style: none;
+}
+
+.paymentWarnings li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.Deposit_Pop {
+  width: 100%;
+  height: 100vh;
+  /* background: #000; */
+  position: absolute;
+  top: 30%;
+  left: 0;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.Pop_display {
+  width: 80%;
+  height: max-content;
+  padding: 20px;
+  background: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0.5rem;
+  animation-iteration-count: 1;
+}
+
+.Pop_display > span {
+  text-align: center;
+  font-size: 20px;
+}
+
+.Pop_display_btn {
+  width: 80%;
+  height: 50px;
+  background: #0b2b11;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}

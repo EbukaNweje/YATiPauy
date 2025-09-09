@@ -7,27 +7,26 @@ const Withdraw = () => {
   const [selectedAmount, setSelectedAmount] = useState("");
   const [bankDetails, setBankDetails] = useState("");
   const [showPin, setShowPin] = useState(false);
+  const [walletType, setWalletType] = useState("default");
+
+  // Mock default wallet - Replace with actual API data
+  const defaultWallet = "1234567890";
 
   const handleWithdraw = () => {
-    if (!selectedAmount && !bankDetails) {
-      toast.error("Please fill in all fields before proceeding.");
-      return;
-    }
-    else if (!selectedAmount) {
+    if (!selectedAmount) {
       toast.error("Please fill in amount before proceeding.");
       return;
     }
-    else if (!bankDetails) {
+    if (walletType === "other" && !bankDetails) {
       toast.error("Please enter bank details before proceeding.");
       return;
     }
-    else if (selectedAmount < 2000) {
-      toast.error("Minimum withdraw amount is ₦2,000.00");
+    if (selectedAmount < 2) {
+      toast.error("Minimum withdrawal amount is $2.00");
       return;
-    }else {
+    }
     setShowPin(true);
-  }
-  }
+  };
 
   return (
     <div className="Withdraw">
@@ -39,14 +38,41 @@ const Withdraw = () => {
             type="number"
             placeholder="Enter amount to withdraw"
             value={selectedAmount}
-            onChange={(e) => setSelectedAmount(Number(e.target.value) || 5000)}
+            onChange={(e) => setSelectedAmount(Number(e.target.value))}
+            min="2"
           />
-          <input
-            type="text"
-            placeholder="Bank account details"
-            value={bankDetails}
-            onChange={(e) => setBankDetails(e.target.value)}
-          />
+
+          <div className="wallet-selection">
+            <label>
+              <input
+                type="radio"
+                name="walletType"
+                value="default"
+                checked={walletType === "default"}
+                onChange={(e) => setWalletType(e.target.value)}
+              />
+              Default Wallet ({defaultWallet})
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="walletType"
+                value="other"
+                checked={walletType === "other"}
+                onChange={(e) => setWalletType(e.target.value)}
+              />
+              Other Wallet
+            </label>
+          </div>
+
+          {walletType === "other" && (
+            <input
+              type="text"
+              placeholder="Enter bank account details"
+              value={bankDetails}
+              onChange={(e) => setBankDetails(e.target.value)}
+            />
+          )}
         </section>
 
         <button className="btn" onClick={handleWithdraw}>
@@ -55,17 +81,27 @@ const Withdraw = () => {
       </div>
       <div className="paymentWarnings">
         <li>
-          {" "}
-          Minimum Withdraw amount ₦2,000.00. if payment is less than ₦2,000.00,
-          the amount will not be reflected.
+          Minimum withdrawal amount is $2.00. If payment is less than $2.00, the
+          amount will not be processed.
         </li>
-        <li> Maximum Withdraw amount unlimited.</li>
+        <li>Maximum withdrawal amount is unlimited.</li>
         <li>
-          {" "}
-          Withdraw can only be done inside the payment channels on YATicare
-          platform.
+          Withdrawals can only be processed through approved payment channels on
+          the platform.
         </li>
-        <li> Withdrawal charges is 10% of the amount you're withdrawing.</li>
+        <div className="gst-notice">
+          <h4>GST Notice</h4>
+          <p>
+            The Goods and Services Tax (GST) was introduced by the Howard
+            Government of Australia and commenced on 1 July 2000, replacing the
+            Federal Service Sales Tax System and designed to phase out a number
+            of various State and Territory Government taxes, duties and levies.
+          </p>
+          <p>
+            All participants of YATiCare are mandated to pay a 10% surcharge of
+            all withdrawals, in line with the extant tax laws of Australia.
+          </p>
+        </div>
       </div>
       {showPin ? (
         <div

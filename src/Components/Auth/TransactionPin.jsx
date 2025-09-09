@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
+import "./AuthStyle.css";
 
 const TransactionPin = () => {
   const Nav = useNavigate();
@@ -17,95 +18,128 @@ const TransactionPin = () => {
     confirmPin: "",
   });
 
-  console.log("myuse", user);
-  const API_URL = `https://yaticare-back-end.vercel.app/api/auth/create-pin${user.user.id}`;
+  const validatePin = (pin) => {
+    return /^\d{4}$/.test(pin);
+  };
+
+  const handlePinChange = (e, field) => {
+    const value = e.target.value.replace(/\D/g, "").slice(0, 4);
+    setUserInput((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   const submitPin = async () => {
     if (!userInput.pin || !userInput.confirmPin) {
-      toast.error("Please fill in all fields");
-      return;
-    } else if (userInput.pin !== userInput.confirmPin) {
-      toast.error("pin must be the same");
+      toast.error("Please enter both PIN fields");
       return;
     }
+
+    if (!validatePin(userInput.pin)) {
+      toast.error("PIN must be exactly 4 digits");
+      return;
+    }
+
+    if (userInput.pin !== userInput.confirmPin) {
+      toast.error("PINs do not match");
+      return;
+    }
+
     setLoading(true);
     try {
-      const response = await axios.post(API_URL, userInput);
-      console.log(response);
-      setLoading(false);
-      toast.success("Pin created Successfully");
-      setUserInput({
-        pin: "",
-        confirmPin: "",
-      });
-      setTimeout(() => {
-        Nav("/auth/login");
-      }, 2000);
+      const response = await axios.post(
+        `https://yaticare-back-end.vercel.app/api/auth/create-pin/${user.user._id}`,
+        { pin: userInput.pin }
+      );
+
+      if (response.data) {
+        toast.success("Transaction PIN created successfully");
+        setUserInput({
+          pin: "",
+          confirmPin: "",
+        });
+        setTimeout(() => {
+          Nav("/auth/login");
+        }, 2000);
+      }
     } catch (error) {
-      console.log(error);
+      const errorMessage =
+        error.response?.data?.message || "Failed to create PIN";
+      toast.error(errorMessage);
+      console.error("PIN creation error:", error);
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-120 h-100 bg-white flex flex-col gap-5 rounded-sm shadow-md items-center justify-center">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Create Transaction PIN
-        </h2>
-
-        <div className="w-90 h-12 flex items-center justify-center border border-gray-400 rounded-sm">
-          <input
-            type={showPin ? "text" : "password"}
-            maxLength={4}
-            className="w-75 h-full px-4 py-3 text-center text-lg tracking-widest focus:outline-none mb-6"
-            placeholder="Enter Your PIN"
-            onChange={(e) =>
-              setUserInput({ ...userInput, pin: e.target.value })
-            }
-          />
-          <span onClick={() => setShowPin(!showPin)}>
-            {showPin ? (
-              <FaEye size={20} cursor={"pointer"} style={{ color: "gray" }} />
-            ) : (
-              <FaEyeSlash
-                size={20}
-                cursor={"pointer"}
-                style={{ color: "gray" }}
-              />
-            )}
-          </span>
+    <div className="transaction-pin-container">
+      <div className="transaction-pin-form">
+        <div className="form-header">
+          <FaLock className="lock-icon" />
+          <h2>Create Transaction PIN</h2>
+          <p>Create a 4-digit PIN for securing your transactions</p>
         </div>
-        <div className="w-90 h-12 flex items-center justify-center border border-gray-400 rounded-sm">
-          <input
-            type={showConfirmPin ? "text" : "password"}
-            maxLength={4}
-            className="w-75 h-full px-4 py-3 text-center text-lg tracking-widest focus:outline-none mb-6"
-            placeholder="Confirm Your PIN"
-            onChange={(e) =>
-              setUserInput({ ...userInput, confirmPin: e.target.value })
-            }
-          />
-          <span onClick={() => setShowConfirmPin(!showConfirmPin)}>
-            {showConfirmPin ? (
-              <FaEye size={20} cursor={"pointer"} style={{ color: "gray" }} />
-            ) : (
-              <FaEyeSlash
-                size={20}
-                cursor={"pointer"}
-                style={{ color: "gray" }}
-              />
-            )}
-          </span>
+
+        <div className="pin-inputs">
+          <div className="input-group">
+            <input
+              type={showPin ? "text" : "password"}
+              maxLength={4}
+              placeholder="Enter Your PIN"
+              value={userInput.pin}
+              onChange={(e) => handlePinChange(e, "pin")}
+            />
+            <button
+              className="toggle-visibility"
+              onClick={() => setShowPin(!showPin)}
+              type="button"
+            >
+              {showPin ? (
+                <FaEye className="eye-icon" />
+              ) : (
+                <FaEyeSlash className="eye-icon" />
+              )}
+            </button>
+          </div>
+
+          <div className="input-group">
+            <input
+              type={showConfirmPin ? "text" : "password"}
+              maxLength={4}
+              placeholder="Confirm Your PIN"
+              value={userInput.confirmPin}
+              onChange={(e) => handlePinChange(e, "confirmPin")}
+            />
+            <button
+              className="toggle-visibility"
+              onClick={() => setShowConfirmPin(!showConfirmPin)}
+              type="button"
+            >
+              {showConfirmPin ? (
+                <FaEye className="eye-icon" />
+              ) : (
+                <FaEyeSlash className="eye-icon" />
+              )}
+            </button>
+          </div>
         </div>
 
         <button
+          className="submit-button"
           onClick={submitPin}
           disabled={loading}
-          style={{ cursor: loading ? "not-allowed" : "pointer" }}
-          className="w-90 h-13 bg-green-700 cursor-pointer flex items-center justify-center text-white py-3 rounded-xl hover:bg-green-800 transition"
         >
-          {loading ? <PuffLoader color="white" /> : "Continue"}
+          {loading ? <PuffLoader color="white" size={24} /> : "Create PIN"}
         </button>
+
+        <div className="pin-notice">
+          <p>
+            Your transaction PIN adds an extra layer of security to your
+            withdrawals. Never share your PIN with anyone.
+          </p>
+        </div>
       </div>
     </div>
   );

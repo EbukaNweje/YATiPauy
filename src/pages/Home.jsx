@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaWallet, FaMoneyBillWave, FaUniversity, FaUsers, FaBell, FaShieldAlt } from "react-icons/fa";
+import {
+  FaWallet,
+  FaMoneyBillWave,
+  FaUniversity,
+  FaUsers,
+  FaBell,
+  FaShieldAlt,
+} from "react-icons/fa";
 import "./pageCss/Home.css";
 import Product from "./Product";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +16,11 @@ const Home = () => {
   const images = [
     "https://zensartech.top/assets/img/banner/1.png",
     "https://zensartech.top/assets/img/banner/3.png",
-    "https://zensartech.top/assets/img/banner/2.png"
+    "https://zensartech.top/assets/img/banner/2.png",
   ];
 
   const products = [
-    { 
+    {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.11.24_bd60e258.jpg",
       name: "YATI STARTER",
       prodText: "Start Smart, Grow Steadily.",
@@ -21,12 +28,12 @@ const Home = () => {
       prodList: [
         "Local transportation coverage.",
         "Basic daily meal allowances.",
-        "Access to community networking opportunities."
+        "Access to community networking opportunities.",
       ],
       price1: "5000",
       price2: "9000",
     },
-    { 
+    {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.11.53_75aba231.jpg",
       name: "YATI HOPE EXPLORER",
       prodText: "Explore Limitless Possibilities.",
@@ -34,12 +41,12 @@ const Home = () => {
       prodList: [
         "Short-distance travel assistance (local/regional).",
         "Budget-friendly hotel accommodations.",
-        "Curated local experience packages."
+        "Curated local experience packages.",
       ],
       price1: "10000",
       price2: "49000",
     },
-    { 
+    {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.12.53_f34d84e9.jpg",
       name: "YATI BRIGHTER HORIZON",
       prodText: "Invest In Tomorrow, Today.",
@@ -47,12 +54,12 @@ const Home = () => {
       prodList: [
         "Expanded interstate travel support.",
         "Partial asset acquisition funding (e.g., tools, small equipment)",
-        "Education fee subsidies."
+        "Education fee subsidies.",
       ],
       price1: "50000",
       price2: "90000",
     },
-    { 
+    {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.13.48_57ab3a06.jpg",
       name: "YATI EMPOWER PASS",
       prodText: "Unlock Global Opportunities.",
@@ -61,26 +68,27 @@ const Home = () => {
         "Premium domestic travel packages.",
         "Luxury vacation experiences (resorts, cruises).",
         "Fixed asset financing (property, vehicles).",
-        "Priority access to Yaticare’s financial advisory network."
+        "Priority access to Yaticare’s financial advisory network.",
       ],
       price1: "100000",
       price2: "399000",
     },
-    { 
+    {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.14.41_8ea10062.jpg",
       name: "YATI ELITE STARS",
       prodText: "Live Luxuriously, Thrive Endlessly.",
-      prodIdeal: "Ideal For: High-net-worth individuals and lifestyle enthusiasts.",
+      prodIdeal:
+        "Ideal For: High-net-worth individuals and lifestyle enthusiasts.",
       prodList: [
         "Premium and quality healthcare packages (global medical coverage).",
         "International travel concierge (bespoke itineraries).",
         "Custom car project support (imports, modifications).",
-        "Exclusive networking events."
+        "Exclusive networking events.",
       ],
       price1: "400000",
       price2: "799000",
     },
-    { 
+    {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.15.12_35ea150a.jpg",
       name: "YATI DIAMOND",
       prodText: "Redefine Excellence, Craft Your Legacy.",
@@ -89,7 +97,7 @@ const Home = () => {
         "Ultimate Travel: Private jet charters, 5-star global stays, and personalized cultural tours.",
         "Asset Mastery: High-value assets (real estate, businesses).",
         "Legacy Planning: Tailored wealth management, generational trust funds, and philanthropy coordination.",
-        "24/7 Concierge: Dedicated support for lifestyle, finance, and exclusive event access."
+        "24/7 Concierge: Dedicated support for lifestyle, finance, and exclusive event access.",
       ],
       price1: "800000",
       price2: "1000000",
@@ -137,12 +145,16 @@ const Home = () => {
 
       {/* Navigation */}
       <nav>
-        <ul onClick={() => Nav('recharge')}>
-          <div className="iconBox"><FaWallet size={25} color="grey" /></div>
+        <ul onClick={() => Nav("recharge")}>
+          <div className="iconBox">
+            <FaWallet size={25} color="grey" />
+          </div>
           <li>Add Funds</li>
         </ul>
-        <ul onClick={() => Nav('withdraw')}>
-          <div className="iconBox"><FaMoneyBillWave size={25} color="grey" /></div>
+        <ul onClick={() => Nav("withdraw")}>
+          <div className="iconBox">
+            <FaMoneyBillWave size={25} color="grey" />
+          </div>
           <li>Withdraw</li>
         </ul>
         {/* <ul onClick={() => Nav('bankDetails')}>
@@ -165,7 +177,9 @@ const Home = () => {
 
       {/* Marquee Button */}
       <button className="margueBtn" disabled>
-        <div className="iconBox"><FaBell size={30} color="white" /></div>
+        <div className="iconBox">
+          <FaBell size={30} color="white" />
+        </div>
         <marquee behavior="scroll" direction="left">
           Officially launched. Join YATiPauy Telegram for more updates!
         </marquee>
@@ -191,6 +205,6 @@ const Home = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

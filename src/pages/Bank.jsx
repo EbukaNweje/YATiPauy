@@ -1,84 +1,123 @@
-import React, { useState } from "react";
-import { FaUser, FaRegCommentDots } from "react-icons/fa";
-import "./pageCss/Recharge.css";
-import { CiMail } from "react-icons/ci";
+import React, { useState, useEffect } from "react";
+import { FaWallet, FaSpinner } from "react-icons/fa6";
+import "./pageCss/Bank.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Bank = () => {
   const [userInput, setUserInput] = useState({
-    bankName: "",
-    accountNumber: "",
-    accountName: "",
+    walletName: "",
+    walletAddress: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const user = useSelector((state) => state.YATipauy.user);
 
-  const updateInfo = async () => {
-    try{
-      const response = await axios.put(`https://yaticare-back-end.vercel.app/api/user/updateuser/${user.user._id}`, userInput)
-      console.log(response)
-    }catch(error){
-      console.log(error)
+  // Load existing wallet details if available
+  useEffect(() => {
+    if (user?.user?.walletName) {
+      setUserInput({
+        walletName: user.user.walletName || "",
+        walletAddress: user.user.walletAddress || "",
+      });
     }
-  }
+  }, [user]);
+
+  const validateForm = () => {
+    if (!userInput.walletName) {
+      toast.error("Please enter your wallet name");
+      return false;
+    }
+    if (!userInput.walletAddress) {
+      toast.error("Please enter your wallet address");
+      return false;
+    }
+    return true;
+  };
+
+  const updateInfo = async () => {
+    if (!validateForm()) return;
+
+    setIsSaving(true);
+    try {
+      const response = await axios.put(
+        `https://yaticare-back-end.vercel.app/api/user/updateuser/${user.user._id}`,
+        userInput
+      );
+      if (response.data) {
+        toast.success("Wallet details updated successfully");
+      }
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to update wallet details"
+      );
+      console.error("Update error:", error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
   return (
     <div className="Bank">
-      <h3>Please provide the following details below to proceed</h3>
-      <section>
-        <div className="inputWrapper">
-          <FaUser className="inputIcon" />
-          <input
-            type="text"
-            placeholder="Enter your Bank Account Number"
-            value={userInput.accountNumber}
-            onChange={(e) =>
-              setUserInput({ ...userInput, accountNumber: e.target.value })
-            }
-          />
-        </div>
+      <div className="bank-header">
+        <h3>Wallet Details</h3>
+        <p>Please provide your wallet information for withdrawals</p>
+      </div>
 
+      <section className="bank-form">
         <div className="inputWrapper">
-          <CiMail className="inputIcon" />
+          <FaWallet className="inputIcon" />
           <select
-            value={userInput.bankName}
+            value={userInput.walletName}
             onChange={(e) =>
-              setUserInput({ ...userInput, bankName: e.target.value })
+              setUserInput({ ...userInput, walletName: e.target.value })
             }
+            className={userInput.walletName ? "filled" : ""}
           >
-            <option value="">-- Choose Bank --</option>
-            <option value="GTBank">Guaranty Trust Bank</option>
-            <option value="Access Bank">Access Bank</option>
-            <option value="First Bank">First Bank of Nigeria</option>
-            <option value="UBA">United Bank for Africa</option>
-            <option value="Zenith Bank">Zenith Bank</option>
-            <option value="Stanbic IBTC">Stanbic IBTC Bank</option>
-            <option value="Fidelity Bank">Fidelity Bank</option>
-            <option value="Polaris Bank">Polaris Bank</option>
-            <option value="Union Bank">Union Bank</option>
-            <option value="Keystone Bank">Keystone Bank</option>
-            <option value="Paycom(opay)">Paycom(opay)</option>
-            <option value="Palmpay">Palmpay</option>
-            <option value="Moniepoint microfinance Bank">
-              Moniepoint microfinance Bank
-            </option>
-            <option value="KUDA microfinance Bank">
-              KUDA microfinance Bank
-            </option>
+            <option value="">Select Wallet Type</option>
+            <option value="Bitcoin">Bitcoin (BTC)</option>
+            <option value="Ethereum">Ethereum (ETH)</option>
+            <option value="USDT-TRC20">USDT (TRC20)</option>
+            <option value="USDT-ERC20">USDT (ERC20)</option>
+            <option value="BNB">BNB (BSC)</option>
+            <option value="BUSD">BUSD (BSC)</option>
           </select>
         </div>
 
         <div className="inputWrapper">
-          <FaUser className="inputIcon" />
+          <FaWallet className="inputIcon" />
           <input
             type="text"
-            placeholder="Enter your Bank Account Name"
-            value={userInput.accountName}
+            placeholder="Enter your wallet address"
+            value={userInput.walletAddress}
             onChange={(e) =>
-              setUserInput({ ...userInput, accountName: e.target.value })
+              setUserInput({ ...userInput, walletAddress: e.target.value })
             }
+            className={userInput.walletAddress ? "filled" : ""}
           />
         </div>
-        <div className="buttTag" onClick={updateInfo}>Save</div>
+
+        <button
+          className={`save-button ${isSaving ? "loading" : ""}`}
+          onClick={updateInfo}
+          disabled={isSaving}
+        >
+          {isSaving ? (
+            <>
+              <FaSpinner className="spinner" /> Saving...
+            </>
+          ) : (
+            "Save Wallet Details"
+          )}
+        </button>
+
+        <div className="bank-notice">
+          <p>
+            Please ensure your wallet address is correct. Double-check the
+            address to avoid loss of funds. Make sure you're using the correct
+            network type for your selected wallet.
+          </p>
+        </div>
       </section>
     </div>
   );

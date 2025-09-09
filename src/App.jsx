@@ -28,6 +28,7 @@ import PlanDetails from "./pages/PlanDetails";
 import ChangePhone from "./pages/Auth/ChangePhone";
 import TransactionPin from "./Components/Auth/TransactionPin";
 import ChangePin from "./pages/ChangePin";
+import Deposit from "./pages/Deposit";
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -71,8 +72,9 @@ const App = () => {
             { path: "", element: <Home /> },
             { path: "Products", element: <ProductS /> },
             { path: "recharge", element: <Recharge /> },
+            { path: "deposit", element: <Deposit /> },
             { path: "withdraw", element: <Withdraw /> },
-            { path: "bankDetails", element: <Bank /> },
+            { path: "WalletAddress", element: <Bank /> },
             { path: "referrals", element: <RefPage /> },
             { path: "profileinfo", element: <ProfileInfo /> },
             { path: "Profile", element: <Profile /> },

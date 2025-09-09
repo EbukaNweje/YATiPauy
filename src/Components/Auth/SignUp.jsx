@@ -69,7 +69,7 @@ const SignUp = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://yaticare-back-end.vercel.app/api/auth/register",
+        "https://yaticare-backend.onrender.com/api/auth/register",
         values
       );
       console.log(response.data.data);
@@ -95,14 +95,9 @@ const SignUp = () => {
           <p>Please enter your appropriate details to continue</p>
         </div>
         <Form
-          name="SignUp"
-          style={{
-            maxWidth: 600,
-            width: 400,
-          }}
-          initialValues={{
-            remember: true,
-          }}
+          name="Signup"
+          className="auth-form"
+          initialValues={{ remember: true }}
           onFinish={onFinish}
         >
           <Form.Item
@@ -199,10 +194,10 @@ const SignUp = () => {
             <Button className="custom-btn" block htmlType="submit">
               {loading ? "Loading..." : "Create account"}
             </Button>
-            or{" "}
+            <span style={{ color: "#eee" }}>or </span>
             <span
               style={{
-                color: "#180169",
+                color: "#4caf50",
                 cursor: "pointer",
               }}
               onClick={() => Nav("/auth/login")}

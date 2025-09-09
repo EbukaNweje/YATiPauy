@@ -73,10 +73,12 @@
 /* ===== Menu ===== */
 .menu-container {
   margin-left: auto;
+  display: none;
 }
 
 .Menu {
   cursor: pointer;
+  display: none;
 }
 
 /* dropdown menu */
@@ -125,6 +127,12 @@
 
 /* ===== Responsive Styles ===== */
 @media (max-width: 768px) {
+  .Menu {
+    display: flex;
+  }
+  .menu-container {
+    display: flex;
+  }
   .homeHcontent {
     flex-direction: column;
     align-items: flex-start;

@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import "./pageCss/Recharge.css";
 import { FaCircleCheck } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { depositedAmount } from "./Global/Slice";
+import toast from "react-hot-toast";
 
 const Recharge = () => {
-  const amounts = [5000, 10000, 20000, 50000, 100000, 150000];
-  const [selectedAmount, setSelectedAmount] = useState();
+  // const amounts = [5000, 10000, 20000, 50000, 100000, 150000];
+  const [selectedAmount, setSelectedAmount] = useState("");
+  const dispatch = useDispatch();
 
-  const handleSelectAmount = (amount) => {
-    setSelectedAmount(amount);
+  const handleSelectAmount = () => {
+    if (!selectedAmount) {
+      return toast.error("Amount is required");
+    }
+
+    dispatch(depositedAmount(selectedAmount));
+    navigate("/dashboard/deposit");
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="Recharge">
@@ -34,13 +46,15 @@ const Recharge = () => {
           <h3>Amount To Deposit</h3>
           <hr />
           <input
-            type="number"
+            type="text"
             value={selectedAmount}
             placeholder="Amount"
             onChange={(e) => setSelectedAmount(Number(e.target.value))}
           />
         </section>
-        <button className="btn">Continue</button>
+        <button className="btn" onClick={handleSelectAmount}>
+          Continue
+        </button>
       </div>
 
       <div className="paymentWarnings">

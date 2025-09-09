@@ -1,14 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null, 
+  user: null,
   isLoggedIn: false,
   loading: false,
   error: null,
+  depositAmout: "",
 };
 
 const authSlice = createSlice({
-  name: 'YATipauy',
+  name: "YATipauy",
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
@@ -20,8 +21,12 @@ const authSlice = createSlice({
       state.user = null;
       state.isLoggedIn = false;
     },
+
+    depositedAmount: (state, action) => {
+      state.depositAmout = action.payload;
+    },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { loginSuccess, logout, depositedAmount } = authSlice.actions;
 export default authSlice.reducer;
