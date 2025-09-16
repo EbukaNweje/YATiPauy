@@ -36,7 +36,7 @@ const Withdraw = () => {
           <hr />
           <input
             type="number"
-            placeholder="Enter amount to withdraw"
+            placeholder="Enter amount ($) to withdraw"
             value={selectedAmount}
             onChange={(e) => setSelectedAmount(Number(e.target.value))}
             min="2"
@@ -53,7 +53,7 @@ const Withdraw = () => {
               />
               Default Wallet ({defaultWallet})
             </label>
-            <label>
+            {/* <label>
               <input
                 type="radio"
                 name="walletType"
@@ -62,13 +62,13 @@ const Withdraw = () => {
                 onChange={(e) => setWalletType(e.target.value)}
               />
               Other Wallet
-            </label>
+            </label> */}
           </div>
 
           {walletType === "other" && (
             <input
               type="text"
-              placeholder="Enter bank account details"
+              placeholder="Enter wallet address"
               value={bankDetails}
               onChange={(e) => setBankDetails(e.target.value)}
             />

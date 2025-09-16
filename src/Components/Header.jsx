@@ -32,7 +32,7 @@ const Header = () => {
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
   const refLink = user.referralLink;
-  console.log(userData);
+  // console.log(userData);
 
   const fetchUserData = async () => {
     try {
@@ -107,7 +107,7 @@ const Header = () => {
                   }}
                 >
                   <FaWallet size={30} color="grey" />
-                  Recharge
+                  Add Funds
                 </button>
                 <button
                   onClick={() => {
@@ -119,11 +119,11 @@ const Header = () => {
                 </button>
                 <button
                   onClick={() => {
-                    navigate("bankDetails"), setMenuOpen(false);
+                    navigate("WalletAddress"), setMenuOpen(false);
                   }}
                 >
                   <FaUniversity size={30} color="grey" />
-                  Bank Account
+                  Wallet Address
                 </button>
                 <button
                   onClick={() => {

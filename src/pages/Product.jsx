@@ -1,6 +1,7 @@
 import "./pageCss/Product.css";
 import { FaNairaSign } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { BiDollar } from "react-icons/bi";
 
 const Product = ({ displayedProducts }) => {
   if (!displayedProducts || displayedProducts.length === 0) {
@@ -29,8 +30,8 @@ const Product = ({ displayedProducts }) => {
               ))}
             </ul>
             <span>
-              Price: <FaNairaSign size={14} />
-              {product.price1} - <FaNairaSign size={14} />
+              Price: <BiDollar size={14} />
+              {product.price1} - <BiDollar size={14} />
               {product.price2}
             </span>
             <button
@@ -40,7 +41,7 @@ const Product = ({ displayedProducts }) => {
                 })
               }
             >
-              Get Started
+              Subscribe
             </button>
           </div>
         </div>

@@ -35,7 +35,7 @@ const Recharge = () => {
                 className={selectedAmount === amount ? 'amountButtonSelected' : ''}
                 onClick={() => handleSelectAmount(amount)}
               >
-                <h3>₦{amount.toLocaleString()}</h3>
+                <h3>${amount.toLocaleString()}</h3>
                { selectedAmount === amount ?  <FaCircleCheck color='teal' size={24}/> : null}
               </button>
             ))}
@@ -48,7 +48,7 @@ const Recharge = () => {
           <input
             type="text"
             value={selectedAmount}
-            placeholder="Amount"
+            placeholder="Amount in $"
             onChange={(e) => setSelectedAmount(Number(e.target.value))}
           />
         </section>
@@ -59,12 +59,12 @@ const Recharge = () => {
 
       <div className="paymentWarnings">
         <li>
-          1. Minimum Recharge amount ₦5,000.00. If payment is less than
-          ₦5,000.00, the amount will not be reflected.
+          1. Minimum Recharge amount $5,000.00. If payment is less than
+          $5,000.00, the amount will not be reflected.
         </li>
         <li>
-          2. Maximum Recharge amount ₦1,000,000.00. If payment is greater than
-          ₦1,000,000.00, the amount will not be processed.
+          2. Maximum Recharge amount $1,000,000.00. If payment is greater than
+          $1,000,000.00, the amount will not be processed.
         </li>
         <li>
           3. Recharge can only be done inside the payment channels on YATicare

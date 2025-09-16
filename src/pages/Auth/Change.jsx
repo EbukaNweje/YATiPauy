@@ -3,38 +3,61 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../pageCss/Recharge.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const Change = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // 🔥 new state
   const user = useSelector((state) => state.YATipauy.user);
+
   const [userInput, setUserInput] = useState({
-    currentPassword: "",
+    oldPassword: "",
     newPassword: "",
     confirmNewPassword: "",
   });
 
   const changePassword = async () => {
-    try{
-      const response = await axios.post(`https://yaticare-back-end.vercel.app/api/user/change-password/${user.user._id}`, userInput)
-      console.log(response)
-    }catch(error){
-      console.log(error)
+    try {
+      if (userInput.newPassword !== userInput.confirmNewPassword) {
+        return toast.error("New passwords do not match!");
+      }
+
+      setLoading(true); // start loading 🔥
+
+      const response = await axios.post(
+        `https://yaticare-back-end.vercel.app/api/auth/change-password/${user.user._id}`,
+        userInput
+      );
+
+      toast.success(response?.data?.message);
+
+      setUserInput({
+        oldPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      });
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false); // stop loading 🔥
     }
-  }
+  };
+
   return (
     <div className="Change">
       <h3>Please provide the following details below to proceed</h3>
       <section className="chanPass">
+        {/* Current password */}
         <div className="inputDiv">
           <FaLock className="inputIcon" />
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Enter current password"
-            value={userInput.currentPassword}
+            value={userInput.oldPassword}
             onChange={(e) =>
-              setUserInput({ ...userInput, currentPassword: e.target.value })
+              setUserInput({ ...userInput, oldPassword: e.target.value })
             }
           />
           <span
@@ -49,6 +72,7 @@ const Change = () => {
           </span>
         </div>
 
+        {/* New password */}
         <div className="inputDiv">
           <aside>
             <FaLock className="inputIcon" />
@@ -73,6 +97,7 @@ const Change = () => {
           </span>
         </div>
 
+        {/* Confirm new password */}
         <div className="inputDiv">
           <aside>
             <FaLock className="inputIcon" />
@@ -81,7 +106,10 @@ const Change = () => {
               placeholder="Confirm New password"
               value={userInput.confirmNewPassword}
               onChange={(e) =>
-                setUserInput({ ...userInput, confirmNewPassword: e.target.value })
+                setUserInput({
+                  ...userInput,
+                  confirmNewPassword: e.target.value,
+                })
               }
             />
           </aside>
@@ -97,7 +125,10 @@ const Change = () => {
           </span>
         </div>
 
-        <button onClick={changePassword}>Save</button>
+        {/* Save button with loading */}
+        <button onClick={changePassword} disabled={loading}>
+          {loading ? "Saving..." : "Save"}
+        </button>
       </section>
     </div>
   );

@@ -48,12 +48,12 @@ const History = () => {
       <div className="balanceDiv">
         <section>
           <span>Total Recharge</span>
-          <h3>₦0.00</h3>
+          <h3>$0.00</h3>
         </section>
         <hr />
         <section>
           <span>Total Withdrawal</span>
-          <h3>₦0.00</h3>
+          <h3>$0.00</h3>
         </section>
       </div>
 

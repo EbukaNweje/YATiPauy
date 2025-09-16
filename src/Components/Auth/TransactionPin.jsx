@@ -60,7 +60,7 @@ const TransactionPin = () => {
           confirmPin: "",
         });
         setTimeout(() => {
-          Nav("/auth/login");
+          Nav("/auth/add-WalletAddress");
         }, 2000);
       }
     } catch (error) {

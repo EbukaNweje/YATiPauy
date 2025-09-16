@@ -4,8 +4,9 @@ import "./pageCss/Bank.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const Bank = () => {
+const WalletAddress = () => {
   const [userInput, setUserInput] = useState({
     WalletName: "",
     WalletAddress: "",
@@ -58,9 +59,9 @@ const Bank = () => {
     }
   };
   return (
-    <div className="Bank">
+    <div className="Bank Wallet">
       <div className="bank-header">
-        <h3>Wallet Details</h3>
+        <h3 style={{ color: "white" }}>Wallet Details</h3>
         <p>Please provide your wallet information for withdrawals</p>
       </div>
 
@@ -88,7 +89,7 @@ const Bank = () => {
           <FaWallet className="inputIcon" />
           <input
             type="text"
-            placeholder="Enter your new wallet address"
+            placeholder="Enter your wallet address"
             value={userInput.WalletAddress}
             onChange={(e) =>
               setUserInput({ ...userInput, WalletAddress: e.target.value })
@@ -123,4 +124,4 @@ const Bank = () => {
   );
 };
 
-export default Bank;
+export default WalletAddress;

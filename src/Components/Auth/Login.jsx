@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AuthStyle.css";
-import { LockOutlined, PhoneOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -65,7 +65,7 @@ const Login = () => {
             ]}
             className="FromInput"
           >
-            <Input prefix={<PhoneOutlined />} placeholder="Email" />
+            <Input prefix={<MailOutlined />} placeholder="Email" />
           </Form.Item>
 
           <Form.Item

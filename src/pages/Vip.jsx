@@ -9,7 +9,7 @@ const Vip = () => {
     // { id: 2, name: "Plan 2" },
     // { id: 3, name: "Plan 3" },
     // { id: 4, name: "Plan 4" },
-    // { id: 5, name: "Plan 5" },   
+    // { id: 5, name: "Plan 5" },
     // { id: 6, name: "Plan 6" },
     // { id: 7, name: "Plan 7" },
   ];
@@ -37,7 +37,7 @@ const Vip = () => {
               <ul className="product-details">
                 <li>
                   <span className="label">Price:</span>
-                  <span className="value">₦{price || "6,000.00"}</span>
+                  <span className="value">${price || "6,000.00"}</span>
                 </li>
                 <li>
                   <span className="label">Period:</span>
@@ -45,11 +45,11 @@ const Vip = () => {
                 </li>
                 <li>
                   <span className="label">Daily Income:</span>
-                  <span className="value">₦{dailyIncome || "1,800.00"}</span>
+                  <span className="value">${dailyIncome || "1,800.00"}</span>
                 </li>
                 <li>
                   <span className="label">Total Income:</span>
-                  <span className="value">₦{totalIncome || "90,000.00"}</span>
+                  <span className="value">${totalIncome || "90,000.00"}</span>
                 </li>
                 <li
                   className="navigate-icon"

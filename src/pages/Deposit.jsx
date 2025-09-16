@@ -9,14 +9,16 @@ import axios from "axios";
 
 // ⏳ Countdown Component
 const Countdown = ({ paymentMethod, onExpire }) => {
-  const [timeLeft, setTimeLeft] = useState(60);
+  // 30 minutes = 1800 seconds
+  const [timeLeft, setTimeLeft] = useState(1800);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft((s) => {
         if (s <= 1) {
-          onExpire(); // tell parent to switch wallet/bank
-          return 60;
+          clearInterval(interval); // stop timer
+          onExpire(); // notify parent
+          return 0;
         }
         return s - 1;
       });
@@ -25,11 +27,14 @@ const Countdown = ({ paymentMethod, onExpire }) => {
     return () => clearInterval(interval);
   }, [onExpire]);
 
-  const fmt = (s) =>
-    `${String(Math.floor(s / 60)).padStart(1, "0")}:${String(s % 60).padStart(
+  const fmt = (s) => {
+    const minutes = Math.floor(s / 60);
+    const seconds = s % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
       2,
       "0"
     )}`;
+  };
 
   return <p className="timer">Expires in {fmt(timeLeft)}</p>;
 };
@@ -49,25 +54,25 @@ const RenderPopSuccessful = React.memo(({ onClose }) => (
 const Deposit = () => {
   const amount = useSelector((state) => state.YATipauy.depositAmout);
   const userData = useSelector((state) => state.YATipauy.user);
-  const [usdtRate, setUsdtRate] = useState(0);
-  const [usdtAmount, setUsdtAmount] = useState(0);
+  // const [usdtRate, setUsdtRate] = useState(0);
+  // const [usdtAmount, setUsdtAmount] = useState(0);
   const [proofPaymentPop, setProofPaymentPop] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   // console.log(userData);
 
-  useEffect(() => {
-    fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ngn"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const rate = data.tether.ngn;
-        setUsdtRate(rate);
-        setUsdtAmount(amount / rate);
-      })
-      .catch((err) => console.error(err));
-  }, [amount]);
+  // useEffect(() => {
+  //   fetch(
+  //     "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ngn"
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const rate = data.tether.ngn;
+  //       setUsdtRate(rate);
+  //       setUsdtAmount(amount / rate);
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, [amount]);
 
   const companyWallets = [
     "WALLET-ADDR-123-ABC",
@@ -129,8 +134,8 @@ const Deposit = () => {
   };
 
   const handleProofUpload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setProofFile(e.target.files[0]);
+    if (e.target.files.length > 0) {
+      setProofFile(e.target.files[0].name);
     }
   };
 
@@ -160,8 +165,8 @@ const Deposit = () => {
       <div className="depositSection">
         <h3>Deposit Amount</h3>
         <div className="Amount_Show">
-          <p className="amount">≈ {usdtAmount.toFixed(2)} USDT</p>
-          {/* <p className="amount">₦{amount?.toLocaleString()}</p> */}
+          <p className="amount">≈ {amount} USDT</p>
+          {/* <p className="amount">${amount?.toLocaleString()}</p> */}
         </div>
         <hr />
 
@@ -243,7 +248,11 @@ const Deposit = () => {
             type="file"
             accept="image/*,.pdf"
             onChange={handleProofUpload}
+            id="ChooseFile"
+            hidden
           />
+          <label htmlFor="ChooseFile">Choose File</label>
+          {proofFile && <p className="fileName">📄 {proofFile}</p>}
         </div>
 
         {/* I Have Paid Button */}
@@ -258,8 +267,8 @@ const Deposit = () => {
       </div>
 
       <div className="paymentWarnings">
-        <li>1. Minimum Recharge amount ₦5,000.00.</li>
-        <li>2. Maximum Recharge amount ₦1,000,000.00.</li>
+        <li>1. Minimum Recharge amount $5,000.00.</li>
+        <li>2. Maximum Recharge amount $1,000,000.00.</li>
         <li>3. Use only the official company details shown above.</li>
         <li>4. Each recharge requires creating a new deposit order.</li>
         <li>5. Actual payment must match the order amount exactly.</li>

@@ -20,7 +20,7 @@ const ProfileSettings = () => {
         <section onClick={() => Nav("/dashboard/changePhoneNumber")}>
           <div className="iconBox">
             <IoCallSharp className="profileIcon logoutIcon" />
-            <h3>Change Phonumber</h3>
+            <h3>Change Phone Number</h3>
           </div>
           <FaChevronRight className="arrowIcon" />
         </section>

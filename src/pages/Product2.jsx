@@ -38,7 +38,7 @@ const ProductS = () => {
             <div className="productDetails">
               <li>
                 <h4>Price</h4>
-                <h3>₦{product.price || "6,000.00"}</h3>
+                <h3>${product.price || "6,000.00"}</h3>
               </li>
               <li>
                 <h4>Period</h4>
@@ -46,11 +46,11 @@ const ProductS = () => {
               </li>
               <li>
                 <h4>Daily Income</h4>
-                <h3>₦{product.dailyIncome || "1,800.00"}</h3>
+                <h3>${product.dailyIncome || "1,800.00"}</h3>
               </li>
               <li>
                 <h4>Total Income</h4>
-                <h3>₦{product.totalIncome || "90,000.00"}</h3>
+                <h3>${product.totalIncome || "90,000.00"}</h3>
               </li>
               <button className="purchButton">Purchase</button>
             </div>

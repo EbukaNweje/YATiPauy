@@ -561,44 +561,65 @@
 }
 
 @media (min-width: 320px) and (max-width: 768px) {
-  .paymentSection .amountWrap .amountDiv {
-    button {
-      width: 50%;
-    }
+  /* Make amount buttons stack cleaner */
+  .paymentSection .amountWrap .amountDiv button {
+    width: 100%; /* full width buttons on mobile */
+    justify-content: center;
   }
 
+  /* Expand warnings to full width */
   .paymentWarnings {
     width: 100%;
+    font-size: 14px; /* slightly smaller text */
   }
 
+  /* Reduce padding for tighter spacing */
   .Recharge .paymentSection .amountWrap,
   .Withdraw .paymentSection .amountWrap,
   .paymentSection section {
     padding: 15px;
+    gap: 15px;
   }
 
+  /* Payment container full width */
   .Recharge .paymentSection,
   .Withdraw .paymentSection {
     width: 100%;
+    padding: 15px;
   }
 
+  /* Bank / Change sections responsive */
   .Bank,
   .Change {
     width: 100%;
-    margin: 0%;
+    margin: 0;
     padding: 20px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    height: auto; /* prevent fixed 70vh on small screens */
+    box-shadow: none; /* optional, cleaner on mobile */
   }
 
+  /* Ensure inputs stretch properly */
   .Bank section,
   .Change section {
     flex-direction: column;
     width: 100%;
+    gap: 15px;
+  }
 
-    .inputDiv,
-    .inputWrapper {
-      width: 100%;
-    }
+  .Bank section .inputDiv,
+  .Change section .inputDiv,
+  .Bank section .inputWrapper,
+  .Change section .inputWrapper {
+    width: 100%;
+  }
+
+  /* Buttons scale down */
+  .Bank section button,
+  .Change section button,
+  .buttTag {
+    width: 100%;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 20px;
   }
 }

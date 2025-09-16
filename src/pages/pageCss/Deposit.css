@@ -194,3 +194,38 @@
   cursor: pointer;
   color: #fff;
 }
+
+.ChooseFile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.proofUpload label {
+  display: inline-block;
+  background: #014b0ff5;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  transition: 0.2s ease;
+  margin-top: 1rem;
+}
+
+.proofUpload label:hover {
+  background: #05451091;
+}
+
+.ChooseFile input[type="file"] {
+  display: none; /* hide native input */
+}
+
+.fileName {
+  font-size: 13px;
+  color: #333;
+  margin-top: 6px;
+  word-break: break-word;
+}

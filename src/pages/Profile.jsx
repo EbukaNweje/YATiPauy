@@ -55,12 +55,12 @@ const Profile = () => {
         <div className="balance">
           <button disabled>
             <h3>
-              ₦
+              $
               {userInfo
                 ? `${Number(userInfo?.accountBalance).toLocaleString()}.00`
                 : "Loading..."}
             </h3>
-            <span>Total Withdrawal (₦)</span>
+            <span>Total Withdrawal ($)</span>
           </button>
         </div>
       </div>

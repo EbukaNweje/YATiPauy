@@ -11,7 +11,7 @@ function ProfileInfo() {
     UserName: user.user.userName || "",
     email: user.user.email,
     PhoneNumber: user.user.phoneNumber,
-    bankDetails: "",
+    WalletAddress: "",
     KYC: "" || "",
     uplineUserName: "" || "",
     uplinePhoneNumber: "" || "",
@@ -20,7 +20,7 @@ function ProfileInfo() {
     UserName: true,
     PhoneNumber: true,
   });
-  const Nav = useNavigate()
+  const Nav = useNavigate();
 
   const updateInfo = async () => {
     try {
@@ -83,7 +83,6 @@ function ProfileInfo() {
           My Profile
         </h1>
         <form className="profileform" onSubmit={""}>
-
           <div className="inforcontainer">
             <h2>UserName</h2>
             <div className="readonly-field">
@@ -105,9 +104,9 @@ function ProfileInfo() {
           </div>
 
           <div className="inforcontainer">
-            <h2>Bank Details</h2>
+            <h2> Wallet Address</h2>
             <div className="readonly-field">
-              <span>{details.bankDetails || "bank details"}</span>
+              <span>{details.WalletAddress || "Wallet Address"}</span>
             </div>
           </div>
 
@@ -121,7 +120,7 @@ function ProfileInfo() {
           <div className="inforcontainer">
             <h2>Upline Username</h2>
             <div className="readonly-field">
-              <span>{details.uplineUserName || "Username" }</span>
+              <span>{details.uplineUserName || "Username"}</span>
             </div>
           </div>
 

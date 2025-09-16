@@ -30,8 +30,8 @@ const Home = () => {
         "Basic daily meal allowances.",
         "Access to community networking opportunities.",
       ],
-      price1: "5000",
-      price2: "9000",
+      price1: "10",
+      price2: "100",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.11.53_75aba231.jpg",
@@ -43,8 +43,8 @@ const Home = () => {
         "Budget-friendly hotel accommodations.",
         "Curated local experience packages.",
       ],
-      price1: "10000",
-      price2: "49000",
+      price1: "100",
+      price2: "300",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.12.53_f34d84e9.jpg",
@@ -56,8 +56,8 @@ const Home = () => {
         "Partial asset acquisition funding (e.g., tools, small equipment)",
         "Education fee subsidies.",
       ],
-      price1: "50000",
-      price2: "90000",
+      price1: "300",
+      price2: "600",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.13.48_57ab3a06.jpg",
@@ -70,8 +70,8 @@ const Home = () => {
         "Fixed asset financing (property, vehicles).",
         "Priority access to Yaticare’s financial advisory network.",
       ],
-      price1: "100000",
-      price2: "399000",
+      price1: "600",
+      price2: "1,000",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.14.41_8ea10062.jpg",
@@ -85,8 +85,8 @@ const Home = () => {
         "Custom car project support (imports, modifications).",
         "Exclusive networking events.",
       ],
-      price1: "400000",
-      price2: "799000",
+      price1: "1,000",
+      price2: "2,500",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.15.12_35ea150a.jpg",
@@ -99,8 +99,8 @@ const Home = () => {
         "Legacy Planning: Tailored wealth management, generational trust funds, and philanthropy coordination.",
         "24/7 Concierge: Dedicated support for lifestyle, finance, and exclusive event access.",
       ],
-      price1: "800000",
-      price2: "1000000",
+      price1: "2,500",
+      price2: "5,000",
     },
   ];
 

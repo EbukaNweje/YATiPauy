@@ -2,7 +2,7 @@
   width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9fafb;
 }
 
@@ -24,14 +24,14 @@
   justify-content: space-between;
   background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   padding: 20px;
   transition: box-shadow 0.3s ease;
   cursor: default;
 }
 
 .product-card:hover {
-  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
 }
 
 .product-left {
@@ -47,7 +47,7 @@
   height: 120px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .image-container img {
@@ -111,7 +111,8 @@
     gap: 16px;
   }
 
-  .product-left, .product-details {
+  .product-left,
+  .product-details {
     width: 100%;
   }
 
@@ -210,7 +211,7 @@
   color: #222;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .textCon button {

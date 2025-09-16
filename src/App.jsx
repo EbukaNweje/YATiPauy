@@ -29,6 +29,7 @@ import ChangePhone from "./pages/Auth/ChangePhone";
 import TransactionPin from "./Components/Auth/TransactionPin";
 import ChangePin from "./pages/ChangePin";
 import Deposit from "./pages/Deposit";
+import WalletAddress from "./pages/WalletAddress";
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -47,6 +48,10 @@ const App = () => {
         {
           path: "/auth/Pin",
           element: <TransactionPin />,
+        },
+        {
+          path: "/auth/add-WalletAddress",
+          element: <WalletAddress />,
         },
         {
           path: "/auth/Sign-up",

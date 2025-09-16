@@ -50,18 +50,18 @@ const SignUp = () => {
     } else if (values.password.length < 6) {
       toast.error("Password must be at least 6 characters long.");
       return;
-    } else if (!hasUpperCase.test(values.password)) {
-      toast.error("Password must contain at least one uppercase letter.");
-      return;
-    } else if (!hasLowerCase.test(values.password)) {
-      toast.error("Password must contain at least one lowercase letter.");
-      return;
-    } else if (!hasNumber.test(values.password)) {
-      toast.error("Password must contain at least one number.");
-      return;
-    } else if (!specialCharacterRegex.test(values.password)) {
-      toast.error("Password must contain at least one special character.");
-      return;
+      // } else if (!hasUpperCase.test(values.password)) {
+      //   toast.error("Password must contain at least one uppercase letter.");
+      //   return;
+      // } else if (!hasLowerCase.test(values.password)) {
+      //   toast.error("Password must contain at least one lowercase letter.");
+      //   return;
+      // } else if (!hasNumber.test(values.password)) {
+      //   toast.error("Password must contain at least one number.");
+      //   return;
+      // } else if (!specialCharacterRegex.test(values.password)) {
+      //   toast.error("Password must contain at least one special character.");
+      //   return;
     } else if (!regex.test(values.email)) {
       toast.error("Email must be valid");
       return;
