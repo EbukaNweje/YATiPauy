@@ -11,6 +11,8 @@ const WalletAddress = () => {
     WalletName: "",
     WalletAddress: "",
   });
+  const Nav = useNavigate();
+
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const user = useSelector((state) => state.YATipauy.user);
@@ -48,6 +50,7 @@ const WalletAddress = () => {
       );
       if (response.data) {
         toast.success("Wallet details updated successfully");
+        Nav("/dashboard");
       }
     } catch (error) {
       toast.error(
