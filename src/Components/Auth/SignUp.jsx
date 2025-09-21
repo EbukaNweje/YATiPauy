@@ -28,6 +28,13 @@ const tailFormItemLayout = {
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
+  const [referralCode, setReferralCode] = useState("");
+  // Get referralCode from URL param on mount
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("referralCode");
+    if (code) setReferralCode(code);
+  }, []);
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
   const hasNumber = /\d/;
@@ -165,8 +172,14 @@ const SignUp = () => {
                 message: "Please input your Referral Code!",
               },
             ]}
+            initialValue={referralCode}
           >
-            <Input prefix={<UserOutlined />} placeholder="Referral Code" />
+            <Input
+              prefix={<UserOutlined />}
+              placeholder="Referral Code"
+              value={referralCode}
+              onChange={(e) => setReferralCode(e.target.value)}
+            />
           </Form.Item>
 
           <Form.Item

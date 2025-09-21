@@ -8,28 +8,36 @@ const HowItWorks = () => {
       <div className="leftSide">
         <h1>How It Works</h1>
         <p className="intro-text">
-          Join <span className="brand">YATiCare</span> by creating an account and making a deposit.
+          Join <span className="brand">YATiCare</span> by creating an account
+          and making a deposit.
           <br />
-          <strong>Limit:</strong> N5,000 - N1,000,000
+          <strong>Limit:</strong> $10 - $5,000
         </p>
 
         <div className="info-box">
           <h3>📈 Return Policy</h3>
           <p>
-            Earn <strong>20%</strong> of your deposit daily or a total of <strong>140%</strong> weekly.
+            Earn <strong>20%</strong> of your deposit daily or a total of{" "}
+            <strong>140%</strong> weekly.
           </p>
           <p>Initial deposit must be recycled every 7 days.</p>
         </div>
 
         <div className="info-box">
           <h3>🎁 Bonuses</h3>
-          <p>💰 <strong>Referral Bonus:</strong> 15% from direct downlines.</p>
-          <p>🔄 <strong>Recycled Packages:</strong> 1.5% commission.</p>
+          <p>
+            💰 <strong>Referral Bonus:</strong> 15% from direct downlines.
+          </p>
+          <p>
+            🔄 <strong>Recycled Packages:</strong> 1.5% commission.
+          </p>
         </div>
 
         <div className="info-box">
           <h3>💵 Withdrawals</h3>
-          <p>Minimum withdrawal: <strong>N2,000</strong>.</p>
+          <p>
+            Minimum withdrawal: <strong>$2</strong>.
+          </p>
         </div>
       </div>
 

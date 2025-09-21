@@ -181,7 +181,7 @@ const Home = () => {
           <FaBell size={30} color="white" />
         </div>
         <marquee behavior="scroll" direction="left">
-          Officially launched. Join YATiPauy Telegram for more updates!
+          Officially launched. Join YATiCare Telegram for more updates!
         </marquee>
       </button>
 

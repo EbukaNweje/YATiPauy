@@ -99,13 +99,19 @@
   .wallet-selection label {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     cursor: pointer;
     padding: 15px 20px;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     color: white;
     transition: all 0.3s ease;
+    gap: 12px;
+  }
+  @media (max-width: 768px) {
+    .wallet-selection label {
+      gap: 16px;
+      font-size: 16px;
+    }
   }
 
   .wallet-selection label:hover {

@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import "./pageCss/Recharge.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const Withdraw = () => {
-  const [selectedAmount, setSelectedAmount] = useState("");
+  const user = useSelector((state) => state.YATipauy.user);
+  const [selectedAmount, setSelectedAmount] = useState();
   const [bankDetails, setBankDetails] = useState("");
   const [showPin, setShowPin] = useState(false);
   const [walletType, setWalletType] = useState("default");
+  console.log(user?.user.WalletInfo?.WalletAddress);
 
   // Mock default wallet - Replace with actual API data
-  const defaultWallet = "1234567890";
+  const defaultWallet = user?.user.WalletInfo?.WalletAddress || "Not Set";
 
   const handleWithdraw = () => {
     if (!selectedAmount) {
@@ -35,10 +38,16 @@ const Withdraw = () => {
           <h3>Fill The Details</h3>
           <hr />
           <input
-            type="number"
+            type="text"
             placeholder="Enter amount ($) to withdraw"
             value={selectedAmount}
-            onChange={(e) => setSelectedAmount(Number(e.target.value))}
+            onChange={(e) => {
+              const value = e.target.value;
+              // Only allow numbers or empty string
+              if (value === "" || /^[0-9]*$/.test(value)) {
+                setSelectedAmount(value);
+              }
+            }}
             min="2"
           />
 
@@ -51,7 +60,7 @@ const Withdraw = () => {
                 checked={walletType === "default"}
                 onChange={(e) => setWalletType(e.target.value)}
               />
-              Default Wallet ({defaultWallet})
+              Default Wallet ({defaultWallet || "Not Set"})
             </label>
             {/* <label>
               <input

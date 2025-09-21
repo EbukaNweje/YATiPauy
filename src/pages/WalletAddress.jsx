@@ -91,9 +91,12 @@ const WalletAddress = () => {
             type="text"
             placeholder="Enter your wallet address"
             value={userInput.WalletAddress}
-            onChange={(e) =>
-              setUserInput({ ...userInput, WalletAddress: e.target.value })
-            }
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value === "" || /^[0-9]*$/.test(value)) {
+                setUserInput({ ...userInput, WalletAddress: value });
+              }
+            }}
             className={userInput.WalletAddress ? "filled" : ""}
           />
         </div>

@@ -15,7 +15,9 @@ const Recharge = () => {
     if (!selectedAmount) {
       return toast.error("Amount is required");
     }
-
+    if (Number(selectedAmount) < 2) {
+      return toast.error("Minimum deposit is $2");
+    }
     dispatch(depositedAmount(selectedAmount));
     navigate("/dashboard/deposit");
   };
@@ -49,7 +51,13 @@ const Recharge = () => {
             type="text"
             value={selectedAmount}
             placeholder="Amount in $"
-            onChange={(e) => setSelectedAmount(Number(e.target.value))}
+            onChange={(e) => {
+              const value = e.target.value;
+              // Only allow numbers or empty string
+              if (value === "" || /^[0-9]*$/.test(value)) {
+                setSelectedAmount(value);
+              }
+            }}
           />
         </section>
         <button className="btn" onClick={handleSelectAmount}>
@@ -59,12 +67,12 @@ const Recharge = () => {
 
       <div className="paymentWarnings">
         <li>
-          1. Minimum Recharge amount $5,000.00. If payment is less than
-          $5,000.00, the amount will not be reflected.
+          1. Minimum Recharge amount $2. If payment is less than $2, the amount
+          will not be reflected.
         </li>
         <li>
-          2. Maximum Recharge amount $1,000,000.00. If payment is greater than
-          $1,000,000.00, the amount will not be processed.
+          2. Maximum Recharge amount $5,000. If payment is greater than $5,000,
+          the amount will not be processed.
         </li>
         <li>
           3. Recharge can only be done inside the payment channels on YATicare
@@ -81,7 +89,7 @@ const Recharge = () => {
           be reflected.
         </li>
         <li>
-          6. If the amount is not reflected after 10 minutes, send the payment
+          6. If the amount is not reflected after 24 Hours, send the payment
           voucher to YATicare customer service for help. Do not disclose your
           payment receipt to prevent others from stealing it.
         </li>
