@@ -27,9 +27,11 @@ const tailFormItemLayout = {
 };
 
 const SignUp = () => {
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [referralCode, setReferralCode] = useState("");
   // Get referralCode from URL param on mount
+  const [isReferralReadOnly, setIsReferralReadOnly] = useState(false);
   React.useEffect(() => {
     let params;
     if (window.location.search) {
@@ -39,8 +41,17 @@ const SignUp = () => {
       params = new URLSearchParams(hashQuery);
     }
     const code = params?.get("referralCode");
-    if (code) setReferralCode(code);
+    if (code) {
+      setReferralCode(code);
+      setIsReferralReadOnly(true);
+    } else {
+      setIsReferralReadOnly(false);
+    }
   }, []);
+
+  React.useEffect(() => {
+    form.setFieldsValue({ referralCode });
+  }, [referralCode, form]);
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
   const hasNumber = /\d/;
@@ -49,6 +60,8 @@ const SignUp = () => {
 
   const Nav = useNavigate();
   const dispatch = useDispatch();
+
+  console.log("referralCode", referralCode);
 
   const onFinish = async (values) => {
     if (values.password !== values.confirmpassword) {
@@ -91,7 +104,6 @@ const SignUp = () => {
       dispatch(loginSuccess(response.data.data));
       Nav("/auth/Pin");
     } catch (error) {
-      console.log(error);
       setLoading(false);
       toast.error(error?.response?.data?.message);
     }
@@ -108,6 +120,7 @@ const SignUp = () => {
           <p>Please enter your appropriate details to continue</p>
         </div>
         <Form
+          form={form}
           name="Signup"
           className="auth-form"
           initialValues={{ remember: true }}
@@ -185,6 +198,7 @@ const SignUp = () => {
               placeholder="Referral Code"
               value={referralCode}
               onChange={(e) => setReferralCode(e.target.value)}
+              readOnly={isReferralReadOnly}
             />
           </Form.Item>
 
