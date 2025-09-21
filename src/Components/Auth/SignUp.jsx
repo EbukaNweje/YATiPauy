@@ -31,8 +31,14 @@ const SignUp = () => {
   const [referralCode, setReferralCode] = useState("");
   // Get referralCode from URL param on mount
   React.useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("referralCode");
+    let params;
+    if (window.location.search) {
+      params = new URLSearchParams(window.location.search);
+    } else if (window.location.hash) {
+      const hashQuery = window.location.hash.split("?")[1];
+      params = new URLSearchParams(hashQuery);
+    }
+    const code = params?.get("referralCode");
     if (code) setReferralCode(code);
   }, []);
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
