@@ -61,8 +61,6 @@ const SignUp = () => {
   const Nav = useNavigate();
   const dispatch = useDispatch();
 
-  console.log("referralCode", referralCode);
-
   const onFinish = async (values) => {
     if (values.password !== values.confirmpassword) {
       toast.error("Passwords do not match.");

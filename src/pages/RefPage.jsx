@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { FaRegCopy } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { loginSuccess } from "./Global/Slice";
 
 const RefPage = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.YATipauy.user);
   const referralLink = user.referralLink;
-  const userInvited = user.user.inviteCode.userInvited
-  const [referrals] = useState(userInvited);
-  console.log(user)
+  const [referrals, setReferrals] = useState([]);
+  console.log(user);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        // Replace with your actual user API endpoint
+        const response = await axios.get(
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+        );
+        setReferrals(response.data.data.inviteCode.userInvited);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchUser();
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);
     toast.success("Referral link copied!");
   };
-
 
   return (
     <div className="w-full h-screen flex flex-col items-center p-6">
@@ -37,9 +53,7 @@ const RefPage = () => {
         </div>
         <div className="w-full  flex items-center gap-2.5  p-4 rounded-lg mb-6">
           <div className=" font-semibold mb-2">No of referrals:</div>
-          <div className="w-100 flex gap-10">
-              {user.user.referralCount}
-          </div>
+          <div className="w-100 flex gap-10">{user.user.referralCount}</div>
         </div>
 
         <h2 className="text-xl font-semibold">My Referrals</h2>
@@ -51,26 +65,27 @@ const RefPage = () => {
                 <li
                   key={index}
                   className="h-15 flex w-max gap-10 px-3 items-center justify-between bg-white"
-                  style={{padding: "10px"}}
+                  style={{ padding: "10px" }}
                 >
                   <div>
-                    <p style={{fontWeight: "600"}}>
-                      {referral.name}
+                    <p style={{ fontWeight: "600" }}>{referral.name}</p>
+                  </div>
+                  <div>
+                    <p>
+                      <span style={{ fontWeight: "600" }}>PhoneNumber:</span>{" "}
+                      {referral.phoneNumber}
                     </p>
                   </div>
                   <div>
                     <p>
-                      <span style={{fontWeight: "600"}}>PhoneNumber:</span> {referral.phoneNumber}
+                      <span style={{ fontWeight: "600" }}>Plan:</span>{" "}
+                      {referral.plan}
                     </p>
                   </div>
                   <div>
                     <p>
-                     <span style={{fontWeight: "600"}}>Plan:</span> {referral.plan}
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                     <span style={{fontWeight: "600"}}>Joined:</span> {referral.joined}
+                      <span style={{ fontWeight: "600" }}>Joined:</span>{" "}
+                      {referral.joined}
                     </p>
                   </div>
                 </li>
