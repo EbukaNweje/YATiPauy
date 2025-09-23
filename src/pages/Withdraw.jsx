@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import "./pageCss/Recharge.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Withdraw = () => {
   const user = useSelector((state) => state.YATipauy.user);
   const [selectedAmount, setSelectedAmount] = useState();
   const [bankDetails, setBankDetails] = useState("");
   const [showPin, setShowPin] = useState(false);
+  const [showPinPopup, setShowPinPopup] = useState(false);
   const [walletType, setWalletType] = useState("default");
-  console.log(user?.user.WalletInfo?.WalletAddress);
+  const [userData, setUserData] = useState(null);
+  console.log(userData);
 
-  // Mock default wallet - Replace with actual API data
-  const defaultWallet = user?.user.WalletInfo?.WalletAddress || "Not Set";
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(
+        `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+      );
+      const data = response?.data?.data;
+      setUserData(data?.WalletInfo?.WalletAddress);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  useState(() => {
+    fetchUserData();
+  }, []);
 
   const handleWithdraw = () => {
     if (!selectedAmount) {
@@ -28,7 +44,7 @@ const Withdraw = () => {
       toast.error("Minimum withdrawal amount is $2.00");
       return;
     }
-    setShowPin(true);
+    setShowPinPopup(true);
   };
 
   return (
@@ -60,7 +76,7 @@ const Withdraw = () => {
                 checked={walletType === "default"}
                 onChange={(e) => setWalletType(e.target.value)}
               />
-              Default Wallet ({defaultWallet || "Not Set"})
+              Default Wallet ({userData || "Not Set"})
             </label>
             {/* <label>
               <input
@@ -112,7 +128,7 @@ const Withdraw = () => {
           </p>
         </div>
       </div>
-      {showPin ? (
+      {showPinPopup ? (
         <div
           style={{
             backdropFilter: "blur(2px)",
@@ -150,9 +166,9 @@ const Withdraw = () => {
 
             <button
               className="w-90 h-15 bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
-              onClick={() => setShowPin(false)}
+              onClick={() => setShowPinPopup(false)}
             >
-              Continue
+              Withdraw
             </button>
           </div>
         </div>

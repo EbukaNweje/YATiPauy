@@ -136,8 +136,10 @@ const Deposit = () => {
       setProofFile(e.target.files[0].name);
     }
   };
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  console.log(userTimeZone);
+  // const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // console.log(userTimeZone);
+  const date = new Date().toLocaleString();
+  console.log(date);
 
   const handlePayment = async () => {
     const url = "https://yaticare-back-end.vercel.app/api/deposit/deposit";
@@ -146,7 +148,7 @@ const Deposit = () => {
       userId: userData.user._id,
       amount: amount,
       PaymentType: paymentMethod,
-      depositDate: userTimeZone,
+      depositDate: date,
     };
     setLoading(true);
     try {
