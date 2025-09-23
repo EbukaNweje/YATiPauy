@@ -10,7 +10,7 @@ const RefPage = () => {
   const user = useSelector((state) => state.YATipauy.user);
   const referralLink = user.referralLink;
   const [referrals, setReferrals] = useState([]);
-  console.log(user);
+  // console.log("referrals", referrals);
 
   useEffect(() => {
     async function fetchUser() {
@@ -19,7 +19,7 @@ const RefPage = () => {
         const response = await axios.get(
           `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
         );
-        setReferrals(response.data.data.inviteCode.userInvited);
+        setReferrals(response?.data?.data?.inviteCode.userInvited);
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +53,7 @@ const RefPage = () => {
         </div>
         <div className="w-full  flex items-center gap-2.5  p-4 rounded-lg mb-6">
           <div className=" font-semibold mb-2">No of referrals:</div>
-          <div className="w-100 flex gap-10">{user.user.referralCount}</div>
+          <div className="w-100 flex gap-10">{referrals.length}</div>
         </div>
 
         <h2 className="text-xl font-semibold">My Referrals</h2>
@@ -68,7 +68,7 @@ const RefPage = () => {
                   style={{ padding: "10px" }}
                 >
                   <div>
-                    <p style={{ fontWeight: "600" }}>{referral.name}</p>
+                    <p style={{ fontWeight: "600" }}>{referral.userName}</p>
                   </div>
                   <div>
                     <p>
@@ -85,7 +85,7 @@ const RefPage = () => {
                   <div>
                     <p>
                       <span style={{ fontWeight: "600" }}>Joined:</span>{" "}
-                      {referral.joined}
+                      {referral.date}
                     </p>
                   </div>
                 </li>

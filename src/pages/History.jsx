@@ -70,7 +70,7 @@ const History = () => {
         </thead>
         <tbody>
           {filteredTransactions.length > 0 ? (
-            filteredTransactions.map((txn, i) => (
+            filteredTransactions.reverse().map((txn, i) => (
               <tr key={txn._id || i}>
                 <section>
                   <BsArrowDownLeftCircle size={45} color="teal" />
@@ -83,8 +83,8 @@ const History = () => {
                   </span>
                 </section>
                 <span>
-                  <td style={{ color: "teal" }}>${txn.amountusdt}</td>
-                  <td>{txn.date}</td>
+                  <td style={{ color: "teal" }}>${txn.amount}</td>
+                  <td>{txn.depositDate}</td>
                 </span>
                 <span>{txn.status}</span>
               </tr>

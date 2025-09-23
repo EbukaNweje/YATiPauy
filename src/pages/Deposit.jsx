@@ -6,6 +6,7 @@ import "animate.css";
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from "./Global/Slice";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 // ⏳ Countdown Component
 const Countdown = ({ paymentMethod, onExpire }) => {
@@ -39,7 +40,6 @@ const Countdown = ({ paymentMethod, onExpire }) => {
   return <p className="timer">Expires in {fmt(timeLeft)}</p>;
 };
 
-// ✅ Popup separated & memoized
 const RenderPopSuccessful = React.memo(({ onClose }) => (
   <div className="Deposit_Pop">
     <div className="Pop_display animate__animated animate__backInDown">
@@ -54,8 +54,6 @@ const RenderPopSuccessful = React.memo(({ onClose }) => (
 const Deposit = () => {
   const amount = useSelector((state) => state.YATipauy.depositAmout);
   const userData = useSelector((state) => state.YATipauy.user);
-  // const [usdtRate, setUsdtRate] = useState(0);
-  // const [usdtAmount, setUsdtAmount] = useState(0);
   const [proofPaymentPop, setProofPaymentPop] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -138,22 +136,30 @@ const Deposit = () => {
       setProofFile(e.target.files[0].name);
     }
   };
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log(userTimeZone);
 
-  const url = "https://yaticare-backend.onrender.com/api/deposit/deposit";
-  const data = {
-    userId: userData.user._id,
-    amount: amount,
-    PaymentType: paymentMethod,
-  };
   const handlePayment = async () => {
-    setLoading(true);
+    const url = "https://yaticare-back-end.vercel.app/api/deposit/deposit";
 
+    const data = {
+      userId: userData.user._id,
+      amount: amount,
+      PaymentType: paymentMethod,
+      depositDate: userTimeZone,
+    };
+    setLoading(true);
     try {
       const res = await axios.post(url, data);
       console.log(res);
+      toast.success(res.data.message);
       setLoading(false);
+      // navigate("/dashboard");
       setProofPaymentPop(true);
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+      console.log("deposit error", error);
+    }
   };
   const handleClosePayment = () => {
     setProofPaymentPop(false);

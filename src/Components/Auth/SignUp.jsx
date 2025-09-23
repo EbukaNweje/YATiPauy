@@ -96,7 +96,6 @@ const SignUp = () => {
         "https://yaticare-backend.onrender.com/api/auth/register",
         values
       );
-      console.log(response.data.data);
       toast.success(response.data.message);
       // setLoading(false);
       dispatch(loginSuccess(response.data.data));
