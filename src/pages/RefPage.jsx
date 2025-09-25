@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { FaRegCopy } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
+import { FaRegCopy, FaUsers, FaGift } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import { loginSuccess } from "./Global/Slice";
+import { VscLiveShare } from "react-icons/vsc";
 
 const RefPage = () => {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.YATipauy.user);
   const referralLink = user.referralLink;
   const [referrals, setReferrals] = useState([]);
-  // console.log("referrals", referrals);
+  const [refBonus, setRefBonus] = useState(0);
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        // Replace with your actual user API endpoint
         const response = await axios.get(
           `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
         );
-        setReferrals(response?.data?.data?.inviteCode.userInvited);
+
+        const invited = response?.data?.data?.inviteCode?.userInvited || [];
+        setReferrals(invited);
+
+        setRefBonus(response?.data?.data?.referralBonus || 0);
       } catch (error) {
         console.log(error);
       }
@@ -33,66 +35,105 @@ const RefPage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col items-center p-6">
-      <div className="w-full max-w-3xl p-6 flex flex-col gap-2">
-        <h1 className="text-2xl font-bold mb-4">My Referral</h1>
+    <div className="w-full min-h-screen bg-gray-50 py-12 px-6 flex justify-center">
+      <div className="w-full max-w-7xl flex flex-col gap-12">
+        {/* Header */}
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            Referral Dashboard
+          </h1>
+          <p className="text-gray-600">
+            Share your referral link and earn bonuses when friends join.
+          </p>
+        </div>
 
-        <div className="w-full  flex items-center gap-2.5  p-4 rounded-lg mb-6">
-          <div className=" font-semibold mb-2">Referral Link:</div>
-          <div className="w-160 flex gap-10">
-            <input
-              type="text"
-              readOnly
-              value={referralLink}
-              className=" rounded-lg p-2 w-full text-blue-600"
-            />
-            <button onClick={handleCopy} className="cursor-pointer">
-              <FaRegCopy />
-            </button>
+        {/* Stats Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Referral Link */}
+          <div className="bg-white shadow-lg rounded-2xl p-6 border border-gray-100 flex items-center flex-col gap-4">
+            <VscLiveShare className="text-green-600 text-5xl" />
+            <h2 className="text-lg font-semibold text-gray-900">
+              Your Referral Link
+            </h2>
+
+            <div className="flex w-[90%] items-center bg-gray-50 border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-green-500 transition">
+              <input
+                type="text"
+                readOnly
+                value={referralLink}
+                className="flex-1 px-4 py-3 w-[80%] text-gray-700 font-medium bg-gray-50 focus:outline-none"
+              />
+              <button
+                onClick={handleCopy}
+                className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-semibold hover:bg-green-700 active:bg-green-800 transition"
+              >
+                <FaRegCopy />
+                Copy
+              </button>
+            </div>
+          </div>
+
+          {/* Total Referrals */}
+          <div className="bg-white shadow-lg rounded-2xl p-6 border border-gray-100 flex flex-col justify-center items-center text-center gap-3">
+            <FaUsers className="text-green-600 text-5xl" />
+            <h2 className="text-lg font-semibold text-gray-900">
+              Total Referrals
+            </h2>
+            <span className="text-4xl font-bold text-green-600">
+              {referrals.length}
+            </span>
+          </div>
+
+          {/* Referral Bonus */}
+          <div className="bg-white shadow-lg rounded-2xl p-6 border border-gray-100 flex flex-col justify-center items-center text-center gap-3">
+            <FaGift className="text-green-600 text-5xl" />
+            <h2 className="text-lg font-semibold text-gray-900">
+              Referral Bonus
+            </h2>
+            <span className="text-4xl font-bold text-green-600">
+              ${refBonus.toFixed(2)}
+            </span>
           </div>
         </div>
-        <div className="w-full  flex items-center gap-2.5  p-4 rounded-lg mb-6">
-          <div className=" font-semibold mb-2">No of referrals:</div>
-          <div className="w-100 flex gap-10">{referrals.length}</div>
-        </div>
 
-        <h2 className="text-xl font-semibold">My Referrals</h2>
+        {/* Referral List */}
+        <div className="bg-white shadow-lg rounded-2xl p-8 border border-gray-100">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            My Referrals
+          </h2>
 
-        <div className="p-4 flex flex-col gap-2">
           {referrals.length > 0 ? (
-            <ul className="space-y-3 flex flex-col gap-2">
-              {referrals.map((referral, index) => (
-                <li
-                  key={index}
-                  className="h-15 flex w-max gap-10 px-3 items-center justify-between bg-white"
-                  style={{ padding: "10px" }}
-                >
-                  <div>
-                    <p style={{ fontWeight: "600" }}>{referral.userName}</p>
-                  </div>
-                  <div>
-                    <p>
-                      <span style={{ fontWeight: "600" }}>PhoneNumber:</span>{" "}
-                      {referral.phoneNumber}
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      <span style={{ fontWeight: "600" }}>Plan:</span>{" "}
-                      {referral.plan}
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      <span style={{ fontWeight: "600" }}>Joined:</span>{" "}
-                      {referral.date}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-green-600 text-white">
+                    <th className="p-4 font-medium">Username</th>
+                    <th className="p-4 font-medium">Phone Number</th>
+                    <th className="p-4 font-medium">Plan</th>
+                    <th className="p-4 font-medium">Joined</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {referrals.map((referral, index) => (
+                    <tr
+                      key={index}
+                      className="border-b last:border-0 hover:bg-gray-50 transition"
+                    >
+                      <td className="p-4 font-medium text-gray-900">
+                        {referral.userName}
+                      </td>
+                      <td className="p-4 text-gray-700">
+                        {referral.phoneNumber}
+                      </td>
+                      <td className="p-4 text-gray-700">{referral.plan}</td>
+                      <td className="p-4 text-gray-700">{referral.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
-            <div className="text-center text-black py-4">
+            <div className="text-center text-gray-500 py-8">
               You have no referrals yet.
             </div>
           )}

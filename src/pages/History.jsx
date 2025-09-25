@@ -8,16 +8,13 @@ const History = () => {
   const [filter, setFilter] = useState("All");
   const user = useSelector((state) => state.YATipauy.user);
   const [userData, setUserData] = useState(null);
-  console.log(user.user._id);
 
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
         `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
       );
-      // only set the actual data part
       setUserData(response.data.data);
-      console.log("this", response.data.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -29,7 +26,6 @@ const History = () => {
     }
   }, [user]);
 
-  // ✅ safe optional chaining + fallback arrays
   const depositTransactions = userData?.userTransaction?.deposit || [];
   const withdrawTransactions = userData?.userTransaction?.withdraw || [];
 
@@ -45,53 +41,88 @@ const History = () => {
 
   return (
     <div className="history">
+      {/* Balance Summary */}
       <div className="balanceDiv">
         <section>
           <span>Total Recharge</span>
-          <h3>$0.00</h3>
+          <h3>
+            $
+            {depositTransactions
+              .filter((txn) => txn.status === "success") // ✅ only successful deposits
+              .reduce((acc, txn) => acc + txn.amount, 0)
+              .toFixed(2)}
+          </h3>
         </section>
         <hr />
         <section>
           <span>Total Withdrawal</span>
-          <h3>$0.00</h3>
+          <h3>
+            $
+            {withdrawTransactions
+              .filter((txn) => txn.status === "success") // ✅ only successful withdrawals
+              .reduce((acc, txn) => acc + txn.amount, 0)
+              .toFixed(2)}
+          </h3>
         </section>
       </div>
 
+      {/* Transactions Table */}
       <table>
         <thead>
           <tr>
-            <h3>Transactions</h3>
-            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-              <option value="All">All Records</option>
-              <option value="Deposit">Deposit Records</option>
-              <option value="Withdraw">Withdrawal Records</option>
-            </select>
+            <th colSpan="5" className="table-header">
+              <div className="header-content">
+                <h3>Transactions</h3>
+                <select
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                >
+                  <option value="All">All Records</option>
+                  <option value="Deposit">Deposit Records</option>
+                  <option value="Withdraw">Withdrawal Records</option>
+                </select>
+              </div>
+            </th>
+          </tr>
+          <tr className="column-titles">
+            <th>Type</th>
+            <th>Transaction ID</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
           </tr>
         </thead>
+
         <tbody>
           {filteredTransactions.length > 0 ? (
-            filteredTransactions.reverse().map((txn, i) => (
-              <tr key={txn._id || i}>
-                <section>
-                  <BsArrowDownLeftCircle size={45} color="teal" />
-                  <span>
-                    <td>{txn.type}</td>
-                    <td style={{ color: "grey" }}>
-                      ID: {txn._id || txn.id || "N/A"}
-                    </td>
-                    {/* <td>{txn.description || "no description"}</td> */}
-                  </span>
-                </section>
-                <span>
-                  <td style={{ color: "teal" }}>${txn.amount}</td>
-                  <td>{txn.depositDate}</td>
-                </span>
-                <span>{txn.status}</span>
-              </tr>
-            ))
+            filteredTransactions
+              .slice()
+              .reverse()
+              .map((txn, i) => (
+                <tr key={txn._id || i}>
+                  <td className="type">
+                    <BsArrowDownLeftCircle size={20} color="teal" />
+                    {txn.type}
+                  </td>
+                  <td className="txn-id">{txn._id || txn.id || "N/A"}</td>
+                  <td className="amount">${txn.amount}</td>
+                  <td className="date">{txn.depositDate}</td>
+                  <td
+                    className={`status ${
+                      txn.status === "success"
+                        ? "success"
+                        : txn.status === "pending"
+                        ? "pending"
+                        : "failed"
+                    }`}
+                  >
+                    {txn.status}
+                  </td>
+                </tr>
+              ))
           ) : (
             <tr>
-              <td colSpan="3" style={{ textAlign: "center" }}>
+              <td colSpan="5" className="no-records">
                 No transactions found
               </td>
             </tr>

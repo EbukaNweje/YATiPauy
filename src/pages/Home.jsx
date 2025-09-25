@@ -11,6 +11,7 @@ import {
 import "./pageCss/Home.css";
 import Product from "./Product";
 import { useNavigate } from "react-router-dom";
+import Bg from "../assets/bg.png";
 
 const Home = () => {
   const images = [
@@ -127,21 +128,30 @@ const Home = () => {
   return (
     <div className="Home">
       {/* Carousel */}
-      <div className="carousel-container">
-        <motion.div
-          className="carousel"
-          animate={{ x: `-${index * 100}%` }}
-          transition={{ ease: "easeInOut", duration: 1 }}
-        >
-          {images.map((src, i) => (
-            <div
-              key={i}
-              className="carousel-item"
-              style={{ backgroundImage: `url(${src})` }}
-            ></div>
-          ))}
-        </motion.div>
+      {/* <div className="carousel-container"> */}
+      <div
+        className="carousel-item relative flex items-center justify-center text-white"
+        style={{ backgroundImage: `url(${Bg})` }}
+      >
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
+        {/* Dark overlay behind text */}
+        <div className="relative z-20 text-center px-6 max-w-2xl">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">
+            Invest Smart. Grow Faster.
+          </h1>
+          <span className="text-[lightgray] text-lg md:text-xl mb-6">
+            Your trusted platform for secure deposits and fast withdrawals.
+          </span>
+          <button
+            onClick={() => Nav("/dashboard/plan")}
+            className="bg-green-600 hover:bg-green-700 w-[150px] h-[40px] text-white font-semibold px-6 py-3 rounded-[5px] shadow-lg transition"
+          >
+            Get Started
+          </button>
+        </div>
       </div>
+
+      {/* </div> */}
 
       {/* Navigation */}
       <nav>
@@ -181,7 +191,8 @@ const Home = () => {
           <FaBell size={30} color="white" />
         </div>
         <marquee behavior="scroll" direction="left">
-          Officially launched. Join YATiCare Telegram for more updates!
+          Officially launched 31st of September. Join YATiCare Telegram for more
+          updates!
         </marquee>
       </button>
 

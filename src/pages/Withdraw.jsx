@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./pageCss/Recharge.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
@@ -7,29 +7,29 @@ import axios from "axios";
 
 const Withdraw = () => {
   const user = useSelector((state) => state.YATipauy.user);
-  const [selectedAmount, setSelectedAmount] = useState();
+  const [selectedAmount, setSelectedAmount] = useState("");
   const [bankDetails, setBankDetails] = useState("");
   const [showPin, setShowPin] = useState(false);
   const [showPinPopup, setShowPinPopup] = useState(false);
   const [walletType, setWalletType] = useState("default");
   const [userData, setUserData] = useState(null);
-  console.log(userData);
+  const [pin, setPin] = useState(""); // <-- capture PIN
+  const [loading, setLoading] = useState(false);
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(
-        `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
-      );
-      const data = response?.data?.data;
-      setUserData(data?.WalletInfo?.WalletAddress);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
-  useState(() => {
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+        );
+        const data = response?.data?.data;
+        setUserData(data?.WalletInfo?.WalletAddress);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
     fetchUserData();
-  }, []);
+  }, [user.user._id]);
 
   const handleWithdraw = () => {
     if (!selectedAmount) {
@@ -47,6 +47,39 @@ const Withdraw = () => {
     setShowPinPopup(true);
   };
 
+  const confirmWithdraw = async () => {
+    if (!pin || pin.length !== 4) {
+      toast.error("Please enter your 4-digit PIN.");
+      return;
+    }
+    // console.log({ userId: user.user._id });
+
+    try {
+      const url =
+        "https://yaticare-back-end.vercel.app/api/withdrawal/createWithdrawal";
+
+      setLoading(true);
+      const res = await axios.post(url, {
+        amount: selectedAmount,
+        method: walletType === "default" ? "USDT" : "BANK",
+        walletAddress: walletType === "default" ? userData : bankDetails,
+        pin,
+        accountName: user.user.userName,
+        userId: user.user._id,
+      });
+      console.log(res);
+      toast.success(res.data.message);
+      setShowPinPopup(false);
+      setSelectedAmount("");
+      setPin("");
+    } catch (error) {
+      console.error("Withdraw error:", error.response?.data || error.message);
+      toast.error(error.response?.data?.error || "Withdrawal failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="Withdraw">
       <div className="paymentSection">
@@ -59,7 +92,6 @@ const Withdraw = () => {
             value={selectedAmount}
             onChange={(e) => {
               const value = e.target.value;
-              // Only allow numbers or empty string
               if (value === "" || /^[0-9]*$/.test(value)) {
                 setSelectedAmount(value);
               }
@@ -78,16 +110,6 @@ const Withdraw = () => {
               />
               Default Wallet ({userData || "Not Set"})
             </label>
-            {/* <label>
-              <input
-                type="radio"
-                name="walletType"
-                value="other"
-                checked={walletType === "other"}
-                onChange={(e) => setWalletType(e.target.value)}
-              />
-              Other Wallet
-            </label> */}
           </div>
 
           {walletType === "other" && (
@@ -104,31 +126,9 @@ const Withdraw = () => {
           Continue
         </button>
       </div>
-      <div className="paymentWarnings">
-        <li>
-          Minimum withdrawal amount is $2.00. If payment is less than $2.00, the
-          amount will not be processed.
-        </li>
-        <li>Maximum withdrawal amount is unlimited.</li>
-        <li>
-          Withdrawals can only be processed through approved payment channels on
-          the platform.
-        </li>
-        <div className="gst-notice">
-          <h4>GST Notice</h4>
-          <p>
-            The Goods and Services Tax (GST) was introduced by the Howard
-            Government of Australia and commenced on 1 July 2000, replacing the
-            Federal Service Sales Tax System and designed to phase out a number
-            of various State and Territory Government taxes, duties and levies.
-          </p>
-          <p>
-            All participants of YATiCare are mandated to pay a 10% surcharge of
-            all withdrawals, in line with the extant tax laws of Australia.
-          </p>
-        </div>
-      </div>
-      {showPinPopup ? (
+
+      {/* PIN Popup */}
+      {showPinPopup && (
         <div
           style={{
             backdropFilter: "blur(2px)",
@@ -144,6 +144,8 @@ const Withdraw = () => {
               <input
                 type={showPin ? "text" : "password"}
                 maxLength={4}
+                value={pin}
+                onChange={(e) => setPin(e.target.value)}
                 className="w-75 h-full px-4 py-3 text-center text-2xl tracking-widest focus:outline-none mb-6"
                 placeholder="••••"
               />
@@ -165,14 +167,15 @@ const Withdraw = () => {
             </div>
 
             <button
+              disabled={loading}
               className="w-90 h-15 bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
-              onClick={() => setShowPinPopup(false)}
+              onClick={confirmWithdraw}
             >
-              Withdraw
+              {loading ? "Processing..." : "Withdraw"}
             </button>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

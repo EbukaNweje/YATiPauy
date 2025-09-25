@@ -1,178 +1,161 @@
-.Profile{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    align-items: center;
-    padding: 50px;
-    overflow-y: scroll;
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
+.Profile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background: #f5f7fa; /* Light clean background */
 }
 
-.Profile .smallBox{
-    width: 30%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* background-color: #05451091; */
-    background-color: #022308f5;
-    border-radius: 20px;
+.Profile::-webkit-scrollbar {
+  display: none;
 }
 
-.Profile .smallBox section{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    .profileI{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
-        text-transform: capitalize;
-    }
-
+/* Top user box */
+.Profile .smallBox {
+  width: 100%;
+  max-width: 450px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: linear-gradient(135deg, #022308f5, #034d15);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  color: white;
 }
 
-.Profile .smallBox section .profile{
-    width: 80px;
-    height: 80px;
-    border-radius: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #022e09;
-    background-color: rgba(255, 255, 255, 0.231);
-
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        background-position: center;
-    }
+.Profile .smallBox section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.Profile .smallBox .balance{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    align-items: center;
-
-    button{
-        width: 100%;
-        padding: 20px;
-        border: none;
-        outline: none;
-        background-color: rgba(255, 255, 255, 0.173);
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        border-radius: 10px;
-        cursor: none;
-
-        h3{
-            font-size: 25px;
-            font-weight: 600;
-            line-height: 21px;
-            text-decoration: none;
-
-        }
-        span{
-            font-size: 18px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.423);
-            text-decoration: none;
-        }
-    
- 
-    }
+.Profile .smallBox section .profile {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-.Profile .profileInfo{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
+.Profile .smallBox section .profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Profile .smallBox section .profileI {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Balance Box */
+.Profile .smallBox .balance button {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  cursor: default;
+  transition: background 0.3s ease-in-out;
+}
+
+.Profile .smallBox .balance button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.Profile .smallBox .balance button h3 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.Profile .smallBox .balance button span {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Profile Options */
+.Profile .profileInfo {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .Profile .profileInfo section {
-    width: 100%;
-    padding: 20px;
-    /* background-color: #05451091; */
-    background-color: #022308f5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    height: 80px;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s ease-in, background 0.3s ease-in-out;
-
-    .iconBox {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-    
-    .profileIcon {
-        font-size: 30px;
-        transition: transform 0.3s ease-in-out;
-    }
-    
-    .Profile .profileInfo section:hover .profileIcon {
-        transform: rotate(-10deg);
-    }
+  width: 100%;
+  padding: 18px 20px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  color: #022308;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .Profile .profileInfo section:hover {
-    transform: scale(0.95);
-        background-color: #066a18c2; 
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  background-color: #022308;
+  color: #f5f7fa;
 }
 
-.refCode {
+.Profile .profileInfo .iconBox {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.Profile .profileInfo .profileIcon {
+  font-size: 26px;
+  color: #066a18;
+  transition: transform 0.3s ease-in-out;
+}
+
+.Profile .profileInfo section:hover .profileIcon {
+  transform: scale(1.1);
+}
+
+.Profile .profileInfo .logoutIcon {
+  color: #c53030;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .Profile {
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .Profile .smallBox {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+  }
 
-    h3{
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    p {
-        width: 50%;
-        display: flex;
-        gap: 20px;
-        font-size: 18px;
-        font-weight: 600;
-
-        & span {
-            margin-top: 2px;
-            cursor: pointer;
-        }
-    }
-}
-
-@media (min-width:320px) and (max-width: 768px){
-
-    .Profile .profileInfo{
-        width: 100%;
-    }
-
-    .Profile{
-        padding: 20px;
-    }
-
-    .Profile .smallBox{
-        width: 100%;
-    }
+  .Profile .profileInfo {
+    width: 100%;
+  }
 }

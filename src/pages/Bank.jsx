@@ -4,12 +4,14 @@ import "./pageCss/Bank.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Bank = () => {
   const [userInput, setUserInput] = useState({
     WalletName: "",
     WalletAddress: "",
   });
+  const navigator = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const user = useSelector((state) => state.YATipauy.user);
@@ -47,6 +49,7 @@ const Bank = () => {
       );
       if (response.data) {
         toast.success("Wallet details updated successfully");
+        navigator("/dashboard");
       }
     } catch (error) {
       toast.error(

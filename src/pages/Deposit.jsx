@@ -275,12 +275,12 @@ const Deposit = () => {
       </div>
 
       <div className="paymentWarnings">
-        <li>1. Minimum Recharge amount $5,000.00.</li>
-        <li>2. Maximum Recharge amount $1,000,000.00.</li>
+        <li>1. Minimum Recharge amount $10.</li>
+        <li>2. Maximum Recharge amount $5,000.</li>
         <li>3. Use only the official company details shown above.</li>
         <li>4. Each recharge requires creating a new deposit order.</li>
         <li>5. Actual payment must match the order amount exactly.</li>
-        <li>6. If not reflected after 10 minutes, contact support.</li>
+        <li>6. If not reflected after 24 hours, contact support.</li>
         <li>7. Do not share your deposit address or payment receipt.</li>
         <li>8. Official staff will never ask for your password.</li>
       </div>
