@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Withdraw = () => {
   const user = useSelector((state) => state.YATipauy.user);
@@ -15,6 +16,7 @@ const Withdraw = () => {
   const [userData, setUserData] = useState(null);
   const [pin, setPin] = useState(""); // <-- capture PIN
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -59,6 +61,8 @@ const Withdraw = () => {
         "https://yaticare-back-end.vercel.app/api/withdrawal/createWithdrawal";
 
       setLoading(true);
+      const date = new Date().toLocaleString();
+
       const res = await axios.post(url, {
         amount: selectedAmount,
         method: walletType === "default" ? "USDT" : "BANK",
@@ -66,12 +70,14 @@ const Withdraw = () => {
         pin,
         accountName: user.user.userName,
         userId: user.user._id,
+        withdrawalDate: date,
       });
       console.log(res);
       toast.success(res.data.message);
       setShowPinPopup(false);
       setSelectedAmount("");
       setPin("");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Withdraw error:", error.response?.data || error.message);
       toast.error(error.response?.data?.error || "Withdrawal failed");

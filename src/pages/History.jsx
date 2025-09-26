@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./pageCss/history.css";
-import { BsArrowDownLeftCircle } from "react-icons/bs";
+import { BsArrowDownLeftCircle, BsArrowUpRightCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -27,12 +27,14 @@ const History = () => {
   }, [user]);
 
   const depositTransactions = userData?.userTransaction?.deposit || [];
-  const withdrawTransactions = userData?.userTransaction?.withdraw || [];
+  const withdrawTransactions = userData?.userTransaction?.withdrawal || [];
 
   const allTransactions = [
     ...depositTransactions.map((txn) => ({ ...txn, type: "Deposit" })),
     ...withdrawTransactions.map((txn) => ({ ...txn, type: "Withdraw" })),
   ];
+
+  console.log("allTransactions", userData);
 
   const filteredTransactions =
     filter === "All"
@@ -101,16 +103,37 @@ const History = () => {
               .map((txn, i) => (
                 <tr key={txn._id || i}>
                   <td className="type">
-                    <BsArrowDownLeftCircle size={20} color="teal" />
+                    {txn.type === "Deposit" ? (
+                      <BsArrowDownLeftCircle size={20} color="teal" />
+                    ) : txn.type === "Withdraw" ? (
+                      <BsArrowUpRightCircle size={20} color="red" />
+                    ) : (
+                      <BsArrowUpRightCircle size={20} color="gray" />
+                    )}
+
                     {txn.type}
                   </td>
                   <td className="txn-id">{txn._id || txn.id || "N/A"}</td>
-                  <td className="amount">${txn.amount}</td>
-                  <td className="date">{txn.depositDate}</td>
+                  <td
+                    className="amount"
+                    style={{
+                      color:
+                        txn.type === "Deposit"
+                          ? "green"
+                          : txn.type === "Withdraw"
+                          ? "red"
+                          : "gray",
+                    }}
+                  >
+                    ${txn.amount}
+                  </td>
+                  <td className="date">
+                    {txn.depositDate || txn.withdrawalDate}
+                  </td>
                   <td
                     className={`status ${
-                      txn.status === "success"
-                        ? "success"
+                      txn.status === "confirmed"
+                        ? "confirmed"
                         : txn.status === "pending"
                         ? "pending"
                         : "failed"

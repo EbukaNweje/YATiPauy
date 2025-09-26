@@ -139,7 +139,7 @@ const Deposit = () => {
   // const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   // console.log(userTimeZone);
   const date = new Date().toLocaleString();
-  console.log(date);
+  // console.log(date);
 
   const handlePayment = async () => {
     const url = "https://yaticare-back-end.vercel.app/api/deposit/deposit";
