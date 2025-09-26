@@ -32,7 +32,7 @@ const Home = () => {
         "Access to community networking opportunities.",
       ],
       price1: "10",
-      price2: "100",
+      price2: "99",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.11.53_75aba231.jpg",
@@ -45,7 +45,7 @@ const Home = () => {
         "Curated local experience packages.",
       ],
       price1: "100",
-      price2: "300",
+      price2: "299",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.12.53_f34d84e9.jpg",
@@ -58,7 +58,7 @@ const Home = () => {
         "Education fee subsidies.",
       ],
       price1: "300",
-      price2: "600",
+      price2: "599",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.13.48_57ab3a06.jpg",
@@ -72,7 +72,7 @@ const Home = () => {
         "Priority access to Yaticare’s financial advisory network.",
       ],
       price1: "600",
-      price2: "1,000",
+      price2: "999",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.14.41_8ea10062.jpg",
@@ -87,7 +87,7 @@ const Home = () => {
         "Exclusive networking events.",
       ],
       price1: "1,000",
-      price2: "2,500",
+      price2: "2,999",
     },
     {
       image: "/IMG/WhatsApp Image 2025-04-30 at 05.15.12_35ea150a.jpg",
@@ -100,7 +100,7 @@ const Home = () => {
         "Legacy Planning: Tailored wealth management, generational trust funds, and philanthropy coordination.",
         "24/7 Concierge: Dedicated support for lifestyle, finance, and exclusive event access.",
       ],
-      price1: "2,500",
+      price1: "3,000",
       price2: "5,000",
     },
   ];

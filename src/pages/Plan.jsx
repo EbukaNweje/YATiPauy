@@ -19,7 +19,6 @@ const Plan = () => {
         const response = await axios.get(
           "https://yaticare-backend.onrender.com/api/getallplan"
         );
-        console.log("this is the plan", response.data);
 
         // Map backend fields into usable frontend structure
         const mappedPlans = response.data.data.map((plan) => {
