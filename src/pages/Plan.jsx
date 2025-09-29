@@ -130,7 +130,6 @@ const Plan = () => {
       );
       toast.error(error?.response?.data?.message);
       setSelectedPlan(null);
-
       // alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
