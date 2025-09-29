@@ -3,15 +3,22 @@ import "./pageCss/Plan.css";
 import { FaChevronRight, FaCheck } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const Plan = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
   const [plansData, setPlansData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const location = useLocation();
   const { selectedPlanName } = location.state || {};
+
+  // 👇 get user from redux
+  const user = useSelector((state) => state.YATipauy.user);
+  // console.log("user", user);
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -22,7 +29,6 @@ const Plan = () => {
 
         // Map backend fields into usable frontend structure
         const mappedPlans = response.data.data.map((plan) => {
-          // Generate increments between min and max
           const increments = [];
           if (plan.minimumDeposit && plan.maximumDeposit) {
             const step = Math.floor(
@@ -42,7 +48,7 @@ const Plan = () => {
 
           return {
             ...plan,
-            amounts: increments, // attach amounts array
+            amounts: increments,
           };
         });
 
@@ -77,6 +83,58 @@ const Plan = () => {
     const value = e.target.value;
     setCustomAmount(value);
     setSelectedAmount(value);
+  };
+
+  // 👇 subscription API call
+  const handleSubscribe = async () => {
+    if (!selectedPlan || !selectedAmount) {
+      alert("Please select a plan and amount.");
+      return;
+    }
+
+    if (!user?.user?._id) {
+      alert("User not logged in.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "https://yaticare-backend.onrender.com/api/usrSubcription",
+        {
+          userId: user.user._id, // 👈 take from redux
+          plan: selectedPlan._id,
+          amount: Number(selectedAmount),
+          durationInDays: selectedPlan.durationDays,
+        }
+        // {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // }
+      );
+
+      if (response.data.success) {
+        alert("Subscription created successfully!");
+        setSelectedPlan(null);
+        setSelectedAmount(null);
+        setCustomAmount("");
+      } else {
+        alert(response.data.data.message);
+        // || "Failed to create subscription"
+      }
+    } catch (error) {
+      console.error(
+        "Error creating subscription:",
+        error?.response?.data?.message
+      );
+      toast.error(error?.response?.data?.message);
+      setSelectedPlan(null);
+
+      // alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -119,7 +177,6 @@ const Plan = () => {
                 {selectedPlan.maximumDeposit.toLocaleString()}
               </p>
 
-              {/* Amount selection */}
               <div className="amount-options">
                 {selectedPlan.amounts.map((amount, index) => (
                   <div
@@ -137,7 +194,6 @@ const Plan = () => {
                 ))}
               </div>
 
-              {/* Custom amount */}
               <div className="custom-amount">
                 <input
                   type="number"
@@ -147,7 +203,13 @@ const Plan = () => {
                 />
               </div>
 
-              <button className="subscribe-btn">Subscribe</button>
+              <button
+                className="subscribe-btn"
+                onClick={handleSubscribe}
+                disabled={loading}
+              >
+                {loading ? "Subscribing..." : "Subscribe"}
+              </button>
               <button
                 className="close-btn"
                 onClick={() => setSelectedPlan(null)}
