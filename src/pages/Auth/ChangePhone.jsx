@@ -18,10 +18,10 @@ const ChangePhone = () => {
   };
 
   const changeNo = async () => {
-    if (!validatePhoneNumber(userInput.newPhoneNumber)) {
-      toast.error("Please enter a valid phone number");
-      return;
-    }
+    // if (!validatePhoneNumber(userInput.newPhoneNumber)) {
+    //   toast.error("Please enter a valid phone number");
+    //   return;
+    // }
 
     try {
       setLoading(true);

@@ -23,10 +23,10 @@ const Change = () => {
   };
 
   const changePassword = async () => {
-    if (!validatePassword(userInput.newPassword)) {
-      toast.error("Password must be at least 8 characters long");
-      return;
-    }
+    // if (!validatePassword(userInput.newPassword)) {
+    //   toast.error("Password must be at least 8 characters long");
+    //   return;
+    // }
 
     if (userInput.newPassword !== userInput.confirmNewPassword) {
       toast.error("New passwords do not match!");
