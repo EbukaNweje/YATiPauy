@@ -95,65 +95,61 @@ function ProfileInfo() {
   );
 
   return (
-    <div>
-      <div className="informationdetailcont">
-        <h1
-          style={{ marginLeft: "30px", paddingTop: "10px", fontSize: "27px" }}
-        >
-          My Profile
-        </h1>
-        <form className="profileform" onSubmit={""}>
-          <div className="inforcontainer">
-            <h2>UserName</h2>
-            <div className="readonly-field">
-              <span>{UsersData.userName}</span>
-            </div>
+    <div className="informationdetailcont">
+      <h1 style={{ marginLeft: "30px", paddingTop: "10px", fontSize: "27px" }}>
+        My Profile
+      </h1>
+      <form className="profileform" onSubmit={""}>
+        <div className="inforcontainer">
+          <h2>UserName</h2>
+          <div className="readonly-field">
+            <span>{UsersData.userName}</span>
           </div>
-          <div className="inforcontainer">
-            <h2>Email</h2>
-            <div className="readonly-field">
-              <span>{UsersData.email}</span>
-            </div>
+        </div>
+        <div className="inforcontainer">
+          <h2>Email</h2>
+          <div className="readonly-field">
+            <span>{UsersData.email}</span>
           </div>
+        </div>
 
-          <div className="inforcontainer">
-            <h2>Phone Number</h2>
-            <div className="readonly-field">
-              <span>{UsersData.phoneNumber}</span>
-            </div>
+        <div className="inforcontainer">
+          <h2>Phone Number</h2>
+          <div className="readonly-field">
+            <span>{UsersData.phoneNumber}</span>
           </div>
+        </div>
 
-          <div className="inforcontainer">
-            <h2> Wallet Address</h2>
-            <div className="readonly-field">
-              <span>
-                {UsersData?.WalletInfo?.WalletAddress || "Wallet Address"}
-              </span>
-            </div>
+        <div className="inforcontainer">
+          <h2> Wallet Address</h2>
+          <div className="readonly-field">
+            <span>
+              {UsersData?.WalletInfo?.WalletAddress || "Wallet Address"}
+            </span>
           </div>
+        </div>
 
-          <div className="inforcontainer">
-            <h2>KYC</h2>
-            <div className="readonly-field">
-              <span>{details.KYC || "status"}</span>
-            </div>
+        <div className="inforcontainer">
+          <h2>KYC</h2>
+          <div className="readonly-field">
+            <span>{details.KYC || "status"}</span>
           </div>
+        </div>
 
-          <div className="inforcontainer">
-            <h2>Upline Username</h2>
-            <div className="readonly-field">
-              <span>{details.uplineUserName || "Username"}</span>
-            </div>
+        <div className="inforcontainer">
+          <h2>Upline Username</h2>
+          <div className="readonly-field">
+            <span>{details.uplineUserName || "Username"}</span>
           </div>
+        </div>
 
-          <div className="inforcontainer">
-            <h2>Upline PhoneNumber</h2>
-            <div className="readonly-field">
-              <span>{details.uplinePhoneNumber || "PhoneNumber"}</span>
-            </div>
+        <div className="inforcontainer">
+          <h2>Upline PhoneNumber</h2>
+          <div className="readonly-field">
+            <span>{details.uplinePhoneNumber || "PhoneNumber"}</span>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

@@ -139,34 +139,29 @@ const Withdraw = () => {
           style={{
             backdropFilter: "blur(2px)",
           }}
-          className="h-screen w-full absolute flex justify-center px-4"
+          className="h-screen w-full absolute flex justify-center  px-4"
         >
-          <div className="w-120 h-70 bg-white flex flex-col gap-5 shadow-md items-center justify-center">
-            <h2 className="text-2xl font-bold text-center mb-6">
+          <div className="w-[90%] sm:w-[400px] md:w-[500px] h-70 bg-white flex flex-col gap-5 shadow-md items-center justify-center p-6 rounded-lg">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">
               Enter Transaction PIN
             </h2>
 
-            <div className="w-90 h-15 flex items-center justify-center border border-gray-400 rounded-sm">
+            <div className="w-[70%] flex items-center justify-between border border-gray-400 rounded-sm px-3">
               <input
                 type={showPin ? "text" : "password"}
                 maxLength={4}
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
-                className="w-75 h-full px-4 py-3 text-center text-2xl tracking-widest focus:outline-none mb-6"
+                className="w-full py-3 text-center text-xl sm:text-2xl tracking-widest focus:outline-none"
                 placeholder="••••"
               />
               <span onClick={() => setShowPin(!showPin)}>
                 {showPin ? (
-                  <FaEye
-                    size={20}
-                    cursor={"pointer"}
-                    style={{ color: "gray" }}
-                  />
+                  <FaEye size={20} className="text-gray-500 cursor-pointer" />
                 ) : (
                   <FaEyeSlash
                     size={20}
-                    cursor={"pointer"}
-                    style={{ color: "gray" }}
+                    className="text-gray-500 cursor-pointer"
                   />
                 )}
               </span>
@@ -174,7 +169,7 @@ const Withdraw = () => {
 
             <button
               disabled={loading}
-              className="w-90 h-15 bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
+              className="w-[70%] h-[50px] bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
               onClick={confirmWithdraw}
             >
               {loading ? "Processing..." : "Withdraw"}

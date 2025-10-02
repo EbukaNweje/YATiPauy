@@ -9,7 +9,7 @@ const Change = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false); // 🔥 new state
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.YATipauy.user);
 
   const [userInput, setUserInput] = useState({
@@ -18,21 +18,28 @@ const Change = () => {
     confirmNewPassword: "",
   });
 
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
   const changePassword = async () => {
+    if (!validatePassword(userInput.newPassword)) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
+
+    if (userInput.newPassword !== userInput.confirmNewPassword) {
+      toast.error("New passwords do not match!");
+      return;
+    }
+
     try {
-      if (userInput.newPassword !== userInput.confirmNewPassword) {
-        return toast.error("New passwords do not match!");
-      }
-
-      setLoading(true); // start loading 🔥
-
+      setLoading(true);
       const response = await axios.post(
         `https://yaticare-back-end.vercel.app/api/auth/change-password/${user.user._id}`,
         userInput
       );
-
-      toast.success(response?.data?.message);
-
+      toast.success(response?.data?.message || "Password updated successfully");
       setUserInput({
         oldPassword: "",
         newPassword: "",
@@ -41,95 +48,97 @@ const Change = () => {
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");
     } finally {
-      setLoading(false); // stop loading 🔥
+      setLoading(false);
     }
   };
 
+  const PasswordInput = ({ label, value, onChange, show, toggleShow }) => (
+    <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
+      <FaLock className="text-gray-500 text-xl mr-2" />
+      <input
+        type={show ? "text" : "password"}
+        placeholder={label}
+        value={value}
+        onChange={onChange}
+        className="w-full text-lg focus:outline-none placeholder-gray-500"
+      />
+      <button
+        className="ml-2 cursor-pointer"
+        onClick={toggleShow}
+        type="button"
+      >
+        {show ? (
+          <FaEyeSlash className="text-gray-500 text-xl" />
+        ) : (
+          <FaEye className="text-gray-500 text-xl" />
+        )}
+      </button>
+    </div>
+  );
+
   return (
-    <div className="Change">
-      <h3>Please provide the following details below to proceed</h3>
-      <section className="chanPass">
-        {/* Current password */}
-        <div className="inputDiv">
-          <FaLock className="inputIcon" />
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter current password"
+    <div className="transaction-pin-container flex items-center justify-center w-full h-screen bg-gray-100">
+      <div className="transaction-pin-form w-full max-w-md bg-white rounded-lg shadow-lg p-6 flex flex-col gap-6">
+        <div className="form-header text-center">
+          <FaLock className="lock-icon text-green-500 text-4xl mb-2" />
+          <h2 className="text-2xl font-bold text-gray-800">Change Password</h2>
+          <p className="text-gray-600">
+            Update your password for account security
+          </p>
+        </div>
+
+        <div className="pin-inputs flex flex-col gap-4">
+          <PasswordInput
+            label="Enter current password"
             value={userInput.oldPassword}
             onChange={(e) =>
               setUserInput({ ...userInput, oldPassword: e.target.value })
             }
+            show={showPassword}
+            toggleShow={() => setShowPassword(!showPassword)}
           />
-          <span
-            className="toggleIcon"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? (
-              <FaEyeSlash size={25} cursor={"pointer"} />
-            ) : (
-              <FaEye size={25} cursor={"pointer"} />
-            )}
-          </span>
+
+          <PasswordInput
+            label="Enter new password"
+            value={userInput.newPassword}
+            onChange={(e) =>
+              setUserInput({ ...userInput, newPassword: e.target.value })
+            }
+            show={showNewPassword}
+            toggleShow={() => setShowNewPassword(!showNewPassword)}
+          />
+
+          <PasswordInput
+            label="Confirm new password"
+            value={userInput.confirmNewPassword}
+            onChange={(e) =>
+              setUserInput({
+                ...userInput,
+                confirmNewPassword: e.target.value,
+              })
+            }
+            show={showConfirmPassword}
+            toggleShow={() => setShowConfirmPassword(!showConfirmPassword)}
+          />
         </div>
 
-        {/* New password */}
-        <div className="inputDiv">
-          <aside>
-            <FaLock className="inputIcon" />
-            <input
-              type={showNewPassword ? "text" : "password"}
-              placeholder="Enter New password"
-              value={userInput.newPassword}
-              onChange={(e) =>
-                setUserInput({ ...userInput, newPassword: e.target.value })
-              }
-            />
-          </aside>
-          <span
-            className="toggleIcon"
-            onClick={() => setShowNewPassword(!showNewPassword)}
-          >
-            {showNewPassword ? (
-              <FaEyeSlash size={25} cursor={"pointer"} />
-            ) : (
-              <FaEye size={25} cursor={"pointer"} />
-            )}
-          </span>
-        </div>
-
-        {/* Confirm new password */}
-        <div className="inputDiv">
-          <aside>
-            <FaLock className="inputIcon" />
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm New password"
-              value={userInput.confirmNewPassword}
-              onChange={(e) =>
-                setUserInput({
-                  ...userInput,
-                  confirmNewPassword: e.target.value,
-                })
-              }
-            />
-          </aside>
-          <span
-            className="toggleIcon"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            {showConfirmPassword ? (
-              <FaEyeSlash size={25} cursor={"pointer"} />
-            ) : (
-              <FaEye size={25} cursor={"pointer"} />
-            )}
-          </span>
-        </div>
-
-        {/* Save button with loading */}
-        <button onClick={changePassword} disabled={loading}>
-          {loading ? "Saving..." : "Save"}
+        <button
+          className={`submit-button w-full py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-300 ${
+            loading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={changePassword}
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Update Password"}
         </button>
-      </section>
+
+        <div className="pin-notice text-center text-gray-600">
+          <p>
+            Your password is essential for account security. Ensure it is strong
+            and never share it with anyone.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

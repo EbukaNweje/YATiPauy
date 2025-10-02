@@ -566,66 +566,211 @@
   transform: scale(0.95);
 }
 
-@media (min-width: 320px) and (max-width: 768px) {
-  /* Make amount buttons stack cleaner */
-  .paymentSection .amountWrap .amountDiv button {
-    width: 100%; /* full width buttons on mobile */
-    justify-content: center;
+/* Transaction PIN Styles */
+.transaction-pin-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px; /* Adjusted padding to reduce space at the top */
+  width: 100%;
+  height: 100vh;
+  background-color: #f3f4f6;
+}
+
+.transaction-pin-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: #022308f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-header {
+  text-align: center;
+
+  & h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+}
+
+.lock-icon {
+  font-size: 40px;
+  color: #10b981;
+  margin-bottom: 10px;
+}
+
+.pin-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.input-group input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.input-group .toggle-visibility {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.eye-icon {
+  font-size: 20px;
+  color: #6b7280;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #10b981;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #059669;
+}
+
+.submit-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.pin-notice {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ✅ Mobile responsiveness */
+@media (max-width: 768px) {
+  .Recharge,
+  .Withdraw {
+    padding: 10px;
+    gap: 20px;
   }
 
-  /* Expand warnings to full width */
+  .paymentSection {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .paymentSection h3 {
+    font-size: 18px;
+  }
+
+  .paymentSection input[type="number"],
+  .paymentSection select,
+  .paymentSection section input {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .wallet-selection label {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .paymentSection .btn,
+  .buttTag {
+    font-size: 16px;
+    padding: 12px;
+  }
+
   .paymentWarnings {
     width: 100%;
-    font-size: 14px; /* slightly smaller text */
+    font-size: 14px;
   }
 
-  /* Reduce padding for tighter spacing */
-  .Recharge .paymentSection .amountWrap,
-  .Withdraw .paymentSection .amountWrap,
-  .paymentSection section {
-    padding: 15px;
+  .paymentSection .amountWrap {
+    padding: 20px;
     gap: 15px;
   }
 
-  /* Payment container full width */
-  .Recharge .paymentSection,
-  .Withdraw .paymentSection {
-    width: 100%;
+  .paymentSection .amountWrap h3,
+  .paymentSection section h3 {
+    font-size: 16px;
+  }
+
+  .paymentSection .amountWrap .amountDiv button {
+    width: 100%; /* stack vertically on small screens */
     padding: 15px;
   }
 
-  /* Bank / Change sections responsive */
   .Bank,
   .Change {
     width: 100%;
-    margin: 0;
+    height: auto;
     padding: 20px;
-    height: auto; /* prevent fixed 70vh on small screens */
-    box-shadow: none; /* optional, cleaner on mobile */
+    box-shadow: none;
   }
 
-  /* Ensure inputs stretch properly */
   .Bank section,
   .Change section {
-    flex-direction: column;
     width: 100%;
     gap: 15px;
   }
 
-  .Bank section .inputDiv,
-  .Change section .inputDiv,
   .Bank section .inputWrapper,
   .Change section .inputWrapper {
     width: 100%;
   }
 
-  /* Buttons scale down */
   .Bank section button,
-  .Change section button,
-  .buttTag {
-    width: 100%;
+  .Change section button {
     font-size: 16px;
     padding: 15px;
-    border-radius: 20px;
+  }
+}
+
+/* ✅ Very small devices */
+@media (max-width: 480px) {
+  .paymentSection h3 {
+    font-size: 16px;
+  }
+
+  .paymentSection input,
+  .paymentSection select {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .wallet-selection label {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .paymentWarnings {
+    font-size: 12px;
+  }
+
+  .paymentSection .btn,
+  .buttTag {
+    font-size: 14px;
+    padding: 12px;
   }
 }

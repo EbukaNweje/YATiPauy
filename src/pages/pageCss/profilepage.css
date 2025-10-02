@@ -1,19 +1,21 @@
 /* === Container Card === */
 .informationdetailcont {
-  width: 700px;
-  max-width: 95%;
-  background: #fff;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   padding: 32px;
-  transition: box-shadow 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
 }
 
 .informationdetailcont:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 /* === Form === */
@@ -25,27 +27,15 @@
 }
 
 /* === Section Labels === */
-.inforcontainer,
-.localitycontwrap,
-.statecontwrap {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.inforcontainer h2,
-.localitycontwrap h2,
-.statecontwrap h2 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
+.inforcontainer h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 8px;
 }
 
 /* === Inputs === */
-.containerwrap,
-.containerwarpper,
-.localityinputwrapper,
-.stateinputwrapper {
+.containerwrap {
   height: 48px;
   padding: 0 14px;
   font-size: 15px;
@@ -56,13 +46,10 @@
   transition: all 0.2s ease;
 }
 
-.containerwrap:focus,
-.containerwarpper:focus,
-.localityinputwrapper:focus,
-.stateinputwrapper:focus {
-  border-color: #059669;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+.containerwrap:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
 /* === Input Row (Origin Details) === */
@@ -80,57 +67,27 @@
   margin-top: 24px;
 }
 
-.cancelbtn1,
-.submitbtn {
-  min-width: 120px;
-  height: 44px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.cancelbtn1 {
+  background: #ffffff;
+  border: 1.5px solid #d1d5db;
+  color: #374151;
   transition: all 0.25s ease;
 }
 
-/* Cancel Button */
-.cancelbtn1 {
-  background: #fff;
-  border: 1.5px solid #d1d5db;
-  color: #374151;
-}
 .cancelbtn1:hover {
   background: #f3f4f6;
   border-color: #9ca3af;
 }
 
-/* Submit Button */
 .submitbtn {
-  background: #059669;
+  background: #2563eb;
   border: none;
-  color: #fff;
-}
-.submitbtn:hover {
-  background: #047857;
+  color: #ffffff;
+  transition: all 0.25s ease;
 }
 
-/* === Icon Box (for edit / upload triggers) === */
-.iconBoxs {
-  padding: 6px;
-  background: #059669;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.iconBoxs:hover {
-  background: transparent;
-  border: 1px solid #059669;
-  color: #059669;
+.submitbtn:hover {
+  background: #1d4ed8;
 }
 
 /* === Readonly Field === */
@@ -161,8 +118,24 @@
 }
 
 /* === Responsive Layout === */
+@media (max-width: 1024px) {
+  .informationdetailcont {
+    max-width: 90%;
+    padding: 24px;
+  }
+
+  .profileform {
+    gap: 20px;
+  }
+
+  .readonly-field {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 768px) {
   .informationdetailcont {
+    max-width: 95%;
     padding: 20px;
   }
 
@@ -172,24 +145,35 @@
   }
 
   .actionbtn {
-    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .cancelbtn1,
   .submitbtn {
-    flex: 1;
-    min-width: 100px;
+    width: 100%;
+    min-width: unset;
   }
 }
 
 @media (max-width: 480px) {
   .informationdetailcont {
+    max-width: 90%;
     padding: 16px;
+  }
+
+  .readonly-field {
+    font-size: 13px;
+    padding: 10px;
   }
 
   .cancelbtn1,
   .submitbtn {
-    font-size: 13px;
-    height: 42px;
+    font-size: 12px;
+    height: 40px;
+  }
+
+  .field-container {
+    gap: 6px;
   }
 }

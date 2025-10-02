@@ -151,16 +151,44 @@
 /* Responsive */
 @media (max-width: 768px) {
   .history .balanceDiv {
-    width: 95%;
+    width: 100%;
+    padding: 16px;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
   }
 
   .history table {
     font-size: 14px;
+    overflow-x: auto;
+    display: block;
+    width: 100%;
   }
 
   .history thead .header-content h3 {
     font-size: 16px;
+  }
+
+  .history tbody td {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .history .balanceDiv {
+    width: 100%;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .history table {
+    font-size: 13px;
+  }
+
+  .history tbody td {
+    font-size: 13px;
+  }
+
+  .history thead .header-content h3 {
+    font-size: 14px;
   }
 }
