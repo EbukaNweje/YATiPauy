@@ -67,13 +67,18 @@ const ChangePhone = () => {
         </div>
 
         <div className="pin-inputs flex flex-col gap-4">
-          <PhoneInput
-            label="Enter New Phone number"
-            value={userInput.newPhoneNumber}
-            onChange={(e) =>
-              setUserInput({ ...userInput, newPhoneNumber: e.target.value })
-            }
-          />
+          <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
+            <IoCallSharp className="text-gray-500 text-xl mr-2" />
+            <input
+              type="tel"
+              placeholder="Enter New Phone number"
+              value={userInput.newPhoneNumber}
+              onChange={(e) =>
+                setUserInput({ ...userInput, newPhoneNumber: e.target.value })
+              }
+              className="w-full text-lg focus:outline-none placeholder-gray-500"
+            />
+          </div>
         </div>
 
         <button

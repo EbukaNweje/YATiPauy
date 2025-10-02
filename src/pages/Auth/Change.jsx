@@ -52,29 +52,29 @@ const Change = () => {
     }
   };
 
-  const PasswordInput = ({ label, value, onChange, show, toggleShow }) => (
-    <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
-      <FaLock className="text-gray-500 text-xl mr-2" />
-      <input
-        type={show ? "text" : "password"}
-        placeholder={label}
-        value={value}
-        onChange={onChange}
-        className="w-full text-lg focus:outline-none placeholder-gray-500"
-      />
-      <button
-        className="ml-2 cursor-pointer"
-        onClick={toggleShow}
-        type="button"
-      >
-        {show ? (
-          <FaEyeSlash className="text-gray-500 text-xl" />
-        ) : (
-          <FaEye className="text-gray-500 text-xl" />
-        )}
-      </button>
-    </div>
-  );
+  // const PasswordInput = ({ label, value, onChange, show, toggleShow }) => (
+  //   <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
+  //     <FaLock className="text-gray-500 text-xl mr-2" />
+  //     <input
+  //       type={show ? "text" : "password"}
+  //       placeholder={label}
+  //       value={value}
+  //       onChange={onChange}
+  //       className="w-full text-lg focus:outline-none placeholder-gray-500"
+  //     />
+  //     <button
+  //       className="ml-2 cursor-pointer"
+  //       onClick={toggleShow}
+  //       type="button"
+  //     >
+  //       {show ? (
+  //         <FaEyeSlash className="text-gray-500 text-xl" />
+  //       ) : (
+  //         <FaEye className="text-gray-500 text-xl" />
+  //       )}
+  //     </button>
+  //   </div>
+  // );
 
   return (
     <div className="transaction-pin-container flex items-center justify-center w-full h-screen bg-gray-100">
@@ -87,39 +87,80 @@ const Change = () => {
           </p>
         </div>
 
+        {/* <div className="pin-inputs flex flex-col gap-4"> */}
         <div className="pin-inputs flex flex-col gap-4">
-          <PasswordInput
-            label="Enter current password"
-            value={userInput.oldPassword}
-            onChange={(e) =>
-              setUserInput({ ...userInput, oldPassword: e.target.value })
-            }
-            show={showPassword}
-            toggleShow={() => setShowPassword(!showPassword)}
-          />
-
-          <PasswordInput
-            label="Enter new password"
-            value={userInput.newPassword}
-            onChange={(e) =>
-              setUserInput({ ...userInput, newPassword: e.target.value })
-            }
-            show={showNewPassword}
-            toggleShow={() => setShowNewPassword(!showNewPassword)}
-          />
-
-          <PasswordInput
-            label="Confirm new password"
-            value={userInput.confirmNewPassword}
-            onChange={(e) =>
-              setUserInput({
-                ...userInput,
-                confirmNewPassword: e.target.value,
-              })
-            }
-            show={showConfirmPassword}
-            toggleShow={() => setShowConfirmPassword(!showConfirmPassword)}
-          />
+          <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
+            <FaLock className="text-gray-500 text-xl mr-2" />
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter current password"
+              value={userInput.oldPassword}
+              onChange={(e) =>
+                setUserInput({ ...userInput, oldPassword: e.target.value })
+              }
+              className="w-full text-lg focus:outline-none placeholder-gray-500"
+            />
+            <button
+              className="ml-2 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+              type="button"
+            >
+              {showPassword ? (
+                <FaEyeSlash className="text-gray-500 text-xl" />
+              ) : (
+                <FaEye className="text-gray-500 text-xl" />
+              )}
+            </button>
+          </div>
+          <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
+            <FaLock className="text-gray-500 text-xl mr-2" />
+            <input
+              type={showNewPassword ? "text" : "password"}
+              placeholder="Enter new password"
+              value={userInput.newPassword}
+              onChange={(e) =>
+                setUserInput({ ...userInput, newPassword: e.target.value })
+              }
+              className="w-full text-lg focus:outline-none placeholder-gray-500"
+            />
+            <button
+              className="ml-2 cursor-pointer"
+              onClick={() => setShowNewPassword(!showNewPassword)}
+              type="button"
+            >
+              {showNewPassword ? (
+                <FaEyeSlash className="text-gray-500 text-xl" />
+              ) : (
+                <FaEye className="text-gray-500 text-xl" />
+              )}
+            </button>
+          </div>
+          <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
+            <FaLock className="text-gray-500 text-xl mr-2" />
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm new password"
+              value={userInput.confirmNewPassword}
+              onChange={(e) =>
+                setUserInput({
+                  ...userInput,
+                  confirmNewPassword: e.target.value,
+                })
+              }
+              className="w-full text-lg focus:outline-none placeholder-gray-500"
+            />
+            <button
+              className="ml-2 cursor-pointer"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              type="button"
+            >
+              {showConfirmPassword ? (
+                <FaEyeSlash className="text-gray-500 text-xl" />
+              ) : (
+                <FaEye className="text-gray-500 text-xl" />
+              )}
+            </button>
+          </div>
         </div>
 
         <button

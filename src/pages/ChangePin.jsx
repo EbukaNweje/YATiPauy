@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 import "./pageCss/Recharge.css";
 import { useSelector } from "react-redux";
 import { PuffLoader } from "react-spinners";
@@ -7,10 +7,9 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 const ChangePin = () => {
-  const [showPin, setShowPin] = useState(false);
-  const [showNewPin, setNewShowPin] = useState(false);
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.YATipauy?.user);
+
   const [userInput, setUserInput] = useState({
     oldPin: "",
     newPin: "",
@@ -47,22 +46,16 @@ const ChangePin = () => {
     }
   };
 
-  const PinInput = ({ label, value, onChange, show, toggleShow }) => (
+  // Reusable PIN Input
+  const PinInput = ({ label, value, onChange }) => (
     <div className="input-group">
       <input
-        type={show ? "text" : "password"}
+        type="password"
         maxLength={4}
         placeholder={label}
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)} // Directly update the value
       />
-      <button className="toggle-visibility" onClick={toggleShow} type="button">
-        {show ? (
-          <FaEye className="eye-icon" />
-        ) : (
-          <FaEyeSlash className="eye-icon" />
-        )}
-      </button>
     </div>
   );
 
@@ -76,25 +69,28 @@ const ChangePin = () => {
         </div>
 
         <div className="pin-inputs">
-          <PinInput
-            label="Enter current PIN"
-            value={userInput.oldPin}
-            onChange={(e) =>
-              setUserInput({ ...userInput, oldPin: e.target.value })
-            }
-            show={showPin}
-            toggleShow={() => setShowPin(!showPin)}
-          />
-
-          <PinInput
-            label="Enter new PIN"
-            value={userInput.newPin}
-            onChange={(e) =>
-              setUserInput({ ...userInput, newPin: e.target.value })
-            }
-            show={showNewPin}
-            toggleShow={() => setNewShowPin(!showNewPin)}
-          />
+          <div className="input-group">
+            <input
+              type="password"
+              maxLength={4}
+              placeholder="Enter current PIN"
+              value={userInput.oldPin}
+              onChange={(e) =>
+                setUserInput({ ...userInput, oldPin: e.target.value })
+              }
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              maxLength={4}
+              placeholder="Enter new PIN"
+              value={userInput.newPin}
+              onChange={(e) =>
+                setUserInput({ ...userInput, newPin: e.target.value })
+              }
+            />
+          </div>
         </div>
 
         <button

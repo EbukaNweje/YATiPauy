@@ -1,3 +1,83 @@
+/* === Standardized Container Styles === */
+.transaction-pin-container,
+.Recharge,
+.Withdraw {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  width: 100%;
+  height: auto;
+  background-color: #f3f4f6;
+}
+
+.transaction-pin-form,
+.paymentSection {
+  width: 100%;
+  max-width: 400px;
+  background-color: #022308f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* === Input Styles === */
+.input-group,
+.wallet-selection {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.input-group input,
+.wallet-selection input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 5px;
+}
+
+/* === Button Styles === */
+.submit-button,
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #10b981;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover,
+.btn:hover {
+  background-color: #059669;
+}
+
+.submit-button:disabled,
+.btn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* === Notice Styles === */
+.pin-notice,
+.paymentWarnings {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* === Standardized Styles for Recharge and Withdraw === */
 .Recharge,
 .Withdraw {
   width: 100%;
@@ -627,11 +707,11 @@
   padding: 5px;
 }
 
-.input-group .toggle-visibility {
-  background: none;
+/* .input-group .toggle-visibility {
+  background: yellow;
   border: none;
   cursor: pointer;
-}
+} */
 
 .eye-icon {
   font-size: 20px;
