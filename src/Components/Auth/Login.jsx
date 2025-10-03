@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AuthStyle.css";
-import { LockOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -17,14 +17,17 @@ const Login = () => {
 
   const onFinish = async (values) => {
     setLoading(true);
+    const email = values.email;
+    const password = values.password;
+    const data = { password: password, email: email };
     // console.log('Received values of form: ', values)
     try {
       // Make an API request to your backend to create a new user
       const response = await axios.post(
         "https://yaticare-backend.onrender.com/api/auth/login",
-        values
+        data
       );
-      console.log(response);
+      console.log("this is response", response);
       toast.success("Login Successfull");
       dispatch(loginSuccess(response.data.data));
       localStorage.setItem(
@@ -34,9 +37,9 @@ const Login = () => {
       // setLoading(false);
       Nav("/dashboard");
     } catch (error) {
-      console.log(error);
+      console.log("this is error", error);
       setLoading(false);
-      toast.error(error?.response?.data?.message || "Network Error");
+      toast.error(error?.response?.data?.message || error?.response?.data);
     }
   };
 
