@@ -1,10 +1,8 @@
-import React from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import Login2 from "./Components/Auth/Login";
 import Signup from "./Components/Auth/SignUp";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
-import Product from "./pages/Product";
 import ProductS from "./pages/Product2";
 import Recharge from "./pages/Recharge";
 import Withdraw from "./pages/Withdraw";
