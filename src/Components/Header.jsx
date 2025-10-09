@@ -32,7 +32,7 @@ const Header = () => {
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
   const refLink = user.referralLink;
-  // console.log(userData);
+  console.log(userData);
 
   const fetchUserData = async () => {
     try {
@@ -58,6 +58,8 @@ const Header = () => {
       fetchUserData();
     }
   }, [user]);
+
+  React.useEffect(() => {}, [userData]);
 
   const isHomePage = location.pathname === "/dashboard";
 

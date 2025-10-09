@@ -128,7 +128,9 @@ const Deposit = () => {
       }
       setCopied(true);
       setTimeout(() => setCopied(false), 1200);
-    } catch {}
+    } catch (error) {
+      console.error("Copy to clipboard failed:", error);
+    }
   };
 
   const handleProofUpload = (e) => {

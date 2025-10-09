@@ -114,13 +114,13 @@ const Plan = () => {
         // }
       );
 
-      if (response.data.success) {
-        alert("Subscription created successfully!");
+      if (response.data.message.includes("successfully")) {
+        toast.success("Subscription created successfully!");
         setSelectedPlan(null);
         setSelectedAmount(null);
         setCustomAmount("");
       } else {
-        alert(response.data.data.message);
+        toast.error(response.data.data.message);
         // || "Failed to create subscription"
       }
     } catch (error) {
