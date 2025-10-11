@@ -48,7 +48,7 @@ function ProfileInfo() {
         // console.log("FGF", response?.data?.data);
         setUsersData(response?.data?.data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
     fetchUser();

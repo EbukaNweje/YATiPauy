@@ -55,7 +55,7 @@ const Plan = () => {
         setPlansData(mappedPlans);
       } catch (error) {
         toast.error("Failed to load plans");
-        console.error("Error fetching plans:", error);
+        // console.error("Error fetching plans:", error);
       } finally {
         setLoading(false);
       }

@@ -56,7 +56,7 @@ const WalletAddress = () => {
       toast.error(
         error.response?.data?.message || "Failed to update wallet details"
       );
-      console.error("Update error:", error);
+      // console.error("Update error:", error);
     } finally {
       setIsSaving(false);
     }

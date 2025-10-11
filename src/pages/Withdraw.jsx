@@ -30,7 +30,7 @@ const Withdraw = () => {
         const data = response?.data?.data;
         setUserData(data?.WalletInfo?.WalletAddress);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        // console.error("Error fetching user data:", error);
       }
     };
     fetchUserData();
@@ -83,7 +83,7 @@ const Withdraw = () => {
       navigate("/dashboard");
       dispatch(depositedAmount(Date.now()));
     } catch (error) {
-      console.error("Withdraw error:", error.response?.data || error.message);
+      // console.error("Withdraw error:", error.response?.data || error.message);
       toast.error(error.response?.data?.error || "Withdrawal failed");
     } finally {
       setLoading(false);
