@@ -28,11 +28,8 @@ import TransactionPin from "./Components/Auth/TransactionPin";
 import ChangePin from "./pages/ChangePin";
 import Deposit from "./pages/Deposit";
 import WalletAddress from "./pages/WalletAddress";
-// import AdminLogin from "./pages/Admin/AdminLogin";
-// import AdminLayout from "./pages/Admin/AdminLayout";
-// import Deposits from "./pages/Admin/Deposits";
-// import Withdrawals from "./pages/Admin/Withdrawals";
-// import Users from "./pages/Admin/Users";
+import AdminLogin from "./pages/Admin/AdminLogin";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -89,6 +86,7 @@ const App = () => {
             { path: "accountSettings", element: <ProfileSettings /> },
             { path: "changePin", element: <ChangePin /> },
             { path: "history", element: <History /> },
+            { path: "plandetails", element: <PlanDetails /> },
             { path: "plandetails/:id", element: <PlanDetails /> },
             { path: "myPlans", element: <Vip /> },
             { path: "changephoneNumber", element: <ChangePhone /> },
@@ -97,19 +95,6 @@ const App = () => {
             { path: "Privacy", element: <Privacy /> },
           ],
         },
-        // {
-        //   path: "/admin/login",
-        //   element: <AdminLogin />,
-        // },
-        // {
-        //   path: "/admin/dashboard",
-        //   element: <AdminLayout />,
-        //   children: [
-        //     { path: "deposits", element: <Deposits /> },
-        //     { path: "withdrawals", element: <Withdrawals /> },
-        //     { path: "users", element: <Users /> },
-        //   ],
-        // },
       ],
     },
   ]);

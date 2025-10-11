@@ -4,7 +4,8 @@ import { FiCopy, FiCheck } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import "animate.css";
 import { useNavigate } from "react-router-dom";
-import { loginSuccess } from "./Global/Slice";
+import { depositedAmount } from "./Global/Slice";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -57,6 +58,7 @@ const Deposit = () => {
   const [proofPaymentPop, setProofPaymentPop] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // console.log(userData);
 
   // useEffect(() => {
@@ -155,14 +157,14 @@ const Deposit = () => {
     setLoading(true);
     try {
       const res = await axios.post(url, data);
-      console.log(res);
       toast.success(res.data.message);
       setLoading(false);
       // navigate("/dashboard");
       setProofPaymentPop(true);
+      // signal other parts of the app (Header) to refresh user data
+      dispatch(depositedAmount(Date.now()));
     } catch (error) {
       setLoading(false);
-      console.log("deposit error", error);
     }
   };
   const handleClosePayment = () => {

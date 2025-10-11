@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { depositedAmount } from "./Global/Slice";
+import { useDispatch } from "react-redux";
 
 const Withdraw = () => {
   const user = useSelector((state) => state.YATipauy.user);
@@ -17,6 +19,7 @@ const Withdraw = () => {
   const [pin, setPin] = useState(""); // <-- capture PIN
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -78,6 +81,7 @@ const Withdraw = () => {
       setSelectedAmount("");
       setPin("");
       navigate("/dashboard");
+      dispatch(depositedAmount(Date.now()));
     } catch (error) {
       console.error("Withdraw error:", error.response?.data || error.message);
       toast.error(error.response?.data?.error || "Withdrawal failed");

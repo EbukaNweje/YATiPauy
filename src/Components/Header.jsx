@@ -31,7 +31,9 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
+  const depositSignal = useSelector((state) => state.YATipauy.depositAmout);
   const refLink = user.referralLink;
+
   console.log(userData);
 
   const fetchUserData = async () => {
@@ -50,14 +52,15 @@ const Header = () => {
   const copy = (refLink) => {
     navigator.clipboard.writeText(refLink);
     toast.success("copied successfully");
-    setShowRef(false);
   };
 
   React.useEffect(() => {
+    // fetch when user logs in or when a deposit/withdraw/subscription updates the signal
     if (user?.user?._id) {
       fetchUserData();
     }
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, depositSignal]);
 
   React.useEffect(() => {}, [userData]);
 

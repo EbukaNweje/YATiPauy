@@ -1,0 +1,240 @@
+:root {
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0f172a;
+  --accent: #047857;
+  --accent-600: #065f46;
+  --success: #10b981;
+  --danger: #ef4444;
+  --glass: rgba(255, 255, 255, 0.6);
+}
+
+/* Page wrapper */
+.vip-wrap {
+  max-width: 1100px;
+  margin: 36px auto;
+  padding: 20px;
+  background: var(--bg);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.vip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.vip-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.vip-title h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.vip-title p {
+  margin: 4px 0 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.vip-count {
+  background: linear-gradient(135deg, var(--accent-600), var(--accent));
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(4, 120, 87, 0.18);
+}
+
+/* Cards list */
+.vip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.vip-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.vip-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.08);
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.logo-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--glass), #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(2, 6, 23, 0.06);
+  flex-shrink: 0;
+}
+
+.logo-badge img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-meta {
+  min-width: 0;
+}
+
+.card-meta h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-meta p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.card-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.details {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
+}
+
+.detail-item .label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.detail-item .value {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.status-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.status-active {
+  background: linear-gradient(90deg, var(--success), #059669);
+  color: #fff;
+}
+.status-pending {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+  color: #fff;
+}
+.status-failed {
+  background: linear-gradient(90deg, var(--danger), #b91c1c);
+  color: #fff;
+}
+
+.navigate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--accent-600);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.navigate-btn:hover {
+  background: rgba(6, 95, 70, 0.06);
+  transform: scale(1.06);
+}
+
+/* Empty / loading states */
+.vip-empty {
+  text-align: center;
+  padding: 42px;
+  color: var(--muted);
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.04);
+}
+
+.vip-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px;
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .vip-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .card-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .details {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-badge {
+    width: 56px;
+    height: 56px;
+  }
+  .logo-badge img {
+    width: 44px;
+    height: 44px;
+  }
+  .vip-wrap {
+    padding: 14px;
+  }
+}

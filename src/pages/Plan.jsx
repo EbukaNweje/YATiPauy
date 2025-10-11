@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./pageCss/Plan.css";
 import { FaChevronRight, FaCheck } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { depositedAmount } from "./Global/Slice";
 import toast from "react-hot-toast";
 
 const Plan = () => {
@@ -15,19 +16,18 @@ const Plan = () => {
 
   const location = useLocation();
   const { selectedPlanName } = location.state || {};
-
-  // 👇 get user from redux
   const user = useSelector((state) => state.YATipauy.user);
-  // console.log("user", user);
+  const dispatch = useDispatch();
+  const date = new Date().toLocaleString();
 
   useEffect(() => {
     const fetchPlans = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           "https://yaticare-backend.onrender.com/api/getallplan"
         );
 
-        // Map backend fields into usable frontend structure
         const mappedPlans = response.data.data.map((plan) => {
           const increments = [];
           if (plan.minimumDeposit && plan.maximumDeposit) {
@@ -54,7 +54,10 @@ const Plan = () => {
 
         setPlansData(mappedPlans);
       } catch (error) {
+        toast.error("Failed to load plans");
         console.error("Error fetching plans:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -85,15 +88,25 @@ const Plan = () => {
     setSelectedAmount(value);
   };
 
-  // 👇 subscription API call
   const handleSubscribe = async () => {
     if (!selectedPlan || !selectedAmount) {
-      alert("Please select a plan and amount.");
+      toast.error("Please select a plan and amount.");
+      return;
+    }
+
+    const amountNum = Number(selectedAmount);
+    if (
+      amountNum < selectedPlan.minimumDeposit ||
+      amountNum > selectedPlan.maximumDeposit
+    ) {
+      toast.error(
+        `Amount must be between $${selectedPlan.minimumDeposit} and $${selectedPlan.maximumDeposit}`
+      );
       return;
     }
 
     if (!user?.user?._id) {
-      alert("User not logged in.");
+      toast.error("User not logged in.");
       return;
     }
 
@@ -102,16 +115,12 @@ const Plan = () => {
       const response = await axios.post(
         "https://yaticare-backend.onrender.com/api/usrSubcription",
         {
-          userId: user.user._id, // 👈 take from redux
+          userId: user.user._id,
           plan: selectedPlan._id,
-          amount: Number(selectedAmount),
+          amount: amountNum,
           durationInDays: selectedPlan.durationDays,
+          subscriptionDate: date,
         }
-        // {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // }
       );
 
       if (response.data.message.includes("successfully")) {
@@ -119,18 +128,14 @@ const Plan = () => {
         setSelectedPlan(null);
         setSelectedAmount(null);
         setCustomAmount("");
+        // signal header to refresh balance and user data
+        dispatch(depositedAmount(Date.now()));
       } else {
-        toast.error(response.data.data.message);
-        // || "Failed to create subscription"
+        toast.error(response.data.data.message || "Subscription failed");
       }
     } catch (error) {
-      console.error(
-        "Error creating subscription:",
-        error?.response?.data?.message
-      );
-      toast.error(error?.response?.data?.message);
-      setSelectedPlan(null);
-      // alert("Something went wrong. Please try again.");
+      toast.error(error?.response?.data?.message || "Something went wrong");
+      console.error("Subscription error:", error);
     } finally {
       setLoading(false);
     }
@@ -139,13 +144,17 @@ const Plan = () => {
   return (
     <div className="Plan">
       <div className="plan-container">
-        {plansData.length === 0 ? (
+        {loading ? (
           <p>Loading plans...</p>
+        ) : plansData.length === 0 ? (
+          <p>No plan available</p>
         ) : (
-          plansData?.map((plan, index) => (
+          plansData.map((plan, index) => (
             <div
               key={index}
-              className="plan-box"
+              className={`plan-box ${
+                selectedPlan?._id === plan._id ? "active" : ""
+              }`}
               onClick={() => {
                 setSelectedPlan(plan);
                 setSelectedAmount(null);
@@ -181,12 +190,12 @@ const Plan = () => {
                   <div
                     key={index}
                     className={`amount-box ${
-                      selectedAmount === amount ? "selected" : ""
+                      Number(selectedAmount) === amount ? "selected" : ""
                     }`}
                     onClick={() => handleAmountSelection(amount)}
                   >
                     ${amount.toLocaleString()}
-                    {selectedAmount === amount && (
+                    {Number(selectedAmount) === amount && (
                       <FaCheck className="check-icon" />
                     )}
                   </div>
@@ -199,6 +208,8 @@ const Plan = () => {
                   placeholder="Enter custom amount"
                   value={customAmount}
                   onChange={handleCustomAmountChange}
+                  min={selectedPlan.minimumDeposit}
+                  max={selectedPlan.maximumDeposit}
                 />
               </div>
 
