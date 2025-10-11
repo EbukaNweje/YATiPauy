@@ -8,7 +8,7 @@ import axios from "axios";
 function ProfileInfo() {
   const user = useSelector((state) => state.YATipauy.user);
   const [UsersData, setUsersData] = useState([]);
-  console.log("UsersData", UsersData);
+  // console.log("UsersData", UsersData);
 
   const [details, setDetails] = useState({
     UserName: UsersData.userName || "",
