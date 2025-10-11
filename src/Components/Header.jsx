@@ -34,8 +34,6 @@ const Header = () => {
   const depositSignal = useSelector((state) => state.YATipauy.depositAmout);
   const refLink = user.referralLink;
 
-  console.log(userData);
-
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
