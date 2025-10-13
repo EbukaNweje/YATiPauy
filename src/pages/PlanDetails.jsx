@@ -142,7 +142,7 @@ const PlanDetails = () => {
 
           <div className="earned">
             <span>+</span>
-            <h3>{interestPct}%</h3>
+            <h3>{interestPct}% Daily</h3>
           </div>
         </div>
 
@@ -162,7 +162,7 @@ const PlanDetails = () => {
         </div>
 
         <div className="duration" style={{ borderBottom: "none" }}>
-          <h3>Interest:</h3>
+          <h3>Total:</h3>
           <p>{totalPct}%</p>
         </div>
       </div>

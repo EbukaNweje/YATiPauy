@@ -32,7 +32,7 @@ const Header = () => {
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
   const depositSignal = useSelector((state) => state.YATipauy.depositAmout);
-  const refLink = user.referralLink;
+  const refLink = user?.referralLink;
 
   const formatCurrency = (val) => {
     const n = Number(val);
@@ -57,7 +57,7 @@ const Header = () => {
   };
 
   // safe debug - avoid accessing accountBalance on null
-  // console.log("header userData:", userData?.accountBalance);
+  console.log("header userData:", userData);
 
   const copy = (refLink) => {
     navigator.clipboard.writeText(refLink);
