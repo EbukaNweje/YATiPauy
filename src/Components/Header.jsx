@@ -34,6 +34,15 @@ const Header = () => {
   const depositSignal = useSelector((state) => state.YATipauy.depositAmout);
   const refLink = user.referralLink;
 
+  const formatCurrency = (val) => {
+    const n = Number(val);
+    if (!Number.isFinite(n)) return "0.00";
+    return n.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
@@ -46,6 +55,9 @@ const Header = () => {
       console.error("Error fetching user data:", error);
     }
   };
+
+  // safe debug - avoid accessing accountBalance on null
+  // console.log("header userData:", userData?.accountBalance);
 
   const copy = (refLink) => {
     navigator.clipboard.writeText(refLink);
@@ -81,8 +93,8 @@ const Header = () => {
               <div className="refinfo">
                 <button disabled className="Btn">
                   Available Balance:
-                  <BsCurrencyDollar />{" "}
-                  {userData ? `${userData.accountBalance}.00` : "0.00"}
+                  <BsCurrencyDollar />
+                  {userData ? formatCurrency(userData.accountBalance) : "0.00"}
                 </button>
                 <div className="reflink">
                   Referral Link

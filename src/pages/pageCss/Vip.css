@@ -222,6 +222,15 @@
   }
   .details {
     gap: 12px;
+    flex-wrap: wrap;
+  }
+  .card-meta h3 {
+    white-space: normal; /* allow wrap on smaller screens */
+    font-size: 1rem;
+  }
+  .detail-item {
+    text-align: left;
+    min-width: 120px;
   }
 }
 
@@ -236,5 +245,44 @@
   }
   .vip-wrap {
     padding: 14px;
+  }
+
+  .vip-count {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .card-meta h3 {
+    font-size: 0.98rem;
+  }
+
+  .details {
+    gap: 8px;
+  }
+
+  .navigate-btn {
+    padding: 8px;
+  }
+}
+
+/* very small screens */
+@media (max-width: 360px) {
+  .logo-badge {
+    width: 48px;
+    height: 48px;
+  }
+  .logo-badge img {
+    width: 40px;
+    height: 40px;
+  }
+  .card-meta h3 {
+    font-size: 0.95rem;
+  }
+  .detail-item {
+    min-width: 100px;
+    font-size: 0.88rem;
+  }
+  .vip-title h2 {
+    font-size: 1.05rem;
   }
 }

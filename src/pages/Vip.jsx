@@ -94,7 +94,9 @@ const Vip = () => {
                   <div className="detail-item" role="listitem">
                     <span className="label">Interest</span>
                     <span className="value">
-                      {subscriptionData?.plan?.percentageInterest}%
+                      {subscriptionData?.plan?.percentageInterest *
+                        subscriptionData?.plan?.durationDays}
+                      %
                     </span>
                   </div>
                 </div>

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./pageCss/plandetails.css";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const PlanDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const params = useParams();
+  const user = useSelector((state) => state.YATipauy.user);
   const [subscription, setSubscription] = useState(
     location?.state?.subscription || null
   );
@@ -30,6 +33,57 @@ const PlanDetails = () => {
     }
   }, [params, subscription]);
 
+  const formatCurrency = (val) => {
+    const n = Number(val);
+    if (!Number.isFinite(n)) return "-";
+    return n.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const formatDate = (s) => {
+    if (!s) return "-";
+    const d = new Date(s);
+    if (isNaN(d)) return s;
+    return d.toLocaleString();
+  };
+
+  useEffect(() => {
+    // If navigated with state we already have the subscription. Otherwise, if we have an id and the user is logged in,
+    // fetch the user's subscriptions and find the one with the matching id.
+    const fetchById = async () => {
+      if (subscription || !params?.id) return;
+      if (!user?.user?._id) return;
+
+      try {
+        const resp = await axios.get(
+          `https://yaticare-back-end.vercel.app/api/getusrSubcription/${user.user._id}`
+        );
+        const data =
+          resp?.data?.subscriptions || resp?.data?.data?.subscriptions || [];
+        const found = data.find((s) => String(s._id) === String(params.id));
+        if (found) setSubscription(found);
+        else {
+          // fallback lightweight object if not found
+          setSubscription({
+            plan: { planName: `Plan (${params.id})` },
+            amount: "-",
+          });
+        }
+      } catch (err) {
+        console.error("Error fetching subscription by id:", err);
+        setSubscription({
+          plan: { planName: `Plan (${params.id})` },
+          amount: "-",
+        });
+      }
+    };
+
+    fetchById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.id, user?.user?._id]);
+
   if (!subscription) {
     return (
       <div className="planDetails">
@@ -40,6 +94,18 @@ const PlanDetails = () => {
       </div>
     );
   }
+
+  const amountDisplay = subscription?.amount
+    ? formatCurrency(subscription.amount)
+    : "-";
+  const interestPct =
+    subscription?.plan?.percentageInterest ?? subscription?.planInterest ?? "-";
+  const startDateDisplay =
+    subscription?.startDate ?? subscription?.createdAt ?? null;
+  const endDateDisplay = subscription?.endDate ?? null;
+  const durationDaysNum = Number(subscription?.plan?.durationDays) || 0;
+  const pctNum = Number(interestPct) || 0;
+  const totalPct = pctNum * durationDaysNum;
 
   return (
     <div className="planDetails">
@@ -70,18 +136,13 @@ const PlanDetails = () => {
       <div className="cardsPlan">
         <div className="profit">
           <div className="invest">
-            <h2>${subscription?.amount ?? "-"}</h2>
+            <h2>${amountDisplay}</h2>
             <p>Invested Amount</p>
           </div>
 
           <div className="earned">
             <span>+</span>
-            <h3>
-              {subscription?.plan?.percentageInterest ??
-                subscription?.planInterest ??
-                "-"}
-              %
-            </h3>
+            <h3>{interestPct}%</h3>
           </div>
         </div>
 
@@ -92,22 +153,17 @@ const PlanDetails = () => {
 
         <div className="duration">
           <h3>Start Date:</h3>
-          <p>{subscription?.startDate ?? subscription?.createdAt ?? "-"}</p>
+          <p>{formatDate(startDateDisplay)}</p>
         </div>
 
         <div className="duration">
           <h3>End Date:</h3>
-          <p>{subscription?.endDate ?? "-"}</p>
+          <p>{formatDate(endDateDisplay)}</p>
         </div>
 
         <div className="duration" style={{ borderBottom: "none" }}>
           <h3>Interest:</h3>
-          <p>
-            {subscription?.plan?.percentageInterest ??
-              subscription?.planInterest ??
-              "-"}
-            %
-          </p>
+          <p>{totalPct}%</p>
         </div>
       </div>
     </div>
