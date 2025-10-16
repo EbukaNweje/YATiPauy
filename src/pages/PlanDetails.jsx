@@ -103,9 +103,9 @@ const PlanDetails = () => {
   const startDateDisplay =
     subscription?.startDate ?? subscription?.createdAt ?? null;
   const endDateDisplay = subscription?.endDate ?? null;
-  const durationDaysNum = Number(subscription?.plan?.durationDays) || 0;
-  const pctNum = Number(interestPct) || 0;
-  const totalPct = pctNum * durationDaysNum;
+  // const durationDaysNum = Number(subscription?.plan?.durationDays) || 0;
+  // const pctNum = Number(interestPct) || 0;
+  const totalPct = amountDisplay * 1.4;
 
   return (
     <div className="planDetails">
@@ -161,9 +161,9 @@ const PlanDetails = () => {
           <p>{formatDate(endDateDisplay)}</p>
         </div>
 
-        <div className="duration" style={{ borderBottom: "none" }}>
-          <h3>Total:</h3>
-          <p>{totalPct}%</p>
+        <div className="duration Total" style={{ borderBottom: "none" }}>
+          <h3>Total Income:</h3>
+          <p>${totalPct}</p>
         </div>
       </div>
     </div>

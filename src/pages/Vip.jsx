@@ -56,79 +56,82 @@ const Vip = () => {
         <div className="vip-empty">You have no active subscriptions.</div>
       ) : (
         <div className="vip-list">
-          {userData.subscriptions.reverse().map((subscriptionData) => (
-            <article
-              key={subscriptionData?._id}
-              className="vip-card"
-              aria-labelledby={`sub-${subscriptionData?._id}`}
-            >
-              <div className="card-left">
-                <div className="logo-badge" aria-hidden>
-                  {/* placeholder image, replace with real plan image if available */}
-                  <img src={planLogo} alt="plan" />
-                </div>
-                <div className="card-meta">
-                  <h3 id={`sub-${subscriptionData?._id}`}>
-                    {subscriptionData?.plan?.planName}
-                  </h3>
-                  <p className="muted">
-                    {subscriptionData?.plan?.description ?? ""}
-                  </p>
-                </div>
-              </div>
-
-              <div className="card-right">
-                <div className="details" role="list">
-                  <div className="detail-item" role="listitem">
-                    <span className="label">Price</span>
-                    <span className="value">${subscriptionData?.amount}</span>
+          {userData.subscriptions.reverse().map((subscriptionData) => {
+            {
+              /* console.log("this is the subscriptionData", subscriptionData); */
+            }
+            return (
+              <article
+                key={subscriptionData?._id}
+                className="vip-card"
+                aria-labelledby={`sub-${subscriptionData?._id}`}
+              >
+                <div className="card-left">
+                  <div className="logo-badge" aria-hidden>
+                    {/* placeholder image, replace with real plan image if available */}
+                    <img src={planLogo} alt="plan" />
                   </div>
-
-                  <div className="detail-item" role="listitem">
-                    <span className="label">Period</span>
-                    <span className="value">
-                      {subscriptionData?.plan?.durationDays} days
-                    </span>
-                  </div>
-
-                  <div className="detail-item" role="listitem">
-                    <span className="label">Interest</span>
-                    <span className="value">
-                      {subscriptionData?.plan?.percentageInterest *
-                        subscriptionData?.plan?.durationDays}
-                      %
-                    </span>
+                  <div className="card-meta">
+                    <h3 id={`sub-${subscriptionData?._id}`}>
+                      {subscriptionData?.plan?.planName}
+                    </h3>
+                    <p className="muted">
+                      {subscriptionData?.plan?.description ?? ""}
+                    </p>
                   </div>
                 </div>
 
-                <div>
-                  <div
-                    className={`status-badge ${
-                      subscriptionData?.status === "active"
-                        ? "status-active"
-                        : subscriptionData?.status === "pending"
-                        ? "status-pending"
-                        : "status-failed"
-                    }`}
+                <div className="card-right">
+                  <div className="details" role="list">
+                    <div className="detail-item" role="listitem">
+                      <span className="label">Price</span>
+                      <span className="value">${subscriptionData?.amount}</span>
+                    </div>
+
+                    <div className="detail-item" role="listitem">
+                      <span className="label">Period</span>
+                      <span className="value">
+                        {subscriptionData?.plan?.durationDays} days
+                      </span>
+                    </div>
+
+                    <div className="detail-item" role="listitem">
+                      <span className="label">Total Income</span>
+                      <span className="value">
+                        ${subscriptionData?.amount * 1.4}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div
+                      className={`status-badge ${
+                        subscriptionData?.status === "active"
+                          ? "status-active"
+                          : subscriptionData?.status === "pending"
+                          ? "status-pending"
+                          : "status-failed"
+                      }`}
+                    >
+                      {subscriptionData?.status}
+                    </div>
+                  </div>
+
+                  <button
+                    className="navigate-btn"
+                    aria-label={`View details for ${subscriptionData?.plan?.planName}`}
+                    onClick={() =>
+                      navigate(`/dashboard/plandetails`, {
+                        state: { subscription: subscriptionData },
+                      })
+                    }
                   >
-                    {subscriptionData?.status}
-                  </div>
+                    <FaChevronRight />
+                  </button>
                 </div>
-
-                <button
-                  className="navigate-btn"
-                  aria-label={`View details for ${subscriptionData?.plan?.planName}`}
-                  onClick={() =>
-                    navigate(`/dashboard/plandetails`, {
-                      state: { subscription: subscriptionData },
-                    })
-                  }
-                >
-                  <FaChevronRight />
-                </button>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       )}
     </div>

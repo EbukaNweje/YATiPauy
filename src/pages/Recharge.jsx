@@ -18,9 +18,9 @@ const Recharge = () => {
     if (Number(selectedAmount) < 2) {
       return toast.error("Minimum Recharge is $2");
     }
-    if (Number(selectedAmount) > 5000) {
-      return toast.error("Maximum Recharge is $5,000");
-    }
+    // if (Number(selectedAmount) > 5000) {
+    //   return toast.error("Maximum Recharge is $5,000");
+    // }
     dispatch(depositedAmount(selectedAmount));
     navigate("/dashboard/deposit");
   };

@@ -51,7 +51,10 @@ const RefPage = () => {
     if (!s) return "-";
     const d = new Date(s);
     if (isNaN(d)) return s;
-    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    return `${dd}/${mm}/${yyyy}`;
   };
 
   return (

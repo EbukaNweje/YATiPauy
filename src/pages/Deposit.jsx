@@ -280,7 +280,7 @@ const Deposit = () => {
 
       <div className="paymentWarnings">
         <li>1. Minimum Recharge amount $10.</li>
-        <li>2. Maximum Recharge amount $5,000.</li>
+        {/* <li>2. Maximum Recharge amount $5,000.</li> */}
         <li>3. Use only the official company details shown above.</li>
         <li>4. Each recharge requires creating a new deposit order.</li>
         <li>5. Actual payment must match the order amount exactly.</li>
