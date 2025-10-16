@@ -37,12 +37,33 @@ const History = () => {
   const allTransactions = [
     ...depositTransactions.map((txn) => ({ ...txn, type: "Deposit" })),
     ...withdrawTransactions.map((txn) => ({ ...txn, type: "Withdraw" })),
-    ...bonusHistory.map((txn) => ({ ...txn, type: "Bonus" })),
-    ...dailyInterestHistory.map((txn) => ({ ...txn, type: "Daily Interest" })),
+    ...bonusHistory.map((txn) => ({
+      ...txn,
+      type: "Bonus",
+      status: "confirmed",
+    })),
+    ...dailyInterestHistory.map((txn) => ({
+      ...txn,
+      type: "Daily Interest",
+      status: "confirmed",
+    })),
     ...subscriptionsHistory.map((txn) => ({ ...txn, type: "Subscription" })),
   ];
 
   // helper to get a timestamp for a transaction from several possible date fields
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "N/A";
+    const d = new Date(dateStr);
+    if (isNaN(d)) return dateStr;
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    const hh = String(d.getHours()).padStart(2, "0");
+    const min = String(d.getMinutes()).padStart(2, "0");
+    const ss = String(d.getSeconds()).padStart(2, "0");
+    return `${dd}/${mm}/${yyyy}, ${hh}:${min}:${ss}`;
+  };
+
   const getTxnTimestamp = (txn) => {
     const dateStr =
       txn.depositDate ||
@@ -143,6 +164,7 @@ const History = () => {
           </tr>
           <tr className="column-titles">
             <th>Type</th>
+            <th>Details</th>
             <th>Transaction ID</th>
             <th>Amount</th>
             <th>Date</th>
@@ -164,6 +186,7 @@ const History = () => {
                   )}
                   {txn.type}
                 </td>
+                <td>{txn.reason}</td>
                 <td className="txn-id">{txn._id || txn.id || "N/A"}</td>
                 <td
                   className="amount"
@@ -179,11 +202,14 @@ const History = () => {
                   ${txn.amount}
                 </td>
                 <td className="date">
-                  {txn.depositDate ||
-                    txn.withdrawalDate ||
-                    txn.date ||
-                    txn.subscriptionDate ||
-                    "N/A"}
+                  {formatDate(
+                    txn.depositDate ||
+                      txn.withdrawalDate ||
+                      txn.date ||
+                      txn.subscriptionDate ||
+                      txn.createdAt ||
+                      txn.updatedAt
+                  )}
                 </td>
                 <td
                   className={`status ${
