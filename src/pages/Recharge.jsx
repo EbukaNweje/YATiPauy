@@ -73,10 +73,10 @@ const Recharge = () => {
           1. Minimum Recharge amount $2. If payment is less than $2, the amount
           will not be reflected.
         </li>
-        <li>
+        {/* <li>
           2. Maximum Recharge amount $5,000. If payment is greater than $5,000,
           the amount will not be processed.
-        </li>
+        </li> */}
         <li>
           3. Recharge can only be done inside the payment channels on YATicare
           platform.
