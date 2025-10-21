@@ -35,22 +35,43 @@ const History = () => {
     userData?.userTransaction?.subscriptionsHistory || [];
 
   const allTransactions = [
-    ...depositTransactions.map((txn) => ({ ...txn, type: "Deposit" })),
-    ...withdrawTransactions.map((txn) => ({ ...txn, type: "Withdraw" })),
-    ...bonusHistory.map((txn) => ({
-      ...txn,
-      type: "Bonus",
-      status: "confirmed",
-    })),
+    ...subscriptionsHistory.map((txn) => ({ ...txn, type: "Subscription" })),
     ...dailyInterestHistory.map((txn) => ({
       ...txn,
       type: "Daily Interest",
       status: "confirmed",
     })),
-    ...subscriptionsHistory.map((txn) => ({ ...txn, type: "Subscription" })),
+    ...bonusHistory.map((txn) => ({
+      ...txn,
+      type: "Bonus",
+      status: "confirmed",
+    })),
+    ...withdrawTransactions.map((txn) => ({ ...txn, type: "Withdraw" })),
+    ...depositTransactions.map((txn) => ({ ...txn, type: "Deposit" })),
   ];
 
-  console.log("All Transactions:", allTransactions);
+  const sortedTransactions = [...allTransactions].sort((a, b) => {
+    const dateA = new Date(a.createdAt).getTime();
+    const dateB = new Date(b.createdAt).getTime();
+    return dateB - dateA;
+  });
+
+  console.log(
+    "Dates before sorting:",
+    allTransactions.map((txn) => ({
+      id: txn._id,
+      type: txn.type,
+      date: txn.createdAt || txn.date || txn.updatedAt,
+    }))
+  );
+
+  console.log(
+    sortedTransactions.map((txn) => ({
+      type: txn.type,
+      amount: txn.amount,
+      date: txn.createdAt || txn.date || txn.updatedAt,
+    }))
+  );
 
   // helper to get a timestamp for a transaction from several possible date fields
   const formatDate = (dateStr) => {
@@ -65,14 +86,6 @@ const History = () => {
     const ss = String(d.getSeconds()).padStart(2, "0");
     return `${dd}/${mm}/${yyyy}, ${hh}:${min}:${ss}`;
   };
-
-  const filteredTransactions =
-    filter === "All"
-      ? allTransactions
-      : allTransactions.filter((txn) => txn.type === filter);
-
-  // sort by timestamp descending so newest items appear first
-  const sortedTransactions = filteredTransactions.slice().reverse();
 
   return (
     <div className="history">

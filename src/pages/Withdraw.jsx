@@ -14,6 +14,7 @@ const Withdraw = () => {
   const [bankDetails, setBankDetails] = useState("");
   const [showPin, setShowPin] = useState(false);
   const [showPinPopup, setShowPinPopup] = useState(false);
+  const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
   const [walletType, setWalletType] = useState("default");
   const [userData, setUserData] = useState(null);
   const [pin, setPin] = useState(""); // <-- capture PIN
@@ -29,8 +30,8 @@ const Withdraw = () => {
         );
         const data = response?.data?.data;
         setUserData(data?.WalletInfo?.WalletAddress);
-      } catch (error) {
-        // console.error("Error fetching user data:", error);
+      } catch {
+        // Error handling logic can be added here if needed
       }
     };
     fetchUserData();
@@ -49,6 +50,15 @@ const Withdraw = () => {
       toast.error("Minimum withdrawal amount is $2.00");
       return;
     }
+    setShowConfirmationPopup(true);
+  };
+
+  const closeConfirmationPopup = () => {
+    setShowConfirmationPopup(false);
+  };
+
+  const confirmWithdrawPopup = () => {
+    setShowConfirmationPopup(false);
     setShowPinPopup(true);
   };
 
@@ -137,13 +147,51 @@ const Withdraw = () => {
         </button>
       </div>
 
+      {/* Confirmation Popup */}
+      {showConfirmationPopup && (
+        <div
+          style={{
+            backdropFilter: "blur(2px)",
+          }}
+          className="h-screen w-full absolute flex justify-center px-4"
+        >
+          <div className="w-[90%] sm:w-[400px] md:w-[500px] h-70 bg-white flex flex-col gap-5 shadow-md items-center justify-center p-6 rounded-lg">
+            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">
+              Confirm Withdrawal
+            </h2>
+
+            <p className="text-lg sm:text-xl text-center">
+              Amount: <strong>${selectedAmount}</strong>
+            </p>
+            <p className="text-lg sm:text-xl text-center">
+              Fee: <strong>${(selectedAmount * 0.15).toFixed(2)}</strong>
+            </p>
+
+            <div className="flex gap-4">
+              <button
+                className="w-[100px] h-[50px] bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
+                onClick={confirmWithdrawPopup}
+              >
+                Confirm
+              </button>
+              <button
+                className="w-[100px] h-[50px] bg-red-700 cursor-pointer text-white py-3 rounded-xl hover:bg-red-800 transition"
+                onClick={closeConfirmationPopup}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* PIN Popup */}
       {showPinPopup && (
         <div
           style={{
             backdropFilter: "blur(2px)",
           }}
-          className="h-screen w-full absolute flex justify-center  px-4"
+          className="h-screen w-full absolute flex justify-center px-4"
         >
           <div className="w-[90%] sm:w-[400px] md:w-[500px] h-70 bg-white flex flex-col gap-5 shadow-md items-center justify-center p-6 rounded-lg">
             <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">
@@ -181,6 +229,16 @@ const Withdraw = () => {
           </div>
         </div>
       )}
+
+      <div className="paymentWarnings">
+        <li>1. Minimum withdrawal amount $2.</li>
+        <li>3. Use only the official company details shown above.</li>
+        <li>4. Each recharge requires creating a new deposit order.</li>
+        <li>5. Actual payment must match the order amount exactly.</li>
+        <li>6. If not reflected after 24 hours, contact support.</li>
+        <li>7. Do not share your deposit address or payment receipt.</li>
+        <li>8. Official staff will never ask for your password.</li>
+      </div>
     </div>
   );
 };

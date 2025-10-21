@@ -163,7 +163,7 @@ const PlanDetails = () => {
 
         <div className="duration Total" style={{ borderBottom: "none" }}>
           <h3>Total Income:</h3>
-          <p>${totalPct}</p>
+          <p>${formatCurrency(totalPct)}</p>
         </div>
       </div>
     </div>

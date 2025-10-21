@@ -12,6 +12,15 @@ const Vip = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const formatCurrency = (val) => {
+    const n = Number(val);
+    if (!Number.isFinite(n)) return "0.00";
+    return n.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   useEffect(() => {
     if (!user?.user?._id) return;
 
@@ -98,7 +107,7 @@ const Vip = () => {
                     <div className="detail-item" role="listitem">
                       <span className="label">Total Income</span>
                       <span className="value">
-                        ${subscriptionData?.amount * 1.4}
+                        {formatCurrency(subscriptionData?.amount * 1.4)}
                       </span>
                     </div>
                   </div>
