@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./pageCss/history.css";
 import { BsArrowDownLeftCircle, BsArrowUpRightCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -9,18 +9,18 @@ const History = () => {
   const user = useSelector((state) => state.YATipauy.user);
   const [userData, setUserData] = useState(null);
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(
-        `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
-      );
-      setUserData(response.data.data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+        );
+        setUserData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
     if (user?.user?._id) {
       fetchUserData();
     }
@@ -50,6 +50,8 @@ const History = () => {
     ...subscriptionsHistory.map((txn) => ({ ...txn, type: "Subscription" })),
   ];
 
+  console.log("All Transactions:", allTransactions);
+
   // helper to get a timestamp for a transaction from several possible date fields
   const formatDate = (dateStr) => {
     if (!dateStr) return "N/A";
@@ -64,28 +66,13 @@ const History = () => {
     return `${dd}/${mm}/${yyyy}, ${hh}:${min}:${ss}`;
   };
 
-  const getTxnTimestamp = (txn) => {
-    const dateStr =
-      txn.depositDate ||
-      txn.withdrawalDate ||
-      txn.date ||
-      txn.subscriptionDate ||
-      txn.createdAt ||
-      txn.updatedAt ||
-      null;
-    const t = Date.parse(dateStr);
-    return isNaN(t) ? 0 : t;
-  };
-
   const filteredTransactions =
     filter === "All"
       ? allTransactions
       : allTransactions.filter((txn) => txn.type === filter);
 
   // sort by timestamp descending so newest items appear first
-  const sortedTransactions = filteredTransactions
-    .slice()
-    .sort((a, b) => getTxnTimestamp(b) - getTxnTimestamp(a));
+  const sortedTransactions = filteredTransactions.slice().reverse();
 
   return (
     <div className="history">

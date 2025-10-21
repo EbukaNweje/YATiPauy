@@ -28,8 +28,6 @@ import TransactionPin from "./Components/Auth/TransactionPin";
 import ChangePin from "./pages/ChangePin";
 import Deposit from "./pages/Deposit";
 import WalletAddress from "./pages/WalletAddress";
-import AdminLogin from "./pages/Admin/AdminLogin";
-import AdminDashboard from "./pages/Admin/AdminDashboard";
 // import FAQ from './pages/FAQ';
 
 const App = () => {
