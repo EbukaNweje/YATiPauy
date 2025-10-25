@@ -27,15 +27,17 @@ const Login = () => {
         "https://yaticare-backend.onrender.com/api/auth/login",
         data
       );
-      console.log("this is response", response);
       toast.success("Login Successfull");
       dispatch(loginSuccess(response.data.data));
       localStorage.setItem(
         "refLink",
         JSON.stringify(response.data.data.referralLink)
       );
-      // setLoading(false);
-      Nav("/dashboard");
+      if (response?.data?.data?.user?.pin === "") {
+        Nav("/auth/Pin");
+      } else {
+        Nav("/dashboard");
+      }
     } catch (error) {
       console.log("this is error", error);
       setLoading(false);

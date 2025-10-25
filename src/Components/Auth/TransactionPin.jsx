@@ -60,7 +60,11 @@ const TransactionPin = () => {
           confirmPin: "",
         });
         setTimeout(() => {
-          Nav("/auth/add-WalletAddress");
+          if (user?.user?.WalletInfo?.WalletAddress) {
+            Nav("/dashboard");
+          } else {
+            Nav("/auth/add-WalletAddress");
+          }
         }, 2000);
       }
     } catch (error) {
