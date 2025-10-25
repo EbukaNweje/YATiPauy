@@ -162,15 +162,15 @@ const Withdraw = () => {
                 <span className="amount-value">${selectedAmount}</span>
               </div>
               <div className="amount-row">
-                <span className="amount-label">Processing Fee (2%):</span>
+                <span className="amount-label">Processing Fee (15%):</span>
                 <span className="amount-value">
-                  ${(selectedAmount * 0.02).toFixed(2)}
+                  ${(selectedAmount * 0.15).toFixed(2)}
                 </span>
               </div>
               <div className="amount-row total-amount">
                 <span className="amount-label">Total Amount:</span>
                 <span className="amount-value">
-                  ${(selectedAmount * 1.02).toFixed(2)}
+                  ${(selectedAmount - selectedAmount * 0.15).toFixed(2)}
                 </span>
               </div>
             </div>
