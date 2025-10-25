@@ -274,7 +274,7 @@ const Deposit = () => {
           disabled={!proofFile}
           onClick={handlePayment}
         >
-          {loading ? " Loading..." : " I Have Paid"}
+          {loading ? " Loading..." : "Make Payment"}
         </button>
       </div>
 

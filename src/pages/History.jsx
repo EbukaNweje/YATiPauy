@@ -89,6 +89,8 @@ const History = () => {
     return `${dd}/${mm}/${yyyy}, ${hh}:${min}:${ss}`;
   };
 
+  console.log("userData", userData);
+
   return (
     <div className="history">
       {/* Balance Summary */}
@@ -106,13 +108,7 @@ const History = () => {
         <hr />
         <section>
           <span>Total Withdrawal</span>
-          <h3>
-            $
-            {withdrawTransactions
-              .filter((txn) => txn.status === "approved")
-              .reduce((acc, txn) => acc + txn.amount, 0)
-              .toFixed(2)}
-          </h3>
+          <h3>${userData?.userTransactionTotal?.withdrawalTotal || 0}.00</h3>
         </section>
         <hr />
         <section>
