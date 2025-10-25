@@ -245,13 +245,21 @@ const Withdraw = () => {
         </div>
       )}
       <div className="paymentWarnings">
-        <li>1. Minimum withdrawal amount $2.</li>
-        <li>3. Use only the official company details shown above.</li>
+        <li>
+          To ensure transparency and regulatory compliance, a total withdrawal
+          charge of 15% will be applied. This consists of a 10% Goods and
+          Services Tax (GST) mandated by Australian law, and a 5% Community
+          Empowerment Fee dedicated to a pool that rewards members for marketing
+          and promotional activities, fostering collective growth thereby
+          creating earning opportunities for you. By proceeding, you acknowledge
+          and agree to this structure.
+        </li>
+        {/* <li>3. Use only the official company details shown above.</li>
         <li>4. Each recharge requires creating a new deposit order.</li>
         <li>5. Actual payment must match the order amount exactly.</li>
         <li>6. If not reflected after 24 hours, contact support.</li>
         <li>7. Do not share your deposit address or payment receipt.</li>
-        <li>8. Official staff will never ask for your password.</li>
+        <li>8. Official staff will never ask for your password.</li> */}
       </div>
     </div>
   );
