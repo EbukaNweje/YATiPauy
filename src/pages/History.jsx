@@ -6,6 +6,8 @@ import axios from "axios";
 
 const History = () => {
   const [filter, setFilter] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
   const user = useSelector((state) => state.YATipauy.user);
   const [userData, setUserData] = useState(null);
 
@@ -174,71 +176,109 @@ const History = () => {
 
         <tbody>
           {sortedTransactions.length > 0 ? (
-            sortedTransactions.map((txn, i) => (
-              <tr key={txn._id || i}>
-                <td className="type">
-                  {txn.type === "Deposit" ? (
-                    <BsArrowUpRightCircle size={20} color="green" />
-                  ) : txn.type === "Withdraw" ? (
-                    <BsArrowDownLeftCircle size={20} color="red" />
-                  ) : (
-                    <BsArrowUpRightCircle size={20} color="gray" />
-                  )}
-                  {txn.type}
-                </td>
-                <td>{txn.reason}</td>
-                <td className="txn-id">{txn._id || txn.id || "N/A"}</td>
-                <td
-                  className="amount"
-                  style={{
-                    color:
-                      txn.type === "Deposit"
-                        ? "green"
-                        : txn.type === "Withdraw"
-                        ? "red"
-                        : "gray",
-                  }}
-                >
-                  ${txn.amount}
-                </td>
-                <td className="date">
-                  {formatDate(
-                    txn.depositDate ||
-                      txn.withdrawalDate ||
-                      txn.date ||
-                      txn.subscriptionDate ||
-                      txn.createdAt ||
-                      txn.updatedAt
-                  )}
-                </td>
-                <td
-                  className={`status ${
-                    txn.status === "confirmed"
-                      ? "confirmed"
-                      : txn.status === "approved"
-                      ? "approved"
-                      : txn.status === "active"
-                      ? "active"
-                      : txn.status === "pending"
-                      ? "pending"
-                      : txn.status === "success"
-                      ? "success"
-                      : "failed"
-                  }`}
-                >
-                  {txn.status || "confirmed"}
-                </td>
-              </tr>
-            ))
+            sortedTransactions
+              .slice(
+                (currentPage - 1) * itemsPerPage,
+                currentPage * itemsPerPage
+              )
+              .map((txn, i) => (
+                <tr key={txn._id || i}>
+                  <td className="type">
+                    {txn.type === "Deposit" ? (
+                      <BsArrowUpRightCircle size={20} color="green" />
+                    ) : txn.type === "Withdraw" ? (
+                      <BsArrowDownLeftCircle size={20} color="red" />
+                    ) : (
+                      <BsArrowUpRightCircle size={20} color="gray" />
+                    )}
+                    {txn.type}
+                  </td>
+                  <td>{txn.reason}</td>
+                  <td className="txn-id">{txn._id || txn.id || "N/A"}</td>
+                  <td
+                    className="amount"
+                    style={{
+                      color:
+                        txn.type === "Deposit"
+                          ? "green"
+                          : txn.type === "Withdraw"
+                          ? "red"
+                          : "gray",
+                    }}
+                  >
+                    ${txn.amount}
+                  </td>
+                  <td className="date">
+                    {formatDate(
+                      txn.depositDate ||
+                        txn.withdrawalDate ||
+                        txn.date ||
+                        txn.subscriptionDate ||
+                        txn.createdAt ||
+                        txn.updatedAt
+                    )}
+                  </td>
+                  <td
+                    className={`status ${
+                      txn.status === "confirmed"
+                        ? "confirmed"
+                        : txn.status === "approved"
+                        ? "approved"
+                        : txn.status === "active"
+                        ? "active"
+                        : txn.status === "pending"
+                        ? "pending"
+                        : txn.status === "success"
+                        ? "success"
+                        : "failed"
+                    }`}
+                  >
+                    {txn.status || "confirmed"}
+                  </td>
+                </tr>
+              ))
           ) : (
             <tr>
-              <td colSpan="5" className="no-records">
+              <td colSpan="6" className="no-records">
                 No transactions found
               </td>
             </tr>
           )}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      {sortedTransactions.length > 0 && (
+        <div className="pagination">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+            disabled={currentPage === 1}
+            className="pagination-button"
+          >
+            Previous
+          </button>
+          <span className="page-info">
+            Page {currentPage} of{" "}
+            {Math.ceil(sortedTransactions.length / itemsPerPage)}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) =>
+                Math.min(
+                  Math.ceil(sortedTransactions.length / itemsPerPage),
+                  prev + 1
+                )
+              )
+            }
+            disabled={
+              currentPage >= Math.ceil(sortedTransactions.length / itemsPerPage)
+            }
+            className="pagination-button"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -88,7 +88,13 @@ const Plan = () => {
     setSelectedAmount(value);
   };
 
-  const handleSubscribe = async () => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const handleConfirmationClose = () => {
+    setShowConfirmation(false);
+  };
+
+  const handleSubscribeClick = () => {
     if (!selectedPlan || !selectedAmount) {
       toast.error("Please select a plan and amount.");
       return;
@@ -110,8 +116,13 @@ const Plan = () => {
       return;
     }
 
+    setShowConfirmation(true);
+  };
+
+  const handleSubscribe = async () => {
     setLoading(true);
     try {
+      const amountNum = Number(selectedAmount);
       const response = await axios.post(
         "https://yaticare-backend.onrender.com/api/userSubcription",
         {
@@ -128,7 +139,7 @@ const Plan = () => {
         setSelectedPlan(null);
         setSelectedAmount(null);
         setCustomAmount("");
-        // signal header to refresh balance and user data
+        setShowConfirmation(false);
         dispatch(depositedAmount(Date.now()));
       } else {
         toast.error(response.data.data.message || "Subscription failed");
@@ -145,9 +156,14 @@ const Plan = () => {
     <div className="Plan">
       <div className="plan-container">
         {loading ? (
-          <p>Loading plans...</p>
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading plans...</p>
+          </div>
         ) : plansData.length === 0 ? (
-          <p>No plan available</p>
+          <div className="no-plans">
+            <p>No plans available</p>
+          </div>
         ) : (
           plansData.map((plan, index) => (
             <div
@@ -164,10 +180,12 @@ const Plan = () => {
               <div className="planBoxInfo">
                 <h3 className="plan-title">{plan.planName}</h3>
                 <p className="plan-amount">
-                  ${plan.minimumDeposit.toLocaleString()} - $
-                  {plan.maximumDeposit.toLocaleString()}
+                  <span className="amount-range">
+                    ${plan.minimumDeposit.toLocaleString()} - $
+                    {plan.maximumDeposit.toLocaleString()}
+                  </span>
                 </p>
-                <p className="plan-amount">
+                <p className="plan-duration">
                   Duration: {plan.durationDays} days
                 </p>
               </div>
@@ -179,11 +197,13 @@ const Plan = () => {
         {selectedPlan && (
           <div className="modal-overlay">
             <div className="plan-modal">
-              <h3 className="modal-title">{selectedPlan.planName}</h3>
-              <p className="modal-amount">
-                ${selectedPlan.minimumDeposit.toLocaleString()} - $
-                {selectedPlan.maximumDeposit.toLocaleString()}
-              </p>
+              <div className="modal-header">
+                <h3 className="modal-title">{selectedPlan.planName}</h3>
+                <p className="modal-amount">
+                  ${selectedPlan.minimumDeposit.toLocaleString()} - $
+                  {selectedPlan.maximumDeposit.toLocaleString()}
+                </p>
+              </div>
 
               <div className="amount-options">
                 {selectedPlan.amounts.map((amount, index) => (
@@ -213,19 +233,70 @@ const Plan = () => {
                 />
               </div>
 
-              <button
-                className="subscribe-btn"
-                onClick={handleSubscribe}
-                disabled={loading}
-              >
-                {loading ? "Subscribing..." : "Subscribe"}
-              </button>
-              <button
-                className="close-btn"
-                onClick={() => setSelectedPlan(null)}
-              >
-                Close
-              </button>
+              <div className="button-group">
+                <button
+                  className="subscribe-btn"
+                  onClick={handleSubscribeClick}
+                  disabled={loading || !selectedAmount}
+                >
+                  {loading ? (
+                    <span>
+                      Processing... <div className="loading-spinner"></div>
+                    </span>
+                  ) : (
+                    "Continue"
+                  )}
+                </button>
+                <button
+                  className="close-btn"
+                  onClick={() => setSelectedPlan(null)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showConfirmation && (
+          <div className="modal-overlay">
+            <div className="confirmation-modal">
+              <h3 className="modal-title">Confirm Subscription</h3>
+              <div className="confirmation-content">
+                <p>Please review your subscription details:</p>
+                <div className="confirmation-details">
+                  <div className="detail-row">
+                    <span>Plan:</span>
+                    <span>{selectedPlan.planName}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span>Amount:</span>
+                    <span>${Number(selectedAmount).toLocaleString()}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span>Duration:</span>
+                    <span>{selectedPlan.durationDays} days</span>
+                  </div>
+                </div>
+              </div>
+              <div className="button-group">
+                <button
+                  className="subscribe-btn"
+                  onClick={handleSubscribe}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <span>
+                      Processing... <div className="loading-spinner"></div>
+                    </span>
+                  ) : (
+                    "Confirm Subscription"
+                  )}
+                </button>
+                <button className="close-btn" onClick={handleConfirmationClose}>
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}

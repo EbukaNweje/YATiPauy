@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./pageCss/Recharge.css";
+import "./pageCss/Withdraw.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -146,90 +147,103 @@ const Withdraw = () => {
           Continue
         </button>
       </div>
-
       {/* Confirmation Popup */}
       {showConfirmationPopup && (
-        <div
-          style={{
-            backdropFilter: "blur(2px)",
-          }}
-          className="h-screen w-full absolute flex justify-center px-4"
-        >
-          <div className="w-[90%] sm:w-[400px] md:w-[500px] h-70 bg-white flex flex-col gap-5 shadow-md items-center justify-center p-6 rounded-lg">
-            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">
-              Confirm Withdrawal
-            </h2>
+        <div className="popup-overlay">
+          <div className="popup-card">
+            <div className="popup-header">
+              <h2>Confirm Withdrawal</h2>
+              <p>Please review your withdrawal details</p>
+            </div>
 
-            <p className="text-lg sm:text-xl text-center">
-              Amount: <strong>${selectedAmount}</strong>
-            </p>
-            <p className="text-lg sm:text-xl text-center">
-              Fee: <strong>${(selectedAmount * 0.15).toFixed(2)}</strong>
-            </p>
+            <div className="amount-display">
+              <div className="amount-row">
+                <span className="amount-label">Withdrawal Amount:</span>
+                <span className="amount-value">${selectedAmount}</span>
+              </div>
+              <div className="amount-row">
+                <span className="amount-label">Processing Fee (2%):</span>
+                <span className="amount-value">
+                  ${(selectedAmount * 0.02).toFixed(2)}
+                </span>
+              </div>
+              <div className="amount-row total-amount">
+                <span className="amount-label">Total Amount:</span>
+                <span className="amount-value">
+                  ${(selectedAmount * 1.02).toFixed(2)}
+                </span>
+              </div>
+            </div>
 
-            <div className="flex gap-4">
+            <div className="popup-buttons">
               <button
-                className="w-[100px] h-[50px] bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
+                className="popup-btn confirm-btn"
                 onClick={confirmWithdrawPopup}
               >
-                Confirm
+                Confirm Withdrawal
               </button>
               <button
-                className="w-[100px] h-[50px] bg-red-700 cursor-pointer text-white py-3 rounded-xl hover:bg-red-800 transition"
+                className="popup-btn close-btn"
                 onClick={closeConfirmationPopup}
               >
-                Close
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}{" "}
+      {/* PIN Popup */}
+      {showPinPopup && (
+        <div className="popup-overlay">
+          <div className="popup-card">
+            <span
+              className="close-popup"
+              onClick={() => setShowPinPopup(false)}
+            >
+              x
+            </span>
+            <div className="popup-header">
+              <h2>Enter Transaction PIN</h2>
+              <p>Please enter your 4-digit security PIN</p>
+            </div>
+
+            <div className="pin-input-container">
+              <div style={{ position: "relative" }}>
+                <input
+                  type={showPin ? "text" : "password"}
+                  maxLength={4}
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                  className="pin-input"
+                  placeholder="••••"
+                />
+                <span
+                  className="pin-toggle"
+                  onClick={() => setShowPin(!showPin)}
+                >
+                  {showPin ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
+                </span>
+              </div>
+            </div>
+
+            <div className="popup-buttons">
+              <button
+                disabled={loading}
+                className="popup-btn confirm-btn"
+                onClick={confirmWithdraw}
+              >
+                {loading ? (
+                  <span>
+                    Processing... <span className="loading-dots"></span>
+                  </span>
+                ) : (
+                  "Complete Withdrawal"
+                )}
               </button>
             </div>
           </div>
         </div>
       )}
-
-      {/* PIN Popup */}
-      {showPinPopup && (
-        <div
-          style={{
-            backdropFilter: "blur(2px)",
-          }}
-          className="h-screen w-full absolute flex justify-center px-4"
-        >
-          <div className="w-[90%] sm:w-[400px] md:w-[500px] h-70 bg-white flex flex-col gap-5 shadow-md items-center justify-center p-6 rounded-lg">
-            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">
-              Enter Transaction PIN
-            </h2>
-
-            <div className="w-[70%] flex items-center justify-between border border-gray-400 rounded-sm px-3">
-              <input
-                type={showPin ? "text" : "password"}
-                maxLength={4}
-                value={pin}
-                onChange={(e) => setPin(e.target.value)}
-                className="w-full py-3 text-center text-xl sm:text-2xl tracking-widest focus:outline-none"
-                placeholder="••••"
-              />
-              <span onClick={() => setShowPin(!showPin)}>
-                {showPin ? (
-                  <FaEye size={20} className="text-gray-500 cursor-pointer" />
-                ) : (
-                  <FaEyeSlash
-                    size={20}
-                    className="text-gray-500 cursor-pointer"
-                  />
-                )}
-              </span>
-            </div>
-
-            <button
-              disabled={loading}
-              className="w-[70%] h-[50px] bg-green-700 cursor-pointer text-white py-3 rounded-xl hover:bg-green-800 transition"
-              onClick={confirmWithdraw}
-            >
-              {loading ? "Processing..." : "Withdraw"}
-            </button>
-          </div>
-        </div>
-      )}
-
       <div className="paymentWarnings">
         <li>1. Minimum withdrawal amount $2.</li>
         <li>3. Use only the official company details shown above.</li>

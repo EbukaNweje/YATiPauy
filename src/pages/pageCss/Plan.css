@@ -1,10 +1,12 @@
 .Plan {
   width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 40px;
   align-items: center;
-  padding: 60px 20px;
+  padding: 40px 20px;
+  background: #f8f9fa;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -197,6 +199,21 @@
 .custom-amount {
   width: 100%;
   margin-top: 12px;
+}
+
+.confirmation-modal {
+  background: white;
+  color: #222;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  width: 380px;
+  max-width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.3s ease;
 }
 
 .custom-amount input {
