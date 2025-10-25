@@ -56,22 +56,22 @@ const History = () => {
     return dateB - dateA;
   });
 
-  console.log(
-    "Dates before sorting:",
-    allTransactions.map((txn) => ({
-      id: txn._id,
-      type: txn.type,
-      date: txn.createdAt || txn.date || txn.updatedAt,
-    }))
-  );
+  // console.log(
+  //   "Dates before sorting:",
+  //   allTransactions.map((txn) => ({
+  //     id: txn._id,
+  //     type: txn.type,
+  //     date: txn.createdAt || txn.date || txn.updatedAt,
+  //   }))
+  // );
 
-  console.log(
-    sortedTransactions.map((txn) => ({
-      type: txn.type,
-      amount: txn.amount,
-      date: txn.createdAt || txn.date || txn.updatedAt,
-    }))
-  );
+  // console.log(
+  //   sortedTransactions.map((txn) => ({
+  //     type: txn.type,
+  //     amount: txn.amount,
+  //     date: txn.createdAt || txn.date || txn.updatedAt,
+  //   }))
+  // );
 
   // helper to get a timestamp for a transaction from several possible date fields
   const formatDate = (dateStr) => {

@@ -57,7 +57,7 @@ const Header = () => {
   };
 
   // safe debug - avoid accessing accountBalance on null
-  console.log("header userData:", userData);
+  // console.log("header userData:", userData);
 
   const copy = (refLink) => {
     navigator.clipboard.writeText(refLink);

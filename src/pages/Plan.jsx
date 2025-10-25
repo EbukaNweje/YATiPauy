@@ -113,7 +113,7 @@ const Plan = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://yaticare-backend.onrender.com/api/usrSubcription",
+        "https://yaticare-backend.onrender.com/api/userSubcription",
         {
           userId: user.user._id,
           plan: selectedPlan._id,

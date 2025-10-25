@@ -16,20 +16,22 @@ const PlanDetails = () => {
   // If the user navigated directly to /plandetails/:id, params.id can be used to fetch data.
   useEffect(() => {
     if (!subscription && params?.id) {
-      // TODO: fetch subscription by id if required. For now, show placeholder fallback.
-      // Example: axios.get(`/api/subscription/${params.id}`).then(res => setSubscription(res.data))
-      // We'll set a lightweight fallback object so the UI still renders.
-      setSubscription({
-        plan: {
-          planName: `Plan (${params.id})`,
-          durationDays: "-",
-          description: "",
-        },
-        amount: "-",
-        startDate: "-",
-        endDate: "-",
-        planInterest: "-",
-      });
+      const fetchSubscription = async () => {
+        try {
+          const response = await axios.get(
+            `https://yaticare-backend.onrender.com/api/getusrSubcription/${params.id}`
+          );
+          setSubscription(response.data);
+        } catch (error) {
+          console.error("Error fetching subscription:", error);
+          // Fallback lightweight object if not found
+          setSubscription({
+            plan: { planName: `Plan (${params.id})` },
+            amount: "-",
+          });
+        }
+      };
+      fetchSubscription();
     }
   }, [params, subscription]);
 
