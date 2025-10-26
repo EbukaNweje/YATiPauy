@@ -28,6 +28,7 @@ import TransactionPin from "./Components/Auth/TransactionPin";
 import ChangePin from "./pages/ChangePin";
 import Deposit from "./pages/Deposit";
 import WalletAddress from "./pages/WalletAddress";
+import NotFound from "./Components/NotFound";
 // import FAQ from './pages/FAQ';
 
 const App = () => {
@@ -35,6 +36,10 @@ const App = () => {
     {
       element: <ScrollToTop />,
       children: [
+        {
+          path: "*",
+          element: <NotFound />,
+        },
         {
           path: "/",
           element: <LandingPage />,
@@ -72,7 +77,13 @@ const App = () => {
           path: "dashboard",
           element: <Layout />,
           children: [
-            { path: "", element: <Home /> },
+            {
+              path: "",
+              children: [
+                { path: "", element: <Home /> }, // when visiting /dashboard
+                { path: ":userDataId", element: <Home /> }, // when visiting /dashboard/123
+              ],
+            },
             { path: "Products", element: <ProductS /> },
             { path: "recharge", element: <Recharge /> },
             { path: "deposit", element: <Deposit /> },
