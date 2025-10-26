@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   depositAmount: null,
+  id: "",
 };
 
 const authSlice = createSlice({
@@ -25,8 +26,14 @@ const authSlice = createSlice({
     depositedAmount: (state, action) => {
       state.depositAmount = action.payload;
     },
+
+    userId: (state, { payload }) => {
+      state.id = payload;
+      console.log("User id:", payload);
+    },
   },
 });
 
-export const { loginSuccess, logout, depositedAmount } = authSlice.actions;
+export const { loginSuccess, logout, depositedAmount, userId } =
+  authSlice.actions;
 export default authSlice.reducer;

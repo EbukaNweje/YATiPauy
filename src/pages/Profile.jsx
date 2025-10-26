@@ -18,6 +18,8 @@ const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.YATipauy.user);
   const [userInfo, setUserInfo] = useState(null);
+  const reduxId = useSelector((state) => state?.YATipauy?.id);
+  const finalId = user?.user?._id || reduxId;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -28,7 +30,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
         );
         const data = response?.data?.data;
         setUserInfo(data);
@@ -37,10 +39,10 @@ const Profile = () => {
         // console.error("Error fetching user data:", error);
       }
     };
-    if (user?.user?._id) {
+    if (finalId) {
       fetchUserData();
     }
-  }, []);
+  }, [user, finalId]);
 
   return (
     <div className="Profile">

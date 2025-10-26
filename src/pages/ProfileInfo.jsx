@@ -8,6 +8,8 @@ import axios from "axios";
 function ProfileInfo() {
   const user = useSelector((state) => state.YATipauy.user);
   const [UsersData, setUsersData] = useState([]);
+  const reduxId = useSelector((state) => state?.YATipauy?.id);
+  const finalId = user?.user?._id || reduxId;
   // console.log("UsersData", UsersData);
 
   const [details, setDetails] = useState({
@@ -43,7 +45,7 @@ function ProfileInfo() {
       try {
         // Replace with your actual user API endpoint
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
         );
         // console.log("FGF", response?.data?.data);
         setUsersData(response?.data?.data);
@@ -52,7 +54,7 @@ function ProfileInfo() {
       }
     }
     fetchUser();
-  }, []);
+  }, [user, finalId]);
 
   const handleInputChange = (field) => (e) => {
     setDetails({ ...details, [field]: e.target.value });

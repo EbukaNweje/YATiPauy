@@ -8,17 +8,22 @@ import "./pageCss/refpage.css";
 
 const RefPage = () => {
   const user = useSelector((state) => state.YATipauy.user);
-  const referralLink = user.referralLink;
   const [referrals, setReferrals] = useState([]);
   const [refBonus, setRefBonus] = useState(0);
   const [loading, setLoading] = useState(true);
+  const reduxId = useSelector((state) => state?.YATipauy?.id);
+  const finalId = user?.user?._id || reduxId;
+  const referralLink = user?.referralLink;
 
+  console.log("referralLink:", referralLink);
   useEffect(() => {
     async function fetchUser() {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
         );
+
+        console.log("response:", response);
 
         const invited = response?.data?.data?.inviteCode?.userInvited || [];
         setReferrals(invited);
@@ -31,7 +36,7 @@ const RefPage = () => {
       }
     }
     fetchUser();
-  }, []);
+  }, [user, finalId]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);

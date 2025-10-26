@@ -10,12 +10,14 @@ const History = () => {
   const [itemsPerPage] = useState(10);
   const user = useSelector((state) => state.YATipauy.user);
   const [userData, setUserData] = useState(null);
+  const reduxId = useSelector((state) => state?.YATipauy?.id);
+  const finalId = user?.user?._id || reduxId;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+          `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
         );
         setUserData(response.data.data);
       } catch (error) {
@@ -23,10 +25,10 @@ const History = () => {
       }
     };
 
-    if (user?.user?._id) {
+    if (finalId) {
       fetchUserData();
     }
-  }, [user]);
+  }, [user, finalId]);
 
   const depositTransactions = userData?.userTransaction?.deposit || [];
   const withdrawTransactions = userData?.userTransaction?.withdrawal || [];
@@ -89,7 +91,7 @@ const History = () => {
     return `${dd}/${mm}/${yyyy}, ${hh}:${min}:${ss}`;
   };
 
-  console.log("userData", userData);
+  // console.log("userData", userData);
 
   return (
     <div className="history">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   FaArrowLeft,
   FaHeadphones,
@@ -31,8 +31,17 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const user = useSelector((state) => state.YATipauy.user);
-  const depositSignal = useSelector((state) => state.YATipauy.depositAmout);
+  const depositSignal = useSelector((state) => state.YATipauy.depositAmount);
   const refLink = user?.referralLink;
+  const reduxId = useSelector((state) => state?.YATipauy?.id);
+
+  // console.log("user from header:", user?.user?._id);
+  // console.log("user from header:", reduxId);
+
+  // const id = useSelector((state) => state.id);
+
+  const finalId = user?.user?._id || reduxId;
+  // console.log("user from header:", finalId);
 
   const formatCurrency = (val) => {
     const n = Number(val);
@@ -46,7 +55,7 @@ const Header = () => {
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+        `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
       );
       const data = response?.data?.data;
       setUserData(data);
@@ -66,11 +75,11 @@ const Header = () => {
 
   React.useEffect(() => {
     // fetch when user logs in or when a deposit/withdraw/subscription updates the signal
-    if (user?.user?._id) {
+    if (user?.user?._id || finalId) {
       fetchUserData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, depositSignal]);
+  }, [user, finalId, depositSignal]);
 
   React.useEffect(() => {}, [userData]);
 

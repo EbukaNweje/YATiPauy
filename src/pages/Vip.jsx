@@ -11,6 +11,8 @@ const Vip = () => {
   const user = useSelector((state) => state.YATipauy.user);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const reduxId = useSelector((state) => state?.YATipauy?.id);
+  const finalId = user?.user?._id || reduxId;
 
   const formatCurrency = (val) => {
     const n = Number(val);
@@ -22,13 +24,13 @@ const Vip = () => {
   };
 
   useEffect(() => {
-    if (!user?.user?._id) return;
+    if (!finalId) return;
 
     const fetchSubscriptions = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/getusrSubcription/${user.user._id}`
+          `https://yaticare-back-end.vercel.app/api/getusrSubcription/${finalId}`
         );
         setUserData(response?.data);
       } catch (error) {
@@ -39,7 +41,7 @@ const Vip = () => {
     };
 
     fetchSubscriptions();
-  }, [user]);
+  }, [user, finalId]);
 
   const navigate = useNavigate();
 

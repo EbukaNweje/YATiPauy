@@ -10,18 +10,27 @@ import {
 } from "react-icons/fa";
 import "./pageCss/Home.css";
 import Product from "./Product";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Bg from "../assets/bg.png";
 import { images, products } from "../Components/Data";
+import { useDispatch } from "react-redux";
+import { userId } from "./Global/Slice";
 
 const Home = () => {
   const ITEMS_PER_PAGE = 6;
   const [index, setIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const { userDataId } = useParams();
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
-    navigate("/dashboard"); // ✅ works now
-  }, [navigate]);
+    if (userDataId) {
+      dispatch(userId(userDataId));
+      navigate("/dashboard");
+    }
+  }, [userDataId, dispatch, navigate]);
 
   useEffect(() => {
     const durations = [4000, 3000, 3000];
