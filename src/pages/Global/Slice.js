@@ -5,7 +5,7 @@ const initialState = {
   isLoggedIn: false,
   loading: false,
   error: null,
-  depositAmout: "",
+  depositAmount: null,
 };
 
 const authSlice = createSlice({
@@ -23,7 +23,7 @@ const authSlice = createSlice({
     },
 
     depositedAmount: (state, action) => {
-      state.depositAmout = action.payload;
+      state.depositAmount = action.payload;
     },
   },
 });

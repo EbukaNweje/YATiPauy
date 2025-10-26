@@ -53,12 +53,13 @@ const RenderPopSuccessful = React.memo(({ onClose }) => (
 ));
 
 const Deposit = () => {
-  const amount = useSelector((state) => state.YATipauy.depositAmout);
+  const amount = useSelector((state) => state.YATipauy.depositAmount);
   const userData = useSelector((state) => state.YATipauy.user);
   const [proofPaymentPop, setProofPaymentPop] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   // console.log(userData);
 
   // useEffect(() => {
@@ -162,7 +163,7 @@ const Deposit = () => {
       // navigate("/dashboard");
       setProofPaymentPop(true);
       // signal other parts of the app (Header) to refresh user data
-      dispatch(depositedAmount(Date.now()));
+      dispatch(depositedAmount(amount));
     } catch (error) {
       setLoading(false);
     }
@@ -271,10 +272,14 @@ const Deposit = () => {
         <button
           type="button"
           className="paidBtn"
-          disabled={!proofFile}
+          disabled={!proofFile || proofPaymentPop}
           onClick={handlePayment}
         >
-          {loading ? " Loading..." : "Make Payment"}
+          {loading
+            ? " Loading..."
+            : proofPaymentPop
+            ? " Paid"
+            : " Make Payment"}
         </button>
       </div>
 

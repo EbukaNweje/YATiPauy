@@ -13,27 +13,29 @@ const PlanDetails = () => {
     location?.state?.subscription || null
   );
 
+  // console.log("subscription", subscription);
   // If the user navigated directly to /plandetails/:id, params.id can be used to fetch data.
-  useEffect(() => {
-    if (!subscription && params?.id) {
-      const fetchSubscription = async () => {
-        try {
-          const response = await axios.get(
-            `https://yaticare-backend.onrender.com/api/getusrSubcription/${params.id}`
-          );
-          setSubscription(response.data);
-        } catch (error) {
-          console.error("Error fetching subscription:", error);
-          // Fallback lightweight object if not found
-          setSubscription({
-            plan: { planName: `Plan (${params.id})` },
-            amount: "-",
-          });
-        }
-      };
-      fetchSubscription();
-    }
-  }, [params, subscription]);
+  // useEffect(() => {
+  //   if (!subscription && params?.id) {
+  //     const fetchSubscription = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           `https://yaticare-backend.onrender.com/api/getusrSubcription/${params.id}`
+  //         );
+  //         setSubscription(response.data);
+  //         console.log("this is the res", response.data);
+  //       } catch (error) {
+  //         console.error("Error fetching subscription:", error);
+  //         // Fallback lightweight object if not found
+  //         // setSubscription({
+  //         //   plan: { planName: `Plan (${params.id})` },
+  //         //   amount: "-",
+  //         // });
+  //       }
+  //     };
+  //     fetchSubscription();
+  //   }
+  // }, [params, subscription]);
 
   const formatCurrency = (val) => {
     const n = Number(val);
@@ -97,9 +99,7 @@ const PlanDetails = () => {
     );
   }
 
-  const amountDisplay = subscription?.amount
-    ? formatCurrency(subscription.amount)
-    : "-";
+  const amountDisplay = subscription?.amount ? subscription.amount : "-";
   const interestPct =
     subscription?.plan?.percentageInterest ?? subscription?.planInterest ?? "-";
   const startDateDisplay =

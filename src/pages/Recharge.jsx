@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import "./pageCss/Recharge.css";
 import { FaCircleCheck } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { depositedAmount } from "./Global/Slice";
 import toast from "react-hot-toast";
 
 const Recharge = () => {
   // const amounts = [5000, 10000, 20000, 50000, 100000, 150000];
-  const [selectedAmount, setSelectedAmount] = useState("");
+  // const amount = useSelector((state) => state.YATipauy.depositAmount);
+
+  const [selectedAmount, setSelectedAmount] = useState(null);
   const dispatch = useDispatch();
 
   const handleSelectAmount = () => {
