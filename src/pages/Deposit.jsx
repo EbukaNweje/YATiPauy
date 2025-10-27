@@ -10,9 +10,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 // ⏳ Countdown Component
-const Countdown = ({ paymentMethod, onExpire }) => {
-  // 30 minutes = 1800 seconds
-  const [timeLeft, setTimeLeft] = useState(1800);
+// initialTimeLeft (seconds) is used so timer can persist across reloads
+const Countdown = ({ onExpire, initialTimeLeft = 1800 }) => {
+  const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
+
+  // reset timer when initialTimeLeft changes (e.g., on page load / re-init)
+  useEffect(() => {
+    setTimeLeft(initialTimeLeft);
+  }, [initialTimeLeft]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,7 +32,7 @@ const Countdown = ({ paymentMethod, onExpire }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [onExpire]);
+  }, [onExpire, initialTimeLeft]);
 
   const fmt = (s) => {
     const minutes = Math.floor(s / 60);
@@ -51,6 +56,7 @@ const RenderPopSuccessful = React.memo(({ onClose }) => (
     </div>
   </div>
 ));
+RenderPopSuccessful.displayName = "RenderPopSuccessful";
 
 const Deposit = () => {
   const amount = useSelector((state) => state.YATipauy.depositAmount);
@@ -102,12 +108,64 @@ const Deposit = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const [proofFile, setProofFile] = useState(null);
+  const [initialTimeLeft, setInitialTimeLeft] = useState(1800);
 
-  // Switch address/bank when timer expires
+  // storage key for per-user, per-method timer persistence
+  const timerStorageKey = () =>
+    `deposit_timer_${userData?.user?._id || "anon"}_${paymentMethod}`;
+
+  // Switch address/bank when timer expires and persist timer state
   const handleExpire = () => {
     const list = paymentMethod === "USDT" ? companyWallets : companyBanks;
-    setCurrentIndex((prev) => (prev + 1) % list.length);
+    setCurrentIndex((prev) => {
+      const newIndex = (prev + 1) % list.length;
+      try {
+        const key = timerStorageKey();
+        const payload = { startedAt: Date.now(), initialIndex: newIndex };
+        localStorage.setItem(key, JSON.stringify(payload));
+      } catch {
+        // ignore storage errors
+      }
+      // reset countdown for next window
+      setInitialTimeLeft(1800);
+      return newIndex;
+    });
   };
+
+  // initialize timer and currentIndex from localStorage (or create new)
+  useEffect(() => {
+    const init = () => {
+      const key = timerStorageKey();
+      const now = Date.now();
+      const intervalMs = 1800 * 1000;
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) {
+          const payload = { startedAt: now, initialIndex: currentIndex };
+          localStorage.setItem(key, JSON.stringify(payload));
+          setInitialTimeLeft(1800);
+          return;
+        }
+        const saved = JSON.parse(raw);
+        const startedAt = saved.startedAt || now;
+        const initialIndex =
+          typeof saved.initialIndex === "number" ? saved.initialIndex : 0;
+        const elapsed = now - startedAt;
+        const intervalsPassed = Math.floor(elapsed / intervalMs);
+        const list = paymentMethod === "USDT" ? companyWallets : companyBanks;
+        const newIndex = (initialIndex + intervalsPassed) % list.length;
+        setCurrentIndex(newIndex);
+        const nextExpireAt = startedAt + (intervalsPassed + 1) * intervalMs;
+        const secsLeft = Math.max(0, Math.round((nextExpireAt - now) / 1000));
+        setInitialTimeLeft(secsLeft > 0 ? secsLeft : 0);
+      } catch {
+        setInitialTimeLeft(1800);
+      }
+    };
+    // run init when paymentMethod or user changes
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paymentMethod, userData]);
 
   const copyAddress = async () => {
     let text =
@@ -165,6 +223,7 @@ const Deposit = () => {
       // signal other parts of the app (Header) to refresh user data
       dispatch(depositedAmount(amount));
     } catch (error) {
+      console.error(error);
       setLoading(false);
     }
   };
@@ -248,7 +307,10 @@ const Deposit = () => {
           </div>
 
           {/* ⏳ Only this updates every second */}
-          <Countdown paymentMethod={paymentMethod} onExpire={handleExpire} />
+          <Countdown
+            onExpire={handleExpire}
+            initialTimeLeft={initialTimeLeft}
+          />
           {copied && <p className="copyMsg">Copied!</p>}
         </div>
 
