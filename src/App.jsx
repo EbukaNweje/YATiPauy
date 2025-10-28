@@ -22,6 +22,7 @@ import ProfileSettings from "./pages/ProfileSettings";
 import RefPage from "./pages/RefPage";
 import ProfileInfo from "./pages/ProfileInfo";
 import ScrollToTop from "./Components/ScrollToTop";
+import PrivateRoute from "./Components/PrivateRoute";
 import PlanDetails from "./pages/PlanDetails";
 import ChangePhone from "./pages/Auth/ChangePhone";
 import TransactionPin from "./Components/Auth/TransactionPin";
@@ -75,33 +76,34 @@ const App = () => {
         { path: "terms", element: <Terms /> },
         {
           path: "dashboard",
-          element: <Layout />,
+          element: <PrivateRoute />,
           children: [
             {
               path: "",
+              element: <Layout />, // Layout will render its own nested children
               children: [
                 { path: "", element: <Home /> }, // when visiting /dashboard
                 { path: ":userDataId", element: <Home /> }, // when visiting /dashboard/123
+                { path: "Products", element: <ProductS /> },
+                { path: "recharge", element: <Recharge /> },
+                { path: "deposit", element: <Deposit /> },
+                { path: "withdraw", element: <Withdraw /> },
+                { path: "WalletAddress", element: <Bank /> },
+                { path: "referrals", element: <RefPage /> },
+                { path: "profileinfo", element: <ProfileInfo /> },
+                { path: "Profile", element: <Profile /> },
+                { path: "accountSettings", element: <ProfileSettings /> },
+                { path: "changePin", element: <ChangePin /> },
+                { path: "history", element: <History /> },
+                { path: "plandetails", element: <PlanDetails /> },
+                { path: "plandetails/:id", element: <PlanDetails /> },
+                { path: "myPlans", element: <Vip /> },
+                { path: "changephoneNumber", element: <ChangePhone /> },
+                { path: "plan", element: <Plan key={location.key} /> },
+                { path: "changePassword", element: <Change /> },
+                { path: "Privacy", element: <Privacy /> },
               ],
             },
-            { path: "Products", element: <ProductS /> },
-            { path: "recharge", element: <Recharge /> },
-            { path: "deposit", element: <Deposit /> },
-            { path: "withdraw", element: <Withdraw /> },
-            { path: "WalletAddress", element: <Bank /> },
-            { path: "referrals", element: <RefPage /> },
-            { path: "profileinfo", element: <ProfileInfo /> },
-            { path: "Profile", element: <Profile /> },
-            { path: "accountSettings", element: <ProfileSettings /> },
-            { path: "changePin", element: <ChangePin /> },
-            { path: "history", element: <History /> },
-            { path: "plandetails", element: <PlanDetails /> },
-            { path: "plandetails/:id", element: <PlanDetails /> },
-            { path: "myPlans", element: <Vip /> },
-            { path: "changephoneNumber", element: <ChangePhone /> },
-            { path: "plan", element: <Plan key={location.key} /> },
-            { path: "changePassword", element: <Change /> },
-            { path: "Privacy", element: <Privacy /> },
           ],
         },
       ],

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   FaArrowLeft,
@@ -20,7 +20,7 @@ import {
   FaShieldAlt,
 } from "react-icons/fa";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaNairaSign } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { BsCurrencyDollar } from "react-icons/bs";
@@ -35,7 +35,23 @@ const Header = () => {
   const refLink = user?.referralLink;
   const reduxId = useSelector((state) => state?.YATipauy?.id);
 
-  // console.log("user from header:", user?.user?._id);
+  useEffect(() => {
+    // dispatch(loginSuccess(userData));
+    const handleClickOutside = (event) => {
+      if (
+        !event.target.closest(".menu-container") &&
+        !event.target.closest(".dropdown-menu")
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [userData]);
+
   // console.log("user from header:", reduxId);
 
   // const id = useSelector((state) => state.id);
