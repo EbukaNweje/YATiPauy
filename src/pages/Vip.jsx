@@ -78,10 +78,23 @@ const Vip = () => {
                 aria-labelledby={`sub-${subscriptionData?._id}`}
               >
                 <div className="card-left">
-                  <div className="logo-badge" aria-hidden>
-                    {/* placeholder image, replace with real plan image if available */}
-                    <img src={planLogo} alt="plan" />
+                  <div>
+                    <div
+                      className={`status-badge ${
+                        subscriptionData?.status === "active"
+                          ? "status-active"
+                          : subscriptionData?.status === "expired"
+                          ? "status-expired"
+                          : "status-failed"
+                      }`}
+                    >
+                      {subscriptionData?.status}
+                    </div>
                   </div>
+                  {/* <div className="logo-badge" aria-hidden>
+                    placeholder image, replace with real plan image if available
+                    <img src={planLogo} alt="plan" />
+                  </div> */}
                   <div className="card-meta">
                     <h3 id={`sub-${subscriptionData?._id}`}>
                       {subscriptionData?.plan?.planName}
@@ -114,20 +127,19 @@ const Vip = () => {
                     </div>
                   </div>
 
-                  <div>
-                    <div
-                      className={`status-badge ${
-                        subscriptionData?.status === "active"
-                          ? "status-active"
-                          : subscriptionData?.status === "pending"
-                          ? "status-pending"
-                          : "status-failed"
-                      }`}
-                    >
-                      {subscriptionData?.status}
-                    </div>
-                  </div>
-
+                  <button
+                    className="Recycle-btn"
+                    aria-label={"Recycle"}
+                    disabled={true}
+                    // style={{}}
+                    // onClick={() =>
+                    //   navigate(`/dashboard/plandetails`, {
+                    //     state: { subscription: subscriptionData },
+                    //   })
+                    // }
+                  >
+                    Recycle
+                  </button>
                   <button
                     className="navigate-btn"
                     aria-label={`View details for ${subscriptionData?.plan?.planName}`}

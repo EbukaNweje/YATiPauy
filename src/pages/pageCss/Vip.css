@@ -165,7 +165,7 @@
   background: linear-gradient(90deg, var(--success), #059669);
   color: #fff;
 }
-.status-pending {
+.status-expired {
   background: linear-gradient(90deg, #f59e0b, #f97316);
   color: #fff;
 }
@@ -188,7 +188,25 @@
 }
 
 .navigate-btn:hover {
-  background: rgba(6, 95, 70, 0.06);
+  background: rgba(0, 1, 0, 0.06);
+  transform: scale(1.06);
+}
+.Recycle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* background: linear-gradient(90deg, var(--success), #059668); */
+  background: rgba(128, 128, 128, 0.188);
+  border: none;
+  color: var(--bg);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.Recycle-btn:hover {
+  background: rgba(6, 95, 70, 0.083);
   transform: scale(1.06);
 }
 

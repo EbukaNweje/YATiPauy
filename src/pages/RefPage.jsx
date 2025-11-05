@@ -11,11 +11,12 @@ const RefPage = () => {
   const [referrals, setReferrals] = useState([]);
   const [refBonus, setRefBonus] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [totalreferredactivesubscribers, settotalreferredactivesubscribers] =
+    useState(null);
   const reduxId = useSelector((state) => state?.YATipauy?.id);
   const finalId = user?.user?._id || reduxId;
   const referralLink = user?.referralLink;
 
-  console.log("referralLink:", referralLink);
   useEffect(() => {
     async function fetchUser() {
       try {
@@ -36,6 +37,25 @@ const RefPage = () => {
       }
     }
     fetchUser();
+  }, [user, finalId]);
+
+  const fetchReferredSubscribers = () => {
+    const url = `https://yaticare-back-end.vercel.app/api/user/totalreferredactivesubscribers/${finalId}`;
+    axios
+      .get(url)
+      .then((res) => {
+        settotalreferredactivesubscribers(
+          res?.data?.totalReferredActiveSubscribers
+        );
+        console.log("this is totalreferredactivesubscribers", res);
+        // setOneUserData(res?.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    fetchReferredSubscribers();
   }, [user, finalId]);
 
   const handleCopy = () => {
@@ -104,6 +124,13 @@ const RefPage = () => {
             </div>
             <h2>Total Referrals</h2>
             <div className="big">{referrals.length}</div>
+          </div>
+          <div className="ref-card">
+            <div className="icon">
+              <FaUsers />
+            </div>
+            <h2>Total Referred Active Subscribers</h2>
+            <div className="big">{totalreferredactivesubscribers}</div>
           </div>
 
           {/* Referral Bonus */}

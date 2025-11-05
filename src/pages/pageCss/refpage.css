@@ -40,14 +40,14 @@
 
 .ref-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
 
 .ref-card {
   background: var(--card);
   border-radius: 12px;
-  padding: 18px;
+  padding: 10px;
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
   border: 1px solid rgba(6, 95, 70, 0.06);
   display: flex;

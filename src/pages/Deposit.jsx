@@ -212,6 +212,10 @@ const Deposit = () => {
       amount: amount,
       PaymentType: paymentMethod,
       depositDate: date,
+      depositWallet:
+        paymentMethod === "USDT"
+          ? companyWallets[currentIndex]
+          : companyBanks[currentIndex].accountNumber,
     };
     setLoading(true);
     try {
