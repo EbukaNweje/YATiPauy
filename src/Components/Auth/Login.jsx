@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./AuthStyle.css";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";

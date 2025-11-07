@@ -159,6 +159,7 @@ const RefPage = () => {
                     <th className="p-4 font-medium">User</th>
                     <th className="p-4 font-medium">Phone</th>
                     <th className="p-4 font-medium">Joined</th>
+                    <th className="p-4 font-medium">Subscription Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -167,21 +168,33 @@ const RefPage = () => {
                       <td className="p-4">
                         <div className="user-cell">
                           <div className="avatar">
-                            {(referral.userName || "?").charAt(0)}
+                            {(referral?.userName || "?").charAt(0)}
                           </div>
                           <div>
-                            <div className="user-name">{referral.userName}</div>
+                            <div className="user-name">
+                              {referral?.userName}
+                            </div>
                             <div className="user-sub">
-                              {referral.email || ""}
+                              {referral?.email || ""}
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="p-4 text-gray-700">
-                        {referral.phoneNumber}
+                        {referral?.phoneNumber}
                       </td>
                       <td className="p-4 text-gray-700">
-                        {formatDate(referral.date)}
+                        {formatDate(referral?.date)}
+                      </td>
+                      <td
+                        className="p-4 "
+                        style={{
+                          color: referral?.isSubscribed ? "green" : "red",
+                        }}
+                      >
+                        {formatDate(
+                          referral?.isSubscribed ? "Active" : "Inactive"
+                        )}
                       </td>
                     </tr>
                   ))}
