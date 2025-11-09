@@ -11,20 +11,40 @@ import toast from "react-hot-toast";
 
 // ⏳ Countdown Component
 // initialTimeLeft (seconds) is used so timer can persist across reloads
-const Countdown = ({ onExpire, initialTimeLeft = 1800 }) => {
+const Countdown = ({
+  onExpire,
+  initialTimeLeft = 1800,
+  storageKey = "countdownTimer",
+}) => {
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
 
-  // reset timer when initialTimeLeft changes (e.g., on page load / re-init)
+  // Load persisted start time
   useEffect(() => {
-    setTimeLeft(initialTimeLeft);
-  }, [initialTimeLeft]);
+    const stored = localStorage.getItem(storageKey);
+    if (stored) {
+      const { startedAt } = JSON.parse(stored);
+      const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+      const remaining = initialTimeLeft - elapsed;
+      setTimeLeft(remaining > 0 ? remaining : 0);
+    } else {
+      // First time: store start time
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify({ startedAt: Date.now() })
+      );
+      setTimeLeft(initialTimeLeft);
+    }
+  }, [initialTimeLeft, storageKey]);
 
   useEffect(() => {
+    if (timeLeft <= 0) return;
+
     const interval = setInterval(() => {
       setTimeLeft((s) => {
         if (s <= 1) {
-          clearInterval(interval); // stop timer
-          onExpire(); // notify parent
+          clearInterval(interval);
+          localStorage.removeItem(storageKey); // clear timer
+          onExpire();
           return 0;
         }
         return s - 1;
@@ -32,7 +52,7 @@ const Countdown = ({ onExpire, initialTimeLeft = 1800 }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [onExpire, initialTimeLeft]);
+  }, [timeLeft, onExpire, storageKey]);
 
   const fmt = (s) => {
     const minutes = Math.floor(s / 60);
@@ -115,6 +135,7 @@ const Deposit = () => {
     `deposit_timer_${userData?.user?._id || "anon"}_${paymentMethod}`;
 
   // Switch address/bank when timer expires and persist timer state
+
   const handleExpire = () => {
     const list = paymentMethod === "USDT" ? companyWallets : companyBanks;
     setCurrentIndex((prev) => {
@@ -126,8 +147,7 @@ const Deposit = () => {
       } catch {
         // ignore storage errors
       }
-      // reset countdown for next window
-      setInitialTimeLeft(1800);
+      setInitialTimeLeft(1800); // optional if Countdown reads from localStorage
       return newIndex;
     });
   };
@@ -199,6 +219,14 @@ const Deposit = () => {
       setProofFile(e.target.files[0].name);
     }
   };
+
+  useEffect(() => {
+    const stored = localStorage.getItem(timerStorageKey());
+    if (stored) {
+      const { initialIndex } = JSON.parse(stored);
+      setCurrentIndex(initialIndex);
+    }
+  }, []);
   // const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   // console.log(userTimeZone);
   const date = new Date().toLocaleString();
