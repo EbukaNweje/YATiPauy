@@ -233,7 +233,7 @@ const Deposit = () => {
   // console.log(date);
 
   const handlePayment = async () => {
-    const url = "https://yaticare-back-end.vercel.app/api/deposit/deposit";
+    const url = "https://yaticare-backend.onrender.com/api/deposit/deposit";
 
     const data = {
       userId: userData.user._id,
