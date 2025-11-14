@@ -9,8 +9,8 @@ const ChangePhone = () => {
   const user = useSelector((state) => state.YATipauy.user);
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
-    currentPhoneNumber: "",
-    newPhoneNumber: "",
+    // currentPhoneNumber: "",
+    phoneNumber: "",
   });
 
   const validatePhoneNumber = (phoneNumber) => {
@@ -29,8 +29,9 @@ const ChangePhone = () => {
         `https://yaticare-back-end.vercel.app/api/user/changePhonenumber/${user.user._id}`,
         userInput
       );
-      toast.success("Phone number updated successfully");
-      setUserInput({ currentPhoneNumber: "", newPhoneNumber: "" });
+      console.log(response);
+      // toast.success("Phone number updated successfully");
+      setUserInput({ phoneNumber: "" });
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to update phone number"
@@ -72,9 +73,9 @@ const ChangePhone = () => {
             <input
               type="tel"
               placeholder="Enter New Phone number"
-              value={userInput.newPhoneNumber}
+              value={userInput.phoneNumber}
               onChange={(e) =>
-                setUserInput({ ...userInput, newPhoneNumber: e.target.value })
+                setUserInput({ ...userInput, phoneNumber: e.target.value })
               }
               className="w-full text-lg focus:outline-none placeholder-gray-500"
             />

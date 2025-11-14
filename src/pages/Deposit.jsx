@@ -8,6 +8,7 @@ import { depositedAmount } from "./Global/Slice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
+import PropTypes from "prop-types";
 
 // ⏳ Countdown Component
 // initialTimeLeft (seconds) is used so timer can persist across reloads
@@ -54,6 +55,11 @@ const Countdown = ({
     return () => clearInterval(interval);
   }, [timeLeft, onExpire, storageKey]);
 
+  useEffect(() => {
+    // Reset the timer when initialTimeLeft changes
+    setTimeLeft(initialTimeLeft);
+  }, [initialTimeLeft]);
+
   const fmt = (s) => {
     const minutes = Math.floor(s / 60);
     const seconds = s % 60;
@@ -64,6 +70,12 @@ const Countdown = ({
   };
 
   return <p className="timer">Expires in {fmt(timeLeft)}</p>;
+};
+
+Countdown.propTypes = {
+  onExpire: PropTypes.func.isRequired,
+  initialTimeLeft: PropTypes.number,
+  storageKey: PropTypes.string,
 };
 
 const RenderPopSuccessful = React.memo(({ onClose }) => (
@@ -77,6 +89,10 @@ const RenderPopSuccessful = React.memo(({ onClose }) => (
   </div>
 ));
 RenderPopSuccessful.displayName = "RenderPopSuccessful";
+
+RenderPopSuccessful.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 const Deposit = () => {
   const amount = useSelector((state) => state.YATipauy.depositAmount);
@@ -141,19 +157,14 @@ const Deposit = () => {
     const list = paymentMethod === "USDT" ? companyWallets : companyBanks;
     setCurrentIndex((prev) => {
       const newIndex = (prev + 1) % list.length;
-      try {
-        const key = timerStorageKey();
-        const payload = { startedAt: Date.now(), initialIndex: newIndex };
-        localStorage.setItem(key, JSON.stringify(payload));
-      } catch {
-        // ignore storage errors
-      }
-      setInitialTimeLeft(1800); // Reset the timer
+      setInitialTimeLeft(1800); // Reset the timer to 30 minutes
       return newIndex;
     });
   };
 
   // initialize timer and currentIndex from localStorage (or create new)
+  const currentIndexRef = React.useRef(currentIndex);
+
   useEffect(() => {
     const init = () => {
       const key = timerStorageKey();
@@ -161,9 +172,10 @@ const Deposit = () => {
       try {
         // Clear previous timer data to start fresh
         localStorage.removeItem(key);
-        const newIndex = (currentIndex + 1) % companyWallets.length;
+        const newIndex = (currentIndexRef.current + 1) % companyWallets.length;
         const payload = { startedAt: now, initialIndex: newIndex };
         localStorage.setItem(key, JSON.stringify(payload));
+        currentIndexRef.current = newIndex; // Update ref instead of state
         setCurrentIndex(newIndex);
         setInitialTimeLeft(1800);
       } catch {
@@ -171,7 +183,7 @@ const Deposit = () => {
       }
     };
     init();
-  }, [timerStorageKey, currentIndex, companyWallets]);
+  }, [timerStorageKey, companyWallets]);
 
   const copyAddress = async () => {
     let text =
