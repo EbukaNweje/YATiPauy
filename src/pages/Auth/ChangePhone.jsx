@@ -9,7 +9,6 @@ const ChangePhone = () => {
   const user = useSelector((state) => state.YATipauy.user);
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
-    // currentPhoneNumber: "",
     phoneNumber: "",
   });
 
@@ -23,14 +22,18 @@ const ChangePhone = () => {
     //   return;
     // }
 
+    console.log("userInput", user.user._id);
+
     try {
       setLoading(true);
-      const response = await axios.post(
+      const response = await axios.put(
         `https://yaticare-back-end.vercel.app/api/user/changePhonenumber/${user.user._id}`,
         userInput
       );
-      console.log(response);
-      // toast.success("Phone number updated successfully");
+      // console.log(response);
+      toast.success(
+        response.data.message || "Phone number updated successfully"
+      );
       setUserInput({ phoneNumber: "" });
     } catch (error) {
       toast.error(
