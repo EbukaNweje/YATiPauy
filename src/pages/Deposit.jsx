@@ -101,11 +101,10 @@ const Deposit = () => {
   //     .catch((err) => console.error(err));
   // }, [amount]);
 
-  const companyWallets = [
-    "WALLET-ADDR-123-ABC",
-    "WALLET-ADDR-456-DEF",
-    "WALLET-ADDR-789-GHI",
-  ];
+  const companyWallets = React.useMemo(
+    () => ["WALLET-ADDR-123-ABC", "WALLET-ADDR-456-DEF", "WALLET-ADDR-789-GHI"],
+    []
+  );
   const companyBanks = [
     {
       bankName: "Zenith Bank",
@@ -131,8 +130,10 @@ const Deposit = () => {
   const [initialTimeLeft, setInitialTimeLeft] = useState(1800);
 
   // storage key for per-user, per-method timer persistence
-  const timerStorageKey = () =>
-    `deposit_timer_${userData?.user?._id || "anon"}_${paymentMethod}`;
+  const timerStorageKey = React.useCallback(
+    () => `deposit_timer_${userData?.user?._id || "anon"}_${paymentMethod}`,
+    [userData, paymentMethod]
+  );
 
   // Switch address/bank when timer expires and persist timer state
 
@@ -147,7 +148,7 @@ const Deposit = () => {
       } catch {
         // ignore storage errors
       }
-      setInitialTimeLeft(1800); // optional if Countdown reads from localStorage
+      setInitialTimeLeft(1800); // Reset the timer
       return newIndex;
     });
   };
@@ -157,35 +158,20 @@ const Deposit = () => {
     const init = () => {
       const key = timerStorageKey();
       const now = Date.now();
-      const intervalMs = 1800 * 1000;
       try {
-        const raw = localStorage.getItem(key);
-        if (!raw) {
-          const payload = { startedAt: now, initialIndex: currentIndex };
-          localStorage.setItem(key, JSON.stringify(payload));
-          setInitialTimeLeft(1800);
-          return;
-        }
-        const saved = JSON.parse(raw);
-        const startedAt = saved.startedAt || now;
-        const initialIndex =
-          typeof saved.initialIndex === "number" ? saved.initialIndex : 0;
-        const elapsed = now - startedAt;
-        const intervalsPassed = Math.floor(elapsed / intervalMs);
-        const list = paymentMethod === "USDT" ? companyWallets : companyBanks;
-        const newIndex = (initialIndex + intervalsPassed) % list.length;
+        // Clear previous timer data to start fresh
+        localStorage.removeItem(key);
+        const newIndex = (currentIndex + 1) % companyWallets.length;
+        const payload = { startedAt: now, initialIndex: newIndex };
+        localStorage.setItem(key, JSON.stringify(payload));
         setCurrentIndex(newIndex);
-        const nextExpireAt = startedAt + (intervalsPassed + 1) * intervalMs;
-        const secsLeft = Math.max(0, Math.round((nextExpireAt - now) / 1000));
-        setInitialTimeLeft(secsLeft > 0 ? secsLeft : 0);
+        setInitialTimeLeft(1800);
       } catch {
         setInitialTimeLeft(1800);
       }
     };
-    // run init when paymentMethod or user changes
     init();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentMethod, userData]);
+  }, [timerStorageKey, currentIndex, companyWallets]);
 
   const copyAddress = async () => {
     let text =
@@ -233,7 +219,7 @@ const Deposit = () => {
   // console.log(date);
 
   const handlePayment = async () => {
-    const url = "https://yaticare-backend.onrender.com/api/deposit/deposit";
+    const url = "https://yaticare-back-end.vercel.app/api/deposit/deposit";
 
     const data = {
       userId: userData.user._id,

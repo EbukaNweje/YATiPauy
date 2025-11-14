@@ -211,7 +211,7 @@ const History = () => {
                       txn.depositDate ||
                         txn.withdrawalDate ||
                         txn.date ||
-                        txn.subscriptionDate ||
+                        txn.showDate ||
                         txn.createdAt ||
                         txn.updatedAt
                     )}
