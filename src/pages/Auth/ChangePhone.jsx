@@ -4,6 +4,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoCallSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const ChangePhone = () => {
   const user = useSelector((state) => state.YATipauy.user);
@@ -12,16 +14,7 @@ const ChangePhone = () => {
     phoneNumber: "",
   });
 
-  const validatePhoneNumber = (phoneNumber) => {
-    return /^\+?[1-9]\d{1,14}$/.test(phoneNumber);
-  };
-
   const changeNo = async () => {
-    // if (!validatePhoneNumber(userInput.newPhoneNumber)) {
-    //   toast.error("Please enter a valid phone number");
-    //   return;
-    // }
-
     console.log("userInput", user.user._id);
 
     try {
@@ -30,7 +23,6 @@ const ChangePhone = () => {
         `https://yaticare-back-end.vercel.app/api/user/changePhonenumber/${user.user._id}`,
         userInput
       );
-      // console.log(response);
       toast.success(
         response.data.message || "Phone number updated successfully"
       );
@@ -43,19 +35,6 @@ const ChangePhone = () => {
       setLoading(false);
     }
   };
-
-  const PhoneInput = ({ label, value, onChange }) => (
-    <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
-      <IoCallSharp className="text-gray-500 text-xl mr-2" />
-      <input
-        type="tel"
-        placeholder={label}
-        value={value}
-        onChange={onChange}
-        className="w-full text-lg focus:outline-none placeholder-gray-500"
-      />
-    </div>
-  );
 
   return (
     <div className="transaction-pin-container flex items-center justify-center w-full h-screen bg-gray-100">
@@ -72,15 +51,16 @@ const ChangePhone = () => {
 
         <div className="pin-inputs flex flex-col gap-4">
           <div className="input-group flex items-center border border-gray-300 rounded-lg px-4 py-2">
-            <IoCallSharp className="text-gray-500 text-xl mr-2" />
-            <input
-              type="tel"
-              placeholder="Enter New Phone number"
+            <PhoneInput
+              country={"us"}
               value={userInput.phoneNumber}
-              onChange={(e) =>
-                setUserInput({ ...userInput, phoneNumber: e.target.value })
+              onChange={(phone) =>
+                setUserInput({ ...userInput, phoneNumber: phone })
               }
-              className="w-full text-lg focus:outline-none placeholder-gray-500"
+              inputClass="custom-phone-input"
+              buttonClass="custom-phone-button"
+              containerClass="custom-phone-container"
+              dropdownClass="custom-phone-dropdown"
             />
           </div>
         </div>

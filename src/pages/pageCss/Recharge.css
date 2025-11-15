@@ -746,6 +746,32 @@
   color: #6b7280;
 }
 
+.custom-phone-input {
+  width: 100% !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  height: 45px !important;
+  padding-left: 50px !important;
+}
+
+.custom-phone-button {
+  background-color: transparent !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  position: absolute !important;
+  left: 10px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.custom-phone-dropdown {
+  background-color: #0b331d !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
 /* ✅ Mobile responsiveness */
 @media (max-width: 768px) {
   .Recharge,
