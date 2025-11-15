@@ -16,6 +16,7 @@ function ProfileInfo() {
     UserName: UsersData.userName || "",
     email: UsersData.email,
     PhoneNumber: UsersData.phoneNumber,
+    Country: UsersData.country || "",
     WalletAddress: "",
     KYC: "" || "",
     uplineUserName: "" || "",
@@ -121,6 +122,12 @@ function ProfileInfo() {
             <span>{UsersData.phoneNumber}</span>
           </div>
         </div>
+        <div className="inforcontainer">
+          <h2>Country</h2>
+          <div className="readonly-field">
+            <span>{UsersData.country}</span>
+          </div>
+        </div>
 
         <div className="inforcontainer">
           <h2> Wallet Address</h2>
@@ -138,7 +145,7 @@ function ProfileInfo() {
           </div>
         </div>
 
-        <div className="inforcontainer">
+        {/* <div className="inforcontainer">
           <h2>Upline Username</h2>
           <div className="readonly-field">
             <span>{details.uplineUserName || "Username"}</span>
@@ -150,7 +157,7 @@ function ProfileInfo() {
           <div className="readonly-field">
             <span>{details.uplinePhoneNumber || "PhoneNumber"}</span>
           </div>
-        </div>
+        </div> */}
       </form>
     </div>
   );

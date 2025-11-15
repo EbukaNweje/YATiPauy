@@ -122,14 +122,14 @@ const Withdraw = () => {
 
           <div className="wallet-selection">
             <label>
-              <input
+              {/* <input
                 type="radio"
                 name="walletType"
                 value="default"
                 checked={walletType === "default"}
                 onChange={(e) => setWalletType(e.target.value)}
-              />
-              Default Wallet ({userData || "Not Set"})
+              /> */}
+              <b>Default Wallet</b> ({userData || "Not Set"})
             </label>
           </div>
 
