@@ -1,4 +1,4 @@
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login2 from "./Components/Auth/Login";
 import Signup from "./Components/Auth/SignUp";
 import Layout from "./pages/Layout";
@@ -32,7 +32,7 @@ import WalletAddress from "./pages/WalletAddress";
 import NotFound from "./Components/NotFound";
 
 const App = () => {
-  const router = createHashRouter([
+  const router = createBrowserRouter([
     {
       element: <ScrollToTop />,
       children: [
