@@ -30,7 +30,6 @@ import ChangePin from "./pages/ChangePin";
 import Deposit from "./pages/Deposit";
 import WalletAddress from "./pages/WalletAddress";
 import NotFound from "./Components/NotFound";
-// import FAQ from './pages/FAQ';
 
 const App = () => {
   const router = createHashRouter([
