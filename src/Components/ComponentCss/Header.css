@@ -62,6 +62,11 @@
   white-space: nowrap;
 }
 
+.refinfo .Btn span {
+  display: flex;
+  align-items: center;
+}
+
 .reflink {
   font-size: 0.8rem;
   display: flex;

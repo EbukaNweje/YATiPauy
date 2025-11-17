@@ -118,8 +118,12 @@ const Header = () => {
               <div className="refinfo">
                 <button disabled className="Btn">
                   Available Balance:
-                  <BsCurrencyDollar />
-                  {userData ? formatCurrency(userData.accountBalance) : "0.00"}
+                  <span>
+                    <BsCurrencyDollar />
+                    {userData
+                      ? formatCurrency(userData.accountBalance)
+                      : "0.00"}
+                  </span>
                 </button>
                 <div className="reflink">
                   Referral Link
