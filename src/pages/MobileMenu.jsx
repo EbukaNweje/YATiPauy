@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Link as ScrollLink, scroller } from 'react-scroll';
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Link as ScrollLink, scroller } from "react-scroll";
 import { FaHome, FaLandmark } from "react-icons/fa";
 import { MdOutlinePayment, MdContactPhone } from "react-icons/md";
 import "./MobileStyle.css"; // Ensure this file has your styles
+import { TfiGallery } from "react-icons/tfi";
 
 const MobileMenu = () => {
   const [toggle, setToggle] = useState(false);
@@ -31,16 +32,25 @@ const MobileMenu = () => {
   };
 
   return (
-    <div className='MobileMenuContainer'>
+    <div className="MobileMenuContainer">
       <div className="MobilenavList">
         <ul>
           <li>
             {isHomePage ? (
-              <ScrollLink to="hero" smooth={true} duration={500} offset={-70} className="mobile-menu-link">
+              <ScrollLink
+                to="hero"
+                smooth={true}
+                duration={500}
+                offset={-70}
+                className="mobile-menu-link"
+              >
                 <FaHome /> Home
               </ScrollLink>
             ) : (
-              <span onClick={() => goToSection("hero")} className="mobile-menu-link">
+              <span
+                onClick={() => goToSection("hero")}
+                className="mobile-menu-link"
+              >
                 <FaHome /> Home
               </span>
             )}
@@ -48,11 +58,20 @@ const MobileMenu = () => {
 
           <li>
             {isHomePage ? (
-              <ScrollLink to="about" smooth={true} duration={500} offset={-70} className="mobile-menu-link">
+              <ScrollLink
+                to="about"
+                smooth={true}
+                duration={500}
+                offset={-70}
+                className="mobile-menu-link"
+              >
                 <FaLandmark /> About Us
               </ScrollLink>
             ) : (
-              <span onClick={() => goToSection("about")} className="mobile-menu-link">
+              <span
+                onClick={() => goToSection("about")}
+                className="mobile-menu-link"
+              >
                 <FaLandmark /> About Us
               </span>
             )}
@@ -60,24 +79,50 @@ const MobileMenu = () => {
 
           <li>
             {isHomePage ? (
-              <ScrollLink to="how-it-works" smooth={true} duration={500} offset={-70} className="mobile-menu-link">
+              <ScrollLink
+                to="how-it-works"
+                smooth={true}
+                duration={500}
+                offset={-70}
+                className="mobile-menu-link"
+              >
                 <MdOutlinePayment /> How it works
               </ScrollLink>
             ) : (
-              <span onClick={() => goToSection("how-it-works")} className="mobile-menu-link">
+              <span
+                onClick={() => goToSection("how-it-works")}
+                className="mobile-menu-link"
+              >
                 <MdOutlinePayment /> How it works
               </span>
             )}
           </li>
 
-          <li onClick={() => navigate("/contact-us")} className="mobile-menu-link">
+          <li
+            onClick={() => navigate("/gallery-hub")}
+            className="mobile-menu-link"
+          >
+            <TfiGallery /> Gallery Hub
+          </li>
+
+          <li
+            onClick={() => navigate("/contact-us")}
+            className="mobile-menu-link"
+          >
             <MdContactPhone /> Contacts
           </li>
         </ul>
 
         <div className="Auth">
-          <button className="auth-btn" onClick={() => navigate("/auth/login")}>Login</button>
-          <button className="auth-btn active" onClick={() => navigate("/auth/sign-up")}>Create account</button>
+          <button className="auth-btn" onClick={() => navigate("/auth/login")}>
+            Login
+          </button>
+          <button
+            className="auth-btn active"
+            onClick={() => navigate("/auth/sign-up")}
+          >
+            Create account
+          </button>
         </div>
       </div>
     </div>
