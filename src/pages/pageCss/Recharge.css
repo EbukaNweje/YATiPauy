@@ -856,7 +856,7 @@
 /* ✅ Very small devices */
 @media (max-width: 480px) {
   .paymentSection h3 {
-    font-size: 16px;
+    font-size: 16px !important;
   }
 
   .paymentSection input,
