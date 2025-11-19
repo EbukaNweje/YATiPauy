@@ -24,7 +24,7 @@ const Login = () => {
     try {
       // Make an API request to your backend to create a new user
       const response = await axios.post(
-        "https://yaticare-backend.onrender.com/api/auth/login",
+        "https://yaticare-back-end.vercel.app/api/auth/login",
         data
       );
       toast.success("Login Successfull");

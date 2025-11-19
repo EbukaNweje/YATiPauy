@@ -30,6 +30,7 @@ import ChangePin from "./pages/ChangePin";
 import Deposit from "./pages/Deposit";
 import WalletAddress from "./pages/WalletAddress";
 import NotFound from "./Components/NotFound";
+import GalleryPage from "./pages/GalleryPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -71,6 +72,10 @@ const App = () => {
         {
           path: "/contact-us",
           element: <ContactUs />,
+        },
+        {
+          path: "/gallery-hub",
+          element: <GalleryPage />,
         },
         { path: "terms", element: <Terms /> },
         {

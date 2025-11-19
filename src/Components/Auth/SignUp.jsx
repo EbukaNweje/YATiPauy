@@ -66,7 +66,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "https://yaticare-backend.onrender.com/api/auth/register",
+        "https://yaticare-back-end.vercel.app/api/auth/register",
         { ...values, phoneNumber: phone }
       );
       toast.success(response.data.message);
