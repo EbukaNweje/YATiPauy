@@ -134,7 +134,7 @@ const Plan = () => {
         }
       );
 
-      if (response.data.message.includes("successfully")) {
+      if (response.data.message.includes("created")) {
         toast.success("Subscription created successfully!");
         setSelectedPlan(null);
         setSelectedAmount(null);
@@ -143,6 +143,7 @@ const Plan = () => {
         dispatch(depositedAmount(Date.now()));
       } else {
         toast.error(response.data.data.message || "Subscription failed");
+        console.log(response.data);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");
