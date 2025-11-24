@@ -32,7 +32,7 @@ const Resetpassword = () => {
 
       // Make API request to reset password
       const response = await axios.post(
-        "https://yaticare-backend.onrender.com/api/auth/reset-password",
+        "https://yaticare-back-end.vercel.app/api/auth/reset-password",
         {
           token,
           newPassword: values.newPassword,

@@ -20,7 +20,7 @@ const PlanDetails = () => {
   //     const fetchSubscription = async () => {
   //       try {
   //         const response = await axios.get(
-  //           `https://yaticare-backend.onrender.com/api/getusrSubcription/${params.id}`
+  //           `https://yaticare-back-end.vercel.app/api/getusrSubcription/${params.id}`
   //         );
   //         setSubscription(response.data);
   //         console.log("this is the res", response.data);

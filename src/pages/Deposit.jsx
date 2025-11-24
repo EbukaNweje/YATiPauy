@@ -122,6 +122,7 @@ const Deposit = () => {
       setWallets(data);
       // if there is persisted index, keep it; otherwise reset safe index
       const stored = localStorage.getItem(timerStorageKey());
+      console.log("stored", stored);
       if (!stored && data.length > 0) {
         const newIndex = 0;
         const payload = { startedAt: Date.now(), initialIndex: newIndex };
