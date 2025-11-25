@@ -263,7 +263,7 @@ const Deposit = () => {
           <p>
             <strong>
               {paymentMethod === "USDT"
-                ? `Company Wallet Address: ${currentCoin}`
+                ? `Company Wallet Address: ${currentWalletName} `
                 : "Company Bank Account:"}
             </strong>
           </p>
@@ -278,8 +278,15 @@ const Deposit = () => {
                     ? walletError
                     : currentWalletAddress || "No wallet address available"}
                 </p>
-                <p style={{ fontSize: 12, marginTop: 4, opacity: 0.8 }}>
-                  {currentWalletName || ""}
+                <p
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    marginTop: 4,
+                    color: "#555",
+                  }}
+                >
+                  {currentCoin || " "}
                 </p>
               </div>
             ) : (
