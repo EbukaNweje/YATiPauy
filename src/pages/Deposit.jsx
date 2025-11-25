@@ -16,11 +16,8 @@ const Countdown = ({ onExpire, initialTimeLeft = 1800, storageKey }) => {
 
   useEffect(() => {
     const stored = JSON.parse(sessionStorage.getItem(storageKey) || "{}");
-    if (stored?.timeLeft) {
-      setTimeLeft(stored.timeLeft);
-    } else {
-      setTimeLeft(initialTimeLeft);
-    }
+    if (stored?.timeLeft) setTimeLeft(stored.timeLeft);
+    else setTimeLeft(initialTimeLeft);
   }, [initialTimeLeft, storageKey]);
 
   useEffect(() => {
@@ -95,11 +92,10 @@ const Deposit = () => {
   const [loading, setLoading] = useState(false);
   const [proofPaymentPop, setProofPaymentPop] = useState(false);
 
-  // Timer storage key per user + method
-  const timerStorageKey = useCallback(
-    () => `deposit_timer_${userData?.user?._id || "anon"}_${paymentMethod}`,
-    [userData, paymentMethod]
-  );
+  const userId = userData?.user?._id || "anon";
+
+  const walletIndexKey = `user_${userId}_walletIndex`;
+  const timerKey = `user_${userId}_walletTimer`;
 
   /* ------------------ Fetch wallets ------------------ */
   const handleGetWalletAddress = useCallback(async () => {
@@ -118,19 +114,6 @@ const Deposit = () => {
         ? raw.wallets
         : [];
       setWallets(data || []);
-
-      // Restore currentIndex from sessionStorage
-      const stored = JSON.parse(
-        sessionStorage.getItem(timerStorageKey()) || "{}"
-      );
-      if (typeof stored.currentIndex === "number") {
-        const idx = stored.currentIndex % (data.length || 1);
-        setCurrentIndex(idx);
-        currentIndexRef.current = idx;
-      } else {
-        setCurrentIndex(0);
-        currentIndexRef.current = 0;
-      }
     } catch (err) {
       console.error("Failed to fetch wallets:", err);
       setWalletError("Unable to load wallet addresses.");
@@ -138,82 +121,61 @@ const Deposit = () => {
     } finally {
       setWalletLoading(false);
     }
-  }, [timerStorageKey]);
+  }, []);
 
   useEffect(() => {
     handleGetWalletAddress();
   }, [handleGetWalletAddress]);
 
-  /* ------------------ Wallet rotation on leave ------------------ */
+  /* ------------------ Wallet rotation & timer reset ------------------ */
   useEffect(() => {
-    const key = timerStorageKey();
-    const lastVisit = localStorage.getItem(key);
-    const now = Date.now();
+    if (!wallets.length) return;
 
-    if (lastVisit && wallets.length > 0) {
-      const stored = JSON.parse(lastVisit);
-      const diff = now - (stored.lastVisit || 0);
-      if (diff > 5000) {
-        // 5 seconds threshold to detect leave
-        const newIndex = (currentIndexRef.current + 1) % wallets.length;
-        setCurrentIndex(newIndex);
-        currentIndexRef.current = newIndex;
-      }
-    }
+    let prevIndex = parseInt(localStorage.getItem(walletIndexKey), 10);
+    if (isNaN(prevIndex)) prevIndex = -1;
 
-    localStorage.setItem(key, JSON.stringify({ lastVisit: now }));
-  }, [wallets, timerStorageKey]);
+    const newIndex = (prevIndex + 1) % wallets.length;
+    setCurrentIndex(newIndex);
+    currentIndexRef.current = newIndex;
+
+    localStorage.setItem(walletIndexKey, newIndex);
+
+    // Reset timer
+    sessionStorage.setItem(
+      timerKey,
+      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex })
+    );
+  }, [wallets, walletIndexKey, timerKey]);
 
   /* ------------------ Handle expiry ------------------ */
   const handleExpire = useCallback(() => {
-    if (wallets.length === 0) return;
+    if (!wallets.length) return;
 
     const newIndex = (currentIndexRef.current + 1) % wallets.length;
     setCurrentIndex(newIndex);
     currentIndexRef.current = newIndex;
 
-    // Reset timer
+    // Update timer
     sessionStorage.setItem(
-      timerStorageKey(),
+      timerKey,
       JSON.stringify({ timeLeft: 1800, currentIndex: newIndex })
     );
 
-    // Update last visit
-    localStorage.setItem(
-      timerStorageKey(),
-      JSON.stringify({ lastVisit: Date.now() })
-    );
-  }, [wallets, timerStorageKey]);
+    // Save for next visit
+    localStorage.setItem(walletIndexKey, newIndex);
+  }, [wallets, timerKey, walletIndexKey]);
 
   /* ------------------ Copy address ------------------ */
   const copyAddress = async () => {
-    let text =
-      paymentMethod === "USDT"
-        ? wallets.length > 0
-          ? wallets[currentIndex]?.walletAddress || ""
-          : ""
-        : "bank-account-placeholder";
-
-    if (!text) return toast.error("No address available to copy");
+    const currentWalletAddress =
+      wallets.length > 0 ? wallets[currentIndex]?.walletAddress || "" : "";
+    if (!currentWalletAddress) return toast.error("No address available");
 
     try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
+      await navigator.clipboard.writeText(currentWalletAddress);
       setCopied(true);
       setTimeout(() => setCopied(false), 1200);
-    } catch (err) {
-      console.error("copy failed", err);
+    } catch {
       toast.error("Copy failed");
     }
   };
@@ -231,40 +193,30 @@ const Deposit = () => {
     if (!proofFile) return toast.error("Please upload proof of payment");
     if (!userData?.user?._id) return toast.error("User not found");
 
-    const url = "https://yaticare-backend.onrender.com/api/deposit/deposit";
-    const date = new Date().toLocaleString();
+    const depositWallet =
+      wallets.length > 0 ? wallets[currentIndex]?.walletAddress || "" : "";
+
+    if (!depositWallet) return toast.error("No deposit wallet available");
 
     const formData = new FormData();
     formData.append("userId", userData.user._id);
     formData.append("amount", amount);
     formData.append("PaymentType", paymentMethod);
-    formData.append("depositDate", date);
-
-    const depositWallet =
-      paymentMethod === "USDT"
-        ? wallets.length > 0
-          ? wallets[currentIndex]?.walletAddress || ""
-          : ""
-        : "";
-
-    if (!depositWallet) {
-      toast.error("No deposit wallet available. Please try again later.");
-      return;
-    }
-
+    formData.append("depositDate", new Date().toLocaleString());
     formData.append("depositWallet", depositWallet);
     formData.append("proofFile", proofFile);
 
     setLoading(true);
     try {
-      const res = await axios.post(url, formData);
+      const res = await axios.post(
+        "https://yaticare-backend.onrender.com/api/deposit/deposit",
+        formData
+      );
       toast.success(res.data.message || "Deposit submitted");
       setProofPaymentPop(true);
       dispatch(depositedAmount(amount));
     } catch (err) {
-      console.error("upload error:", err);
-      const msg = err?.response?.data?.message || "Upload failed";
-      toast.error(msg);
+      toast.error(err?.response?.data?.message || "Upload failed");
     } finally {
       setLoading(false);
     }
@@ -275,7 +227,6 @@ const Deposit = () => {
     navigate("/dashboard");
   };
 
-  /* ------------------ Current wallet info ------------------ */
   const currentWalletObj = wallets.length > 0 ? wallets[currentIndex] : {};
   const currentWalletAddress = currentWalletObj.walletAddress || "";
   const currentWalletName = currentWalletObj.walletName || "";
@@ -359,7 +310,7 @@ const Deposit = () => {
             </div>
           </div>
 
-          <Countdown onExpire={handleExpire} storageKey={timerStorageKey()} />
+          <Countdown onExpire={handleExpire} storageKey={timerKey} />
           {copied && <p className="copyMsg">Copied!</p>}
         </div>
 
