@@ -27,7 +27,7 @@ const Withdraw = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${user.user._id}`
         );
         const data = response?.data?.data;
         setUserData(data?.WalletInfo?.WalletAddress);
@@ -72,7 +72,7 @@ const Withdraw = () => {
 
     try {
       const url =
-        "https://yaticare-back-end.vercel.app/api/withdrawal/createWithdrawal";
+        "https://yaticare-backend.onrender.com/api/withdrawal/createWithdrawal";
 
       setLoading(true);
       const date = new Date().toLocaleString();

@@ -20,7 +20,7 @@ const ChangePhone = () => {
     try {
       setLoading(true);
       const response = await axios.put(
-        `https://yaticare-back-end.vercel.app/api/user/changePhonenumber/${user.user._id}`,
+        `https://yaticare-backend.onrender.com/api/user/changePhonenumber/${user.user._id}`,
         userInput
       );
       toast.success(

@@ -25,7 +25,7 @@ const Plan = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://yaticare-back-end.vercel.app/api/getallplan"
+          "https://yaticare-backend.onrender.com/api/getallplan"
         );
 
         const mappedPlans = response.data.data.map((plan) => {
@@ -124,7 +124,7 @@ const Plan = () => {
     try {
       const amountNum = Number(selectedAmount);
       const response = await axios.post(
-        "https://yaticare-back-end.vercel.app/api/userSubcription",
+        "https://yaticare-backend.onrender.com/api/userSubcription",
         {
           userId: user.user._id,
           plan: selectedPlan._id,

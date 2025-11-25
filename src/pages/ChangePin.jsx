@@ -15,7 +15,7 @@ const ChangePin = () => {
     newPin: "",
   });
 
-  const API_URL = `https://yaticare-back-end.vercel.app/api/auth/change-pin/${user?.user?._id}`;
+  const API_URL = `https://yaticare-backend.onrender.com/api/auth/change-pin/${user?.user?._id}`;
 
   const validatePin = (pin) => /^[0-9]{4}$/.test(pin);
 

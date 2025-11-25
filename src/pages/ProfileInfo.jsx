@@ -32,7 +32,7 @@ function ProfileInfo() {
   // const updateInfo = async () => {
   //   try {
   //     const response = await axios.post(
-  //       `https://yaticare-back-end.vercel.app/api/user/updateuser/${user.user._id}`,
+  //       `https://yaticare-backend.onrender.com/api/user/updateuser/${user.user._id}`,
   //       details
   //     );
   //     console.log(response);
@@ -46,7 +46,7 @@ function ProfileInfo() {
       try {
         // Replace with your actual user API endpoint
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
         );
         // console.log("FGF", response?.data?.data);
         setUsersData(response?.data?.data);

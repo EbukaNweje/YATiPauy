@@ -30,7 +30,7 @@ const Vip = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/getusrSubcription/${finalId}`
+          `https://yaticare-backend.onrender.com/api/getusrSubcription/${finalId}`
         );
         setUserData(response?.data);
       } catch (error) {

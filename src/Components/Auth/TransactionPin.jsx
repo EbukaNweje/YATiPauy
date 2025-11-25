@@ -49,7 +49,7 @@ const TransactionPin = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `https://yaticare-back-end.vercel.app/api/auth/create-pin/${user.user._id}`,
+        `https://yaticare-backend.onrender.com/api/auth/create-pin/${user.user._id}`,
         { pin: userInput.pin }
       );
 

@@ -21,7 +21,7 @@ const RefPage = () => {
     async function fetchUser() {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
         );
 
         console.log("response:", response);
@@ -40,7 +40,7 @@ const RefPage = () => {
   }, [user, finalId]);
 
   const fetchReferredSubscribers = () => {
-    const url = `https://yaticare-back-end.vercel.app/api/user/totalreferredactivesubscribers/${finalId}`;
+    const url = `https://yaticare-backend.onrender.com/api/user/totalreferredactivesubscribers/${finalId}`;
     axios
       .get(url)
       .then((res) => {

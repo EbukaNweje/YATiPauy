@@ -36,7 +36,7 @@ const Change = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        `https://yaticare-back-end.vercel.app/api/auth/change-password/${user.user._id}`,
+        `https://yaticare-backend.onrender.com/api/auth/change-password/${user.user._id}`,
         userInput
       );
       toast.success(response?.data?.message || "Password updated successfully");

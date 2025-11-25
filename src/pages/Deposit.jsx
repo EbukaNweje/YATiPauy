@@ -212,7 +212,7 @@ const Deposit = () => {
     if (!proofFile) return toast.error("Please upload proof of payment");
     if (!userData?.user?._id) return toast.error("User not found");
 
-    const url = "https://yaticare-back-end.vercel.app/api/deposit/deposit";
+    const url = "https://yaticare-backend.onrender.com/api/deposit/deposit";
     const date = new Date().toLocaleString();
 
     const formData = new FormData();
