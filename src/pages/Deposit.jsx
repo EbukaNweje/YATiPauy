@@ -1,7 +1,7 @@
 // Deposit.jsx
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import "./pageCss/Deposit.css";
-import { FiCopy, FiCheck } from "react-icons/fi";
+import { FiCopy, FiCheck, FiRefreshCw } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import "animate.css";
 import { useNavigate } from "react-router-dom";
@@ -14,48 +14,36 @@ import PropTypes from "prop-types";
 const Countdown = ({ onExpire, initialTimeLeft = 1800, storageKey }) => {
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
 
-  // init from persisted start time
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(storageKey);
-      if (stored) {
-        const { startedAt } = JSON.parse(stored);
-        const elapsed = Math.floor((Date.now() - startedAt) / 1000);
-        const remaining = initialTimeLeft - elapsed;
-        setTimeLeft(remaining > 0 ? remaining : 0);
-        return;
-      }
-    } catch (e) {
-      // ignore parse errors
+    const stored = JSON.parse(sessionStorage.getItem(storageKey) || "{}");
+    if (stored?.timeLeft) {
+      setTimeLeft(stored.timeLeft);
+    } else {
+      setTimeLeft(initialTimeLeft);
     }
-    // first time
-    localStorage.setItem(storageKey, JSON.stringify({ startedAt: Date.now() }));
-    setTimeLeft(initialTimeLeft);
   }, [initialTimeLeft, storageKey]);
 
   useEffect(() => {
-    if (timeLeft <= 0) {
-      onExpire();
-      return;
-    }
-    const t = setInterval(() => {
-      setTimeLeft((s) => {
-        if (s <= 1) {
-          clearInterval(t);
-          localStorage.removeItem(storageKey);
+    if (timeLeft <= 0) return onExpire();
+
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          sessionStorage.removeItem(storageKey);
           onExpire();
           return 0;
         }
-        return s - 1;
+        sessionStorage.setItem(
+          storageKey,
+          JSON.stringify({ timeLeft: prev - 1 })
+        );
+        return prev - 1;
       });
     }, 1000);
 
-    return () => clearInterval(t);
+    return () => clearInterval(interval);
   }, [timeLeft, onExpire, storageKey]);
-
-  useEffect(() => {
-    setTimeLeft(initialTimeLeft);
-  }, [initialTimeLeft]);
 
   const fmt = (s) => {
     const m = Math.floor(s / 60);
@@ -93,57 +81,62 @@ const Deposit = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [wallets, setWallets] = useState([]); // API wallet objects [{walletName, walletAddress, ...}]
+  const [wallets, setWallets] = useState([]);
+  const [walletLoading, setWalletLoading] = useState(false);
+  const [walletError, setWalletError] = useState(null);
+
   const [paymentMethod, setPaymentMethod] = useState("USDT");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const currentIndexRef = useRef(0);
+
   const [copied, setCopied] = useState(false);
   const [proofFile, setProofFile] = useState(null);
   const [proofFileShow, setProofFileShow] = useState(null);
   const [loading, setLoading] = useState(false);
   const [proofPaymentPop, setProofPaymentPop] = useState(false);
-  const [initialTimeLeft, setInitialTimeLeft] = useState(1800); // 30 minutes default
 
-  const currentIndexRef = useRef(currentIndex);
-
-  // timer storage key per user+method
+  // Timer storage key per user + method
   const timerStorageKey = useCallback(
     () => `deposit_timer_${userData?.user?._id || "anon"}_${paymentMethod}`,
     [userData, paymentMethod]
   );
 
-  // fetch wallets from backend
+  /* ------------------ Fetch wallets ------------------ */
   const handleGetWalletAddress = useCallback(async () => {
+    setWalletLoading(true);
+    setWalletError(null);
     try {
       const res = await axios.get(
-        "https://omega-exchange-back-end-one.vercel.app/api/getallWalletAddress"
+        "https://yaticare-backend.onrender.com/api/admin/getallWalletAddress"
       );
-      // expect res.data to be an array of {walletName, walletAddress, ...}
-      const data = Array.isArray(res.data) ? res.data : res.data?.wallets || [];
-      setWallets(data);
-      // if there is persisted index, keep it; otherwise reset safe index
-      const stored = localStorage.getItem(timerStorageKey());
-      console.log("stored", stored);
-      if (!stored && data.length > 0) {
-        const newIndex = 0;
-        const payload = { startedAt: Date.now(), initialIndex: newIndex };
-        localStorage.setItem(timerStorageKey(), JSON.stringify(payload));
-        setCurrentIndex(newIndex);
-        currentIndexRef.current = newIndex;
-      } else if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          const idx =
-            typeof parsed.initialIndex === "number" ? parsed.initialIndex : 0;
-          setCurrentIndex(idx % Math.max(1, data.length));
-          currentIndexRef.current = idx % Math.max(1, data.length);
-        } catch {
-          setCurrentIndex(0);
-          currentIndexRef.current = 0;
-        }
+      const raw = res.data;
+      const data = Array.isArray(raw)
+        ? raw
+        : Array.isArray(raw?.data)
+        ? raw.data
+        : Array.isArray(raw?.wallets)
+        ? raw.wallets
+        : [];
+      setWallets(data || []);
+
+      // Restore currentIndex from sessionStorage
+      const stored = JSON.parse(
+        sessionStorage.getItem(timerStorageKey()) || "{}"
+      );
+      if (typeof stored.currentIndex === "number") {
+        const idx = stored.currentIndex % (data.length || 1);
+        setCurrentIndex(idx);
+        currentIndexRef.current = idx;
+      } else {
+        setCurrentIndex(0);
+        currentIndexRef.current = 0;
       }
     } catch (err) {
       console.error("Failed to fetch wallets:", err);
+      setWalletError("Unable to load wallet addresses.");
       setWallets([]);
+    } finally {
+      setWalletLoading(false);
     }
   }, [timerStorageKey]);
 
@@ -151,35 +144,58 @@ const Deposit = () => {
     handleGetWalletAddress();
   }, [handleGetWalletAddress]);
 
-  // handle expiry -> rotate index and reset timer
-  const handleExpire = useCallback(() => {
-    if (paymentMethod === "USDT" && wallets.length === 0) return;
-    const len = paymentMethod === "USDT" ? wallets.length : 1; // bank handling fallback
-    if (len === 0) return;
-    setCurrentIndex((prev) => {
-      const newIndex = (prev + 1) % len;
-      currentIndexRef.current = newIndex;
-      // persist new timer start and index
-      localStorage.setItem(
-        timerStorageKey(),
-        JSON.stringify({ startedAt: Date.now(), initialIndex: newIndex })
-      );
-      setInitialTimeLeft(1800);
-      return newIndex;
-    });
-  }, [wallets, paymentMethod, timerStorageKey]);
+  /* ------------------ Wallet rotation on leave ------------------ */
+  useEffect(() => {
+    const key = timerStorageKey();
+    const lastVisit = localStorage.getItem(key);
+    const now = Date.now();
 
-  // copy address (wallet or bank)
-  const copyAddress = async () => {
-    let text = "";
-    if (paymentMethod === "USDT") {
-      text =
-        wallets.length > 0 ? wallets[currentIndex]?.walletAddress || "" : "";
-    } else {
-      // fallback bank details
-      text = "bank-account-placeholder";
+    if (lastVisit && wallets.length > 0) {
+      const stored = JSON.parse(lastVisit);
+      const diff = now - (stored.lastVisit || 0);
+      if (diff > 5000) {
+        // 5 seconds threshold to detect leave
+        const newIndex = (currentIndexRef.current + 1) % wallets.length;
+        setCurrentIndex(newIndex);
+        currentIndexRef.current = newIndex;
+      }
     }
-    if (!text) return;
+
+    localStorage.setItem(key, JSON.stringify({ lastVisit: now }));
+  }, [wallets, timerStorageKey]);
+
+  /* ------------------ Handle expiry ------------------ */
+  const handleExpire = useCallback(() => {
+    if (wallets.length === 0) return;
+
+    const newIndex = (currentIndexRef.current + 1) % wallets.length;
+    setCurrentIndex(newIndex);
+    currentIndexRef.current = newIndex;
+
+    // Reset timer
+    sessionStorage.setItem(
+      timerStorageKey(),
+      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex })
+    );
+
+    // Update last visit
+    localStorage.setItem(
+      timerStorageKey(),
+      JSON.stringify({ lastVisit: Date.now() })
+    );
+  }, [wallets, timerStorageKey]);
+
+  /* ------------------ Copy address ------------------ */
+  const copyAddress = async () => {
+    let text =
+      paymentMethod === "USDT"
+        ? wallets.length > 0
+          ? wallets[currentIndex]?.walletAddress || ""
+          : ""
+        : "bank-account-placeholder";
+
+    if (!text) return toast.error("No address available to copy");
+
     try {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(text);
@@ -198,9 +214,11 @@ const Deposit = () => {
       setTimeout(() => setCopied(false), 1200);
     } catch (err) {
       console.error("copy failed", err);
+      toast.error("Copy failed");
     }
   };
 
+  /* ------------------ Proof upload ------------------ */
   const handleProofUpload = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       setProofFile(e.target.files[0]);
@@ -208,6 +226,7 @@ const Deposit = () => {
     }
   };
 
+  /* ------------------ Payment submission ------------------ */
   const handlePayment = async () => {
     if (!proofFile) return toast.error("Please upload proof of payment");
     if (!userData?.user?._id) return toast.error("User not found");
@@ -226,14 +245,18 @@ const Deposit = () => {
         ? wallets.length > 0
           ? wallets[currentIndex]?.walletAddress || ""
           : ""
-        : ""; // add bank if used
+        : "";
+
+    if (!depositWallet) {
+      toast.error("No deposit wallet available. Please try again later.");
+      return;
+    }
 
     formData.append("depositWallet", depositWallet);
     formData.append("proofFile", proofFile);
 
     setLoading(true);
     try {
-      // Let axios set multipart/form-data and boundary
       const res = await axios.post(url, formData);
       toast.success(res.data.message || "Deposit submitted");
       setProofPaymentPop(true);
@@ -252,11 +275,13 @@ const Deposit = () => {
     navigate("/dashboard");
   };
 
-  // render current wallet display values
-  const currentWalletObj = wallets.length > 0 ? wallets[currentIndex] : null;
-  const currentWalletAddress = currentWalletObj?.walletAddress || "";
-  const currentWalletName = currentWalletObj?.walletName || "";
+  /* ------------------ Current wallet info ------------------ */
+  const currentWalletObj = wallets.length > 0 ? wallets[currentIndex] : {};
+  const currentWalletAddress = currentWalletObj.walletAddress || "";
+  const currentWalletName = currentWalletObj.walletName || "";
+  const currentCoin = currentWalletObj.coin || "";
 
+  /* ------------------ Render ------------------ */
   return (
     <div className="Deposit">
       <div className="depositSection">
@@ -281,27 +306,13 @@ const Deposit = () => {
             />
             Pay with Wallet
           </label>
-          {/* Uncomment to enable bank method */}
-          {/* <label>
-            <input
-              type="radio"
-              name="method"
-              value="BANK"
-              checked={paymentMethod === "BANK"}
-              onChange={() => {
-                setPaymentMethod("BANK");
-                setCurrentIndex(0);
-              }}
-            />
-            Pay with Bank
-          </label> */}
         </div>
 
         <div className="addressBox">
           <p>
             <strong>
               {paymentMethod === "USDT"
-                ? "Company Wallet Address:"
+                ? `Company Wallet Address: ${currentCoin}`
                 : "Company Bank Account:"}
             </strong>
           </p>
@@ -310,10 +321,11 @@ const Deposit = () => {
             {paymentMethod === "USDT" ? (
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <p className="address" style={{ wordBreak: "break-all" }}>
-                  {currentWalletAddress ||
-                    (wallets.length === 0
-                      ? "Loading wallets..."
-                      : "No wallet address available")}
+                  {walletLoading
+                    ? "Loading wallets..."
+                    : walletError
+                    ? walletError
+                    : currentWalletAddress || "No wallet address available"}
                 </p>
                 <p style={{ fontSize: 12, marginTop: 4, opacity: 0.8 }}>
                   {currentWalletName || ""}
@@ -321,21 +333,33 @@ const Deposit = () => {
               </div>
             ) : (
               <div className="bankDetails">
-                {/* Add bank details UI if you enable BANK */}
                 <p>No bank selected</p>
               </div>
             )}
 
-            <button type="button" className="copyBtn" onClick={copyAddress}>
-              {copied ? <FiCheck /> : <FiCopy />}
-            </button>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <button
+                type="button"
+                className="copyBtn"
+                onClick={copyAddress}
+                disabled={walletLoading || !currentWalletAddress}
+              >
+                {copied ? <FiCheck /> : <FiCopy />}
+              </button>
+
+              <button
+                type="button"
+                className="copyBtn"
+                onClick={handleGetWalletAddress}
+                title="Refresh wallets"
+                disabled={walletLoading}
+              >
+                <FiRefreshCw />
+              </button>
+            </div>
           </div>
 
-          <Countdown
-            onExpire={handleExpire}
-            initialTimeLeft={initialTimeLeft}
-            storageKey={timerStorageKey()}
-          />
+          <Countdown onExpire={handleExpire} storageKey={timerStorageKey()} />
           {copied && <p className="copyMsg">Copied!</p>}
         </div>
 
@@ -363,6 +387,7 @@ const Deposit = () => {
             !proofFileShow ||
             proofPaymentPop ||
             loading ||
+            walletLoading ||
             !currentWalletAddress
           }
           onClick={handlePayment}
