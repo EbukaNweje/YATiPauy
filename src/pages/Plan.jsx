@@ -20,6 +20,16 @@ const Plan = () => {
   const dispatch = useDispatch();
   const date = new Date().toLocaleString();
 
+  // FIXED AMOUNTS FOR ALL PLANS
+  const FIXED_AMOUNTS = {
+    "YATI STARTER": [10, 20, 50, 70, 80, 99],
+    "YATI HOPE EXPLORER": [100, 150, 200, 250, 280, 299],
+    "YATI BRIGHTER HORIZON": [300, 350, 400, 450, 500, 599],
+    "YATI EMPOWER PASS": [600, 650, 700, 800, 900, 999],
+    "YATI ELITE STARS": [1000, 1200, 1500, 2000, 2500, 2999],
+    "YATI DIAMOND": [3000, 3500, 4000, 4500, 5000],
+  };
+
   useEffect(() => {
     const fetchPlans = async () => {
       setLoading(true);
@@ -29,33 +39,15 @@ const Plan = () => {
         );
 
         const mappedPlans = response.data.data.map((plan) => {
-          const increments = [];
-          if (plan.minimumDeposit && plan.maximumDeposit) {
-            const step = Math.floor(
-              (plan.maximumDeposit - plan.minimumDeposit) / 4
-            );
-            for (
-              let amt = plan.minimumDeposit;
-              amt <= plan.maximumDeposit;
-              amt += step
-            ) {
-              increments.push(amt);
-            }
-            if (!increments.includes(plan.maximumDeposit)) {
-              increments.push(plan.maximumDeposit);
-            }
-          }
-
           return {
             ...plan,
-            amounts: increments,
+            amounts: FIXED_AMOUNTS[plan.planName] || [], // APPLY FIXED AMOUNTS
           };
         });
 
         setPlansData(mappedPlans);
-      } catch (error) {
+      } catch {
         toast.error("Failed to load plans");
-        // console.error("Error fetching plans:", error);
       } finally {
         setLoading(false);
       }
@@ -90,26 +82,13 @@ const Plan = () => {
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const handleConfirmationClose = () => {
-    setShowConfirmation(false);
-  };
-
   const handleSubscribeClick = () => {
     if (!selectedPlan || !selectedAmount) {
       toast.error("Please select a plan and amount.");
       return;
     }
 
-    const amountNum = Number(selectedAmount);
-    if (
-      amountNum < selectedPlan.minimumDeposit ||
-      amountNum > selectedPlan.maximumDeposit
-    ) {
-      toast.error(
-        `Amount must be between $${selectedPlan.minimumDeposit} and $${selectedPlan.maximumDeposit}`
-      );
-      return;
-    }
+    // const amountNum = Number(selectedAmount);
 
     if (!user?.user?._id) {
       toast.error("User not logged in.");
@@ -143,11 +122,9 @@ const Plan = () => {
         dispatch(depositedAmount(Date.now()));
       } else {
         toast.error(response.data.data.message || "Subscription failed");
-        console.log(response.data);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");
-      console.error("Subscription error:", error);
     } finally {
       setLoading(false);
     }
@@ -229,8 +206,6 @@ const Plan = () => {
                   placeholder="Enter custom amount"
                   value={customAmount}
                   onChange={handleCustomAmountChange}
-                  min={selectedPlan.minimumDeposit}
-                  max={selectedPlan.maximumDeposit}
                 />
               </div>
 
@@ -240,13 +215,7 @@ const Plan = () => {
                   onClick={handleSubscribeClick}
                   disabled={loading || !selectedAmount}
                 >
-                  {loading ? (
-                    <span>
-                      Processing... <div className="loading-spinner"></div>
-                    </span>
-                  ) : (
-                    "Continue"
-                  )}
+                  {loading ? "Processing..." : "Continue"}
                 </button>
                 <button
                   className="close-btn"
@@ -280,21 +249,19 @@ const Plan = () => {
                   </div>
                 </div>
               </div>
+
               <div className="button-group">
                 <button
                   className="subscribe-btn"
                   onClick={handleSubscribe}
                   disabled={loading}
                 >
-                  {loading ? (
-                    <span>
-                      Processing... <div className="loading-spinner"></div>
-                    </span>
-                  ) : (
-                    "Confirm Subscription"
-                  )}
+                  {loading ? "Processing..." : "Confirm Subscription"}
                 </button>
-                <button className="close-btn" onClick={handleConfirmationClose}>
+                <button
+                  className="close-btn"
+                  onClick={() => setShowConfirmation(false)}
+                >
                   Cancel
                 </button>
               </div>
