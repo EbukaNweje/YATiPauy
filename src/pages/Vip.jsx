@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import planLogo from "../assets/logo.png";
+import { PuffLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const Vip = () => {
   const user = useSelector((state) => state.YATipauy.user);
@@ -13,6 +15,7 @@ const Vip = () => {
   const [loading, setLoading] = useState(false);
   const reduxId = useSelector((state) => state?.YATipauy?.id);
   const finalId = user?.user?._id || reduxId;
+  const [recycleLoading, setRecycleLoading] = useState(false);
 
   const formatCurrency = (val) => {
     const n = Number(val);
@@ -49,6 +52,24 @@ const Vip = () => {
     return <p className="no-products">No products available</p>;
   }
 
+  // console.log("userData", userData);
+
+  const handelRecycle = async (subscriptionId) => {
+    setRecycleLoading(true);
+    try {
+      const response = await axios.patch(
+        `https://yaticare-backend.onrender.com/api/recycleSubscription/${subscriptionId}`
+      );
+      console.log("subscriptionId", response);
+      toast.success(response?.data?.message);
+      setRecycleLoading(true);
+    } catch (err) {
+      setRecycleLoading(false);
+      toast.error(err?.response?.data?.message);
+      // console.log(err?.response?.data?.message);
+    }
+  };
+
   return (
     <div className="vip-wrap">
       <header className="vip-header">
@@ -69,7 +90,9 @@ const Vip = () => {
         <div className="vip-list">
           {userData.subscriptions.reverse().map((subscriptionData) => {
             {
-              /* console.log("this is the subscriptionData", subscriptionData); */
+              /* {
+              console.log("this is the subscriptionData", subscriptionData);
+            } */
             }
             return (
               <article
@@ -130,15 +153,26 @@ const Vip = () => {
                   <button
                     className="Recycle-btn"
                     aria-label={"Recycle"}
-                    disabled={true}
-                    // style={{}}
-                    // onClick={() =>
-                    //   navigate(`/dashboard/plandetails`, {
-                    //     state: { subscription: subscriptionData },
-                    //   })
-                    // }
+                    disabled={
+                      !subscriptionData?.isSubscriptionRecycle ? true : false
+                    }
+                    style={{
+                      background: `${
+                        !subscriptionData?.isSubscriptionRecycle
+                          ? "rgba(128, 128, 128, 0.188)"
+                          : ""
+                      }`,
+                    }}
+                    onClick={() => {
+                      handelRecycle(subscriptionData._id),
+                        console.log("wroking");
+                    }}
                   >
-                    Recycle
+                    {recycleLoading ? (
+                      <PuffLoader color="white" size={24} />
+                    ) : (
+                      "Recycle"
+                    )}
                   </button>
                   <button
                     className="navigate-btn"

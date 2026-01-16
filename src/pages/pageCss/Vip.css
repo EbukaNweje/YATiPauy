@@ -195,8 +195,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* background: linear-gradient(90deg, var(--success), #059668); */
-  background: rgba(128, 128, 128, 0.188);
+  background: linear-gradient(90deg, var(--success), #059668);
+  /* background: rgba(128, 128, 128, 0.188); */
   border: none;
   color: var(--bg);
   cursor: pointer;
@@ -206,7 +206,7 @@
 }
 
 .Recycle-btn:hover {
-  background: rgba(6, 95, 70, 0.083);
+  background: #003323;
   transform: scale(1.06);
 }
 
