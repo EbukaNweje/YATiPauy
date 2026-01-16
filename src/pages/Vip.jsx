@@ -164,8 +164,8 @@ const Vip = () => {
                       }`,
                     }}
                     onClick={() => {
-                      handelRecycle(subscriptionData._id),
-                        console.log("wroking");
+                      handelRecycle(subscriptionData._id);
+                      // console.log("wroking");
                     }}
                   >
                     {recycleLoading ? (
