@@ -107,6 +107,7 @@ const Plan = () => {
         {
           userId: user.user._id,
           plan: selectedPlan._id,
+          planName: selectedPlan.planName,
           amount: amountNum,
           durationInDays: selectedPlan.durationDays,
           subscriptionDate: date,
