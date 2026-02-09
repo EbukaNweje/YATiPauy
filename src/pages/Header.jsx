@@ -52,7 +52,12 @@ const Header = () => {
             </li>
             <li>
               {isHomePage ? (
-                <ScrollLink to="about" smooth={true} duration={500} offset={-70}>
+                <ScrollLink
+                  to="about"
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                >
                   About Us
                 </ScrollLink>
               ) : (
@@ -61,26 +66,41 @@ const Header = () => {
             </li>
             <li>
               {isHomePage ? (
-                <ScrollLink to="how-it-works" smooth={true} duration={500} offset={-70}>
+                <ScrollLink
+                  to="how-it-works"
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                >
                   How it works
                 </ScrollLink>
               ) : (
-                <span onClick={() => goToSection("how-it-works")}>How it works</span>
+                <span onClick={() => goToSection("how-it-works")}>
+                  How it works
+                </span>
               )}
             </li>
+            <li onClick={() => navigate("/gallery-hub")}>Gallery Hub</li>
             <li onClick={() => navigate("/contact-us")}>Contacts</li>
           </ul>
 
           <div className="Auth">
             <button onClick={() => navigate("/auth/login")}>Login</button>
-            <button className="Active" onClick={() => navigate("/auth/Sign-up")}>
+            <button
+              className="Active"
+              onClick={() => navigate("/auth/Sign-up")}
+            >
               Create account
             </button>
           </div>
         </div>
 
         <CgMenuRight className="Icon" onClick={() => setToggle(true)} />
-        <Drawer placement="right" onClose={() => setToggle(false)} open={toggle}>
+        <Drawer
+          placement="right"
+          onClose={() => setToggle(false)}
+          open={toggle}
+        >
           <MobileMenu />
         </Drawer>
       </div>

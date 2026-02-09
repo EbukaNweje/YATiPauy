@@ -71,7 +71,7 @@ const Header = () => {
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
+        `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
       );
       const data = response?.data?.data;
       setUserData(data);
@@ -118,8 +118,12 @@ const Header = () => {
               <div className="refinfo">
                 <button disabled className="Btn">
                   Available Balance:
-                  <BsCurrencyDollar />
-                  {userData ? formatCurrency(userData.accountBalance) : "0.00"}
+                  <span>
+                    <BsCurrencyDollar />
+                    {userData
+                      ? formatCurrency(userData.accountBalance)
+                      : "0.00"}
+                  </span>
                 </button>
                 <div className="reflink">
                   Referral Link

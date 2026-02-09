@@ -1,200 +1,199 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Poppins:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Poppins:wght@300;400;600&display=swap");
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f4f4f4;
 }
 
-/* 🔥 Sleek Wrapper */
 .HowItWorksWrapper {
-    width: 100%;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(to right, #03260a, #0c2300);
-    padding: 50px 20px;
-    gap: 50px;
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #03260a, #0c2300);
+  padding: 50px 20px;
+  gap: 50px;
 }
 
 /* ✨ Left Side */
 .leftSide {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    color: white;
-    border-radius: 15px;
-    max-width: 600px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 1s ease-in-out;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  color: white;
+  border-radius: 15px;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
 }
 
 /* 👑 Heading */
 .leftSide h1 {
-    text-align: center;
-    font-size: 3rem;
-    margin-bottom: 20px;
-    font-family: "Oswald", sans-serif;
-    letter-spacing: 1px;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
 }
 
 /* 🏆 Intro Text */
 .intro-text {
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
 }
 
 .brand {
-    font-weight: 700;
-    color: #fdd835;
+  font-weight: 700;
+  color: #fdd835;
 }
 
 /* 📌 Info Box */
 .info-box {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  color: #fff;
 }
 
 .info-box:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .info-box p {
-    color: #fff;
+  color: #fff;
 }
 
 /* 🚀 Right Side */
 .rightSide {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .howItWorksImg {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
 }
 
 .howItWorksImg:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 /* ===================== 📱 RESPONSIVE DESIGN ===================== */
 
 /* 💻 Large Screens (Desktops) */
 @media (max-width: 1440px) {
-    .leftSide h1 {
-        font-size: 2.8rem;
-    }
-    .intro-text {
-        font-size: 1.1rem;
-    }
-    .info-box {
-        padding: 12px;
-    }
+  .leftSide h1 {
+    font-size: 2.8rem;
+  }
+  .intro-text {
+    font-size: 1.1rem;
+  }
+  .info-box {
+    padding: 12px;
+  }
 }
 
 /* 🖥️ Medium Screens (Tablets & Small Laptops) */
 @media (max-width: 1024px) {
-    .HowItWorksWrapper {
-        flex-direction: column;
-        padding: 40px 20px;
-    }
-    .leftSide {
-        width: 90%;
-        max-width: none;
-        text-align: center;
-    }
-    .howItWorksImg {
-        width: 85%;
-    }
-    .leftSide h1 {
-        font-size: 2.5rem;
-    }
+  .HowItWorksWrapper {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  .leftSide {
+    width: 90%;
+    max-width: none;
+    text-align: center;
+  }
+  .howItWorksImg {
+    width: 85%;
+  }
+  .leftSide h1 {
+    font-size: 2.5rem;
+  }
 }
 
 /* 📲 Small Tablets & Large Phones */
 @media (max-width: 768px) {
-    .HowItWorksWrapper {
-        padding: 30px 15px;
-    }
-    .leftSide {
-        width: 100%;
-    }
-    .leftSide h1 {
-        font-size: 2rem;
-    }
-    .intro-text {
-        font-size: 1rem;
-    }
-    .info-box {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-    .howItWorksImg {
-        width: 90%;
-    }
+  .HowItWorksWrapper {
+    padding: 30px 15px;
+  }
+  .leftSide {
+    width: 100%;
+  }
+  .leftSide h1 {
+    font-size: 2rem;
+  }
+  .intro-text {
+    font-size: 1rem;
+  }
+  .info-box {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  .howItWorksImg {
+    width: 90%;
+  }
 }
 
 /* 📱 Mobile Devices */
 @media (max-width: 480px) {
-    .HowItWorksWrapper {
-        padding: 20px 10px;
-        gap: 20px;
-    }
-    .leftSide {
-        padding: 25px;
-    }
-    .leftSide h1 {
-        font-size: 1.8rem;
-    }
-    .intro-text {
-        font-size: 0.95rem;
-    }
-    .info-box {
-        padding: 8px;
-        font-size: 0.85rem;
-    }
-    .howItWorksImg {
-        width: 95%;
-    }
+  .HowItWorksWrapper {
+    padding: 20px 10px;
+    gap: 20px;
+  }
+  .leftSide {
+    padding: 25px;
+  }
+  .leftSide h1 {
+    font-size: 1.8rem;
+  }
+  .intro-text {
+    font-size: 0.95rem;
+  }
+  .info-box {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+  .howItWorksImg {
+    width: 95%;
+  }
 }
 
 /* 📱 Extra Small Phones */
 @media (max-width: 360px) {
-    .leftSide h1 {
-        font-size: 1.6rem;
-    }
-    .intro-text {
-        font-size: 0.9rem;
-    }
-    .info-box {
-        font-size: 0.8rem;
-    }
+  .leftSide h1 {
+    font-size: 1.6rem;
+  }
+  .intro-text {
+    font-size: 0.9rem;
+  }
+  .info-box {
+    font-size: 0.8rem;
+  }
 }
 
 /* 🔥 Fade-In Animation */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

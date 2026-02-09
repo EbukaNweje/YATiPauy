@@ -27,7 +27,7 @@ const Withdraw = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${user.user._id}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${user.user._id}`
         );
         const data = response?.data?.data;
         setUserData(data?.WalletInfo?.WalletAddress);
@@ -72,7 +72,7 @@ const Withdraw = () => {
 
     try {
       const url =
-        "https://yaticare-back-end.vercel.app/api/withdrawal/createWithdrawal";
+        "https://yaticare-backend.onrender.com/api/withdrawal/createWithdrawal";
 
       setLoading(true);
       const date = new Date().toLocaleString();
@@ -249,10 +249,9 @@ const Withdraw = () => {
           To ensure transparency and regulatory compliance, a total withdrawal
           charge of 15% will be applied. This consists of a 10% Goods and
           Services Tax (GST) mandated by Australian law, and a 5% Community
-          Empowerment Fee dedicated to a pool that rewards members for marketing
-          and promotional activities, fostering collective growth thereby
-          creating earning opportunities for you. By proceeding, you acknowledge
-          and agree to this structure.
+          Empowerment Fee dedicated to a pool for Humanitarian purposes, to be
+          executed at the local communities of our members. By proceeding, you
+          acknowledge and agree to this structure.
         </li>
         {/* <li>3. Use only the official company details shown above.</li>
         <li>4. Each recharge requires creating a new deposit order.</li>

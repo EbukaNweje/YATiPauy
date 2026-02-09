@@ -4,10 +4,10 @@ import "./pageCss/Terms.css";
 const Privacy = () => {
   return (
     <div className="Privacy">
-      <h3> YATiCares Privacy Policy</h3>
-      <h4>_Last Updated: [1st January, 2025]_ </h4>
+      <h3> YATiCare Privacy Policy</h3>
+      <h4>Last Updated: [1st January, 2025] </h4>
       <span style={{ fontWeight: "600" }}>
-        YATiCares ("we," "our," or "us") is committed to protecting your privacy
+        YATiCare ("we," "our," or "us") is committed to protecting your privacy
         and ensuring that your personal data is handled securely and
         responsibly. This Privacy Policy outlines how we collect, use, and
         protect your information when you use our platform.
@@ -57,7 +57,7 @@ const Privacy = () => {
         <li>
           2. How We Use Your Information
           <h4>We use collected data to: </h4>
-          <span>✅ Provide and maintain YATiCares services. </span>
+          <span>✅ Provide and maintain YATiCare services. </span>
           <span>✅ Process transactions and contributions. </span>
           <span>✅ Verify user identity and prevent fraud. </span>
           <span>✅ Improve platform performance and user experience. </span>
@@ -161,7 +161,7 @@ const Privacy = () => {
         <li>
           8. International Data Transfers
           <span>
-            YATiCares operates globally, meaning your data may be processed in
+            YATiCare operates globally, meaning your data may be processed in
             multiple countries.{" "}
           </span>
           <span>
@@ -176,14 +176,14 @@ const Privacy = () => {
 
         <li>
           9. Legal Compliance & No Litigation Policy
-          <h4>By using YATiCares, you agree that: </h4>
+          <h4>By using YATiCare, you agree that: </h4>
           <span>
-            ✔ You cannot initiate legal claims against YATiCares regarding data
+            ✔ You cannot initiate legal claims against YATiCare regarding data
             handling unless there is a clear breach of data protection laws.{" "}
           </span>
           <span>
             ✔ Any privacy concerns should be resolved internally through
-            YATiCares’ dispute resolution process.{" "}
+            YATiCare’ dispute resolution process.{" "}
           </span>
         </li>
         <li>
@@ -199,10 +199,9 @@ const Privacy = () => {
           11. Contact Us
           <h4>For privacy-related inquiries or concerns, reach out to: </h4>
           <span>📩 Email: [YATihelpdesk@gmail.com] </span>
-          <span>🌍 Website: [www.yaticares.com] </span>
+          <span>🌍 Website: [www.yaticare.com] </span>
           <p>
-            By using YATiCares, you acknowledge and agree to this Privacy
-            Policy.
+            By using YATiCare, you acknowledge and agree to this Privacy Policy.
           </p>
         </li>
       </ol>

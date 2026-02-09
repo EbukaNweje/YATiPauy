@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./pageCss/plandetails.css";
 import { useSelector } from "react-redux";
@@ -62,7 +62,7 @@ const PlanDetails = () => {
 
       try {
         const resp = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/getusrSubcription/${user.user._id}`
+          `https://yaticare-backend.onrender.com/api/getusrSubcription/${user.user._id}`
         );
         const data =
           resp?.data?.subscriptions || resp?.data?.data?.subscriptions || [];

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./AuthStyle.css";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Select } from "antd";
-import { countries } from "../Data.jsx";
+import { Button, Checkbox, Form, Input } from "antd";
+// import { countries } from "../Data.jsx";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import axios from "axios";
@@ -126,7 +126,7 @@ const SignUp = () => {
             </div>
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="country"
             rules={[{ required: true, message: "Please select your country!" }]}
           >
@@ -153,7 +153,7 @@ const SignUp = () => {
               popupClassName="custom-select-dropdown"
               className="custom-select"
             />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             name="password"
             rules={[{ required: true, message: "Please input your Password!" }]}

@@ -53,21 +53,24 @@ const Home = () => {
       {/* Carousel */}
       {/* <div className="carousel-container"> */}
       <div
-        className="carousel-item relative flex items-center justify-center text-white"
+        className="relative flex items-center justify-center text-white h-[300px] w-[100%] md:h-[400px] lg:h-[500px] bg-cover bg-center mb-10"
         style={{ backgroundImage: `url(${Bg})` }}
       >
-        <div className="absolute inset-0 bg-black/50 z-0"></div>
-        {/* Dark overlay behind text */}
-        <div className="relative z-20 text-center px-6 max-w-2xl">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            Invest Smart. Grow Faster.
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
+
+        {/* Content */}
+        <div className="relative z-20 text-center px-6 max-w-2xl flex flex-col items-center gap-6 mx-auto">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+            Welcome To A Movement Built On Humanity.
           </h1>
-          <span className="text-[lightgray] text-lg md:text-xl mb-6">
-            Your trusted platform for secure deposits and fast withdrawals.
-          </span>
+          <p className="text-lg md:text-xl mb-6" style={{ color: "white" }}>
+            Every step you take empowers a community, bridges an economic gap,
+            and helps write a story of shared success.
+          </p>
           <button
-            onClick={() => Nav("/dashboard/plan")}
-            className="bg-green-600 hover:bg-green-700 w-[150px] h-[40px] text-white font-semibold px-6 py-3 rounded-[5px] shadow-lg transition"
+            onClick={() => navigate("/dashboard/plan")}
+            className="bg-green-600 hover:bg-green-700 w-[150px] h-[40px] text-white font-semibold px-6 py-2 rounded shadow-lg transition duration-300"
           >
             Get Started
           </button>

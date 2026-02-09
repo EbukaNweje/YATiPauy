@@ -1,11 +1,10 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { logout } from "../pages/Global/Slice";
 
-// PrivateRoute: allows access only when user is logged in and not blocked.
 const PrivateRoute = () => {
   const { isLoggedIn, user } = useSelector((state) => state.YATipauy || {});
   const reduxId = useSelector((state) => state?.YATipauy?.id);
@@ -16,35 +15,30 @@ const PrivateRoute = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const timer = useRef(null);
 
+  // 🔐 Check if user is blocked
   useEffect(() => {
     let mounted = true;
 
     const checkBlocked = async () => {
-      // if not logged in we don't need to call API
-      if (!isLoggedIn) {
-        setChecking(false);
-        return;
-      }
-      if (!finalId) {
+      if (!isLoggedIn || !finalId) {
         setChecking(false);
         return;
       }
 
       try {
         const res = await axios.get(
-          `https://yaticare-back-end.vercel.app/api/user/userdata/${finalId}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
         );
         const data = res?.data?.data;
         if (!mounted) return;
         setUserData(data);
 
         if (data?.status === "blocked" || data?.status === "banned") {
-          // log out user locally and redirect with message
           dispatch(logout());
           toast.error("Your account has been blocked. Please contact support.");
           navigate("/", { replace: true });
-          return;
         }
       } catch (err) {
         console.error("PrivateRoute fetch error:", err);
@@ -54,19 +48,38 @@ const PrivateRoute = () => {
     };
 
     checkBlocked();
-
     return () => {
       mounted = false;
     };
   }, [isLoggedIn, finalId, dispatch, navigate]);
 
-  // not logged in -> redirect to landing/login
+  // ⏱️ Auto logout on inactivity
+  useEffect(() => {
+    if (!isLoggedIn) return;
+
+    const logoutUser = () => {
+      dispatch(logout());
+      toast("You've been logged out due to inactivity.");
+      navigate("/auth/login");
+    };
+
+    const resetTimer = () => {
+      if (timer.current) clearTimeout(timer.current);
+      timer.current = setTimeout(logoutUser, 10 * 60 * 1000); // 10 minutes
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "click"];
+    events.forEach((event) => window.addEventListener(event, resetTimer));
+    resetTimer();
+
+    return () => {
+      events.forEach((event) => window.removeEventListener(event, resetTimer));
+      if (timer.current) clearTimeout(timer.current);
+    };
+  }, [isLoggedIn, dispatch, navigate]);
+
   if (!isLoggedIn) return <Navigate to="/" replace />;
-
-  // while we're checking the server, don't render protected content
   if (checking) return null;
-
-  // if user data says blocked (fallback)
   if (userData?.status === "blocked" || userData?.status === "banned") {
     return <Navigate to="/" replace />;
   }

@@ -7,7 +7,7 @@
   position: sticky;
   top: 0;
   background: white;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .Header-Wrapper {
@@ -38,7 +38,7 @@
 }
 
 .Navs {
-  width: 60%;
+  width: 70%;
   height: 100%;
   display: flex;
   align-items: center;

@@ -44,7 +44,7 @@ const Bank = () => {
     setIsSaving(true);
     try {
       const response = await axios.put(
-        `https://yaticare-back-end.vercel.app/api/user/addWallet/${user.user._id}`,
+        `https://yaticare-backend.onrender.com/api/user/addWallet/${user.user._id}`,
         userInput
       );
       if (response.data) {

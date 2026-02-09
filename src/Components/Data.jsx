@@ -1,7 +1,50 @@
+import GalleryImg1 from "../assets/Gallery/1.jpg";
+import GalleryImg2 from "../assets/Gallery/IMG-20250922-WA0000.jpg";
+import GalleryImg3 from "../assets/Gallery/IMG-20250922-WA0002.jpg";
+import GalleryImg4 from "../assets/Gallery/IMG-20250922-WA0007.jpg";
+import GalleryImg5 from "../assets/Gallery/IMG-20250922-WA0010.jpg";
+import GalleryImg6 from "../assets/Gallery/IMG-20250922-WA0013.jpg";
+import GalleryImg7 from "../assets/Gallery/IMG-20250922-WA0014.jpg";
+import GalleryImg8 from "../assets/Gallery/IMG-20250922-WA0015.jpg";
+import GalleryImg9 from "../assets/Gallery/IMG-20250922-WA0017.jpg";
+import GalleryImg10 from "../assets/Gallery/IMG-20250922-WA0022.jpg";
+import GalleryImg11 from "../assets/Gallery/IMG-20250922-WA0031.jpg";
+import GalleryImg12 from "../assets/Gallery/IMG-20250922-WA0035.jpg";
+import GalleryImg13 from "../assets/Gallery/IMG-20250922-WA0037.jpg";
+import GalleryImg14 from "../assets/Gallery/IMG-20250922-WA0038.jpg";
+import GalleryImg15 from "../assets/Gallery/IMG-20250922-WA0039.jpg";
+import GalleryImg16 from "../assets/Gallery/IMG-20250922-WA0041.jpg";
+import GalleryImg17 from "../assets/Gallery/IMG-20250922-WA0043.jpg";
+import GalleryImg18 from "../assets/Gallery/IMG-20250922-WA0046.jpg";
+import GalleryImg19 from "../assets/Gallery/IMG-20250922-WA0047.jpg";
+import GalleryImg20 from "../assets/Gallery/IMG-20250922-WA0053.jpg";
 export const images = [
   "https://zensartech.top/assets/img/banner/1.png",
   "https://zensartech.top/assets/img/banner/3.png",
   "https://zensartech.top/assets/img/banner/2.png",
+];
+
+export const GalleryImages = [
+  GalleryImg1,
+  GalleryImg2,
+  GalleryImg3,
+  GalleryImg4,
+  GalleryImg5,
+  GalleryImg6,
+  GalleryImg7,
+  GalleryImg8,
+  GalleryImg9,
+  GalleryImg10,
+  GalleryImg11,
+  GalleryImg12,
+  GalleryImg13,
+  GalleryImg14,
+  GalleryImg15,
+  GalleryImg16,
+  GalleryImg17,
+  GalleryImg18,
+  GalleryImg19,
+  GalleryImg20,
 ];
 
 export const products = [

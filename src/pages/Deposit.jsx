@@ -1,72 +1,51 @@
-import React, { useState, useEffect } from "react";
+// Deposit.jsx
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import "./pageCss/Deposit.css";
-import { FiCopy, FiCheck } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { FiCopy, FiCheck, FiRefreshCw } from "react-icons/fi";
+import { useSelector, useDispatch } from "react-redux";
 import "animate.css";
 import { useNavigate } from "react-router-dom";
 import { depositedAmount } from "./Global/Slice";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import PropTypes from "prop-types";
 
-// ⏳ Countdown Component
-// initialTimeLeft (seconds) is used so timer can persist across reloads
-const Countdown = ({
-  onExpire,
-  initialTimeLeft = 1800,
-  storageKey = "countdownTimer",
-}) => {
+/* ------------------ Countdown component ------------------ */
+const Countdown = ({ onExpire, initialTimeLeft = 1800, storageKey }) => {
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
 
-  // Load persisted start time
   useEffect(() => {
-    const stored = localStorage.getItem(storageKey);
-    if (stored) {
-      const { startedAt } = JSON.parse(stored);
-      const elapsed = Math.floor((Date.now() - startedAt) / 1000);
-      const remaining = initialTimeLeft - elapsed;
-      setTimeLeft(remaining > 0 ? remaining : 0);
-    } else {
-      // First time: store start time
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify({ startedAt: Date.now() })
-      );
-      setTimeLeft(initialTimeLeft);
-    }
+    const stored = JSON.parse(sessionStorage.getItem(storageKey) || "{}");
+    if (stored?.timeLeft) setTimeLeft(stored.timeLeft);
+    else setTimeLeft(initialTimeLeft);
   }, [initialTimeLeft, storageKey]);
 
   useEffect(() => {
-    if (timeLeft <= 0) return;
+    if (timeLeft <= 0) return onExpire();
 
     const interval = setInterval(() => {
-      setTimeLeft((s) => {
-        if (s <= 1) {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
           clearInterval(interval);
-          localStorage.removeItem(storageKey); // clear timer
+          sessionStorage.removeItem(storageKey);
           onExpire();
           return 0;
         }
-        return s - 1;
+        sessionStorage.setItem(
+          storageKey,
+          JSON.stringify({ timeLeft: prev - 1 })
+        );
+        return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(interval);
   }, [timeLeft, onExpire, storageKey]);
 
-  useEffect(() => {
-    // Reset the timer when initialTimeLeft changes
-    setTimeLeft(initialTimeLeft);
-  }, [initialTimeLeft]);
-
   const fmt = (s) => {
-    const minutes = Math.floor(s / 60);
-    const seconds = s % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
-      2,
-      "0"
-    )}`;
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
   };
 
   return <p className="timer">Expires in {fmt(timeLeft)}</p>;
@@ -75,9 +54,10 @@ const Countdown = ({
 Countdown.propTypes = {
   onExpire: PropTypes.func.isRequired,
   initialTimeLeft: PropTypes.number,
-  storageKey: PropTypes.string,
+  storageKey: PropTypes.string.isRequired,
 };
 
+/* ------------------ Success popup ------------------ */
 const RenderPopSuccessful = React.memo(({ onClose }) => (
   <div className="Deposit_Pop">
     <div className="Pop_display animate__animated animate__backInDown">
@@ -89,190 +69,180 @@ const RenderPopSuccessful = React.memo(({ onClose }) => (
   </div>
 ));
 RenderPopSuccessful.displayName = "RenderPopSuccessful";
+RenderPopSuccessful.propTypes = { onClose: PropTypes.func.isRequired };
 
-RenderPopSuccessful.propTypes = {
-  onClose: PropTypes.func.isRequired,
-};
-
+/* ------------------ Main Deposit component ------------------ */
 const Deposit = () => {
   const amount = useSelector((state) => state.YATipauy.depositAmount);
   const userData = useSelector((state) => state.YATipauy.user);
-  const [proofPaymentPop, setProofPaymentPop] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // console.log(userData);
-
-  // useEffect(() => {
-  //   fetch(
-  //     "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ngn"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const rate = data.tether.ngn;
-  //       setUsdtRate(rate);
-  //       setUsdtAmount(amount / rate);
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, [amount]);
-
-  const companyWallets = React.useMemo(
-    () => ["WALLET-ADDR-123-ABC", "WALLET-ADDR-456-DEF", "WALLET-ADDR-789-GHI"],
-    []
-  );
-  const companyBanks = [
-    {
-      bankName: "Zenith Bank",
-      accountName: "John Doe Ltd",
-      accountNumber: "1234567890",
-    },
-    {
-      bankName: "Access Bank",
-      accountName: "John Doe Ltd",
-      accountNumber: "9876543210",
-    },
-    {
-      bankName: "GTB",
-      accountName: "John Doe Ltd",
-      accountNumber: "1122334455",
-    },
-  ];
+  const [wallets, setWallets] = useState([]);
+  const [walletLoading, setWalletLoading] = useState(false);
+  const [walletError, setWalletError] = useState(null);
 
   const [paymentMethod, setPaymentMethod] = useState("USDT");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const currentIndexRef = useRef(0);
+
   const [copied, setCopied] = useState(false);
   const [proofFile, setProofFile] = useState(null);
-  const [initialTimeLeft, setInitialTimeLeft] = useState(1800);
+  const [proofFileShow, setProofFileShow] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [proofPaymentPop, setProofPaymentPop] = useState(false);
 
-  // storage key for per-user, per-method timer persistence
-  const timerStorageKey = React.useCallback(
-    () => `deposit_timer_${userData?.user?._id || "anon"}_${paymentMethod}`,
-    [userData, paymentMethod]
-  );
+  const userId = userData?.user?._id || "anon";
 
-  // Switch address/bank when timer expires and persist timer state
+  const walletIndexKey = `user_${userId}_walletIndex`;
+  const timerKey = `user_${userId}_walletTimer`;
 
-  const handleExpire = () => {
-    const list = paymentMethod === "USDT" ? companyWallets : companyBanks;
-    setCurrentIndex((prev) => {
-      const newIndex = (prev + 1) % list.length;
-      setInitialTimeLeft(1800); // Reset the timer to 30 minutes
-      return newIndex;
-    });
-  };
-
-  // initialize timer and currentIndex from localStorage (or create new)
-  const currentIndexRef = React.useRef(currentIndex);
-
-  useEffect(() => {
-    const init = () => {
-      const key = timerStorageKey();
-      const now = Date.now();
-      try {
-        // Clear previous timer data to start fresh
-        localStorage.removeItem(key);
-        const newIndex = (currentIndexRef.current + 1) % companyWallets.length;
-        const payload = { startedAt: now, initialIndex: newIndex };
-        localStorage.setItem(key, JSON.stringify(payload));
-        currentIndexRef.current = newIndex; // Update ref instead of state
-        setCurrentIndex(newIndex);
-        setInitialTimeLeft(1800);
-      } catch {
-        setInitialTimeLeft(1800);
-      }
-    };
-    init();
-  }, [timerStorageKey, companyWallets]);
-
-  const copyAddress = async () => {
-    let text =
-      paymentMethod === "USDT"
-        ? companyWallets[currentIndex]
-        : companyBanks[currentIndex].accountNumber;
-
+  /* ------------------ Fetch wallets ------------------ */
+  const handleGetWalletAddress = useCallback(async () => {
+    setWalletLoading(true);
+    setWalletError(null);
     try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
-    } catch (error) {
-      console.error("Copy to clipboard failed:", error);
-    }
-  };
-
-  const handleProofUpload = (e) => {
-    if (e.target.files.length > 0) {
-      setProofFile(e.target.files[0].name);
-    }
-  };
-
-  useEffect(() => {
-    const stored = localStorage.getItem(timerStorageKey());
-    if (stored) {
-      const { initialIndex } = JSON.parse(stored);
-      setCurrentIndex(initialIndex);
+      const res = await axios.get(
+        "https://yaticare-backend.onrender.com/api/admin/getallWalletAddress"
+      );
+      const raw = res.data;
+      const data = Array.isArray(raw)
+        ? raw
+        : Array.isArray(raw?.data)
+        ? raw.data
+        : Array.isArray(raw?.wallets)
+        ? raw.wallets
+        : [];
+      setWallets(data || []);
+    } catch (err) {
+      console.error("Failed to fetch wallets:", err);
+      setWalletError("Unable to load wallet addresses.");
+      setWallets([]);
+    } finally {
+      setWalletLoading(false);
     }
   }, []);
-  // const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  // console.log(userTimeZone);
-  const date = new Date().toLocaleString();
-  // console.log(date);
 
+  useEffect(() => {
+    handleGetWalletAddress();
+  }, [handleGetWalletAddress]);
+
+  /* ------------------ Wallet rotation & timer reset ------------------ */
+  useEffect(() => {
+    if (!wallets.length) return;
+
+    let prevIndex = parseInt(localStorage.getItem(walletIndexKey), 10);
+    if (isNaN(prevIndex)) prevIndex = -1;
+
+    const newIndex = (prevIndex + 1) % wallets.length;
+    setCurrentIndex(newIndex);
+    currentIndexRef.current = newIndex;
+
+    localStorage.setItem(walletIndexKey, newIndex);
+
+    // Reset timer
+    sessionStorage.setItem(
+      timerKey,
+      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex })
+    );
+  }, [wallets, walletIndexKey, timerKey]);
+
+  /* ------------------ Handle expiry ------------------ */
+  const handleExpire = useCallback(() => {
+    if (!wallets.length) return;
+
+    const newIndex = (currentIndexRef.current + 1) % wallets.length;
+    setCurrentIndex(newIndex);
+    currentIndexRef.current = newIndex;
+
+    // Update timer
+    sessionStorage.setItem(
+      timerKey,
+      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex })
+    );
+
+    // Save for next visit
+    localStorage.setItem(walletIndexKey, newIndex);
+  }, [wallets, timerKey, walletIndexKey]);
+
+  /* ------------------ Copy address ------------------ */
+  const copyAddress = async () => {
+    const currentWalletAddress =
+      wallets.length > 0 ? wallets[currentIndex]?.walletAddress || "" : "";
+    if (!currentWalletAddress) return toast.error("No address available");
+
+    try {
+      await navigator.clipboard.writeText(currentWalletAddress);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {
+      toast.error("Copy failed");
+    }
+  };
+
+  /* ------------------ Proof upload ------------------ */
+  const handleProofUpload = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setProofFile(e.target.files[0]);
+      setProofFileShow(e.target.files[0].name);
+    }
+  };
+
+  /* ------------------ Payment submission ------------------ */
   const handlePayment = async () => {
-    const url = "https://yaticare-back-end.vercel.app/api/deposit/deposit";
+    if (!proofFile) return toast.error("Please upload proof of payment");
+    if (!userData?.user?._id) return toast.error("User not found");
 
-    const data = {
-      userId: userData.user._id,
-      amount: amount,
-      PaymentType: paymentMethod,
-      depositDate: date,
-      depositWallet:
-        paymentMethod === "USDT"
-          ? companyWallets[currentIndex]
-          : companyBanks[currentIndex].accountNumber,
-    };
+    const depositWallet =
+      wallets.length > 0 ? wallets[currentIndex]?.walletAddress || "" : "";
+
+    if (!depositWallet) return toast.error("No deposit wallet available");
+
+    const formData = new FormData();
+    formData.append("userId", userData.user._id);
+    formData.append("amount", amount);
+    formData.append("PaymentType", paymentMethod);
+    formData.append("depositDate", new Date().toLocaleString());
+    formData.append("depositWallet", depositWallet);
+    formData.append("proofFile", proofFile);
+
     setLoading(true);
     try {
-      const res = await axios.post(url, data);
-      toast.success(res.data.message);
-      setLoading(false);
-      // navigate("/dashboard");
+      const res = await axios.post(
+        "https://yaticare-backend.onrender.com/api/deposit/deposit",
+        formData
+      );
+      toast.success(res.data.message || "Deposit submitted");
       setProofPaymentPop(true);
-      // signal other parts of the app (Header) to refresh user data
       dispatch(depositedAmount(amount));
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      toast.error(err?.response?.data?.message || "Upload failed");
+    } finally {
       setLoading(false);
     }
   };
+
   const handleClosePayment = () => {
     setProofPaymentPop(false);
     navigate("/dashboard");
   };
 
+  const currentWalletObj = wallets.length > 0 ? wallets[currentIndex] : {};
+  const currentWalletAddress = currentWalletObj.walletAddress || "";
+  const currentWalletName = currentWalletObj.walletName || "";
+  const currentCoin = currentWalletObj.coin || "";
+
+  /* ------------------ Render ------------------ */
   return (
     <div className="Deposit">
       <div className="depositSection">
         <h3>Deposit Amount</h3>
+
         <div className="Amount_Show">
           <p className="amount">≈ {amount} USDT</p>
-          {/* <p className="amount">${amount?.toLocaleString()}</p> */}
         </div>
         <hr />
 
-        {/* Payment Method Switch */}
         <div className="methodSwitch">
           <label>
             <input
@@ -287,64 +257,70 @@ const Deposit = () => {
             />
             Pay with Wallet
           </label>
-          {/* <label>
-            <input
-              type="radio"
-              name="method"
-              value="BANK"
-              checked={paymentMethod === "BANK"}
-              onChange={() => {
-                setPaymentMethod("BANK");
-                setCurrentIndex(0);
-              }}
-            />
-            Pay with Bank
-          </label> */}
         </div>
 
-        {/* Address/Bank Section */}
         <div className="addressBox">
           <p>
             <strong>
               {paymentMethod === "USDT"
-                ? "Company Wallet Address:"
+                ? `Company Wallet Address: ${currentWalletName} `
                 : "Company Bank Account:"}
             </strong>
           </p>
 
           <div className="addressRow">
             {paymentMethod === "USDT" ? (
-              <p className="address">{companyWallets[currentIndex]}</p>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <p className="address" style={{ wordBreak: "break-all" }}>
+                  {walletLoading
+                    ? "Loading wallets..."
+                    : walletError
+                    ? walletError
+                    : currentWalletAddress || "No wallet address available"}
+                </p>
+                <p
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    marginTop: 4,
+                    color: "#555",
+                  }}
+                >
+                  {currentCoin || " "}
+                </p>
+              </div>
             ) : (
               <div className="bankDetails">
-                <p>
-                  <strong>Bank:</strong> {companyBanks[currentIndex].bankName}
-                </p>
-                <p>
-                  <strong>Account Name:</strong>{" "}
-                  {companyBanks[currentIndex].accountName}
-                </p>
-                <p>
-                  <strong>Account Number:</strong>{" "}
-                  {companyBanks[currentIndex].accountNumber}
-                </p>
+                <p>No bank selected</p>
               </div>
             )}
 
-            <button type="button" className="copyBtn" onClick={copyAddress}>
-              {copied ? <FiCheck /> : <FiCopy />}
-            </button>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <button
+                type="button"
+                className="copyBtn"
+                onClick={copyAddress}
+                disabled={walletLoading || !currentWalletAddress}
+              >
+                {copied ? <FiCheck /> : <FiCopy />}
+              </button>
+
+              <button
+                type="button"
+                className="copyBtn"
+                onClick={handleGetWalletAddress}
+                title="Refresh wallets"
+                disabled={walletLoading}
+              >
+                <FiRefreshCw />
+              </button>
+            </div>
           </div>
 
-          {/* ⏳ Only this updates every second */}
-          <Countdown
-            onExpire={handleExpire}
-            initialTimeLeft={initialTimeLeft}
-          />
+          <Countdown onExpire={handleExpire} storageKey={timerKey} />
           {copied && <p className="copyMsg">Copied!</p>}
         </div>
 
-        {/* Proof of Payment */}
         <div className="proofUpload">
           <p>
             <strong>Upload Proof of Payment:</strong>
@@ -356,15 +332,22 @@ const Deposit = () => {
             id="ChooseFile"
             hidden
           />
-          <label htmlFor="ChooseFile">Choose File</label>
-          {proofFile && <p className="fileName">📄 {proofFile}</p>}
+          <label htmlFor="ChooseFile" className="chooseFileLabel">
+            Choose File
+          </label>
+          {proofFileShow && <p className="fileName">📄 {proofFileShow}</p>}
         </div>
 
-        {/* I Have Paid Button */}
         <button
           type="button"
           className="paidBtn"
-          disabled={!proofFile || proofPaymentPop}
+          disabled={
+            !proofFileShow ||
+            proofPaymentPop ||
+            loading ||
+            walletLoading ||
+            !currentWalletAddress
+          }
           onClick={handlePayment}
         >
           {loading
@@ -377,7 +360,6 @@ const Deposit = () => {
 
       <div className="paymentWarnings">
         <li>1. Minimum Recharge amount $10.</li>
-        {/* <li>2. Maximum Recharge amount $5,000.</li> */}
         <li>3. Use only the official company details shown above.</li>
         <li>4. Each recharge requires creating a new deposit order.</li>
         <li>5. Actual payment must match the order amount exactly.</li>
