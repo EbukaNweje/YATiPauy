@@ -10,7 +10,7 @@ const PlanDetails = () => {
   const params = useParams();
   const user = useSelector((state) => state.YATipauy.user);
   const [subscription, setSubscription] = useState(
-    location?.state?.subscription || null
+    location?.state?.subscription || null,
   );
 
   // console.log("subscription", subscription);
@@ -62,7 +62,7 @@ const PlanDetails = () => {
 
       try {
         const resp = await axios.get(
-          `https://yaticare-backend.onrender.com/api/getusrSubcription/${user.user._id}`
+          `https://yaticare-backend.onrender.com/api/getusrSubcription/${user.user._id}`,
         );
         const data =
           resp?.data?.subscriptions || resp?.data?.data?.subscriptions || [];
@@ -150,7 +150,8 @@ const PlanDetails = () => {
 
         <div className="duration">
           <h3>Duration</h3>
-          <p>{subscription?.plan?.durationDays ?? "-"} Days</p>
+          {/* <p>{subscription?.plan?.durationDays ?? "-"} Days</p> */}
+          <p>6 Days</p>
         </div>
 
         <div className="duration">

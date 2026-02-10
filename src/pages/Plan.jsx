@@ -35,7 +35,7 @@ const Plan = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://yaticare-backend.onrender.com/api/getallplan"
+          "https://yaticare-backend.onrender.com/api/getallplan",
         );
 
         const mappedPlans = response.data.data.map((plan) => {
@@ -59,7 +59,8 @@ const Plan = () => {
   useEffect(() => {
     if (selectedPlanName && plansData.length > 0) {
       const matchingPlan = plansData.find(
-        (plan) => plan.planName.toUpperCase() === selectedPlanName.toUpperCase()
+        (plan) =>
+          plan.planName.toUpperCase() === selectedPlanName.toUpperCase(),
       );
       if (matchingPlan) {
         setSelectedPlan(matchingPlan);
@@ -111,7 +112,7 @@ const Plan = () => {
           amount: amountNum,
           durationInDays: selectedPlan.durationDays,
           subscriptionDate: date,
-        }
+        },
       );
 
       if (response.data.message.includes("created")) {
@@ -246,7 +247,8 @@ const Plan = () => {
                   </div>
                   <div className="detail-row">
                     <span>Duration:</span>
-                    <span>{selectedPlan.durationDays} days</span>
+                    {/* <span>{selectedPlan.durationDays} days</span> */}
+                    <span>6 Days</span>
                   </div>
                 </div>
               </div>
