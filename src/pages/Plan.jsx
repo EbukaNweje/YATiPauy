@@ -166,8 +166,8 @@ const Plan = () => {
                   </span>
                 </p>
                 <p className="plan-duration">
-                  {/* Duration: {plan.durationDays} days */}
-                  Duration: 6 days
+                  Duration: {plan.durationDays} days
+                  {/* Duration: 6 days */}
                 </p>
               </div>
               <FaChevronRight className="arrowIcon" />
@@ -248,8 +248,8 @@ const Plan = () => {
                   </div>
                   <div className="detail-row">
                     <span>Duration:</span>
-                    {/* <span>{selectedPlan.durationDays} days</span> */}
-                    <span>6 Days</span>
+                    <span>{selectedPlan.durationDays} days</span>
+                    {/* <span>6 Days</span> */}
                   </div>
                 </div>
               </div>

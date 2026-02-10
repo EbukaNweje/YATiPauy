@@ -150,8 +150,8 @@ const PlanDetails = () => {
 
         <div className="duration">
           <h3>Duration</h3>
-          {/* <p>{subscription?.plan?.durationDays ?? "-"} Days</p> */}
-          <p>6 Days</p>
+          <p>{subscription?.plan?.durationDays ?? "-"} Days</p>
+          {/* <p>6 Days</p> */}
         </div>
 
         <div className="duration">

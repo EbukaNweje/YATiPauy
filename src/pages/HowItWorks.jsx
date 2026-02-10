@@ -21,7 +21,7 @@ const HowItWorks = () => {
             {/* daily or a total of{" "}
             <strong>140%</strong> weekly. */}
           </p>
-          <p>Initial deposit must be recycled every 6 days.</p>
+          <p>Initial deposit must be recycled every 7 days.</p>
         </div>
 
         <div className="info-box">
