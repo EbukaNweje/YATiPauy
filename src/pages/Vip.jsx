@@ -210,7 +210,8 @@ const Vip = () => {
                     <div className="detail-item" role="listitem">
                       <span className="label">Period</span>
                       <span className="value">
-                        {subscriptionData?.plan?.durationDays} days
+                        {/* {subscriptionData?.plan?.durationDays} days */}6
+                        days
                       </span>
                     </div>
 
