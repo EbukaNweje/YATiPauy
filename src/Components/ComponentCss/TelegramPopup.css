@@ -2,7 +2,8 @@
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: flex-end;
+  /* center vertically and horizontally on all viewports */
+  align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.35);
   z-index: 2000;
@@ -17,6 +18,9 @@
   padding: 18px;
   animation: tgPop 300ms ease;
   position: relative;
+  /* prevent overflow on small viewports and keep centered */
+  max-height: calc(100vh - 60px);
+  overflow: auto;
 }
 .tg-close {
   position: absolute;

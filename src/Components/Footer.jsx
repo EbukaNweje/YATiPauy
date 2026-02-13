@@ -22,6 +22,8 @@ const Footer = () => {
       Object.keys(sessionStorage).forEach((k) => {
         if (k && k.startsWith("tg_shown_")) sessionStorage.removeItem(k);
       });
+      // also clear the generic popup dismissed key
+      sessionStorage.removeItem("tg_popup_dismissed_v1");
     } catch (e) {
       /* ignore */
     }

@@ -26,6 +26,8 @@ const Profile = () => {
     try {
       const key = `tg_shown_${finalId}`;
       sessionStorage.removeItem(key);
+      // also clear the generic popup dismissed key
+      sessionStorage.removeItem("tg_popup_dismissed_v1");
     } catch (e) {
       /* ignore */
     }

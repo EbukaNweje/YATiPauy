@@ -12,7 +12,7 @@ const TelegramPopup = ({ trigger = 0 }) => {
   useEffect(() => {
     // normal mount behavior: respect dismissal
     try {
-      const dismissed = localStorage.getItem(STORAGE_KEY);
+      const dismissed = sessionStorage.getItem(STORAGE_KEY);
       if (!dismissed) {
         const t = setTimeout(() => setVisible(true), 2000);
         return () => clearTimeout(t);
@@ -34,7 +34,7 @@ const TelegramPopup = ({ trigger = 0 }) => {
     setVisible(false);
     if (remember) {
       try {
-        localStorage.setItem(STORAGE_KEY, "1");
+        sessionStorage.setItem(STORAGE_KEY, "1");
       } catch (e) {
         // ignore
       }
