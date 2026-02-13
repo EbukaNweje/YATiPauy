@@ -17,6 +17,14 @@ const Footer = () => {
   const nav = useNavigate();
 
   const handleLogout = () => {
+    // clear any Telegram-popup shown flags for this session
+    try {
+      Object.keys(sessionStorage).forEach((k) => {
+        if (k && k.startsWith("tg_shown_")) sessionStorage.removeItem(k);
+      });
+    } catch (e) {
+      /* ignore */
+    }
     dispatch(logout());
     nav("/");
   };

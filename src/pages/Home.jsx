@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   FaWallet,
@@ -13,7 +13,8 @@ import Product from "./Product";
 import { useNavigate, useParams } from "react-router-dom";
 import Bg from "../assets/bg.png";
 import { images, products } from "../Components/Data";
-import { useDispatch } from "react-redux";
+import TelegramPopup from "../Components/TelegramPopup";
+import { useDispatch, useSelector } from "react-redux";
 import { userId } from "./Global/Slice";
 
 const Home = () => {
@@ -24,6 +25,11 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector((s) => s.YATipauy?.isLoggedIn);
+  const reduxUser = useSelector((s) => s.YATipauy?.user);
+  const currentUserId = reduxUser?.user?._id || "anon";
+  const [tgTrigger, setTgTrigger] = useState(0);
+  const prevLoggedRef = useRef(false);
 
   useEffect(() => {
     if (userDataId) {
@@ -34,22 +40,43 @@ const Home = () => {
 
   useEffect(() => {
     const durations = [4000, 3000, 3000];
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, durations[index % durations.length]);
+    const interval = setInterval(
+      () => {
+        setIndex((prev) => (prev + 1) % images.length);
+      },
+      durations[index % durations.length],
+    );
     return () => clearInterval(interval);
   }, [index]);
 
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
   const displayedProducts = products.slice(
     currentPage * ITEMS_PER_PAGE,
-    (currentPage + 1) * ITEMS_PER_PAGE
+    (currentPage + 1) * ITEMS_PER_PAGE,
   );
 
   const Nav = useNavigate();
 
+  useEffect(() => {
+    const prev = prevLoggedRef.current;
+    const shownKey = `tg_shown_${currentUserId}`;
+    if (!prev && isLoggedIn) {
+      const alreadyShown = sessionStorage.getItem(shownKey);
+      if (!alreadyShown) {
+        setTgTrigger((t) => t + 1);
+        try {
+          sessionStorage.setItem(shownKey, "1");
+        } catch (e) {
+          /* ignore */
+        }
+      }
+    }
+    prevLoggedRef.current = isLoggedIn;
+  }, [isLoggedIn]);
+
   return (
     <div className="Home">
+      <TelegramPopup trigger={tgTrigger} />
       {/* Carousel */}
       {/* <div className="carousel-container"> */}
       <div
@@ -117,7 +144,7 @@ const Home = () => {
           <FaBell size={30} color="white" />
         </div>
         <marquee behavior="scroll" direction="left">
-          Officially launched 31st of September. Join YATiCare Telegram for more
+          Officially launched 14th of February. Join YATiCare Telegram for more
           updates!
         </marquee>
       </button>

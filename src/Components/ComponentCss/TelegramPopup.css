@@ -1,0 +1,91 @@
+.tg-popup-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 2000;
+  padding: 20px;
+}
+.tg-popup {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 18px;
+  animation: tgPop 300ms ease;
+  position: relative;
+}
+.tg-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+}
+.tg-content {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.tg-emoji {
+  font-size: 34px;
+}
+.tg-text h4 {
+  margin: 0;
+  font-size: 18px;
+}
+.tg-text p {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 14px;
+}
+.tg-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  align-items: center;
+}
+.tg-join {
+  background: #16a34a;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.tg-join .tg-icon {
+  font-size: 16px;
+}
+.tg-later {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+}
+
+@keyframes tgPop {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .tg-popup-overlay {
+    align-items: center;
+  }
+}

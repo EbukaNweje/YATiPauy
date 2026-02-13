@@ -33,7 +33,7 @@ const Countdown = ({ onExpire, initialTimeLeft = 1800, storageKey }) => {
         }
         sessionStorage.setItem(
           storageKey,
-          JSON.stringify({ timeLeft: prev - 1 })
+          JSON.stringify({ timeLeft: prev - 1 }),
         );
         return prev - 1;
       });
@@ -103,16 +103,16 @@ const Deposit = () => {
     setWalletError(null);
     try {
       const res = await axios.get(
-        "https://yaticare-backend.onrender.com/api/admin/getallWalletAddress"
+        "https://yaticare-backend.onrender.com/api/admin/getallWalletAddress",
       );
       const raw = res.data;
       const data = Array.isArray(raw)
         ? raw
         : Array.isArray(raw?.data)
-        ? raw.data
-        : Array.isArray(raw?.wallets)
-        ? raw.wallets
-        : [];
+          ? raw.data
+          : Array.isArray(raw?.wallets)
+            ? raw.wallets
+            : [];
       setWallets(data || []);
     } catch (err) {
       console.error("Failed to fetch wallets:", err);
@@ -130,20 +130,27 @@ const Deposit = () => {
   /* ------------------ Wallet rotation & timer reset ------------------ */
   useEffect(() => {
     if (!wallets.length) return;
-
     let prevIndex = parseInt(localStorage.getItem(walletIndexKey), 10);
-    if (isNaN(prevIndex)) prevIndex = -1;
+    let newIndex;
 
-    const newIndex = (prevIndex + 1) % wallets.length;
+    if (isNaN(prevIndex)) {
+      // No stored index for this device/user — pick a random one
+      newIndex = Math.floor(Math.random() * wallets.length);
+    } else {
+      // Continue rotation from previously assigned index
+      newIndex = (prevIndex + 1) % wallets.length;
+    }
+
     setCurrentIndex(newIndex);
     currentIndexRef.current = newIndex;
 
+    // Persist per-device index for this user
     localStorage.setItem(walletIndexKey, newIndex);
 
-    // Reset timer
+    // Reset timer for this assigned wallet
     sessionStorage.setItem(
       timerKey,
-      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex })
+      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex }),
     );
   }, [wallets, walletIndexKey, timerKey]);
 
@@ -151,6 +158,9 @@ const Deposit = () => {
   const handleExpire = useCallback(() => {
     if (!wallets.length) return;
 
+    // On expiry, move to the next index. To further randomize, choose
+    // a different random index when desired — here we advance sequentially
+    // to ensure fairness across addresses.
     const newIndex = (currentIndexRef.current + 1) % wallets.length;
     setCurrentIndex(newIndex);
     currentIndexRef.current = newIndex;
@@ -158,7 +168,7 @@ const Deposit = () => {
     // Update timer
     sessionStorage.setItem(
       timerKey,
-      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex })
+      JSON.stringify({ timeLeft: 1800, currentIndex: newIndex }),
     );
 
     // Save for next visit
@@ -210,7 +220,7 @@ const Deposit = () => {
     try {
       const res = await axios.post(
         "https://yaticare-backend.onrender.com/api/deposit/deposit",
-        formData
+        formData,
       );
       toast.success(res.data.message || "Deposit submitted");
       setProofPaymentPop(true);
@@ -275,8 +285,8 @@ const Deposit = () => {
                   {walletLoading
                     ? "Loading wallets..."
                     : walletError
-                    ? walletError
-                    : currentWalletAddress || "No wallet address available"}
+                      ? walletError
+                      : currentWalletAddress || "No wallet address available"}
                 </p>
                 <p
                   style={{
@@ -353,8 +363,8 @@ const Deposit = () => {
           {loading
             ? " Loading..."
             : proofPaymentPop
-            ? " Paid"
-            : " Make Payment"}
+              ? " Paid"
+              : " Make Payment"}
         </button>
       </div>
 

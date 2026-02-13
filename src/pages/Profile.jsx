@@ -22,6 +22,13 @@ const Profile = () => {
   const finalId = user?.user?._id || reduxId;
 
   const handleLogout = () => {
+    // clear this user's Telegram shown flag for the session
+    try {
+      const key = `tg_shown_${finalId}`;
+      sessionStorage.removeItem(key);
+    } catch (e) {
+      /* ignore */
+    }
     dispatch(logout());
     Nav("/");
   };
@@ -30,7 +37,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`,
         );
         const data = response?.data?.data;
         setUserInfo(data);
