@@ -6,7 +6,7 @@ import { MdOutlinePayment, MdContactPhone } from "react-icons/md";
 import "./MobileStyle.css"; // Ensure this file has your styles
 import { TfiGallery } from "react-icons/tfi";
 
-const MobileMenu = () => {
+const MobileMenu = ({ onClose }) => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,12 +43,16 @@ const MobileMenu = () => {
                 duration={500}
                 offset={-70}
                 className="mobile-menu-link"
+                onClick={() => onClose && onClose()}
               >
                 <FaHome /> Home
               </ScrollLink>
             ) : (
               <span
-                onClick={() => goToSection("hero")}
+                onClick={() => {
+                  onClose && onClose();
+                  goToSection("hero");
+                }}
                 className="mobile-menu-link"
               >
                 <FaHome /> Home
@@ -64,12 +68,16 @@ const MobileMenu = () => {
                 duration={500}
                 offset={-70}
                 className="mobile-menu-link"
+                onClick={() => onClose && onClose()}
               >
                 <FaLandmark /> About Us
               </ScrollLink>
             ) : (
               <span
-                onClick={() => goToSection("about")}
+                onClick={() => {
+                  onClose && onClose();
+                  goToSection("about");
+                }}
                 className="mobile-menu-link"
               >
                 <FaLandmark /> About Us
@@ -85,12 +93,16 @@ const MobileMenu = () => {
                 duration={500}
                 offset={-70}
                 className="mobile-menu-link"
+                onClick={() => onClose && onClose()}
               >
                 <MdOutlinePayment /> How it works
               </ScrollLink>
             ) : (
               <span
-                onClick={() => goToSection("how-it-works")}
+                onClick={() => {
+                  onClose && onClose();
+                  goToSection("how-it-works");
+                }}
                 className="mobile-menu-link"
               >
                 <MdOutlinePayment /> How it works
@@ -99,14 +111,20 @@ const MobileMenu = () => {
           </li>
 
           <li
-            onClick={() => navigate("/gallery-hub")}
+            onClick={() => {
+              onClose && onClose();
+              navigate("/gallery-hub");
+            }}
             className="mobile-menu-link"
           >
             <TfiGallery /> Gallery Hub
           </li>
 
           <li
-            onClick={() => navigate("/contact-us")}
+            onClick={() => {
+              onClose && onClose();
+              navigate("/contact-us");
+            }}
             className="mobile-menu-link"
           >
             <MdContactPhone /> Contacts
@@ -114,12 +132,21 @@ const MobileMenu = () => {
         </ul>
 
         <div className="Auth">
-          <button className="auth-btn" onClick={() => navigate("/auth/login")}>
+          <button
+            className="auth-btn"
+            onClick={() => {
+              onClose && onClose();
+              navigate("/auth/login");
+            }}
+          >
             Login
           </button>
           <button
             className="auth-btn active"
-            onClick={() => navigate("/auth/sign-up")}
+            onClick={() => {
+              onClose && onClose();
+              navigate("/auth/sign-up");
+            }}
           >
             Create account
           </button>

@@ -43,11 +43,26 @@ const Header = () => {
           <ul>
             <li>
               {isHomePage ? (
-                <ScrollLink to="hero" smooth={true} duration={500} offset={-70}>
+                <ScrollLink
+                  to="hero"
+                  smooth={true}
+                  duration={500}
+                  offset={-70}
+                  onClick={() => {
+                    setToggle(false);
+                  }}
+                >
                   Home
                 </ScrollLink>
               ) : (
-                <span onClick={() => goToSection("hero")}>Home</span>
+                <span
+                  onClick={() => {
+                    setToggle(false);
+                    goToSection("hero");
+                  }}
+                >
+                  Home
+                </span>
               )}
             </li>
             <li>
@@ -57,11 +72,21 @@ const Header = () => {
                   smooth={true}
                   duration={500}
                   offset={-70}
+                  onClick={() => {
+                    setToggle(false);
+                  }}
                 >
                   About Us
                 </ScrollLink>
               ) : (
-                <span onClick={() => goToSection("about")}>About Us</span>
+                <span
+                  onClick={() => {
+                    setToggle(false);
+                    goToSection("about");
+                  }}
+                >
+                  About Us
+                </span>
               )}
             </li>
             <li>
@@ -71,24 +96,56 @@ const Header = () => {
                   smooth={true}
                   duration={500}
                   offset={-70}
+                  onClick={() => {
+                    setToggle(false);
+                  }}
                 >
                   How it works
                 </ScrollLink>
               ) : (
-                <span onClick={() => goToSection("how-it-works")}>
+                <span
+                  onClick={() => {
+                    setToggle(false);
+                    goToSection("how-it-works");
+                  }}
+                >
                   How it works
                 </span>
               )}
             </li>
-            <li onClick={() => navigate("/gallery-hub")}>Gallery Hub</li>
-            <li onClick={() => navigate("/contact-us")}>Contacts</li>
+            <li
+              onClick={() => {
+                setToggle(false);
+                navigate("/gallery-hub");
+              }}
+            >
+              Gallery Hub
+            </li>
+            <li
+              onClick={() => {
+                setToggle(false);
+                navigate("/contact-us");
+              }}
+            >
+              Contacts
+            </li>
           </ul>
 
           <div className="Auth">
-            <button onClick={() => navigate("/auth/login")}>Login</button>
+            <button
+              onClick={() => {
+                setToggle(false);
+                navigate("/auth/login");
+              }}
+            >
+              Login
+            </button>
             <button
               className="Active"
-              onClick={() => navigate("/auth/Sign-up")}
+              onClick={() => {
+                setToggle(false);
+                navigate("/auth/Sign-up");
+              }}
             >
               Create account
             </button>
@@ -101,7 +158,7 @@ const Header = () => {
           onClose={() => setToggle(false)}
           open={toggle}
         >
-          <MobileMenu />
+          <MobileMenu onClose={() => setToggle(false)} />
         </Drawer>
       </div>
     </div>
