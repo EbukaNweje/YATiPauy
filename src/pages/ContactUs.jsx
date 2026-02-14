@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ContactStyle.css";
 import { HiOutlineMail } from "react-icons/hi";
 import { BiPhoneCall } from "react-icons/bi";
@@ -11,6 +11,76 @@ import Footer from "./Footer";
 import { Link } from "react-router-dom";
 
 const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    message: "",
+    privacyAccepted: false,
+  });
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  // Send data to API
+  const sendContactMessage = async (e) => {
+    e.preventDefault();
+
+    // Validate form
+    if (!formData.fullName || !formData.email || !formData.message) {
+      setErrorMessage("Please fill in all fields");
+      return;
+    }
+
+    if (!formData.privacyAccepted) {
+      setErrorMessage("Please accept the Privacy Policy");
+      return;
+    }
+
+    setLoading(true);
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch("YOUR_API_ENDPOINT_HERE", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSuccessMessage("Message sent successfully!");
+        setFormData({
+          fullName: "",
+          email: "",
+          message: "",
+          privacyAccepted: false,
+        });
+      } else {
+        setErrorMessage("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setErrorMessage("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -25,26 +95,66 @@ const ContactUs = () => {
         <div className="contactusinner2">
           <div className="innerdetails">
             <h2>Send us a message</h2>
-            <input type="text" placeholder="Full name" className="emailinput" />
-            <input
-              type="email"
-              placeholder="Email address"
-              className="emailinput"
-            />
-            <textarea placeholder="Comments" className="textinput"></textarea>
+            <form onSubmit={sendContactMessage}>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full name"
+                className="emailinput"
+                value={formData.fullName}
+                onChange={handleInputChange}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                className="emailinput"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+              <textarea
+                name="message"
+                placeholder="Comments"
+                className="textinput"
+                value={formData.message}
+                onChange={handleInputChange}
+              ></textarea>
 
-            <div className="termsnpolicies">
-              <input type="checkbox" id="privacy" />
-              <label htmlFor="privacy">
-                You agree to our friendly{" "}
-                <Link to="/Privacy">
-                  <u>Privacy Policy</u>
-                </Link>
-                .
-              </label>
-            </div>
+              <div className="termsnpolicies">
+                <input
+                  type="checkbox"
+                  id="privacy"
+                  name="privacyAccepted"
+                  checked={formData.privacyAccepted}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="privacy">
+                  You agree to our friendly{" "}
+                  <Link to="/Privacy">
+                    <u>Privacy Policy</u>
+                  </Link>
+                  .
+                </label>
+              </div>
 
-            <button className="submitbtn">Submit</button>
+              {errorMessage && (
+                <p style={{ color: "red", fontSize: "14px" }}>{errorMessage}</p>
+              )}
+              {successMessage && (
+                <p style={{ color: "green", fontSize: "14px" }}>
+                  {successMessage}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="submitbtn"
+                disabled={loading}
+                style={{ opacity: loading ? 0.6 : 1 }}
+              >
+                {loading ? "Sending..." : "Submit"}
+              </button>
+            </form>
           </div>
 
           <div className="innerdetailslink">

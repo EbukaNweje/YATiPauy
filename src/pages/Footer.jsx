@@ -3,6 +3,7 @@ import "./footer.css";
 import { IoLogoInstagram } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoLogoLinkedin } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,9 +16,9 @@ const Footer = () => {
           <div className="footercontent">
             <h4>YatiCare</h4>
             <p>
-              We are committed to bridging economic gaps, ensuring that financial
-              growth opportunities are accessible to everyone, regardless of
-              background or status.
+              We are committed to bridging economic gaps, ensuring that
+              financial growth opportunities are accessible to everyone,
+              regardless of background or status.
             </p>
           </div>
 
@@ -30,8 +31,18 @@ const Footer = () => {
           {/* Legal Section */}
           <div className="footercontent">
             <h3>Legal</h3>
-            <p>Privacy note</p>
-            <p>Terms and conditions</p>
+            <Link
+              to="/Terms"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <p>Terms and conditions</p>
+            </Link>
+            <Link
+              to="/Privacy"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <p>Privacy Policy</p>
+            </Link>
           </div>
 
           {/* Contact Section */}
@@ -43,8 +54,16 @@ const Footer = () => {
               <IoLogoLinkedin style={{ color: "white", fontSize: 17, marginLeft: 10 }} />
             </div> */}
             <p>
-              Support email: <a href="mailto:yatihelpdesk@gmail.com ">yatihelpdesk@gmail.com </a> <br />
-              Email: <a href="mailto:yaticares.hq@gmail.com">yaticares.hq@gmail.com</a> <br />
+              Support email:{" "}
+              <a href="mailto:yatihelpdesk@gmail.com ">
+                yatihelpdesk@gmail.com{" "}
+              </a>{" "}
+              <br />
+              Email:{" "}
+              <a href="mailto:yaticares.hq@gmail.com">
+                yaticares.hq@gmail.com
+              </a>{" "}
+              <br />
               +31 970 050 32009 <br />
               +49 163 621 9338
             </p>

@@ -65,12 +65,13 @@ p {
 
 .emailinput,
 .textinput {
-    width: 80%;
+    width: 90%;
     border-radius: 5px;
     border: none;
     background-color: #F2F4F7;
     color: gray;
     padding: 10px;
+    box-sizing: border-box;
 }
 
 .textinput {
