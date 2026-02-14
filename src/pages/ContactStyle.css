@@ -63,7 +63,7 @@ p {
   text-align: start;
 }
 
-form {
+.Form {
   width: 100%;
   height: 70%;
   display: flex;

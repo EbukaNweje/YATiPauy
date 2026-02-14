@@ -98,7 +98,7 @@ const ContactUs = () => {
         <div className="contactusinner2">
           <div className="innerdetails">
             <h2>Send us a message</h2>
-            <form onSubmit={sendContactMessage}>
+            <form onSubmit={sendContactMessage} className="Form">
               <input
                 type="text"
                 name="fullName"
