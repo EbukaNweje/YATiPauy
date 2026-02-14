@@ -78,6 +78,7 @@ const App = () => {
           element: <GalleryPage />,
         },
         { path: "terms", element: <Terms /> },
+        { path: "Privacy", element: <Privacy /> },
         {
           path: "dashboard",
           element: <PrivateRoute />,

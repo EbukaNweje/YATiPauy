@@ -8,6 +8,7 @@ import { PiTiktokLogo } from "react-icons/pi";
 import { PiTelegramLogoDuotone } from "react-icons/pi";
 import Header from "./Header";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const ContactUs = () => {
   return (
@@ -35,7 +36,11 @@ const ContactUs = () => {
             <div className="termsnpolicies">
               <input type="checkbox" id="privacy" />
               <label htmlFor="privacy">
-                You agree to our friendly <u>privacy policy</u>
+                You agree to our friendly{" "}
+                <Link to="/Privacy">
+                  <u>Privacy Policy</u>
+                </Link>
+                .
               </label>
             </div>
 
