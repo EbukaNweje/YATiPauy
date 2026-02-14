@@ -50,17 +50,20 @@ const ContactUs = () => {
     setSuccessMessage("");
 
     try {
-      const response = await fetch("YOUR_API_ENDPOINT_HERE", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://yaticare-backend.onrender.com/api/contactus/createContactMessage",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            message: formData.message,
+          }),
         },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          message: formData.message,
-        }),
-      });
+      );
 
       if (response.ok) {
         setSuccessMessage("Message sent successfully!");
@@ -158,7 +161,7 @@ const ContactUs = () => {
           </div>
 
           <div className="innerdetailslink">
-            <div className="emaillink">
+            {/* <div className="emaillink">
               <HiOutlineMail size={30} style={{ color: "green" }} />
               <b>Email</b>
               <p style={{ fontWeight: 400 }}>
@@ -166,17 +169,17 @@ const ContactUs = () => {
               </p>
               <a href="mailto:yatihelpdesk@gmail.com">yatihelpdesk@gmail.com</a>
               <a href="mailto:yaticares.hq@gmail.com">yaticares.hq@gmail.com</a>
-            </div>
+            </div> */}
 
             <div className="emaillink1">
               <BiPhoneCall size={30} style={{ color: "green" }} />
               <b>Phone</b>
               <p style={{ fontWeight: 400 }}>Mon-Fri 8am to 5pm.</p>
-              <a href="tel:+3197005032009">+3197005032009</a>
+              <a href="tel:+32460218110">+32460218110</a>
               <a href="tel:+491636219338">+491636219338</a>
             </div>
 
-            <div className="emaillink2">
+            <div className="emaillink">
               <FaAppStore size={30} style={{ color: "green" }} />
               <b>Socials</b>
               <p style={{ fontWeight: 400 }}>
