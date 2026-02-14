@@ -23,14 +23,16 @@ const Withdraw = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log(userData);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://yaticare-backend.onrender.com/api/user/userdata/${user.user._id}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${user.user._id}`,
         );
         const data = response?.data?.data;
-        setUserData(data?.WalletInfo?.WalletAddress);
+        setUserData(data?.WalletInfo);
       } catch {
         // Error handling logic can be added here if needed
       }
@@ -79,8 +81,9 @@ const Withdraw = () => {
 
       const res = await axios.post(url, {
         amount: selectedAmount,
-        method: walletType === "default" ? "USDT" : "BANK",
-        walletAddress: walletType === "default" ? userData : bankDetails,
+        method: walletType === "default" ? userData?.WalletName : "BANK",
+        walletAddress:
+          walletType === "default" ? userData?.WalletAddress : bankDetails,
         pin,
         accountName: user.user.userName,
         userId: user.user._id,
@@ -129,7 +132,7 @@ const Withdraw = () => {
                 checked={walletType === "default"}
                 onChange={(e) => setWalletType(e.target.value)}
               /> */}
-              <b>Default Wallet</b> ({userData || "Not Set"})
+              <b>Default Wallet</b> ({userData?.WalletAddress || "Not Set"})
             </label>
           </div>
 
