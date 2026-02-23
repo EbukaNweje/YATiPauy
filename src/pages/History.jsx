@@ -38,6 +38,7 @@ const History = () => {
           `https://yaticare-backend.onrender.com/api/history/getallhistory/${finalId}`,
         );
         setGetAllHistory(response?.data?.data || []);
+        console.log("setGetAllHistory", response?.data?.data);
       } catch (error) {
         console.error("Error fetching history:", error);
       }
@@ -57,9 +58,10 @@ const History = () => {
 
   /* ================= REMOVE & EXTRACT SUBSCRIPTION RECYCLED ================= */
   const subscriptionRecycledHistory = getallhistory.filter(
-    (txn) => txn.transactionType === "Subscription recycled",
+    (txn) => txn.transactionType === "recycl",
   );
 
+  console.log("subscriptionRecycledHistory", subscriptionRecycledHistory);
   /* ================= MERGE RECYCLED INTO SUBSCRIPTIONS ================= */
   const mergedSubscriptionsHistory = [
     ...subscriptionsHistory,
@@ -222,7 +224,7 @@ const History = () => {
                   )}
                   {txn.type}
                 </td>
-                <td>{txn.reason || "-"}</td>
+                <td>{txn.reason || txn.desc || "-"}</td>
                 <td>{txn._id || "N/A"}</td>
                 <td>${txn.amount}</td>
                 <td>{formatDate(txn.createdAt || txn.date)}</td>
