@@ -291,7 +291,7 @@ const Vip = () => {
                 )}
               </button>
 
-              <button
+              {/* <button
                 className="modal-btn modal-btn-upgrade"
                 onClick={() => {
                   setShowUpgradeStep(true);
@@ -304,7 +304,7 @@ const Vip = () => {
                 ) : (
                   "Upgrade Plan"
                 )}
-              </button>
+              </button> */}
             </div>
 
             <button
