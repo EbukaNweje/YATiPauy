@@ -107,7 +107,7 @@ const PlanDetails = () => {
   const endDateDisplay = subscription?.endDate ?? null;
   // const durationDaysNum = Number(subscription?.plan?.durationDays) || 0;
   // const pctNum = Number(interestPct) || 0;
-  const totalPct = amountDisplay * 1.4;
+  const totalPct = amountDisplay * 1.2; // For simplicity, using a fixed multiplier. Replace with actual calculation if needed.
 
   return (
     <div className="planDetails">
@@ -150,8 +150,8 @@ const PlanDetails = () => {
 
         <div className="duration">
           <h3>Duration</h3>
-          <p>{subscription?.plan?.durationDays ?? "-"} Days</p>
-          {/* <p>6 Days</p> */}
+          {/* <p>{subscription?.plan?.durationDays ?? "-"} Days</p> */}
+          <p>6 Days</p>
         </div>
 
         <div className="duration">
