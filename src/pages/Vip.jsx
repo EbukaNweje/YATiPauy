@@ -273,8 +273,11 @@ const Vip = () => {
           }}
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>What would you like to do?</h3>
-            <p>Choose to recycle your current plan or upgrade to a new one.</p>
+            <h3>Agree to Recycle</h3>
+            <p>
+              When You Recycle, You Agree To Maintain Current Plan, and Benefit
+              From Our 20% DAILY Interest.
+            </p>
 
             <div className="modal-buttons">
               <button
