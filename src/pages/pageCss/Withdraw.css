@@ -267,3 +267,151 @@
     height: 1rem;
   }
 }
+
+/* Wallet Warning Modal Styles */
+.wallet-instructions {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.wallet-instructions h3 {
+  font-size: 1.3rem;
+  color: #212529;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-instructions h3::before {
+  content: "📋";
+  font-size: 1.5rem;
+}
+
+.wallet-instructions ol {
+  margin-left: 0;
+  padding-left: 0;
+  counter-reset: step-counter;
+  list-style: none;
+}
+
+.wallet-instructions ol li {
+  margin: 1rem 0;
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #495057;
+  padding-left: 3rem;
+  position: relative;
+  counter-increment: step-counter;
+}
+
+.wallet-instructions ol li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+.wallet-notice {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+  border-left: 5px solid #ffc107;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.wallet-notice::before {
+  content: "⚠️";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  opacity: 0.2;
+}
+
+.wallet-notice p {
+  margin: 0;
+  color: #856404;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.wallet-notice strong {
+  font-weight: 700;
+  color: #664d03;
+}
+
+/* Enhanced popup header for wallet warning */
+.popup-card .popup-header h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive for wallet warning */
+@media (max-width: 480px) {
+  .wallet-instructions {
+    padding: 1.2rem;
+    margin: 1rem 0;
+  }
+
+  .wallet-instructions h3 {
+    font-size: 1.1rem;
+  }
+
+  .wallet-instructions h3::before {
+    font-size: 1.2rem;
+  }
+
+  .wallet-instructions ol li {
+    font-size: 0.95rem;
+    padding-left: 2.5rem;
+    margin: 0.8rem 0;
+  }
+
+  .wallet-instructions ol li::before {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 0.85rem;
+  }
+
+  .wallet-notice {
+    padding: 1rem;
+  }
+
+  .wallet-notice::before {
+    font-size: 2rem;
+    right: 0.5rem;
+  }
+
+  .wallet-notice p {
+    font-size: 0.9rem;
+  }
+}

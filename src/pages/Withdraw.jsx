@@ -20,6 +20,7 @@ const Withdraw = () => {
   const [userData, setUserData] = useState(null);
   const [pin, setPin] = useState(""); // <-- capture PIN
   const [loading, setLoading] = useState(false);
+  const [showWalletWarning, setShowWalletWarning] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,6 +34,11 @@ const Withdraw = () => {
         );
         const data = response?.data?.data;
         setUserData(data?.WalletInfo);
+
+        // Check if wallet address is not set
+        if (!data?.WalletInfo?.WalletAddress || !data?.WalletInfo?.WalletName) {
+          setShowWalletWarning(true);
+        }
       } catch {
         // Error handling logic can be added here if needed
       }
@@ -41,6 +47,12 @@ const Withdraw = () => {
   }, [user.user._id]);
 
   const handleWithdraw = () => {
+    // Check if wallet address is set
+    if (!userData?.WalletAddress || !userData?.WalletName) {
+      setShowWalletWarning(true);
+      return;
+    }
+
     if (!selectedAmount) {
       toast.error("Please fill in amount before proceeding.");
       return;
@@ -104,8 +116,56 @@ const Withdraw = () => {
     }
   };
 
+  const handleGoToWalletPage = () => {
+    navigate("/dashboard/WalletAddress");
+  };
+
   return (
     <div className="Withdraw">
+      {/* Wallet Warning Popup */}
+      {showWalletWarning && (
+        <div className="popup-overlay">
+          <div className="popup-card">
+            <div className="popup-header">
+              <h2>⚠️ Wallet Address Required</h2>
+              <p>Please add your wallet address to proceed with withdrawal</p>
+            </div>
+
+            <div className="wallet-instructions">
+              <h3>How to Add Your Wallet Address:</h3>
+              <ol>
+                <li>Click the "Go to Wallet Settings" button below</li>
+                <li>Enter your Tether BEP20 wallet address carefully</li>
+                <li>Double-check the address to avoid loss of funds</li>
+                <li>Save your wallet details</li>
+              </ol>
+              <div className="wallet-notice">
+                <p>
+                  <strong>Important:</strong> Make sure you enter the correct
+                  Tether BEP20 wallet address. Sending funds to the wrong
+                  address or wrong network may result in permanent loss of
+                  funds.
+                </p>
+              </div>
+            </div>
+
+            <div className="popup-buttons">
+              <button
+                className="popup-btn confirm-btn"
+                onClick={handleGoToWalletPage}
+              >
+                Go to Wallet Settings
+              </button>
+              <button
+                className="popup-btn close-btn"
+                onClick={() => setShowWalletWarning(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="paymentSection">
         <section>
           <h3>Fill The Details</h3>

@@ -46,7 +46,7 @@ const WalletAddress = () => {
     try {
       const response = await axios.put(
         `https://yaticare-backend.onrender.com/api/user/addWallet/${user.user._id}`,
-        userInput
+        userInput,
       );
       if (response.data) {
         toast.success("Wallet details updated successfully");
@@ -54,7 +54,7 @@ const WalletAddress = () => {
       }
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Failed to update wallet details"
+        error.response?.data?.message || "Failed to update wallet details",
       );
       // console.error("Update error:", error);
     } finally {
@@ -79,12 +79,7 @@ const WalletAddress = () => {
             className={userInput.WalletName ? "filled" : ""}
           >
             <option value="">Select Wallet Type</option>
-            {/* <option value="Bitcoin">Bitcoin (BTC)</option>
-            <option value="Ethereum">Ethereum (ETH)</option> */}
-            <option value="USDT-TRC20">USDT (TRC20)</option>
-            <option value="USDT-ERC20">USDT (ERC20)</option>
-            {/* <option value="BNB">BNB (BSC)</option>
-            <option value="BUSD">BUSD (BSC)</option> */}
+            <option value="USDT-BEP20">USDT Tether (BEP20)</option>
           </select>
         </div>
 

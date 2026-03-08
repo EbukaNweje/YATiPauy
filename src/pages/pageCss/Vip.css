@@ -193,7 +193,7 @@
   background: rgba(0, 1, 0, 0.06);
   transform: scale(1.06);
 }
-.Recycle-btn {
+.Recapitalized-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -207,7 +207,7 @@
   border-radius: 8px;
 }
 
-.Recycle-btn:hover {
+.Recapitalized-btn:hover {
   background: #003323;
   transform: scale(1.06);
 }
@@ -393,12 +393,12 @@
   cursor: not-allowed;
 }
 
-.modal-btn-recycle {
+.modal-btn-Recapitalized {
   background: linear-gradient(135deg, var(--accent-600), var(--accent));
   color: white;
 }
 
-.modal-btn-recycle:hover:not(:disabled) {
+.modal-btn-Recapitalized:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(4, 120, 87, 0.2);
 }

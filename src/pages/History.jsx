@@ -56,16 +56,19 @@ const History = () => {
   const subscriptionsHistory =
     userData?.userTransaction?.subscriptionsHistory || [];
 
-  /* ================= REMOVE & EXTRACT SUBSCRIPTION RECYCLED ================= */
-  const subscriptionRecycledHistory = getallhistory.filter(
+  /* ================= REMOVE & EXTRACT SUBSCRIPTION RecapitalizedD ================= */
+  const subscriptionRecapitalizeddHistory = getallhistory.filter(
     (txn) => txn.transactionType === "recycl",
   );
 
-  console.log("subscriptionRecycledHistory", subscriptionRecycledHistory);
-  /* ================= MERGE RECYCLED INTO SUBSCRIPTIONS ================= */
+  console.log(
+    "subscriptionRecapitalizeddHistory",
+    subscriptionRecapitalizeddHistory,
+  );
+  /* ================= MERGE RecapitalizedD INTO SUBSCRIPTIONS ================= */
   const mergedSubscriptionsHistory = [
     ...subscriptionsHistory,
-    ...subscriptionRecycledHistory.map((txn) => ({
+    ...subscriptionRecapitalizeddHistory.map((txn) => ({
       ...txn,
       type: "Subscription recycled",
       status: "active",
@@ -195,8 +198,8 @@ const History = () => {
                   <option value="Bonus">Bonus</option>
                   <option value="Daily Interest">Daily Interest</option>
                   <option value="Subscription">Subscription</option>
-                  <option value="Subscription recycled">
-                    Subscription Recycled
+                  <option value="Subscription Recapitalizedd">
+                    Subscription Recapitalizedd
                   </option>
                 </select>
               </div>

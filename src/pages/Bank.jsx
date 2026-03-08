@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaWallet, FaSpinner } from "react-icons/fa6";
+import { FaCheckCircle, FaInfoCircle } from "react-icons/fa";
 import "./pageCss/Bank.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -28,11 +29,15 @@ const Bank = () => {
 
   const validateForm = () => {
     if (!userInput.WalletName) {
-      toast.error("Please enter your wallet name");
+      toast.error("Please select your wallet type");
       return false;
     }
     if (!userInput.WalletAddress) {
       toast.error("Please enter your wallet address");
+      return false;
+    }
+    if (userInput.WalletAddress.length < 20) {
+      toast.error("Please enter a valid wallet address");
       return false;
     }
     return true;
@@ -45,7 +50,7 @@ const Bank = () => {
     try {
       const response = await axios.put(
         `https://yaticare-backend.onrender.com/api/user/addWallet/${user.user._id}`,
-        userInput
+        userInput,
       );
       if (response.data) {
         toast.success("Wallet details updated successfully");
@@ -53,75 +58,101 @@ const Bank = () => {
       }
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Failed to update wallet details"
+        error.response?.data?.message || "Failed to update wallet details",
       );
       console.error("Update error:", error);
     } finally {
       setIsSaving(false);
     }
   };
+
   return (
     <div className="Bank">
-      <div className="bank-header">
-        <h3>Wallet Details</h3>
-        <p>Please provide your wallet information for withdrawals</p>
-      </div>
+      <div className="bank-container">
+        <div className="bank-header">
+          <div className="header-icon">
+            <FaWallet />
+          </div>
+          <h3>Wallet Configuration</h3>
+          <p>Securely add your withdrawal wallet details</p>
+        </div>
 
-      <section className="bank-form">
-        <div className="inputWrapper">
-          <FaWallet className="inputIcon" />
-          <select
-            value={userInput.WalletName}
-            onChange={(e) =>
-              setUserInput({ ...userInput, WalletName: e.target.value })
-            }
-            className={userInput.WalletName ? "filled" : ""}
+        <section className="bank-form">
+          <div className="form-group">
+            <label className="form-label">
+              <span>Wallet Type</span>
+              <span className="required">*</span>
+            </label>
+            <div className="inputWrapper">
+              <FaWallet className="inputIcon" />
+              <select
+                value={userInput.WalletName}
+                onChange={(e) =>
+                  setUserInput({ ...userInput, WalletName: e.target.value })
+                }
+                className={userInput.WalletName ? "filled" : ""}
+              >
+                <option value="">Select Wallet Type</option>
+                <option value="USDT-BEP20">USDT Tether (BEP20)</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">
+              <span>Wallet Address</span>
+              <span className="required">*</span>
+            </label>
+            <div className="inputWrapper">
+              <FaWallet className="inputIcon" />
+              <input
+                type="text"
+                placeholder="Enter your USDT Tether BEP20 wallet address"
+                value={userInput.WalletAddress}
+                onChange={(e) =>
+                  setUserInput({ ...userInput, WalletAddress: e.target.value })
+                }
+                className={userInput.WalletAddress ? "filled" : ""}
+              />
+            </div>
+            {userInput.WalletAddress &&
+              userInput.WalletAddress.length >= 20 && (
+                <div className="validation-success">
+                  <FaCheckCircle /> Valid address format
+                </div>
+              )}
+          </div>
+
+          <button
+            className={`save-button ${isSaving ? "loading" : ""}`}
+            onClick={updateInfo}
+            disabled={isSaving}
           >
-            <option value="">Select Wallet Type</option>
-            {/* <option value="Bitcoin">Bitcoin (BTC)</option>
-            <option value="Ethereum">Ethereum (ETH)</option> */}
-            <option value="USDT-TRC20">USDT (TRC20)</option>
-            <option value="USDT-ERC20">USDT (ERC20)</option>
-            {/* <option value="BNB">BNB (BSC)</option>
-            <option value="BUSD">BUSD (BSC)</option> */}
-          </select>
-        </div>
+            {isSaving ? (
+              <>
+                <FaSpinner className="spinne" /> Processing...
+              </>
+            ) : (
+              <>
+                <FaCheckCircle /> Save Wallet Details
+              </>
+            )}
+          </button>
 
-        <div className="inputWrapper">
-          <FaWallet className="inputIcon" />
-          <input
-            type="text"
-            placeholder="Enter your new wallet address"
-            value={userInput.WalletAddress}
-            onChange={(e) =>
-              setUserInput({ ...userInput, WalletAddress: e.target.value })
-            }
-            className={userInput.WalletAddress ? "filled" : ""}
-          />
-        </div>
-
-        <button
-          className={`save-button ${isSaving ? "loading" : ""}`}
-          onClick={updateInfo}
-          disabled={isSaving}
-        >
-          {isSaving ? (
-            <>
-              <FaSpinner className="spinner" /> Saving...
-            </>
-          ) : (
-            "Save Wallet Details"
-          )}
-        </button>
-
-        <div className="bank-notice">
-          <p>
-            Please ensure your wallet address is correct. Double-check the
-            address to avoid loss of funds. Make sure you're using the correct
-            network type for your selected wallet.
-          </p>
-        </div>
-      </section>
+          <div className="bank-notice">
+            <div className="notice-header">
+              <FaInfoCircle />
+              <span>Important Information</span>
+            </div>
+            <ul className="notice-list">
+              <li>Ensure your wallet address is correct before saving</li>
+              <li>Double-check the network type matches (BEP20)</li>
+              <li>Incorrect details may result in permanent loss of funds</li>
+              <li>You can update your wallet address anytime</li>
+            </ul>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

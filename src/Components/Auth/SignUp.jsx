@@ -67,7 +67,7 @@ const SignUp = () => {
     try {
       const response = await axios.post(
         "https://yaticare-backend.onrender.com/api/auth/register",
-        { ...values, phoneNumber: phone }
+        { ...values, phoneNumber: phone },
       );
       toast.success(response.data.message);
       dispatch(loginSuccess(response.data.data));

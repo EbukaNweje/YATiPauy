@@ -15,7 +15,7 @@ const Vip = () => {
   const [loading, setLoading] = useState(false);
   const reduxId = useSelector((state) => state?.YATipauy?.id);
   const finalId = user?.user?._id || reduxId;
-  const [recycleLoading, setRecycleLoading] = useState(false);
+  const [RecapitalizedLoading, setRecapitalizedLoading] = useState(false);
   const [upgradeLoading, setUpgradeLoading] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [selectedSubscription, setSelectedSubscription] = useState(null);
@@ -89,24 +89,24 @@ const Vip = () => {
 
   // console.log("userData", userData);
 
-  const handelRecycle = async (subscriptionId) => {
-    setRecycleLoading(true);
+  const handelRecapitalized = async (subscriptionId) => {
+    setRecapitalizedLoading(true);
     try {
       const response = await axios.patch(
-        `https://yaticare-backend.onrender.com/api/recycleSubscription/${subscriptionId}`,
+        `https://yaticare-backend.onrender.com/api/RecapitalizedSubscription/${subscriptionId}`,
       );
       console.log("subscriptionId", response);
       toast.success(
         response?.data?.message ||
-          "Subscription recycled and restarted successfully",
+          "Subscription Recapitalizedd and restarted successfully",
       );
       setShowDialog(false);
       setSelectedSubscription(null);
-      setRecycleLoading(false);
+      setRecapitalizedLoading(false);
       // Refresh user data
       fetchSubscriptions();
     } catch (err) {
-      setRecycleLoading(false);
+      setRecapitalizedLoading(false);
       toast.error(err?.response?.data?.message);
     }
   };
@@ -224,12 +224,14 @@ const Vip = () => {
                   </div>
 
                   <button
-                    className="Recycle-btn"
-                    aria-label={"Recycle"}
-                    disabled={!subscriptionData?.mustRecycle ? true : false}
+                    className="Recapitalized-btn"
+                    aria-label={"Recapitalized"}
+                    disabled={
+                      !subscriptionData?.mustRecapitalized ? true : false
+                    }
                     style={{
                       background: `${
-                        !subscriptionData?.mustRecycle
+                        !subscriptionData?.mustRecapitalized
                           ? "rgba(128, 128, 128, 0.188)"
                           : ""
                       }`,
@@ -239,10 +241,10 @@ const Vip = () => {
                       setShowDialog(true);
                     }}
                   >
-                    {recycleLoading ? (
+                    {RecapitalizedLoading ? (
                       <PuffLoader color="white" size={24} />
                     ) : (
-                      "Recycle"
+                      "Recapitalized"
                     )}
                   </button>
                   <button
@@ -263,7 +265,7 @@ const Vip = () => {
         </div>
       )}
 
-      {/* Dialog Modal for Recycle or Upgrade */}
+      {/* Dialog Modal for Recapitalized or Upgrade */}
       {showDialog && selectedSubscription && !showUpgradeStep && (
         <div
           className="modal-overlay"
@@ -273,24 +275,24 @@ const Vip = () => {
           }}
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Agree to Recycle</h3>
+            <h3>Agree to Recapitalized</h3>
             <p>
-              When You Recycle, You Agree To Maintain Current Plan, and Benefit
-              From Our 20% DAILY Interest.
+              When You Recapitalized, You Agree To Maintain Current Plan, and
+              Benefit From Our 20% DAILY Interest.
             </p>
 
             <div className="modal-buttons">
               <button
-                className="modal-btn modal-btn-recycle"
+                className="modal-btn modal-btn-Recapitalized"
                 onClick={() => {
-                  handelRecycle(selectedSubscription._id);
+                  handelRecapitalized(selectedSubscription._id);
                 }}
-                disabled={recycleLoading}
+                disabled={RecapitalizedLoading}
               >
-                {recycleLoading ? (
+                {RecapitalizedLoading ? (
                   <PuffLoader color="white" size={16} />
                 ) : (
-                  "Recycle"
+                  "Recapitalized"
                 )}
               </button>
 
@@ -389,9 +391,9 @@ const Vip = () => {
               <button
                 className="modal-btn modal-btn-confirm"
                 onClick={handleUpgrade}
-                disabled={!selectedPlan || recycleLoading}
+                disabled={!selectedPlan || RecapitalizedLoading}
               >
-                {recycleLoading ? (
+                {RecapitalizedLoading ? (
                   <PuffLoader color="white" size={16} />
                 ) : (
                   "Confirm Upgrade"

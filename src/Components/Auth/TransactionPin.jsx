@@ -50,7 +50,7 @@ const TransactionPin = () => {
     try {
       const response = await axios.post(
         `https://yaticare-backend.onrender.com/api/auth/create-pin/${user.user._id}`,
-        { pin: userInput.pin }
+        { pin: userInput.pin },
       );
 
       if (response.data) {
@@ -59,13 +59,16 @@ const TransactionPin = () => {
           pin: "",
           confirmPin: "",
         });
-        setTimeout(() => {
-          if (user?.user?.WalletInfo?.WalletAddress) {
-            Nav("/dashboard");
-          } else {
-            Nav("/auth/add-WalletAddress");
-          }
-        }, 2000);
+
+        Nav("/dashboard");
+
+        // setTimeout(() => {
+        //   if (user?.user?.WalletInfo?.WalletAddress) {
+        //     Nav("/dashboard");
+        //   } else {
+        //     Nav("/auth/add-WalletAddress");
+        //   }
+        // }, 2000);
       }
     } catch (error) {
       const errorMessage =
