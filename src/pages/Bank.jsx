@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FaWallet, FaSpinner } from "react-icons/fa6";
-import { FaCheckCircle, FaInfoCircle } from "react-icons/fa";
+import { FaWallet } from "react-icons/fa6";
+import { FaCheckCircle, FaInfoCircle, FaSpinner } from "react-icons/fa";
 import "./pageCss/Bank.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -12,14 +12,14 @@ const Bank = () => {
     WalletName: "",
     WalletAddress: "",
   });
-  const navigator = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
   const [isSaving, setIsSaving] = useState(false);
   const user = useSelector((state) => state.YATipauy.user);
 
-  // Load existing wallet details if available
+  // Load wallet details
   useEffect(() => {
-    if (user?.walletName) {
+    if (user?.user) {
       setUserInput({
         WalletName: user.user.WalletName || "",
         WalletAddress: user.user.WalletAddress || "",
@@ -32,14 +32,17 @@ const Bank = () => {
       toast.error("Please select your wallet type");
       return false;
     }
+
     if (!userInput.WalletAddress) {
       toast.error("Please enter your wallet address");
       return false;
     }
+
     if (userInput.WalletAddress.length < 20) {
       toast.error("Please enter a valid wallet address");
       return false;
     }
+
     return true;
   };
 
@@ -47,20 +50,22 @@ const Bank = () => {
     if (!validateForm()) return;
 
     setIsSaving(true);
+
     try {
       const response = await axios.put(
         `https://yaticare-backend.onrender.com/api/user/addWallet/${user.user._id}`,
         userInput,
       );
+
       if (response.data) {
         toast.success("Wallet details updated successfully");
-        navigator("/dashboard");
+        navigate("/dashboard");
       }
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to update wallet details",
       );
-      console.error("Update error:", error);
+      console.error(error);
     } finally {
       setIsSaving(false);
     }
@@ -73,22 +78,28 @@ const Bank = () => {
           <div className="header-icon">
             <FaWallet />
           </div>
+
           <h3>Wallet Configuration</h3>
           <p>Securely add your withdrawal wallet details</p>
         </div>
 
         <section className="bank-form">
+          {/* Wallet Type */}
           <div className="form-group">
             <label className="form-label">
-              <span>Wallet Type</span>
-              <span className="required">*</span>
+              Wallet Type <span className="required">*</span>
             </label>
+
             <div className="inputWrapper">
               <FaWallet className="inputIcon" />
+
               <select
                 value={userInput.WalletName}
                 onChange={(e) =>
-                  setUserInput({ ...userInput, WalletName: e.target.value })
+                  setUserInput({
+                    ...userInput,
+                    WalletName: e.target.value,
+                  })
                 }
                 className={userInput.WalletName ? "filled" : ""}
               >
@@ -98,23 +109,29 @@ const Bank = () => {
             </div>
           </div>
 
+          {/* Wallet Address */}
           <div className="form-group">
             <label className="form-label">
-              <span>Wallet Address</span>
-              <span className="required">*</span>
+              Wallet Address <span className="required">*</span>
             </label>
+
             <div className="inputWrapper">
               <FaWallet className="inputIcon" />
+
               <input
                 type="text"
                 placeholder="Enter your USDT Tether BEP20 wallet address"
                 value={userInput.WalletAddress}
                 onChange={(e) =>
-                  setUserInput({ ...userInput, WalletAddress: e.target.value })
+                  setUserInput({
+                    ...userInput,
+                    WalletAddress: e.target.value,
+                  })
                 }
                 className={userInput.WalletAddress ? "filled" : ""}
               />
             </div>
+
             {userInput.WalletAddress &&
               userInput.WalletAddress.length >= 20 && (
                 <div className="validation-success">
@@ -123,6 +140,7 @@ const Bank = () => {
               )}
           </div>
 
+          {/* Save Button */}
           <button
             className={`save-button ${isSaving ? "loading" : ""}`}
             onClick={updateInfo}
@@ -130,20 +148,24 @@ const Bank = () => {
           >
             {isSaving ? (
               <>
-                <FaSpinner className="spinne" /> Processing...
+                <FaSpinner className="spinner" />
+                Processing...
               </>
             ) : (
               <>
-                <FaCheckCircle /> Save Wallet Details
+                <FaCheckCircle />
+                Save Wallet Details
               </>
             )}
           </button>
 
+          {/* Notice */}
           <div className="bank-notice">
             <div className="notice-header">
               <FaInfoCircle />
               <span>Important Information</span>
             </div>
+
             <ul className="notice-list">
               <li>Ensure your wallet address is correct before saving</li>
               <li>Double-check the network type matches (BEP20)</li>
