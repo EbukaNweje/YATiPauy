@@ -1,49 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AuthStyle.css";
 import { LockOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Flex } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Button, Form, Input } from "antd";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const Resetpassword = () => {
   const Nav = useNavigate();
+  const { id } = useParams(); // Get user ID from URL params
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // Get user ID from URL params or query string
+    const userIdFromParams = id || searchParams.get("id");
+
+    if (!userIdFromParams) {
+      toast.error("Invalid reset link. Please request a new password reset.");
+      setTimeout(() => {
+        Nav("/auth/forgotpassword");
+      }, 2000);
+    } else {
+      setUserId(userIdFromParams);
+    }
+  }, [id, searchParams, Nav]);
 
   const onFinish = async (values) => {
-    if (values.newPassword !== values.confirmPassword) {
-      toast.error("Passwords do not match!");
+    if (!userId) {
+      toast.error("Invalid reset link. Please try again.");
       return;
     }
 
     setLoading(true);
     try {
-      // Get reset token from URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get("token");
-
-      if (!token) {
-        toast.error("Reset token is missing!");
-        Nav("/auth/forgotpassword");
-        return;
-      }
-
-      // Make API request to reset password
-      const response = await axios.post(
-        "https://yaticare-backend.onrender.com/api/auth/reset-password",
+      const response = await axios.put(
+        `https://yaticare-backend.onrender.com/api/auth/reset-password/${userId}`,
         {
-          token,
-          newPassword: values.newPassword,
-        }
+          password: values.newPassword,
+        },
       );
 
-      toast.success("Password reset successful!");
-      Nav("/auth/login");
+      if (response.data) {
+        toast.success(response.data.message || "Password reset successful!");
+        form.resetFields();
+
+        // Navigate to login after successful reset
+        setTimeout(() => {
+          Nav("/auth/login");
+        }, 2000);
+      }
     } catch (error) {
-      console.error(error);
-      toast.error(error?.response?.data?.message || "Failed to reset password");
+      console.error("Reset password error:", error);
+      toast.error(
+        error.response?.data?.message ||
+          error.response?.data?.error ||
+          "Failed to reset password. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -57,6 +73,7 @@ const Resetpassword = () => {
       <div className="AuthWrapper">
         <div className="AuthHeader">
           <h3>Reset password</h3>
+          <p>Enter your new password below</p>
         </div>
         <Form
           name="reset-password"
@@ -84,10 +101,12 @@ const Resetpassword = () => {
             <Input.Password
               prefix={<LockOutlined />}
               placeholder="New Password"
+              disabled={loading || !userId}
             />
           </Form.Item>
           <Form.Item
             name="confirmPassword"
+            dependencies={["newPassword"]}
             rules={[
               {
                 required: true,
@@ -99,7 +118,7 @@ const Resetpassword = () => {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error("The two passwords do not match!")
+                    new Error("The two passwords do not match!"),
                   );
                 },
               }),
@@ -108,14 +127,8 @@ const Resetpassword = () => {
             <Input.Password
               prefix={<LockOutlined />}
               placeholder="Confirm Password"
+              disabled={loading || !userId}
             />
-          </Form.Item>
-          <Form.Item>
-            <Flex justify="space-between" align="center">
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-            </Flex>
           </Form.Item>
 
           <Form.Item>
@@ -124,7 +137,7 @@ const Resetpassword = () => {
               className="custom-btn"
               htmlType="submit"
               loading={loading}
-              disabled={loading}
+              disabled={loading || !userId}
             >
               {loading ? "Resetting..." : "Reset password"}
             </Button>
