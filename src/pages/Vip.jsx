@@ -93,12 +93,12 @@ const Vip = () => {
     setRecapitalizedLoading(true);
     try {
       const response = await axios.patch(
-        `https://yaticare-backend.onrender.com/api/RecapitalizedSubscription/${subscriptionId}`,
+        `https://yaticare-backend.onrender.com/api/recycleSubscription/${subscriptionId}`,
       );
       console.log("subscriptionId", response);
       toast.success(
         response?.data?.message ||
-          "Subscription Recapitalizedd and restarted successfully",
+          "Subscription Recapitalize and restarted successfully",
       );
       setShowDialog(false);
       setSelectedSubscription(null);
@@ -226,12 +226,10 @@ const Vip = () => {
                   <button
                     className="Recapitalized-btn"
                     aria-label={"Recapitalized"}
-                    disabled={
-                      !subscriptionData?.mustRecapitalized ? true : false
-                    }
+                    disabled={!subscriptionData?.mustRecycle ? true : false}
                     style={{
                       background: `${
-                        !subscriptionData?.mustRecapitalized
+                        !subscriptionData?.mustRecycle
                           ? "rgba(128, 128, 128, 0.188)"
                           : ""
                       }`,
@@ -244,7 +242,7 @@ const Vip = () => {
                     {RecapitalizedLoading ? (
                       <PuffLoader color="white" size={24} />
                     ) : (
-                      "Recapitalized"
+                      "Recapitalize"
                     )}
                   </button>
                   <button
@@ -292,7 +290,7 @@ const Vip = () => {
                 {RecapitalizedLoading ? (
                   <PuffLoader color="white" size={16} />
                 ) : (
-                  "Recapitalized"
+                  "Recapitalize"
                 )}
               </button>
 
