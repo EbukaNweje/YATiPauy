@@ -222,28 +222,221 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Mobile */
+/* Responsive Styles */
 
-@media (max-width: 480px) {
+/* Tablet and below (768px) */
+@media (max-width: 768px) {
   .Bank {
-    padding: 20px 10px;
+    padding: 20px 15px;
+    align-items: flex-start;
+  }
+
+  .bank-container {
+    max-width: 100%;
   }
 
   .bank-form {
-    padding: 22px;
+    padding: 25px 20px;
+  }
+
+  .bank-header {
+    margin-bottom: 25px;
+  }
+
+  .header-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 12px;
+  }
+
+  .header-icon svg {
+    font-size: 24px;
   }
 
   .bank-header h3 {
     font-size: 22px;
   }
 
+  .bank-header p {
+    font-size: 13px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
   .inputWrapper input,
   .inputWrapper select {
-    height: 46px;
+    height: 48px;
+    font-size: 14px;
+    padding: 0 12px 0 42px;
+  }
+
+  .inputIcon {
+    left: 12px;
+    font-size: 15px;
+  }
+
+  .save-button {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  .bank-notice {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .notice-header {
+    font-size: 13px;
+  }
+
+  .notice-list li {
+    font-size: 12px;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .Bank {
+    padding: 15px 10px;
+    min-height: 100vh;
+  }
+
+  .bank-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .bank-form {
+    padding: 20px 15px;
+    border-radius: 16px;
+  }
+
+  .bank-header {
+    margin-bottom: 20px;
+  }
+
+  .header-icon {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 10px;
+  }
+
+  .header-icon svg {
+    font-size: 22px;
+  }
+
+  .bank-header h3 {
+    font-size: 20px;
+  }
+
+  .bank-header p {
+    font-size: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-label {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .inputWrapper input,
+  .inputWrapper select {
+    height: 45px;
+    font-size: 13px;
+    padding: 0 10px 0 38px;
+    border-radius: 8px;
+  }
+
+  .inputIcon {
+    left: 10px;
+    font-size: 14px;
+  }
+
+  .validation-success {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .save-button {
+    height: 45px;
+    font-size: 13px;
+    margin-top: 15px;
+    border-radius: 10px;
+  }
+
+  .bank-notice {
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 10px;
+  }
+
+  .notice-header {
+    font-size: 12px;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .notice-list li {
+    font-size: 11px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+}
+
+/* Extra small mobile (360px and below) */
+@media (max-width: 360px) {
+  .Bank {
+    padding: 10px 8px;
+  }
+
+  .bank-form {
+    padding: 18px 12px;
+  }
+
+  .bank-header h3 {
+    font-size: 18px;
+  }
+
+  .header-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .header-icon svg {
+    font-size: 20px;
+  }
+
+  .inputWrapper input,
+  .inputWrapper select {
+    height: 42px;
+    font-size: 12px;
+    padding: 0 8px 0 35px;
+  }
+
+  .inputIcon {
+    left: 8px;
     font-size: 13px;
   }
 
   .save-button {
-    height: 46px;
+    height: 42px;
+    font-size: 12px;
+  }
+
+  .form-label {
+    font-size: 12px;
+  }
+
+  .bank-notice {
+    padding: 10px;
+  }
+
+  .notice-list li {
+    font-size: 10px;
   }
 }

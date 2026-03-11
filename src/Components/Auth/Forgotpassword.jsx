@@ -65,8 +65,8 @@ const Forgotpassword = () => {
           form={form}
           name="forgotPassword"
           style={{
-            maxWidth: 600,
-            width: 400,
+            width: "100%",
+            maxWidth: "100%",
           }}
           initialValues={{
             remember: true,

@@ -252,7 +252,12 @@
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 470px;
+  max-width: 420px;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 100%;
 }
 
 .AuthHeader {
@@ -418,19 +423,67 @@
 .custom-select .ant-select-selection-item {
   color: rgba(255, 255, 255, 0.9) !important;
 }
-/* Responsive Fix */
-@media screen and (max-width: 500px) {
+/* Responsive Styles */
+
+/* Tablet (768px and below) */
+@media screen and (max-width: 768px) {
   .AuthBody {
-    padding: 20px;
+    padding: 20px 15px;
+  }
+
+  .AuthWrapper {
+    padding: 35px 25px;
+    max-width: 100%;
+    width: calc(100% - 30px);
+  }
+
+  .auth-form {
+    width: 100%;
+  }
+
+  .AuthHeader h3 {
+    font-size: 1.6rem;
+  }
+
+  .AuthHeader p {
+    font-size: 0.95rem;
+  }
+
+  .Logo img {
+    width: 120px;
+  }
+
+  .auth-form .ant-input-affix-wrapper {
+    height: 44px;
+  }
+
+  .custom-btn {
+    height: 44px;
+    font-size: 15px;
+  }
+}
+
+/* Mobile (600px and below) */
+@media screen and (max-width: 600px) {
+  .AuthBody {
+    padding: 15px 10px;
+    min-height: 100vh;
   }
 
   .AuthWrapper {
     padding: 30px 20px;
     max-width: 100%;
+    width: calc(100% - 20px);
+    border-radius: 10px;
+  }
+
+  .AuthHeader {
+    margin-bottom: 25px;
   }
 
   .AuthHeader h3 {
     font-size: 1.5rem;
+    margin-bottom: 8px;
   }
 
   .AuthHeader p {
@@ -438,30 +491,295 @@
   }
 
   .Logo {
-    text-align: center;
+    margin-bottom: 20px;
   }
 
   .Logo img {
-    width: 50px;
+    width: 100px;
+  }
+
+  .auth-form {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .auth-form .ant-form-item {
+    margin-bottom: 16px;
+  }
+
+  .auth-form .ant-input-affix-wrapper {
+    height: 42px;
+    border-radius: 8px;
+  }
+
+  .auth-form .ant-input {
+    font-size: 14px;
+  }
+
+  .custom-btn {
+    height: 42px;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .auth-form .ant-checkbox-wrapper {
+    font-size: 0.9rem;
+  }
+
+  /* Transaction PIN Styles */
+  .transaction-pin-form {
+    padding: 30px 20px;
+  }
+
+  .form-header h2 {
+    font-size: 20px;
+  }
+
+  .form-header p {
+    font-size: 13px;
+  }
+
+  .lock-icon {
+    font-size: 28px;
+  }
+
+  .input-group input {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .submit-button {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .pin-notice {
+    padding: 12px;
+  }
+
+  .pin-notice p {
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile (480px and below) */
+@media screen and (max-width: 480px) {
+  .AuthBody {
+    padding: 10px 8px;
+  }
+
+  .AuthWrapper {
+    padding: 25px 15px;
+    border-radius: 8px;
+    width: calc(100% - 16px);
   }
 
   .auth-form {
     width: 100% !important;
   }
 
-  .auth-form .ant-form-item {
+  .AuthHeader {
+    margin-bottom: 20px;
+  }
+
+  .AuthHeader h3 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+
+  .AuthHeader p {
+    font-size: 0.85rem;
+  }
+
+  .Logo {
     margin-bottom: 15px;
   }
 
+  .Logo img {
+    width: 80px;
+  }
+
+  .auth-form .ant-form-item {
+    margin-bottom: 14px;
+  }
+
   .auth-form .ant-input-affix-wrapper {
-    height: 42px;
+    height: 40px;
+    border-radius: 6px;
+  }
+
+  .auth-form .ant-input {
+    font-size: 13px;
+  }
+
+  .auth-form .ant-input::placeholder {
+    font-size: 13px;
   }
 
   .custom-btn {
-    height: 42px;
+    height: 40px;
+    font-size: 13px;
+    margin-top: 6px;
+    border-radius: 6px;
   }
 
   .auth-form .ant-checkbox-wrapper {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .auth-form .login-form-forgot {
+    font-size: 0.85rem;
+  }
+
+  /* Transaction PIN Styles */
+  .transaction-pin-container {
+    padding: 15px 10px;
+  }
+
+  .transaction-pin-form {
+    padding: 25px 15px;
+    border-radius: 8px;
+  }
+
+  .form-header {
+    margin-bottom: 25px;
+  }
+
+  .form-header h2 {
+    font-size: 18px;
+    margin: 12px 0 8px;
+  }
+
+  .form-header p {
+    font-size: 12px;
+  }
+
+  .lock-icon {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .pin-inputs {
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .input-group input {
+    padding: 10px;
+    font-size: 15px;
+    letter-spacing: 6px;
+  }
+
+  .input-group input::placeholder {
+    font-size: 14px;
+  }
+
+  .toggle-visibility {
+    right: 12px;
+  }
+
+  .eye-icon {
+    font-size: 18px;
+  }
+
+  .submit-button {
+    padding: 11px;
+    font-size: 14px;
+  }
+
+  .pin-notice {
+    padding: 10px;
+    margin-top: 15px;
+  }
+
+  .pin-notice p {
+    font-size: 12px;
+  }
+
+  /* Custom Phone Input */
+  .custom-phone-input {
+    height: 40px !important;
+    font-size: 13px !important;
+    padding-left: 45px !important;
+  }
+
+  .custom-phone-button {
+    left: 8px !important;
+  }
+
+  .custom-select .ant-select-selector {
+    height: 40px !important;
+    font-size: 13px;
+  }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media screen and (max-width: 360px) {
+  .AuthBody {
+    padding: 8px 5px;
+  }
+
+  .AuthWrapper {
+    padding: 20px 12px;
+    width: calc(100% - 10px);
+  }
+
+  .auth-form {
+    width: 100% !important;
+  }
+
+  .AuthHeader h3 {
+    font-size: 1.2rem;
+  }
+
+  .AuthHeader p {
+    font-size: 0.8rem;
+  }
+
+  .Logo img {
+    width: 70px;
+  }
+
+  .auth-form .ant-form-item {
+    margin-bottom: 12px;
+  }
+
+  .auth-form .ant-input-affix-wrapper {
+    height: 38px;
+  }
+
+  .auth-form .ant-input {
+    font-size: 12px;
+  }
+
+  .custom-btn {
+    height: 38px;
+    font-size: 12px;
+  }
+
+  .auth-form .ant-checkbox-wrapper {
+    font-size: 0.8rem;
+  }
+
+  .transaction-pin-form {
+    padding: 20px 12px;
+  }
+
+  .form-header h2 {
+    font-size: 16px;
+  }
+
+  .lock-icon {
+    font-size: 24px;
+  }
+
+  .input-group input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .submit-button {
+    padding: 10px;
+    font-size: 13px;
   }
 }
