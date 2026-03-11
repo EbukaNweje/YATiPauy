@@ -273,9 +273,9 @@ const Vip = () => {
           }}
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Agree to Recapitalized</h3>
+            <h3>Agree to Recapitalize</h3>
             <p>
-              When You Recapitalized, You Agree To Maintain Current Plan, and
+              When You Recapitalize, You Agree To Maintain Current Plan, and
               Benefit From Our 20% DAILY Interest.
             </p>
 
