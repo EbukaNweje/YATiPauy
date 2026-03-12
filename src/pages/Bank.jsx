@@ -105,6 +105,8 @@ const Bank = () => {
               >
                 <option value="">Select Wallet Type</option>
                 <option value="USDT-BEP20">USDT Tether (BEP20)</option>
+                <option value="USDT-ERC20">USDT (ERC20)</option>
+                <option value="USDT-TRC20">USDT (TRC20)</option>
               </select>
             </div>
           </div>
@@ -120,7 +122,7 @@ const Bank = () => {
 
               <input
                 type="text"
-                placeholder="Enter your USDT Tether BEP20 wallet address"
+                placeholder="Enter your USDT wallet address"
                 value={userInput.WalletAddress}
                 onChange={(e) =>
                   setUserInput({
@@ -168,7 +170,7 @@ const Bank = () => {
 
             <ul className="notice-list">
               <li>Ensure your wallet address is correct before saving</li>
-              <li>Double-check the network type matches (BEP20)</li>
+              <li>Double-check the network type matches (wallet address)</li>
               <li>Incorrect details may result in permanent loss of funds</li>
               <li>You can update your wallet address anytime</li>
             </ul>

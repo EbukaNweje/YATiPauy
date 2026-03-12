@@ -135,16 +135,15 @@ const Withdraw = () => {
               <h3>How to Add Your Wallet Address:</h3>
               <ol>
                 <li>Click the "Go to Wallet Settings" button below</li>
-                <li>Enter your Tether BEP20 wallet address carefully</li>
+                <li>Enter your correct wallet address carefully</li>
                 <li>Double-check the address to avoid loss of funds</li>
                 <li>Save your wallet details</li>
               </ol>
               <div className="wallet-notice">
                 <p>
                   <strong>Important:</strong> Make sure you enter the correct
-                  Tether BEP20 wallet address. Sending funds to the wrong
-                  address or wrong network may result in permanent loss of
-                  funds.
+                  wallet address. Sending funds to the wrong address or wrong
+                  network may result in permanent loss of funds.
                 </p>
               </div>
             </div>
