@@ -31,6 +31,7 @@ import Deposit from "./pages/Deposit";
 import WalletAddress from "./pages/WalletAddress";
 import NotFound from "./Components/NotFound";
 import GalleryPage from "./pages/GalleryPage";
+import AdminLoginAsUser from "./pages/Admin/LoginAsUser";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -80,6 +81,10 @@ const App = () => {
         { path: "terms", element: <Terms /> },
         { path: "Privacy", element: <Privacy /> },
         {
+          path: "dashboard/as-user/:userDataId",
+          element: <AdminLoginAsUser />,
+        },
+        {
           path: "dashboard",
           element: <PrivateRoute />,
           children: [
@@ -88,7 +93,6 @@ const App = () => {
               element: <Layout />, // Layout will render its own nested children
               children: [
                 { path: "", element: <Home /> }, // when visiting /dashboard
-                { path: ":userDataId", element: <Home /> }, // when visiting /dashboard/123
                 { path: "Products", element: <ProductS /> },
                 { path: "recharge", element: <Recharge /> },
                 { path: "deposit", element: <Deposit /> },

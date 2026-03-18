@@ -10,18 +10,16 @@ import {
 } from "react-icons/fa";
 import "./pageCss/Home.css";
 import Product from "./Product";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Bg from "../assets/bg.png";
 import { images, products } from "../Components/Data";
 import TelegramPopup from "../Components/TelegramPopup";
 import { useDispatch, useSelector } from "react-redux";
-import { userId } from "./Global/Slice";
 
 const Home = () => {
   const ITEMS_PER_PAGE = 6;
   const [index, setIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const { userDataId } = useParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,13 +28,6 @@ const Home = () => {
   const currentUserId = reduxUser?.user?._id || "anon";
   const [tgTrigger, setTgTrigger] = useState(0);
   const prevLoggedRef = useRef(false);
-
-  useEffect(() => {
-    if (userDataId) {
-      dispatch(userId(userDataId));
-      navigate("/dashboard");
-    }
-  }, [userDataId, dispatch, navigate]);
 
   useEffect(() => {
     const durations = [4000, 3000, 3000];

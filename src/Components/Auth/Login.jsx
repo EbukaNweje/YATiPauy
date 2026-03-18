@@ -25,13 +25,13 @@ const Login = () => {
       // Make an API request to your backend to create a new user
       const response = await axios.post(
         "https://yaticare-backend.onrender.com/api/auth/login",
-        data
+        data,
       );
       toast.success("Login Successfull");
       dispatch(loginSuccess(response.data.data));
       localStorage.setItem(
         "refLink",
-        JSON.stringify(response.data.data.referralLink)
+        JSON.stringify(response.data.data.referralLink),
       );
       if (response?.data?.data?.user?.pin === "") {
         Nav("/auth/Pin");
