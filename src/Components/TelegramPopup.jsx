@@ -8,25 +8,29 @@ const STORAGE_KEY = "tg_popup_dismissed_v1";
 const TelegramPopup = ({ trigger = 0 }) => {
   const [visible, setVisible] = useState(false);
   const [lastTrigger, setLastTrigger] = useState(0);
+  const [programmaticTriggered, setProgrammaticTriggered] = useState(false);
 
   useEffect(() => {
-    // normal mount behavior: respect dismissal
-    try {
-      const dismissed = sessionStorage.getItem(STORAGE_KEY);
-      if (!dismissed) {
-        const t = setTimeout(() => setVisible(true), 2000);
-        return () => clearTimeout(t);
+    // normal mount behavior: respect dismissal, but only if not programmatically triggered
+    if (!programmaticTriggered) {
+      try {
+        const dismissed = sessionStorage.getItem(STORAGE_KEY);
+        if (!dismissed) {
+          const t = setTimeout(() => setVisible(true), 2000);
+          return () => clearTimeout(t);
+        }
+      } catch (e) {
+        setVisible(true);
       }
-    } catch (e) {
-      setVisible(true);
     }
-  }, []);
+  }, [programmaticTriggered]);
 
   // programmatic trigger: open when `trigger` increments
   useEffect(() => {
     if (trigger && trigger !== lastTrigger) {
       setVisible(true);
       setLastTrigger(trigger);
+      setProgrammaticTriggered(true);
     }
   }, [trigger, lastTrigger]);
 

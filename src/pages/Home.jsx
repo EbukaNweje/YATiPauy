@@ -14,7 +14,9 @@ import { useNavigate } from "react-router-dom";
 import Bg from "../assets/bg.png";
 import { images, products } from "../Components/Data";
 import TelegramPopup from "../Components/TelegramPopup";
+import TestimonialModal from "../Components/TestimonialModal";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const Home = () => {
   const ITEMS_PER_PAGE = 6;
@@ -25,9 +27,11 @@ const Home = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector((s) => s.YATipauy?.isLoggedIn);
   const reduxUser = useSelector((s) => s.YATipauy?.user);
-  const currentUserId = reduxUser?.user?._id || "anon";
+  const currentUserId = reduxUser.user?._id || "anon";
   const [tgTrigger, setTgTrigger] = useState(0);
+  const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
   const prevLoggedRef = useRef(false);
+  const prevLoggedRefTestimonial = useRef(false);
 
   useEffect(() => {
     const durations = [4000, 3000, 3000];
@@ -50,24 +54,48 @@ const Home = () => {
 
   useEffect(() => {
     const prev = prevLoggedRef.current;
-    const shownKey = `tg_shown_${currentUserId}`;
     if (!prev && isLoggedIn) {
-      const alreadyShown = sessionStorage.getItem(shownKey);
-      if (!alreadyShown) {
-        setTgTrigger((t) => t + 1);
-        try {
-          sessionStorage.setItem(shownKey, "1");
-        } catch (e) {
-          /* ignore */
-        }
-      }
+      setTgTrigger((t) => t + 1);
     }
     prevLoggedRef.current = isLoggedIn;
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    const prev = prevLoggedRefTestimonial.current;
+    if (!prev && isLoggedIn) {
+      // Check if user has already submitted a testimonial
+      axios
+        .get(
+          `https://yaticare-backend.onrender.com/api/user/userdata/${currentUserId}`,
+        )
+        .then((response) => {
+          console.log("object", response.data.data.userTestimonial);
+          if (!response.data.data.userTestimonial) {
+            // User has testimonials, do not show modal
+            setIsTestimonialModalOpen(false);
+            console.log("User has testimonials, not showing modal");
+          } else {
+            // No testimonials, show modal
+            console.log("Opening testimonial modal");
+            setIsTestimonialModalOpen(true);
+          }
+        })
+        .catch((error) => {
+          console.error("Error checking testimonials:", error);
+          // If error, don't show modal to be safe
+        });
+    }
+    prevLoggedRefTestimonial.current = isLoggedIn;
   }, [isLoggedIn]);
 
   return (
     <div className="Home">
       <TelegramPopup trigger={tgTrigger} />
+      <TestimonialModal
+        isOpen={isTestimonialModalOpen}
+        onClose={() => setIsTestimonialModalOpen(false)}
+        userId={currentUserId}
+      />
       {/* Carousel */}
       {/* <div className="carousel-container"> */}
       <div
