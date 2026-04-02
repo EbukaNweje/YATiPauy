@@ -119,8 +119,8 @@ const TestimonialPage = () => {
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 no-scrollbar"
           >
             {testimonials.length === 0 ? (
-              <div className="snap-center min-w-[45vw] sm:min-w-[40vw] md:min-w-[35vw] lg:min-w-[30vw] xl:min-w-[28vw] rounded-2xl bg-white p-10 shadow-lg border border-orange-100 mx-auto">
-                <FaQuoteLeft className="mx-auto h-16 w-16 text-[#022308f5] mb-6" />
+              <div className="snap-center min-w-full sm:min-w-[40vw] md:min-w-[35vw] lg:min-w-[30vw] xl:min-w-full rounded-2xl  borde mx-auto">
+                {/* <FaQuoteLeft className="mx-auto h-16 w-16 text-[#022308f5] mb-6" /> */}
                 <p className="text-gray-700 text-xl font-semibold text-center">
                   No testimonials yet
                 </p>
