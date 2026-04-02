@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import "./TestimonialModal.css"; // We'll create this CSS file
+import "./TestimonialModal.css"; // We'll create this CSS files for styling the modal
 
 const TestimonialModal = ({ isOpen, onClose, userId }) => {
   const [testimonial, setTestimonial] = useState("");
