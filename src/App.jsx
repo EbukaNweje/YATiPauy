@@ -32,6 +32,7 @@ import WalletAddress from "./pages/WalletAddress";
 import NotFound from "./Components/NotFound";
 import GalleryPage from "./pages/GalleryPage";
 import AdminLoginAsUser from "./pages/Admin/LoginAsUser";
+import TestimonialPage from "./pages/Testimonial";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -111,6 +112,7 @@ const App = () => {
                 { path: "plan", element: <Plan key={location.key} /> },
                 { path: "changePassword", element: <Change /> },
                 { path: "Privacy", element: <Privacy /> },
+                { path: "testimonials", element: <TestimonialPage /> },
               ],
             },
           ],

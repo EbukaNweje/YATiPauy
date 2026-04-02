@@ -4,6 +4,7 @@ import Header from "./Header";
 import Weather from "./Weather";
 import HowItWorks from "./HowItWorks";
 import Footer from "./Footer";
+import Testimonial from "./Testimonial";
 
 const LandingPage = () => {
   return (
@@ -17,6 +18,9 @@ const LandingPage = () => {
       </section>
       <section id="how-it-works">
         <HowItWorks />
+      </section>
+      <section id="testimonial">
+        <Testimonial />
       </section>
       <section>
         <Footer />
