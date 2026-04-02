@@ -10,12 +10,13 @@ const TestimonialModal = ({ isOpen, onClose, userId }) => {
   if (!isOpen) return null;
 
   const handleSubmit = async () => {
+    setLoading(true);
+
     if (!testimonial.trim()) {
       toast.error("Please enter a testimonial");
+      setLoading(false);
       return;
     }
-
-    setLoading(true);
     try {
       const response = await axios.post(
         "https://yaticare-backend.onrender.com/api/user/testimonials",
