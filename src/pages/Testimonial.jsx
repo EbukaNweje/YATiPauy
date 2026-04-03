@@ -95,7 +95,7 @@ const TestimonialPage = () => {
   }
 
   return (
-    <div className="min-h-[60vh] bg-gradient-to-b from-white via-orange-50 to-orange-100 py-14 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <div className="md:min-h-[60vh] h-[70vh] bg-gradient-to-b from-white via-orange-50 to-orange-100 py-14 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="w-full max-w-6xl flex flex-col items-center gap-12">
         <div className="mb-8 text-center">
           <p className="inline-block px-4 py-1 text-xs font-semibold tracking-wider text-orange-700 uppercase rounded-full bg-orange-100">
@@ -110,13 +110,14 @@ const TestimonialPage = () => {
         </div>
 
         <div
-          className="relative mt-20 w-full flex flex-col gap-10 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 "
+          className="relative mt-20 w-full overflow-hidden"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
+          <style>{`.no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }`}</style>
           <div
             ref={carouselRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 no-scrollbar"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-10 h-[200px] items-center no-scrollbar"
           >
             {testimonials.length === 0 ? (
               <div className="snap-center min-w-full sm:min-w-[40vw] md:min-w-[35vw] lg:min-w-[30vw] xl:min-w-full rounded-2xl  borde mx-auto">
@@ -133,7 +134,7 @@ const TestimonialPage = () => {
                 <article
                   key={testimonial._id || idx}
                   data-card
-                  className={`snap-start min-w-[45vw] sm:min-w-[40vw] md:min-w-[35vw] lg:min-w-[30vw] xl:min-w-[28vw]  rounded-[5px]transition-transform duration-300 ${
+                  className={`snap-center min-w-full max-w-2xl mx-autop-6 flex items-center flex-col transition-transform duration-300 ${
                     activeIndex === idx ? "scale-100" : "scale-95 opacity-80"
                   }`}
                 >
@@ -159,7 +160,7 @@ const TestimonialPage = () => {
                       </p>
                     </div>
                   </div>
-                  <p className="text-gray-700 text-base leading-relaxed">
+                  <p className="text-gray-700 text-base leading-relaxed mb-6 text-center">
                     {testimonial.testimonial || "No testimonial available"}
                   </p>
                 </article>
@@ -183,7 +184,7 @@ const TestimonialPage = () => {
             <FaChevronRight />
           </button>
 
-          <div className="mt-4 flex justify-center gap-2">
+          <div className="mt-6 flex justify-center gap-2">
             {testimonials.map((_, idx) => (
               <button
                 key={`dot-${idx}`}
