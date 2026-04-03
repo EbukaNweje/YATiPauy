@@ -114,11 +114,15 @@ const TestimonialPage = () => {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <style>{`.no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }`}</style>
           <div
             ref={carouselRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-10 h-[200px] items-center no-scrollbar"
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-10 h-[200px] items-center"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
           >
+            <style>{`#hidden-scrollbar::-webkit-scrollbar { display: none; }`}</style>
             {testimonials.length === 0 ? (
               <div className="snap-center min-w-full sm:min-w-[40vw] md:min-w-[35vw] lg:min-w-[30vw] xl:min-w-full rounded-2xl  borde mx-auto">
                 {/* <FaQuoteLeft className="mx-auto h-16 w-16 text-[#022308f5] mb-6" /> */}

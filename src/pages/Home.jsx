@@ -1,13 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
-import {
-  FaWallet,
-  FaMoneyBillWave,
-  FaUniversity,
-  FaUsers,
-  FaBell,
-  FaShieldAlt,
-} from "react-icons/fa";
+import { FaWallet, FaMoneyBillWave, FaBell } from "react-icons/fa";
 import "./pageCss/Home.css";
 import Product from "./Product";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +7,7 @@ import Bg from "../assets/bg.png";
 import { images, products } from "../Components/Data";
 import TelegramPopup from "../Components/TelegramPopup";
 import TestimonialModal from "../Components/TestimonialModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const Home = () => {
@@ -23,13 +15,13 @@ const Home = () => {
   const [index, setIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((s) => s.YATipauy?.isLoggedIn);
   const reduxUser = useSelector((s) => s.YATipauy?.user);
   const currentUserId = reduxUser.user?._id || "anon";
   const [tgTrigger, setTgTrigger] = useState(0);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
+  const [marqueeTestimonials, setMarqueeTestimonials] = useState([]);
   const prevLoggedRef = useRef(false);
   const prevLoggedRefTestimonial = useRef(false);
 
@@ -73,10 +65,10 @@ const Home = () => {
           if (!response.data.data.userTestimonial) {
             // User has testimonials, do not show modal
             setIsTestimonialModalOpen(false);
-            console.log("User has testimonials, not showing modal");
+            // console.log("User has testimonials, not showing modal");
           } else {
             // No testimonials, show modal
-            console.log("Opening testimonial modal");
+            // console.log("Opening testimonial modal");
             setIsTestimonialModalOpen(true);
           }
         })
@@ -85,8 +77,24 @@ const Home = () => {
           // If error, don't show modal to be safe
         });
     }
+
     prevLoggedRefTestimonial.current = isLoggedIn;
-  }, [isLoggedIn]);
+  }, [isLoggedIn, currentUserId]);
+
+  useEffect(() => {
+    const fetchTestimonialsForMarquee = async () => {
+      try {
+        const response = await axios.get(
+          "https://yaticare-backend.onrender.com/api/user/testimonials/approved",
+        );
+        setMarqueeTestimonials(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching marquee testimonials:", error);
+      }
+    };
+
+    fetchTestimonialsForMarquee();
+  }, []);
 
   return (
     <div className="Home">
@@ -162,10 +170,24 @@ const Home = () => {
         <div className="iconBox">
           <FaBell size={30} color="white" />
         </div>
-        <marquee behavior="scroll" direction="left">
-          Officially launched 14th of February. Join YATiCare Telegram for more
-          updates!
-        </marquee>
+        <div className="homeMarqueeScroller">
+          <div className="homeMarqueeContent">
+            {`Officially launched 14th of February. Join YATiCare Telegram for more updates! User testimonials:   `}
+            {marqueeTestimonials.length > 0
+              ? marqueeTestimonials
+                  .map((item) => {
+                    const name = item.user.userName || "Anonymous";
+                    const date = item.createdAt
+                      ? new Date(item.createdAt).toLocaleDateString()
+                      : "Unknown date";
+                    const messageText =
+                      item.testimonial || item.message || "Great service!";
+                    return `${name} (${date}): ${messageText}`;
+                  })
+                  .join("  •  ")
+              : "No testimonials yet. Be the first to share your experience!"}
+          </div>
+        </div>
       </button>
 
       {/* Products */}
