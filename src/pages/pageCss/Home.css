@@ -179,7 +179,7 @@
   line-height: 1.8;
 }
 
-.Home .testimonialEmptyState {
+.Home .testimonialEmptyState p {
   color: #f2f7ee;
   font-size: 15px;
   line-height: 1.7;
