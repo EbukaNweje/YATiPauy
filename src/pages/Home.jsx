@@ -1,5 +1,10 @@
-import { useEffect, useState, useRef } from "react";
-import { FaWallet, FaMoneyBillWave, FaBell } from "react-icons/fa";
+import { useEffect, useMemo, useState, useRef } from "react";
+import {
+  FaWallet,
+  FaMoneyBillWave,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import "./pageCss/Home.css";
 import Product from "./Product";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +27,9 @@ const Home = () => {
   const [tgTrigger, setTgTrigger] = useState(0);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
   const [marqueeTestimonials, setMarqueeTestimonials] = useState([]);
+  const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
+  const [isTestimonialCarouselPaused, setIsTestimonialCarouselPaused] =
+    useState(false);
   const prevLoggedRef = useRef(false);
   const prevLoggedRefTestimonial = useRef(false);
 
@@ -41,6 +49,13 @@ const Home = () => {
     currentPage * ITEMS_PER_PAGE,
     (currentPage + 1) * ITEMS_PER_PAGE,
   );
+
+  const testimonialsToShow = useMemo(() => {
+    const filtered = marqueeTestimonials.filter(
+      (item) => item.user?._id !== currentUserId,
+    );
+    return filtered.length > 0 ? filtered : marqueeTestimonials;
+  }, [marqueeTestimonials, currentUserId]);
 
   const Nav = useNavigate();
 
@@ -95,6 +110,31 @@ const Home = () => {
 
     fetchTestimonialsForMarquee();
   }, []);
+
+  useEffect(() => {
+    if (!testimonialsToShow.length || isTestimonialCarouselPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveTestimonialIndex(
+        (prev) => (prev + 1) % testimonialsToShow.length,
+      );
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [testimonialsToShow, isTestimonialCarouselPaused]);
+
+  const handlePrevTestimonial = () => {
+    if (!testimonialsToShow.length) return;
+    setActiveTestimonialIndex(
+      (prev) =>
+        (prev - 1 + testimonialsToShow.length) % testimonialsToShow.length,
+    );
+  };
+
+  const handleNextTestimonial = () => {
+    if (!testimonialsToShow.length) return;
+    setActiveTestimonialIndex((prev) => (prev + 1) % testimonialsToShow.length);
+  };
 
   return (
     <div className="Home">
@@ -165,30 +205,85 @@ const Home = () => {
         </ul> */}
       </nav>
 
-      {/* Marquee Button */}
-      <button className="margueBtn" disabled>
-        <div className="iconBox">
-          <FaBell size={30} color="white" />
-        </div>
-        <div className="homeMarqueeScroller">
-          <div className="homeMarqueeContent">
-            {`Officially launched 14th of February. Join YATiCare Telegram for more updates! User testimonials:   `}
-            {marqueeTestimonials.length > 0
-              ? marqueeTestimonials
-                  .map((item) => {
-                    const name = item.user.userName || "Anonymous";
-                    const date = item.createdAt
-                      ? new Date(item.createdAt).toLocaleDateString()
-                      : "Unknown date";
-                    const messageText =
-                      item.testimonial || item.message || "Great service!";
-                    return `${name} (${date}): ${messageText}`;
-                  })
-                  .join("  •  ")
-              : "No testimonials yet. Be the first to share your experience!"}
+      {/* Testimonials Carousel */}
+      <div
+        className="testimonialCarousel"
+        onMouseEnter={() => setIsTestimonialCarouselPaused(true)}
+        onMouseLeave={() => setIsTestimonialCarouselPaused(false)}
+      >
+        <div className="testimonialCarouselHeader">
+          <div>
+            <div className="testimonialCarouselLabel">Official update</div>
+            <p className="testimonialCarouselText">
+              Officially launched 14th of February. Join YATiCare Telegram for
+              more updates!
+            </p>
+          </div>
+          <div className="testimonialCarouselButtons">
+            <button
+              onClick={handlePrevTestimonial}
+              className="testimonialCarouselBtn"
+              aria-label="Previous testimonial"
+            >
+              <FaChevronLeft />
+            </button>
+            <button
+              onClick={handleNextTestimonial}
+              className="testimonialCarouselBtn"
+              aria-label="Next testimonial"
+            >
+              <FaChevronRight />
+            </button>
           </div>
         </div>
-      </button>
+
+        <div className="testimonialCarouselCard">
+          {testimonialsToShow.length > 0 ? (
+            <>
+              <div className="testimonialCarouselCardHeader">
+                <h4>
+                  {testimonialsToShow[activeTestimonialIndex].user?.userName ||
+                    "Anonymous"}
+                </h4>
+                <p className="testimonialDate">
+                  {testimonialsToShow[activeTestimonialIndex].createdAt
+                    ? new Date(
+                        testimonialsToShow[activeTestimonialIndex].createdAt,
+                      ).toLocaleDateString()
+                    : testimonialsToShow[activeTestimonialIndex].date
+                      ? new Date(
+                          testimonialsToShow[activeTestimonialIndex].date,
+                        ).toLocaleDateString()
+                      : "Date not available"}
+                </p>
+              </div>
+              <p className="testimonialCarouselTextBody">
+                {testimonialsToShow[activeTestimonialIndex].testimonial ||
+                  testimonialsToShow[activeTestimonialIndex].message ||
+                  "Great service!"}
+              </p>
+            </>
+          ) : (
+            <div className="testimonialEmptyState">
+              <p>No testimonials available right now.</p>
+              <p>Be the first to share your experience!</p>
+            </div>
+          )}
+        </div>
+
+        <div className="testimonialCarouselDots">
+          {testimonialsToShow.map((_, idx) => (
+            <button
+              key={`dot-${idx}`}
+              className={`testimonialCarouselDot ${
+                activeTestimonialIndex === idx ? "active" : ""
+              }`}
+              onClick={() => setActiveTestimonialIndex(idx)}
+              aria-label={`Go to testimonial ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </div>
 
       {/* Products */}
       <div className="productDiv">
