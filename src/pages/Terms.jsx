@@ -77,6 +77,7 @@ const Terms = () => {
             contribute funds and earn daily returns based on active
             subscriptions.
           </p>
+
           <h5>Active Subscription Requirement</h5>
           <ul>
             <li>
@@ -93,13 +94,15 @@ const Terms = () => {
               recapitalize or purchase a new subscription to continue earning.
             </li>
           </ul>
+
           <h5>Minimum Contribution</h5>
           <ul>
             <li>
               The minimum deposit to activate a subscription is{" "}
-              <strong>$10 USD</strong>.
+              <strong>$25 USD</strong>.
             </li>
           </ul>
+
           <h5>Withdrawal Minimum</h5>
           <ul>
             <li>
@@ -107,7 +110,7 @@ const Terms = () => {
             </li>
             <li>
               Withdrawal requests will only be processed if you have an active
-              subscription at the time of the request. Without an active
+              subscription at the time of processing. Without an active
               subscription, your withdrawal will remain pending.
             </li>
           </ul>
@@ -166,6 +169,7 @@ const Terms = () => {
               bypass platform rules.
             </li>
           </ul>
+
           <h5>Consequences of Violation</h5>
           <p>
             If the system detects that you have earned more than 20% in any
@@ -281,9 +285,7 @@ const Terms = () => {
           <p>If a dispute arises, users agree to:</p>
           <ul>
             <li>Attempt resolution through YATiCare customer support.</li>
-            <li>
-              Submit complaints in writing before taking any external action.
-            </li>
+            <li>Submit complaints in writing.</li>
             <li>
               Accept that YATiCare's decision is final in cases where platform
               policies apply.
@@ -340,10 +342,6 @@ const Terms = () => {
           <h4>15. Contact Us</h4>
           <p>For inquiries, complaints, or support, reach out to:</p>
           <ul>
-            <li>
-              Email:{" "}
-              <a href="mailto:YATihelpdesk@gmail.com">YATihelpdesk@gmail.com</a>
-            </li>
             <li>
               Website:{" "}
               <a
