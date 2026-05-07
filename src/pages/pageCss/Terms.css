@@ -8,6 +8,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  color: #1a1a1a;
+  background-color: #f9f9f9;
 }
 
 /* Title */
@@ -15,13 +17,13 @@
 .Privacy h3 {
   font-size: 22px;
   font-weight: 700;
-  color: #fff;
+  color: #0b331d;
 }
 
 /* Last Updated */
 .last-updated {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #666;
   font-weight: 400;
   margin-top: -10px;
 }
@@ -30,10 +32,9 @@
 .intro {
   font-size: 14px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
+  color: #333;
   border-left: 3px solid #10b981;
-  padding-left: 14px;
-  background: rgba(16, 185, 129, 0.05);
+  background: rgba(16, 185, 129, 0.08);
   border-radius: 0 8px 8px 0;
   padding: 12px 14px;
 }
@@ -54,10 +55,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #fff;
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* Section headings */
@@ -65,7 +67,7 @@
 .Privacy ol li h4 {
   font-size: 15px;
   font-weight: 700;
-  color: #10b981;
+  color: #0b331d;
   margin: 0;
 }
 
@@ -74,7 +76,7 @@
 .Privacy ol li h5 {
   font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: #1a1a1a;
   margin: 6px 0 2px;
   text-transform: uppercase;
   letter-spacing: 0.4px;
@@ -85,7 +87,7 @@
 .Privacy ol li p {
   font-size: 13px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.75);
+  color: #444;
   margin: 0;
 }
 
@@ -103,11 +105,12 @@
 .Privacy ol li ul li {
   font-size: 13px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.75);
+  color: #444;
   background: none;
   border: none;
   border-radius: 0;
   padding: 0;
+  box-shadow: none;
   position: relative;
   padding-left: 14px;
 }
@@ -138,7 +141,7 @@
 /* Strong text */
 .Terms strong,
 .Privacy strong {
-  color: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
   font-weight: 600;
 }
 
@@ -146,8 +149,8 @@
 .agreement {
   font-size: 13px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.7);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #555;
+  border-top: 1px solid #e0e0e0;
   padding-top: 20px;
   margin-top: 10px;
   text-align: center;
