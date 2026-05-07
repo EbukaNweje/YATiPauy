@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { FaRegCopy, FaUsers, FaGift } from "react-icons/fa";
+import { FaUsers, FaGift } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { VscLiveShare } from "react-icons/vsc";
@@ -11,6 +11,7 @@ const RefPage = () => {
   const [referrals, setReferrals] = useState([]);
   const [refBonus, setRefBonus] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [withdrawing, setWithdrawing] = useState(false);
   const [totalreferredactivesubscribers, settotalreferredactivesubscribers] =
     useState(null);
   const reduxId = useSelector((state) => state?.YATipauy?.id);
@@ -21,7 +22,7 @@ const RefPage = () => {
     async function fetchUser() {
       try {
         const response = await axios.get(
-          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`,
         );
 
         console.log("response:", response);
@@ -32,35 +33,55 @@ const RefPage = () => {
         setRefBonus(response?.data?.data?.inviteCode?.bonusAmount || 0);
         setLoading(false);
       } catch (error) {
-        // console.log(error);
+        console.error("Error fetching user data:", error);
         setLoading(false);
       }
     }
     fetchUser();
-  }, [user, finalId]);
 
-  const fetchReferredSubscribers = () => {
-    const url = `https://yaticare-backend.onrender.com/api/user/totalreferredactivesubscribers/${finalId}`;
-    axios
-      .get(url)
-      .then((res) => {
-        settotalreferredactivesubscribers(
-          res?.data?.totalReferredActiveSubscribers
-        );
-        console.log("this is totalreferredactivesubscribers", res);
-        // setOneUserData(res?.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  useEffect(() => {
+    const fetchReferredSubscribers = () => {
+      const url = `https://yaticare-backend.onrender.com/api/user/totalreferredactivesubscribers/${finalId}`;
+      axios
+        .get(url)
+        .then((res) => {
+          settotalreferredactivesubscribers(
+            res?.data?.totalReferredActiveSubscribers,
+          );
+          console.log("this is totalreferredactivesubscribers", res);
+          // setOneUserData(res?.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
     fetchReferredSubscribers();
   }, [user, finalId]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);
     toast.success("Referral link copied!");
+  };
+
+  const handleWithdraw = async () => {
+    if (refBonus <= 0) {
+      toast.error("No referral bonus to withdraw.");
+      return;
+    }
+    setWithdrawing(true);
+    try {
+      await axios.post(
+        `https://yaticare-backend.onrender.com/api/user/withdraw-referral-bonus/${finalId}`,
+        { amount: refBonus },
+      );
+      toast.success("Referral bonus withdrawn successfully!");
+      setRefBonus(0); // Reset bonus after withdrawal
+      // Optionally refetch user data if needed
+    } catch (error) {
+      console.error("Withdrawal error:", error);
+      toast.error("Failed to withdraw referral bonus. Please try again.");
+    } finally {
+      setWithdrawing(false);
+    }
   };
 
   const formatCurrency = (val) => {
@@ -140,6 +161,16 @@ const RefPage = () => {
             </div>
             <h2>Referral Bonus</h2>
             <div className="big">{formatCurrency(refBonus)}</div>
+            <span className="text-[12px] text-muted text-center mb-4">
+              Minimum withdrawal amount: ${formatCurrency(50)}
+            </span>
+            <button
+              onClick={handleWithdraw}
+              disabled={withdrawing || refBonus <= 0}
+              className={`withdraw-btn ${refBonus <= 0 ? "disabled" : ""}`}
+            >
+              {withdrawing ? "Withdrawing..." : "Withdraw Bonus"}
+            </button>
           </div>
         </div>
 
@@ -193,7 +224,7 @@ const RefPage = () => {
                         }}
                       >
                         {formatDate(
-                          referral?.isSubscribed ? "Active" : "Inactive"
+                          referral?.isSubscribed ? "Active" : "Inactive",
                         )}
                       </td>
                     </tr>

@@ -11,8 +11,14 @@
 
 .refpage-root {
   background: var(--bg);
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
   padding: 48px 20px;
   color: var(--text);
 }
@@ -96,6 +102,26 @@
   cursor: pointer;
 }
 .ref-link-btn[disabled] {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.withdraw-btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--accent-600);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.withdraw-btn:hover:not(:disabled) {
+  background: var(--accent);
+}
+.withdraw-btn:disabled {
   background: #e5e7eb;
   color: #9ca3af;
   cursor: not-allowed;

@@ -1,45 +1,219 @@
 .Terms,
 .Privacy {
   width: 100%;
-  padding: 50px;
+  padding: 40px 50px;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-
-  h3 {
-    font-size: 20px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  h4,
-  span {
-    font-size: 14px;
-    text-decoration: none;
-  }
+  gap: 16px;
 }
 
+/* Title */
+.Terms h3,
+.Privacy h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Last Updated */
+.last-updated {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  margin-top: -10px;
+}
+
+/* Intro paragraph */
+.intro {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  border-left: 3px solid #10b981;
+  padding-left: 14px;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+}
+
+/* Ordered list */
 .Terms ol,
 .Privacy ol {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 24px;
+  padding-left: 0;
+  list-style: none;
+}
 
-  li {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+/* Each section */
+.Terms ol li,
+.Privacy ol li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+/* Section headings */
+.Terms ol li h4,
+.Privacy ol li h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #10b981;
+  margin: 0;
+}
+
+/* Sub-headings */
+.Terms ol li h5,
+.Privacy ol li h5 {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 6px 0 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Paragraphs */
+.Terms ol li p,
+.Privacy ol li p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+}
+
+/* Nested unordered lists */
+.Terms ol li ul,
+.Privacy ol li ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 16px;
+  list-style: none;
+}
+
+.Terms ol li ul li,
+.Privacy ol li ul li {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  position: relative;
+  padding-left: 14px;
+}
+
+.Terms ol li ul li::before,
+.Privacy ol li ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Links */
+.Terms a,
+.Privacy a {
+  color: #10b981;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.Terms a:hover,
+.Privacy a:hover {
+  text-decoration: underline;
+}
+
+/* Strong text */
+.Terms strong,
+.Privacy strong {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+}
+
+/* Agreement footer */
+.agreement {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .Terms,
+  .Privacy {
+    padding: 25px 20px;
+    gap: 14px;
+  }
+
+  .Terms h3,
+  .Privacy h3 {
     font-size: 18px;
-    font-weight: 500;
+  }
+
+  .Terms ol li,
+  .Privacy ol li {
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+
+  .Terms ol li h4,
+  .Privacy ol li h4 {
+    font-size: 14px;
   }
 }
 
-@media (min-width: 320px) and (max-width: 768px) {
+@media (max-width: 480px) {
   .Terms,
   .Privacy {
-    padding: 20px;
+    padding: 15px 12px;
+    gap: 12px;
+  }
+
+  .Terms h3,
+  .Privacy h3 {
+    font-size: 16px;
+  }
+
+  .Terms ol li,
+  .Privacy ol li {
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .Terms ol li h4,
+  .Privacy ol li h4 {
+    font-size: 13px;
+  }
+
+  .Terms ol li p,
+  .Terms ol li ul li,
+  .Privacy ol li p,
+  .Privacy ol li ul li {
+    font-size: 12px;
+  }
+
+  .intro {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .agreement {
+    font-size: 12px;
   }
 }
