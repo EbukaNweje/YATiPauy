@@ -22,7 +22,7 @@ const Login = () => {
     const data = { password: password, email: email };
     // console.log('Received values of form: ', values)
     try {
-      // Make an API request to your backend to create a new user
+      // Make an API request to your backend to create a new users
       const response = await axios.post(
         "https://yaticare-backend.onrender.com/api/auth/login",
         data,
