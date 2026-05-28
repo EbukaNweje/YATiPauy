@@ -5,6 +5,26 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { logout } from "../pages/Global/Slice";
 
+const isAdminOrSuperAdmin = (userRecord) => {
+  const roleCandidates = [
+    userRecord?.role,
+    userRecord?.userRole,
+    userRecord?.userType,
+    userRecord?.user?.role,
+    userRecord?.user?.userRole,
+    userRecord?.user?.userType,
+  ];
+
+  const roleText = roleCandidates.filter(Boolean).join(" ").toLowerCase();
+  const isFlaggedAdmin =
+    userRecord?.isAdmin === true ||
+    userRecord?.isSuperAdmin === true ||
+    userRecord?.user?.isAdmin === true ||
+    userRecord?.user?.isSuperAdmin === true;
+
+  return isFlaggedAdmin || /(admin|superadmin|supperadmin)/i.test(roleText);
+};
+
 const PrivateRoute = () => {
   const { isLoggedIn, user } = useSelector((state) => state.YATipauy || {});
   const reduxId = useSelector((state) => state?.YATipauy?.id);
@@ -29,13 +49,17 @@ const PrivateRoute = () => {
 
       try {
         const res = await axios.get(
-          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
+          `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`,
         );
         const data = res?.data?.data;
         if (!mounted) return;
         setUserData(data);
 
-        if (data?.status === "blocked" || data?.status === "banned") {
+        const isBlockedUser =
+          data?.status === "blocked" || data?.status === "banned";
+        const canBypassBlock = isAdminOrSuperAdmin(data);
+
+        if (isBlockedUser && !canBypassBlock) {
           dispatch(logout());
           toast.error("Your account has been blocked. Please contact support.");
           navigate("/", { replace: true });
@@ -80,7 +104,12 @@ const PrivateRoute = () => {
 
   if (!isLoggedIn) return <Navigate to="/" replace />;
   if (checking) return null;
-  if (userData?.status === "blocked" || userData?.status === "banned") {
+
+  const isBlockedUser =
+    userData?.status === "blocked" || userData?.status === "banned";
+  const canBypassBlock = isAdminOrSuperAdmin(userData);
+
+  if (isBlockedUser && !canBypassBlock) {
     return <Navigate to="/" replace />;
   }
 
