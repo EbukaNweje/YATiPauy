@@ -8,10 +8,10 @@ const Terms = () => {
       <h4 className="last-updated">Last Updated: 1st May 2026</h4>
 
       <p className="intro">
-        These Terms and Conditions ("Terms") govern your access to and use of
-        YATiCare's platform, services, and financial programs. By using our
-        platform, you agree to these Terms. If you do not agree, please refrain
-        from using our services.
+        These Terms and Conditions (&quot;Terms&quot;) govern your access to and
+        use of YATiCare&apos;s platform, services, and financial programs. By
+        using our platform, you agree to these Terms. If you do not agree,
+        please refrain from using our services.
       </p>
 
       <ol>
@@ -29,54 +29,117 @@ const Terms = () => {
           <h4>2. Eligibility</h4>
           <p>To use YATiCare, you must:</p>
           <ul>
-            <li>Be at least 18 years old or meet the legal financial age in your country.</li>
-            <li>Provide accurate and verifiable information when registering.</li>
-            <li>Comply with all local financial regulations applicable to your country of residence.</li>
+            <li>
+              Be at least 18 years old or meet the legal financial age in your
+              country.
+            </li>
+            <li>
+              Provide accurate and verifiable information when registering.
+            </li>
+            <li>
+              Comply with all local financial regulations applicable to your
+              country of residence.
+            </li>
           </ul>
           <p>
-            YATiCare reserves the right to verify your identity and eligibility before granting access to certain financial services.
+            YATiCare reserves the right to verify your identity and eligibility
+            before granting access to certain financial services.
           </p>
         </li>
 
         <li>
-          <h4>3. Account Registration & Security</h4>
+          <h4>3. Account Registration &amp; Security</h4>
           <ul>
-            <li>Users must provide valid personal or business information during registration.</li>
-            <li>You are responsible for maintaining account security (e.g., passwords, financial details).</li>
-            <li>Unauthorized access to another user's account is strictly prohibited.</li>
+            <li>
+              Users must provide valid personal or business information during
+              registration.
+            </li>
+            <li>
+              You are responsible for maintaining account security (e.g.,
+              passwords, financial details).
+            </li>
+            <li>
+              Unauthorized access to another user&apos;s account is strictly
+              prohibited.
+            </li>
           </ul>
-          <p>If you suspect fraudulent activity on your account, contact support immediately.</p>
+          <p>
+            If you suspect fraudulent activity on your account, contact support
+            immediately.
+          </p>
         </li>
 
         <li>
-          <h4>4. Contributions, Subscriptions & Returns</h4>
+          <h4>4. Contributions, Subscriptions &amp; Returns</h4>
           <p>
-            YATiCare offers a community-driven financial model where members contribute funds and earn daily returns based on active subscriptions. Each member must activate only one subscription at a time. Multiple subscriptions are highly prohibited.
+            YATiCare offers a community-driven financial model where members
+            contribute funds and earn daily returns based on active
+            subscriptions. Each member must activate only one subscription at a
+            time. Multiple subscriptions are highly prohibited.
           </p>
 
           <h5>Active Subscription Requirement</h5>
           <ul>
-            <li>Every member with an active subscription is entitled to <strong>20% daily income</strong> (inclusive of capital and profit).</li>
-            <li>Over a 6-day cycle, this amounts to a total of <strong>120%</strong> (100% capital recovery plus 20% net profit).</li>
-            <li>Once the 6-day cycle is completed, you are expected to recapitalize or purchase a new subscription to continue earning.</li>
+            <li>
+              Every member with an active subscription is entitled to 20% daily
+              income (inclusive of capital and profit).
+            </li>
+            <li>
+              Over a 6-day cycle, this amounts to a total of 120% (100% capital
+              recovery plus 20% net profit).
+            </li>
+            <li>
+              Once the 6-day cycle is completed, you are expected to
+              recapitalize or purchase a new subscription to continue earning.
+            </li>
           </ul>
 
           <h5>Minimum Contribution</h5>
           <ul>
-            <li>The minimum deposit to activate a subscription is <strong>$25 USD</strong>.</li>
+            <li>The minimum deposit to activate a subscription is $25 USD.</li>
           </ul>
 
           <h5>Withdrawal Minimum</h5>
           <ul>
-            <li>The minimum withdrawable amount is <strong>$50 USD</strong>.</li>
-            <li>Withdrawal requests will only be processed if you have an active subscription at the time of processing. Without an active subscription, your withdrawal will remain pending.</li>
+            <li>The minimum withdrawable amount is $50 USD.</li>
+            <li>
+              Withdrawal requests will only be processed if you have an active
+              subscription at the time of processing. Without an active
+              subscription, your withdrawal will remain pending.
+            </li>
+          </ul>
+
+          <h5>Mid-Cycle Withdrawal Restriction</h5>
+          <ul>
+            <li>
+              The ongoing 6-day trading cycle must be concluded before any
+              withdrawal can be processed. Withdrawals initiated midway through
+              an active cycle (when the initial subscription is still running)
+              may be automatically reversed by the system.
+            </li>
+            <li>
+              Reason: Our trading engine relies on a stable capital base to
+              execute daily trades consistently. Interrupting a cycle by
+              withdrawing funds mid-cycle can lead to incomplete trade
+              execution, imbalance in profit distribution, and potential
+              disruption of returns for other members. To protect the integrity
+              of the system and ensure fair earnings for all, withdrawals are
+              only permitted after the 6-day cycle has fully completed.
+            </li>
+            <li>
+              At the end of each full cycle, withdrawals will be successfully
+              processed as long as the member has an active subscription at that
+              time.
+            </li>
           </ul>
         </li>
 
         <li>
           <h4>5. Mandatory Testimony After Withdrawal</h4>
           <p>
-            To maintain transparency and encourage community growth, all members who successfully withdraw funds are mandated to testify about their withdrawal experience.
+            To maintain transparency and encourage community growth, all members
+            who successfully withdraw funds are mandated to testify about their
+            withdrawal experience.
           </p>
           <p>Testimony must be shared in:</p>
           <ul>
@@ -85,100 +148,205 @@ const Terms = () => {
             <li>The Testimony section of your member backoffice (dashboard)</li>
           </ul>
           <p>
-            Failure to testify after a withdrawal may result in your next withdrawal request being delayed or forfeited. This policy ensures that success stories inspire others and that the platform remains credible.
+            Failure to testify after a withdrawal may result in your next
+            withdrawal request being delayed or forfeited. This policy ensures
+            that success stories inspire others and that the platform remains
+            credible.
           </p>
         </li>
 
         <li>
-          <h4>6. Account Liquidation (Full Withdrawal Without Active Subscription)</h4>
+          <h4>
+            6. Account Liquidation (Full Withdrawal Without Active Subscription)
+          </h4>
           <p>
-            If you choose to liquidate your account or withdraw your entire funds from the system, and as a result you will no longer have an active subscription, you must notify YATiCare management in writing at least three (3) months in advance.
+            If you choose to liquidate your account or withdraw your entire
+            funds from the system, and as a result you will no longer have an
+            active subscription, you must notify YATiCare management in writing
+            at least three (3) months in advance.
           </p>
           <ul>
-            <li>The written notice must be sent to YatiCare Official with the subject line “Account Liquidation Notice”.</li>
-            <li>The notice must include your full name, registered email address, and the intended date of full withdrawal.</li>
+            <li>
+              The written notice must be sent to YatiCare Official with the
+              subject line “Account Liquidation Notice”.
+            </li>
+            <li>
+              The notice must include your full name, registered email address,
+              and the intended date of full withdrawal.
+            </li>
           </ul>
           <p>Important restrictions after applying for liquidation:</p>
           <ul>
-            <li>You are not permitted to make any further deposits after submitting a liquidation notice.</li>
-            <li>You are not permitted to request any withdrawals after submitting a liquidation notice (doing so will invalidate your liquidation application).</li>
-            <li>You may not engage in further trades or recapitalization once liquidation has been applied for. Your account will be frozen for trading activity.</li>
-            <li>If you violate any of these restrictions, your liquidation notice will be automatically canceled.</li>
+            <li>
+              You are not permitted to make any further deposits after
+              submitting a liquidation notice.
+            </li>
+            <li>
+              You are not permitted to request any withdrawals after submitting
+              a liquidation notice (doing so will invalidate your liquidation
+              application).
+            </li>
+            <li>
+              You may not engage in further trades or recapitalization once
+              liquidation has been applied for. Your account will be frozen for
+              trading activity.
+            </li>
+            <li>
+              If you violate any of these restrictions, your liquidation notice
+              will be automatically canceled.
+            </li>
           </ul>
           <p>Processing of liquidation:</p>
           <ul>
-            <li>After the 3-month notice period has elapsed, your liquidation will be processed.</li>
-            <li>At the time of processing, your total capital will be refunded after deducting all withdrawals you have made from the platform.</li>
-            <li>If you have withdrawn more than your total capital deposited, you are not eligible to apply for liquidation. Any such application will be automatically denied.</li>
+            <li>
+              After the 3-month notice period has elapsed, your liquidation will
+              be processed.
+            </li>
+            <li>
+              At the time of processing, your total capital will be refunded
+              after deducting all withdrawals you have made from the platform.
+            </li>
+            <li>
+              If you have withdrawn more than your total capital deposited, you
+              are not eligible to apply for liquidation. Any such application
+              will be automatically denied.
+            </li>
           </ul>
           <p>
-            This policy ensures orderly management of community funds and protects the interests of all members.
+            This policy ensures orderly management of community funds and
+            protects the interests of all members.
           </p>
         </li>
 
         <li>
-          <h4>7. Prohibited Activities & Fraudulent Manipulation</h4>
-          <p>To ensure fairness and integrity, the following are strictly prohibited:</p>
+          <h4>7. Prohibited Activities &amp; Fraudulent Manipulation</h4>
+          <p>
+            To ensure fairness and integrity, the following are strictly
+            prohibited:
+          </p>
           <ul>
-            <li>Manipulation of daily returns – Any activity that results in earning more than the prescribed 20% daily (e.g., 40%, 60%, or 100% in a single day) is considered a violation.</li>
-            <li>Exploiting or manipulating the system for unfair financial gain.</li>
-            <li>Using multiple accounts or irregular subscription patterns to bypass platform rules.</li>
+            <li>
+              Manipulation of daily returns – Any activity that results in
+              earning more than the prescribed 20% daily (e.g., 40%, 60%, or
+              100% in a single day) is considered a violation.
+            </li>
+            <li>
+              Exploiting or manipulating the system for unfair financial gain.
+            </li>
+            <li>
+              Using multiple accounts or irregular subscription patterns to
+              bypass platform rules.
+            </li>
           </ul>
           <p>Consequences of Violation</p>
           <ul>
-            <li>Your account may be suspended or permanently blocked.</li>
-            <li>All funds and benefits obtained through manipulation may be forfeited.</li>
-            <li>You may be required to follow a reinstatement process (including zeroing your balance and restarting with a placeholder deposit).</li>
+            <li>
+              If the system detects that you have earned more than 20% in any
+              given day through manipulation or malicious activity on your
+              account, or you registered with multiple accounts:
+            </li>
+            <li>Your account(s) may be suspended or permanently blocked.</li>
+            <li>
+              All funds and benefits obtained through manipulation may be
+              forfeited.
+            </li>
+            <li>
+              You may be required to follow a reinstatement process (including
+              zeroing your balance and restarting with a placeholder deposit).
+            </li>
           </ul>
           <p>
-            YATiCare reserves the right to take legal action in cases of severe or repeated fraud.
+            YATiCare reserves the right to take legal action in cases of severe
+            or repeated fraud.
           </p>
         </li>
 
         <li>
-          <h4>8. Fees & Charges</h4>
+          <h4>8. Fees &amp; Charges</h4>
           <ul>
-            <li>YATiCare charges a <strong>15% withdrawal fee</strong> (10% Australian GST + 5% Community Empowerment Fee).</li>
-            <li>All applicable fees will be clearly displayed before you confirm a transaction.</li>
-            <li>Users are responsible for any additional charges imposed by financial institutions (e.g., bank fees, currency conversion).</li>
+            <li>
+              YATiCare charges a 15% withdrawal fee (10% Australian GST + 5%
+              Community Empowerment Fee).
+            </li>
+            <li>
+              All applicable fees will be clearly displayed before you confirm a
+              transaction.
+            </li>
+            <li>
+              Users are responsible for any additional charges imposed by
+              financial institutions (e.g., bank fees, currency conversion).
+            </li>
           </ul>
         </li>
 
         <li>
           <h4>9. Risk Disclaimer</h4>
           <p>
-            While YATiCare strives for financial growth, we do not guarantee profits or returns. Users must acknowledge that:
+            While YATiCare strives for financial growth, we do not guarantee
+            profits or returns. Users must acknowledge that:
           </p>
           <ul>
             <li>Investments and contributions carry inherent risks.</li>
-            <li>Returns may fluctuate based on trading performance and market conditions.</li>
-            <li>YATiCare is not liable for financial losses resulting from user decisions.</li>
+            <li>
+              Returns may fluctuate based on trading performance and market
+              conditions.
+            </li>
+            <li>
+              YATiCare is not liable for financial losses resulting from user
+              decisions.
+            </li>
           </ul>
-          <p>Users should conduct their own due diligence before participating.</p>
+          <p>
+            Users should conduct their own due diligence before participating.
+          </p>
         </li>
 
         <li>
           <h4>10. No Litigation Policy</h4>
           <p>By using YATiCare, you agree that:</p>
           <ul>
-            <li>You waive the right to initiate legal action against YATiCare or its affiliates regarding any losses, delays, or uncertainties arising from platform participation.</li>
-            <li>Any disputes must be resolved through internal resolution mechanisms provided by YATiCare.</li>
-            <li>YATiCare will not be held legally responsible for market fluctuations, economic conditions, or unforeseen events affecting platform performance.</li>
+            <li>
+              You waive the right to initiate legal action against YATiCare or
+              its affiliates regarding any losses, delays, or uncertainties
+              arising from platform participation.
+            </li>
+            <li>
+              Any disputes must be resolved through internal resolution
+              mechanisms provided by YATiCare.
+            </li>
+            <li>
+              YATiCare will not be held legally responsible for market
+              fluctuations, economic conditions, or unforeseen events affecting
+              platform performance.
+            </li>
           </ul>
           <p>
-            Users expressly agree that participation is at their own risk, and YATiCare holds no legal obligation for financial outcomes.
+            Users expressly agree that participation is at their own risk, and
+            YATiCare holds no legal obligation for financial outcomes.
           </p>
         </li>
 
         <li>
-          <h4>11. User Conduct & Prohibited Activities (General)</h4>
+          <h4>11. User Conduct &amp; Prohibited Activities (General)</h4>
           <p>To ensure a fair and secure platform, users must not:</p>
           <ul>
-            <li>Engage in fraudulent transactions or misrepresent financial details.</li>
-            <li>Use the platform for illegal activities, including money laundering.</li>
-            <li>Violate the specific subscription, withdrawal, liquidation, or testimony rules outlined in Sections 4, 5, 6, and 7.</li>
+            <li>
+              Engage in fraudulent transactions or misrepresent financial
+              details.
+            </li>
+            <li>
+              Use the platform for illegal activities, including money
+              laundering.
+            </li>
+            <li>
+              Violate the specific subscription, withdrawal, liquidation, or
+              testimony rules outlined in Sections 4, 5, 6, and 7.
+            </li>
           </ul>
-          <p>Violating these rules may result in account suspension, permanent termination, or legal action.</p>
+          <p>
+            Violating these rules may result in account suspension, permanent
+            termination, or legal action.
+          </p>
         </li>
 
         <li>
@@ -187,32 +355,55 @@ const Terms = () => {
           <ul>
             <li>Attempt resolution through YATiCare customer support.</li>
             <li>Submit complaints in writing.</li>
-            <li>Accept that YATiCare’s decision is final in cases where platform policies apply.</li>
+            <li>
+              Accept that YATiCare&apos;s decision is final in cases where
+              platform policies apply.
+            </li>
           </ul>
         </li>
 
         <li>
-          <h4>13. Privacy & Data Protection</h4>
+          <h4>13. Privacy &amp; Data Protection</h4>
           <ul>
-            <li>YATiCare collects and processes personal data in accordance with our Privacy Policy.</li>
-            <li>We do not share user data with third parties without consent, except as required by law.</li>
+            <li>
+              YATiCare collects and processes personal data in accordance with
+              our Privacy Policy.
+            </li>
+            <li>
+              We do not share user data with third parties without consent,
+              except as required by law.
+            </li>
           </ul>
           <p>For more details, review our Privacy Policy.</p>
         </li>
 
         <li>
-          <h4>14. Termination & Account Closure</h4>
+          <h4>14. Termination &amp; Account Closure</h4>
           <ul>
-            <li>Users may close their accounts at any time by submitting a request, provided they follow the Account Liquidation notice period outlined in Section 6.</li>
-            <li>YATiCare may suspend or terminate accounts that violate these Terms or engage in fraudulent activities.</li>
+            <li>
+              Users may close their accounts at any time by submitting a
+              request, provided they follow the Account Liquidation notice
+              period outlined in Section 6.
+            </li>
+            <li>
+              YATiCare may suspend or terminate accounts that violate these
+              Terms or engage in fraudulent activities.
+            </li>
           </ul>
         </li>
 
         <li>
           <h4>15. Amendments to These Terms</h4>
           <ul>
-            <li>YATiCare reserves the right to update or modify these Terms at any time, without prior notice.</li>
-            <li>Users may or may not be notified of significant changes via email or platform announcements, as changes will be clearly visible under the Terms and Conditions segment.</li>
+            <li>
+              YATiCare reserves the right to update or modify these Terms at any
+              time, without prior notice.
+            </li>
+            <li>
+              Users may or may not be notified of significant changes via email
+              or platform announcements, as changes will be clearly visible
+              under the Terms and Conditions segment.
+            </li>
           </ul>
         </li>
 
@@ -220,13 +411,23 @@ const Terms = () => {
           <h4>16. Contact Us</h4>
           <p>For inquiries, complaints, or support, reach out to:</p>
           <ul>
-            <li>Website: <a href="https://www.yaticare.com" target="_blank" rel="noreferrer">www.yaticare.com</a></li>
+            <li>
+              Website:{" "}
+              <a
+                href="https://www.yaticare.com"
+                target="_blank"
+                rel="noreferrer"
+              >
+                www.yaticare.com
+              </a>
+            </li>
           </ul>
         </li>
       </ol>
 
       <p className="agreement">
-        By using YATiCare, you acknowledge and agree to these Terms & Conditions as last updated on <strong>1st May 2026</strong>.
+        By using YATiCare, you acknowledge and agree to these Terms &amp;
+        Conditions as last updated on <strong>1st May 2026</strong>.
       </p>
     </div>
   );
