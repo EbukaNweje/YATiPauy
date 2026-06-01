@@ -61,8 +61,8 @@ const Withdraw = () => {
       toast.error("Please enter bank details before proceeding.");
       return;
     }
-    if (selectedAmount < 40) {
-      toast.error("Minimum withdrawal amount is $40.00");
+    if (selectedAmount < 30) {
+      toast.error("Minimum withdrawal amount is $30.00");
       return;
     }
     setShowConfirmationPopup(true);
