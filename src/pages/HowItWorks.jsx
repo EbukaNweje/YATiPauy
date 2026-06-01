@@ -37,7 +37,7 @@ const HowItWorks = () => {
         <div className="info-box">
           <h3>💵 Withdrawals</h3>
           <p>
-            Minimum withdrawal: <strong>$10</strong>.
+            Minimum withdrawal: <strong>$40</strong>.
           </p>
         </div>
       </div>
