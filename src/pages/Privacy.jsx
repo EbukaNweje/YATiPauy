@@ -29,7 +29,8 @@ const Privacy = () => {
             (for verification).{" "}
           </span>
           <span>
-            ✔ Payment details, banking information, and transaction history.{" "}
+            ✔ Payment details, banking information, and transaction
+            history.{" "}
           </span>
           <span>✔ Business or financial details (if applicable). </span>
           <h4>b. Automatic Information (Collected by Us) </h4>
@@ -87,7 +88,8 @@ const Privacy = () => {
           <p>
             However, while we take security seriously, no online platform is
             100% secure. Users must also take precautions, such as using strong
-            passwords and enabling two-factor authentication (if available).{" "}
+            passwords and enabling two-factor authentication (if
+            available).{" "}
           </p>
         </li>
 
@@ -96,7 +98,8 @@ const Privacy = () => {
           <h4>We may share your data with: </h4>
           <span>a. Trusted Third Parties (Only When Necessary)</span>
           <span>
-            🔹 Payment processors and financial institutions for transactions.{" "}
+            🔹 Payment processors and financial institutions for
+            transactions.{" "}
           </span>
           <span>🔹 Identity verification and fraud prevention services. </span>
           <span>🔹 Legal or regulatory authorities if required by law. </span>
@@ -141,8 +144,8 @@ const Privacy = () => {
             messages.{" "}
           </span>
           <p>
-            To exercise any of these rights, contact us at
-            [YATihelpdesk@gmail.com].{" "}
+            To exercise any of these rights, contact us at [+32460218110,
+            +491636219338].{" "}
           </p>
         </li>
 
@@ -179,7 +182,8 @@ const Privacy = () => {
           <h4>By using YATiCare, you agree that: </h4>
           <span>
             ✔ You cannot initiate legal claims against YATiCare regarding data
-            handling unless there is a clear breach of data protection laws.{" "}
+            handling unless there is a clear breach of data protection
+            laws.{" "}
           </span>
           <span>
             ✔ Any privacy concerns should be resolved internally through
@@ -198,7 +202,7 @@ const Privacy = () => {
         <li>
           11. Contact Us
           <h4>For privacy-related inquiries or concerns, reach out to: </h4>
-          <span>📩 Email: [YATihelpdesk@gmail.com] </span>
+          {/* <span>📩 Email: [YATihelpdesk@gmail.com] </span> */}
           <span>🌍 Website: [www.yaticare.com] </span>
           <p>
             By using YATiCare, you acknowledge and agree to this Privacy Policy.

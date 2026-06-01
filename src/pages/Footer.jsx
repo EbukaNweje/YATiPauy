@@ -54,7 +54,7 @@ const Footer = () => {
               <IoLogoLinkedin style={{ color: "white", fontSize: 17, marginLeft: 10 }} />
             </div> */}
             <p>
-              Support email:{" "}
+              {/* Support email:{" "}
               <a href="mailto:yatihelpdesk@gmail.com ">
                 yatihelpdesk@gmail.com{" "}
               </a>{" "}
@@ -62,7 +62,7 @@ const Footer = () => {
               Email:{" "}
               <a href="mailto:yaticares.hq@gmail.com">
                 yaticares.hq@gmail.com
-              </a>{" "}
+              </a>{" "} */}
               <br />
               +32460218110 <br />
               +491636219338
