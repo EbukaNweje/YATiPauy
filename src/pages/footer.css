@@ -1,84 +1,172 @@
 /* 🌍 Global Footer Styles */
 footer {
-    background: #222;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-  }
-  
-  .footerbody {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* 📌 Footer Wrapper */
-  .footerwrapper {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #444;
-  }
-  
-  /* 📌 Footer Content Boxes */
-  .footercontent {
-    flex: 1;
-    min-width: 200px;
-    text-align: left;
-  }
-  
-  .footercontent h3,
-  .footercontent h4 {
-    margin-bottom: 10px;
-    font-size: 18px;
-  }
-  
-  .footercontent p {
-    font-size: 14px;
-    color: #ccc;
-    line-height: 1.5;
-  }
-  
-  .footercontent a {
-    color: #ffffff;
-    text-decoration: none;
-  }
-  
-  .footercontent a:hover {
-    text-decoration: underline;
-  }
-  
-  /* 📌 Social Icons */
-  .social-icons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  /* 📌 Footer Bottom */
-  .footeraddress {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #ffffff;
+  background: #222;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.footerbody {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* 📌 Footer Wrapper */
+.footerwrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #444;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 📌 Footer Content Boxes */
+.footercontent {
+  flex: 1;
+  min-width: 150px;
+  text-align: left;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.footercontent h3,
+.footercontent h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  word-break: break-word;
+}
+
+.footercontent p {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.5;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.footercontent a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footercontent a:hover {
+  text-decoration: underline;
+}
+
+/* 📌 Social Icons */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+/* 📌 Footer Bottom */
+.footeraddress {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ffffff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.footeraddress p {
+  color: #ccc;
+  word-break: break-word;
+}
+
+/* 📌 Responsive Design */
+@media (max-width: 768px) {
+  footer {
+    padding: 15px 0;
   }
 
-  .footeraddress p {
-    color: #ccc;
+  .footerbody {
+    padding: 15px 10px;
+    overflow: hidden;
   }
-  
-  /* 📌 Responsive Design */
-  @media (max-width: 768px) {
-    .footerwrapper {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .footercontent {
-      text-align: center;
-    }
+
+  .footerwrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding-bottom: 15px;
   }
-  
+
+  .footercontent {
+    text-align: center;
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .footercontent h3,
+  .footercontent h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .footercontent p {
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .social-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footeraddress {
+    margin-top: 15px;
+    font-size: 12px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  footer {
+    padding: 10px 0;
+  }
+
+  .footerbody {
+    padding: 10px 8px;
+    max-width: 100%;
+  }
+
+  .footerwrapper {
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+
+  .footercontent {
+    min-width: 0;
+  }
+
+  .footercontent h3,
+  .footercontent h4 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .footercontent p {
+    font-size: 11px;
+  }
+
+  .footeraddress {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+}

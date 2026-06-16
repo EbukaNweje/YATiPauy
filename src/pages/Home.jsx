@@ -76,14 +76,11 @@ const Home = () => {
           `https://yaticare-backend.onrender.com/api/user/userdata/${currentUserId}`,
         )
         .then((response) => {
-          console.log("object", response.data.data.userTestimonial);
           if (!response.data.data.userTestimonial) {
             // User has testimonials, do not show modal
             setIsTestimonialModalOpen(false);
-            // console.log("User has testimonials, not showing modal");
           } else {
             // No testimonials, show modal
-            // console.log("Opening testimonial modal");
             setIsTestimonialModalOpen(true);
           }
         })

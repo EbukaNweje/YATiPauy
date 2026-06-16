@@ -25,7 +25,6 @@ const RefPage = () => {
           `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`,
         );
 
-        console.log("response:", response);
 
         const invited = response?.data?.data?.inviteCode?.userInvited || [];
         setReferrals(invited);
@@ -47,11 +46,9 @@ const RefPage = () => {
           settotalreferredactivesubscribers(
             res?.data?.totalReferredActiveSubscribers,
           );
-          console.log("this is totalreferredactivesubscribers", res);
           // setOneUserData(res?.data.data);
         })
         .catch((error) => {
-          console.log(error);
         });
     };
     fetchReferredSubscribers();

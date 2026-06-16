@@ -15,7 +15,6 @@ const ChangePhone = () => {
   });
 
   const changeNo = async () => {
-    console.log("userInput", user.user._id);
 
     try {
       setLoading(true);

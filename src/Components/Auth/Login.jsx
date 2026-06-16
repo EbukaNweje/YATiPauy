@@ -20,7 +20,6 @@ const Login = () => {
     const email = values.email;
     const password = values.password;
     const data = { password: password, email: email };
-    // console.log('Received values of form: ', values)
     try {
       // Make an API request to your backend to create a new users
       const response = await axios.post(
@@ -39,7 +38,6 @@ const Login = () => {
         Nav("/dashboard");
       }
     } catch (error) {
-      console.log("this is error", error);
       setLoading(false);
       toast.error(error?.response?.data?.message || error?.response?.data);
     }

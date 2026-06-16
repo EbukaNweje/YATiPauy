@@ -24,7 +24,6 @@ const Withdraw = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(userData);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -82,7 +81,6 @@ const Withdraw = () => {
       toast.error("Please enter your 4-digit PIN.");
       return;
     }
-    // console.log({ userId: user.user._id });
 
     try {
       const url =
@@ -101,7 +99,6 @@ const Withdraw = () => {
         userId: user.user._id,
         withdrawalDate: date,
       });
-      console.log(res);
       toast.success(res.data.message);
       setShowPinPopup(false);
       setSelectedAmount("");

@@ -75,7 +75,6 @@ const Vip = () => {
     }
   };
 
-  // console.log("availablePlans", availablePlans);
 
   useEffect(() => {
     fetchSubscriptions();
@@ -87,7 +86,6 @@ const Vip = () => {
     return <p className="no-products">No products available</p>;
   }
 
-  // console.log("userData", userData);
 
   const handelRecapitalized = async (subscriptionId) => {
     setRecapitalizedLoading(true);
@@ -95,7 +93,6 @@ const Vip = () => {
       const response = await axios.patch(
         `https://yaticare-backend.onrender.com/api/recycleSubscription/${subscriptionId}`,
       );
-      console.log("subscriptionId", response);
       toast.success(
         response?.data?.message ||
           "Subscription Recapitalize and restarted successfully",
@@ -127,7 +124,6 @@ const Vip = () => {
           newAmount: selectedPlan.maximumDeposit,
         },
       );
-      console.log("Upgrade response", response);
       toast.success(response?.data?.message || "Plan upgraded successfully!");
       setShowDialog(false);
       setShowUpgradeStep(false);
@@ -163,7 +159,6 @@ const Vip = () => {
           {userData.subscriptions.reverse().map((subscriptionData) => {
             {
               /* {
-              console.log("this is the subscriptionData", subscriptionData);
             } */
             }
             return (

@@ -29,7 +29,6 @@ const authSlice = createSlice({
 
     userId: (state, { payload }) => {
       state.id = payload;
-      console.log("User id:", payload);
     },
   },
 });

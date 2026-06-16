@@ -43,7 +43,6 @@ const Profile = () => {
         );
         const data = response?.data?.data;
         setUserInfo(data);
-        // console.log("FGF", data);
       } catch (error) {
         // console.error("Error fetching user data:", error);
       }

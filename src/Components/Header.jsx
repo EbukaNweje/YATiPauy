@@ -52,12 +52,10 @@ const Header = () => {
     };
   }, [userData]);
 
-  // console.log("user from header:", reduxId);
 
   // const id = useSelector((state) => state.id);
 
   const finalId = user?.user?._id || reduxId;
-  // console.log("user from header:", finalId);
 
   const formatCurrency = (val) => {
     const n = Number(val);
@@ -75,14 +73,12 @@ const Header = () => {
       );
       const data = response?.data?.data;
       setUserData(data);
-      // console.log(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
 
   // safe debug - avoid accessing accountBalance on null
-  // console.log("header userData:", userData);
 
   const copy = (refLink) => {
     navigator.clipboard.writeText(refLink);

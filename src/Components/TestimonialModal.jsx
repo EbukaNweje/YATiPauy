@@ -26,7 +26,6 @@ const TestimonialModal = ({ isOpen, onClose, userId }) => {
         },
       );
 
-      console.log("Testimonial submitted:", response.data);
       toast.success("Thank you for your testimonial!");
       setTestimonial("");
       onClose();

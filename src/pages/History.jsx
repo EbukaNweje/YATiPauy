@@ -38,7 +38,6 @@ const History = () => {
           `https://yaticare-backend.onrender.com/api/history/getallhistory/${finalId}`,
         );
         setGetAllHistory(response?.data?.data || []);
-        console.log("setGetAllHistory", response?.data?.data);
       } catch (error) {
         console.error("Error fetching history:", error);
       }
@@ -61,10 +60,6 @@ const History = () => {
     (txn) => txn.transactionType === "recycl",
   );
 
-  console.log(
-    "subscriptionRecapitalizeddHistory",
-    subscriptionRecapitalizeddHistory,
-  );
   /* ================= MERGE RecapitalizedD INTO SUBSCRIPTIONS ================= */
   const mergedSubscriptionsHistory = [
     ...subscriptionsHistory,

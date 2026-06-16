@@ -45,7 +45,9 @@
   width: 280px;
   min-height: 200px;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .plan-box:hover {
@@ -100,7 +102,9 @@
   font-weight: 600;
   width: 100%;
   border-radius: 8px;
-  transition: background 0.25s ease, transform 0.15s ease;
+  transition:
+    background 0.25s ease,
+    transform 0.15s ease;
 }
 
 .subscribe-btn {
@@ -244,6 +248,25 @@
   }
 }
 
+/* Tablet (768px to 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .plan-container {
+    width: 100%;
+    padding: 0;
+    gap: 20px;
+  }
+
+  .plan-box {
+    width: 100%;
+    max-width: 85%;
+    padding: 20px;
+  }
+
+  .amount-options div {
+    flex: 1 1 48%;
+  }
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .plan-container {
@@ -254,6 +277,7 @@
   .plan-box {
     width: 100%;
     max-width: 90%;
+    padding: 16px;
   }
 
   .amount-options div {

@@ -33,6 +33,7 @@ import NotFound from "./Components/NotFound";
 import GalleryPage from "./pages/GalleryPage";
 import AdminLoginAsUser from "./pages/Admin/LoginAsUser";
 import TestimonialPage from "./pages/Testimonial";
+import Chat from "./pages/Chat";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -94,6 +95,7 @@ const App = () => {
               element: <Layout />, // Layout will render its own nested children
               children: [
                 { path: "", element: <Home /> }, // when visiting /dashboard
+                { path: "Chat", element: <Chat /> },
                 { path: "Products", element: <ProductS /> },
                 { path: "recharge", element: <Recharge /> },
                 { path: "deposit", element: <Deposit /> },

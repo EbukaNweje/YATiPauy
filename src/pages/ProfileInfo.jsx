@@ -10,7 +10,6 @@ function ProfileInfo() {
   const [UsersData, setUsersData] = useState([]);
   const reduxId = useSelector((state) => state?.YATipauy?.id);
   const finalId = user?.user?._id || reduxId;
-  // console.log("UsersData", UsersData);
 
   const [details, setDetails] = useState({
     UserName: UsersData.userName || "",
@@ -35,9 +34,7 @@ function ProfileInfo() {
   //       `https://yaticare-backend.onrender.com/api/user/updateuser/${user.user._id}`,
   //       details
   //     );
-  //     console.log(response);
   //   } catch (error) {
-  //     console.log(error);
   //   }
   // };
 
@@ -48,10 +45,8 @@ function ProfileInfo() {
         const response = await axios.get(
           `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
         );
-        // console.log("FGF", response?.data?.data);
         setUsersData(response?.data?.data);
       } catch (error) {
-        // console.log(error);
       }
     }
     fetchUser();

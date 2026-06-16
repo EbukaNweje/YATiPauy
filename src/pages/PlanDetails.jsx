@@ -13,7 +13,6 @@ const PlanDetails = () => {
     location?.state?.subscription || null,
   );
 
-  // console.log("subscription", subscription);
   // If the user navigated directly to /plandetails/:id, params.id can be used to fetch data.
   // useEffect(() => {
   //   if (!subscription && params?.id) {
@@ -23,7 +22,6 @@ const PlanDetails = () => {
   //           `https://yaticare-backend.onrender.com/api/getusrSubcription/${params.id}`
   //         );
   //         setSubscription(response.data);
-  //         console.log("this is the res", response.data);
   //       } catch (error) {
   //         console.error("Error fetching subscription:", error);
   //         // Fallback lightweight object if not found
