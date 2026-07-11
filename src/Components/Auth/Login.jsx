@@ -23,7 +23,7 @@ const Login = () => {
     try {
       // Make an API request to your backend to create a new users
       const response = await axios.post(
-        "https://yaticare-backend.onrender.com/api/auth/login",
+        "https://yaticare-backend.onrender.com1/api/auth/login",
         data,
       );
       toast.success("Login Successfull");
