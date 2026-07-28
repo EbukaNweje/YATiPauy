@@ -21,6 +21,9 @@ const Withdraw = () => {
   const [pin, setPin] = useState(""); // <-- capture PIN
   const [loading, setLoading] = useState(false);
   const [showWalletWarning, setShowWalletWarning] = useState(false);
+  const [refBonus, setRefBonus] = useState(0);
+  const [isOldMember, setIsOldMember] = useState(false);
+  const [availableBalance, setAvailableBalance] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,6 +36,32 @@ const Withdraw = () => {
         );
         const data = response?.data?.data;
         setUserData(data?.WalletInfo);
+
+        // Fetch referral bonus (like RefPage does)
+        const bonus = data?.inviteCode?.bonusAmount || 0;
+        setRefBonus(bonus);
+
+        // Check if user has deposits and if there's a deposit from today
+        const deposits = data?.deposits || [];
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const hasDepositToday = deposits.some((deposit) => {
+          const depositDate = new Date(deposit.createdAt || deposit.date);
+          depositDate.setHours(0, 0, 0, 0);
+          return depositDate.getTime() === today.getTime();
+        });
+
+        // Old member = no deposit from today
+        const oldMember = deposits.length === 0 || !hasDepositToday;
+        setIsOldMember(oldMember);
+
+        // Set available balance based on member status
+        if (oldMember) {
+          setAvailableBalance(bonus); // Old members can only withdraw refBonus
+        } else {
+          setAvailableBalance(data?.accountBalance || 0);
+        }
 
         // Check if wallet address is not set
         if (!data?.WalletInfo?.WalletAddress || !data?.WalletInfo?.WalletName) {
@@ -64,6 +93,15 @@ const Withdraw = () => {
       toast.error("Minimum withdrawal amount is $30.00");
       return;
     }
+
+    // Check if old member is trying to withdraw more than refBonus
+    if (isOldMember && selectedAmount > availableBalance) {
+      toast.error(
+        `You can only withdraw up to $${refBonus.toFixed(2)} (your referral bonus).`
+      );
+      return;
+    }
+
     setShowConfirmationPopup(true);
   };
 
@@ -166,6 +204,26 @@ const Withdraw = () => {
         <section>
           <h3>Fill The Details</h3>
           <hr />
+
+          {/* Old Member Warning */}
+          {isOldMember && (
+            <div
+              style={{
+                backgroundColor: "#fff3cd",
+                border: "1px solid #ffc107",
+                borderRadius: "8px",
+                padding: "12px",
+                marginBottom: "16px",
+                color: "#856404",
+              }}
+            >
+              <strong>ℹ️ Available Balance</strong>
+              <p style={{ marginTop: "8px", marginBottom: 0 }}>
+                You can only withdraw your referral bonus: ${refBonus.toFixed(2)}
+              </p>
+            </div>
+          )}
+
           <input
             type="text"
             placeholder="Enter amount ($) to withdraw"
@@ -216,6 +274,12 @@ const Withdraw = () => {
             </div>
 
             <div className="amount-display">
+              {isOldMember && (
+                <div className="amount-row" style={{ color: "#ff9800" }}>
+                  <span className="amount-label">Source:</span>
+                  <span className="amount-value">Referral Bonus</span>
+                </div>
+              )}
               <div className="amount-row">
                 <span className="amount-label">Withdrawal Amount:</span>
                 <span className="amount-value">${selectedAmount}</span>

@@ -17,11 +17,11 @@ const HowItWorks = () => {
         <div className="info-box">
           <h3>📈 Return Policy</h3>
           <p>
-            Earn <strong>20%</strong> of your deposit.
+            Earn <strong>10%</strong> of your deposit.
             {/* daily or a total of{" "}
             <strong>140%</strong> weekly. */}
           </p>
-          <p>Initial deposit must be Recapitalizedd every 6 days.</p>
+          <p>Initial deposit must be Recapitalizedd every 12 days.</p>
         </div>
 
         <div className="info-box">
@@ -37,7 +37,7 @@ const HowItWorks = () => {
         <div className="info-box">
           <h3>💵 Withdrawals</h3>
           <p>
-            Minimum withdrawal: <strong>$40</strong>.
+            Minimum withdrawal: <strong>$20</strong>.
           </p>
         </div>
       </div>

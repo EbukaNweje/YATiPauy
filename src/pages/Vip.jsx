@@ -75,7 +75,6 @@ const Vip = () => {
     }
   };
 
-
   useEffect(() => {
     fetchSubscriptions();
   }, [user, finalId]);
@@ -85,7 +84,6 @@ const Vip = () => {
   if (userData?.subscriptions === 0) {
     return <p className="no-products">No products available</p>;
   }
-
 
   const handelRecapitalized = async (subscriptionId) => {
     setRecapitalizedLoading(true);
@@ -205,8 +203,8 @@ const Vip = () => {
                     <div className="detail-item" role="listitem">
                       <span className="label">Period</span>
                       <span className="value">
-                        {/* {subscriptionData?.plan?.durationDays} days */}6
-                        days
+                        {subscriptionData?.plan?.durationDays} days
+                        {/* 6 days */}
                       </span>
                     </div>
 

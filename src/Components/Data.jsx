@@ -58,7 +58,7 @@ export const products = [
       "Basic daily meal allowances.",
       "Access to community networking opportunities.",
     ],
-    price1: "25",
+    price1: "50",
     price2: "99",
   },
   {
