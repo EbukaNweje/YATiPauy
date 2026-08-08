@@ -36,24 +36,90 @@ const Withdraw = () => {
         const data = response?.data?.data;
         setUserData(data?.WalletInfo);
 
+        // Debug: show full backend response and detailed deposits info
+        // eslint-disable-next-line no-console
+        console.debug("Withdraw: backend response", response?.data);
+        console.log("data", data); // Debugging line to check the structure of the response
+
         // Fetch referral bonus (like RefPage does)
         const bonus = data?.inviteCode?.bonusAmount || 0;
         setRefBonus(bonus);
 
-        // Check if user has deposits and if there's a deposit from today
-        const deposits = data?.deposits || [];
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        // Use deposits from userTransaction.deposit if available
+        const deposits = data?.userTransaction?.deposit || data?.deposits || [];
+        const now = new Date();
+        // Allow overriding the cutoff year via Vite env var VITE_AUG_CUTOFF_YEAR
+        // Example: VITE_AUG_CUTOFF_YEAR=2025 will use Aug 1, 2025 as cutoff
+        const envYear =
+          typeof import.meta !== "undefined" &&
+          import.meta.env &&
+          import.meta.env.VITE_AUG_CUTOFF_YEAR
+            ? Number(import.meta.env.VITE_AUG_CUTOFF_YEAR)
+            : null;
+        // Default cutoff year is 2026 unless overridden by VITE_AUG_CUTOFF_YEAR
+        const cutoffYear = envYear && !isNaN(envYear) ? envYear : 2026;
+        const cutoff = new Date(cutoffYear, 7, 1); // August is month 7 (0-based)
+        cutoff.setHours(0, 0, 0, 0);
 
-        const hasDepositToday = deposits.some((deposit) => {
-          const depositDate = new Date(deposit.createdAt || deposit.date);
-          depositDate.setHours(0, 0, 0, 0);
-          return depositDate.getTime() === today.getTime();
+        const normalizedDeposits = deposits.map((deposit) => {
+          const rawDate =
+            deposit.depositDateChecked ||
+            deposit.depositDate ||
+            deposit.createdAt ||
+            deposit.date;
+          const parsedDate = rawDate ? new Date(rawDate) : null;
+          const normalizedDate = parsedDate ? new Date(parsedDate) : null;
+          if (normalizedDate) {
+            normalizedDate.setHours(0, 0, 0, 0);
+          }
+          return {
+            ...deposit,
+            rawDate,
+            normalizedDate,
+            normalizedDateIso: normalizedDate
+              ? normalizedDate.toISOString()
+              : null,
+          };
         });
 
-        // Old member = has previous deposits and none from today
-        // New accounts (no deposits) OR users with a deposit today are NOT old members
-        const oldMember = deposits.length !== 0 && !hasDepositToday;
+        const debugDeposits = normalizedDeposits.slice(0, 5).map((d) => ({
+          id: d._id || d.id,
+          depositDateRaw: d.rawDate,
+          normalizedDateIso: d.normalizedDateIso,
+          raw: d,
+        }));
+        // eslint-disable-next-line no-console
+        console.debug("Withdraw: deposits detail", debugDeposits);
+
+        const hasDepositSinceCutoff = normalizedDeposits.some((deposit) => {
+          return (
+            deposit.normalizedDate &&
+            deposit.normalizedDate.getTime() >= cutoff.getTime()
+          );
+        });
+
+        console.log("hasDepositSinceCutoff", hasDepositSinceCutoff); // Debugging line to check if the user has deposits since cutoff
+
+        // Old member = NO deposits OR no deposit on/after Aug 1 this year
+        // Treat empty deposits as old members — they must make a new deposit
+        // on/after the cutoff to be considered not-old.
+        const oldMember =
+          normalizedDeposits.length === 0 || !hasDepositSinceCutoff;
+
+        console.log("oldMember", oldMember); // Debugging line to check if the user is considered an old member
+
+        // Debug logging to help diagnose why the warning may not show
+        // Remove or comment out in production after verifying behavior
+        // eslint-disable-next-line no-console
+        console.debug("Withdraw:isOldMember check", {
+          depositsCount: normalizedDeposits.length,
+          deposits: debugDeposits,
+          cutoffYear,
+          cutoff: cutoff.toISOString(),
+          hasDepositSinceCutoff,
+          oldMember,
+        });
+
         setIsOldMember(oldMember);
 
         // Set available balance based on member status
@@ -154,6 +220,8 @@ const Withdraw = () => {
   const handleGoToWalletPage = () => {
     navigate("/dashboard/WalletAddress");
   };
+
+  console.log("isOldMember", isOldMember); // Debugging line to check if the user is considered an old member
 
   return (
     <div className="Withdraw">
