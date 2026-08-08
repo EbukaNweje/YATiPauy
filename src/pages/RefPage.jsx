@@ -25,7 +25,6 @@ const RefPage = () => {
           `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`,
         );
 
-
         const invited = response?.data?.data?.inviteCode?.userInvited || [];
         setReferrals(invited);
 
@@ -48,8 +47,7 @@ const RefPage = () => {
           );
           // setOneUserData(res?.data.data);
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     };
     fetchReferredSubscribers();
   }, [user, finalId]);
@@ -159,7 +157,7 @@ const RefPage = () => {
             <h2>Referral Bonus</h2>
             <div className="big">{formatCurrency(refBonus)}</div>
             <span className="text-[12px] text-muted text-center mb-4">
-              Minimum withdrawal amount: ${formatCurrency(50)}
+              Minimum withdrawal amount: ${formatCurrency(25)}
             </span>
             <button
               onClick={handleWithdraw}
