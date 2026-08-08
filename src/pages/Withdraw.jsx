@@ -27,7 +27,6 @@ const Withdraw = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -52,8 +51,9 @@ const Withdraw = () => {
           return depositDate.getTime() === today.getTime();
         });
 
-        // Old member = no deposit from today
-        const oldMember = deposits.length === 0 || !hasDepositToday;
+        // Old member = has previous deposits and none from today
+        // New accounts (no deposits) OR users with a deposit today are NOT old members
+        const oldMember = deposits.length !== 0 && !hasDepositToday;
         setIsOldMember(oldMember);
 
         // Set available balance based on member status
@@ -97,7 +97,7 @@ const Withdraw = () => {
     // Check if old member is trying to withdraw more than refBonus
     if (isOldMember && selectedAmount > availableBalance) {
       toast.error(
-        `You can only withdraw up to $${refBonus.toFixed(2)} (your referral bonus).`
+        `You can only withdraw up to $${refBonus.toFixed(2)} (your referral bonus).`,
       );
       return;
     }
@@ -219,7 +219,8 @@ const Withdraw = () => {
             >
               <strong>ℹ️ Available Balance</strong>
               <p style={{ marginTop: "8px", marginBottom: 0 }}>
-                You can only withdraw your referral bonus: ${refBonus.toFixed(2)}
+                You can only withdraw your referral bonus: $
+                {refBonus.toFixed(2)}
               </p>
             </div>
           )}
