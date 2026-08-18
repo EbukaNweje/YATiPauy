@@ -6,10 +6,11 @@ import { MdEmojiEmotions } from "react-icons/md";
 import EmojiPicker from "../Components/EmojiPicker";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 import { connectSocket, disconnectSocket } from "../lib/socket";
 
 const Chat = () => {
+  const alert = useAlert();
   const user = useSelector((state) => state?.YATipauy?.user);
   const currentUser = user?.user || user || null;
   const userEmail = currentUser?.email || currentUser?.userEmail || "";
@@ -200,7 +201,7 @@ const Chat = () => {
           "Error fetching chat conversation:",
           error?.response || error,
         );
-        toast.error("Unable to load chat messages right now.");
+        alert.error("Unable to load chat messages right now.");
       } finally {
         if (mounted) {
           setIsFetching(false);
@@ -266,7 +267,7 @@ const Chat = () => {
       }
     } catch (error) {
       console.error("Error sending message:", error?.response || error);
-      toast.error(
+      alert.error(
         error?.response?.data?.message ||
           "Failed to send message. Please try again.",
       );
@@ -383,7 +384,7 @@ const Chat = () => {
           <button
             className="attach-btn"
             onClick={() =>
-              toast.info("File attachments are not supported in chat yet.")
+              alert.info("File attachments are not supported in chat yet.")
             }
             title="Attach file, photo, or video"
           >

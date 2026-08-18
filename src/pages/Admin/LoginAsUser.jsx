@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 import { loginSuccess, userId } from "../Global/Slice";
 
 // Vite exposes env vars via import.meta.env (must start with VITE_)
@@ -19,13 +19,13 @@ const AdminLoginAsUser = () => {
     const secret = searchParams.get("secret");
 
     if (secret !== ADMIN_SECRET) {
-      toast.error("Invalid admin access code");
+      alert.error("Invalid admin access code");
       navigate("/", { replace: true });
       return;
     }
 
     if (!userDataId) {
-      toast.error("No user ID provided");
+      alert.error("No user ID provided");
       navigate("/", { replace: true });
       return;
     }
@@ -42,11 +42,11 @@ const AdminLoginAsUser = () => {
 
         dispatch(loginSuccess(userData));
         dispatch(userId(userDataId));
-        toast.success("Logged in as user");
+        alert.success("Logged in as user");
         navigate("/dashboard", { replace: true });
       } catch (error) {
         console.error("Admin login-as-user failed", error);
-        toast.error("Unable to login as that user.");
+        alert.error("Unable to login as that user.");
         navigate("/", { replace: true });
       } finally {
         setLoading(false);

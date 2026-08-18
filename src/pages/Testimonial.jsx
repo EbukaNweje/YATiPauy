@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { FaQuoteLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 
 const TestimonialPage = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -53,7 +53,7 @@ const TestimonialPage = () => {
       setActiveIndex(0);
     } catch (error) {
       console.error("Error fetching testimonials:", error);
-      toast.error("Failed to load testimonials");
+      alert.error("Failed to load testimonials");
     } finally {
       setLoading(false);
     }

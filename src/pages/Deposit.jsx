@@ -7,7 +7,7 @@ import "animate.css";
 import { useNavigate } from "react-router-dom";
 import { depositedAmount } from "./Global/Slice";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 import PropTypes from "prop-types";
 
 /* ------------------ Countdown component ------------------ */
@@ -73,6 +73,7 @@ RenderPopSuccessful.propTypes = { onClose: PropTypes.func.isRequired };
 
 /* ------------------ Main Deposit component ------------------ */
 const Deposit = () => {
+  const alert = useAlert();
   const amount = useSelector((state) => state.YATipauy.depositAmount);
   const userData = useSelector((state) => state.YATipauy.user);
   const dispatch = useDispatch();
@@ -179,14 +180,14 @@ const Deposit = () => {
   const copyAddress = async () => {
     const currentWalletAddress =
       wallets.length > 0 ? wallets[currentIndex]?.walletAddress || "" : "";
-    if (!currentWalletAddress) return toast.error("No address available");
+    if (!currentWalletAddress) return alert.error("No address available");
 
     try {
       await navigator.clipboard.writeText(currentWalletAddress);
       setCopied(true);
       setTimeout(() => setCopied(false), 1200);
     } catch {
-      toast.error("Copy failed");
+      alert.error("Copy failed");
     }
   };
 
@@ -200,13 +201,13 @@ const Deposit = () => {
 
   /* ------------------ Payment submission ------------------ */
   const handlePayment = async () => {
-    if (!proofFile) return toast.error("Please upload proof of payment");
-    if (!userData?.user?._id) return toast.error("User not found");
+    if (!proofFile) return alert.error("Please upload proof of payment");
+    if (!userData?.user?._id) return alert.error("User not found");
 
     const depositWallet =
       wallets.length > 0 ? wallets[currentIndex]?.walletAddress || "" : "";
 
-    if (!depositWallet) return toast.error("No deposit wallet available");
+    if (!depositWallet) return alert.error("No deposit wallet available");
 
     const formData = new FormData();
     formData.append("userId", userData.user._id);
@@ -222,11 +223,11 @@ const Deposit = () => {
         "https://yaticare-backend.onrender.com/api/deposit/deposit",
         formData,
       );
-      toast.success(res.data.message || "Deposit submitted");
+      alert.success(res.data.message || "Deposit submitted");
       setProofPaymentPop(true);
       dispatch(depositedAmount(amount));
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Upload failed");
+      alert.error(err?.response?.data?.message || "Upload failed");
     } finally {
       setLoading(false);
     }

@@ -3,10 +3,11 @@ import { FaWallet, FaSpinner } from "react-icons/fa6";
 import "./pageCss/Bank.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 import { useNavigate } from "react-router-dom";
 
 const WalletAddress = () => {
+  const alert = useAlert();
   const [userInput, setUserInput] = useState({
     WalletName: "",
     WalletAddress: "",
@@ -29,11 +30,11 @@ const WalletAddress = () => {
 
   const validateForm = () => {
     if (!userInput.WalletName) {
-      toast.error("Please enter your wallet name");
+      alert.error("Please enter your wallet name");
       return false;
     }
     if (!userInput.WalletAddress) {
-      toast.error("Please enter your wallet address");
+      alert.error("Please enter your wallet address");
       return false;
     }
     return true;
@@ -49,11 +50,11 @@ const WalletAddress = () => {
         userInput,
       );
       if (response.data) {
-        toast.success("Wallet details updated successfully");
+        alert.success("Wallet details updated successfully");
         Nav("/dashboard");
       }
     } catch (error) {
-      toast.error(
+      alert.error(
         error.response?.data?.message || "Failed to update wallet details",
       );
       // console.error("Update error:", error);

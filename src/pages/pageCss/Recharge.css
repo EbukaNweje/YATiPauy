@@ -1,882 +1,388 @@
-/* === Standardized Container Styles === */
+/* =============================================
+   RECHARGE / WITHDRAW / CHANGE PIN — Shared
+   ============================================= */
+
 .transaction-pin-container,
 .Recharge,
 .Withdraw {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
   width: 100%;
-  height: auto;
-  background-color: #f3f4f6;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  background: transparent;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.transaction-pin-container::-webkit-scrollbar,
+.Recharge::-webkit-scrollbar,
+.Withdraw::-webkit-scrollbar {
+  display: none;
 }
 
+/* ---- Form card ---- */
 .transaction-pin-form,
 .paymentSection {
   width: 100%;
-  max-width: 400px;
-  background-color: #022308f5;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(2, 35, 8, 0.08);
+  border: 1px solid #e2e8e4;
+  padding: 22px 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* === Input Styles === */
-.input-group,
-.wallet-selection {
-  display: flex;
-  align-items: center;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 10px;
-}
-
-.input-group input,
-.wallet-selection input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  padding: 5px;
-}
-
-/* === Button Styles === */
-.submit-button,
-.btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #10b981;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover,
-.btn:hover {
-  background-color: #059669;
-}
-
-.submit-button:disabled,
-.btn:disabled {
-  background-color: #9ca3af;
-  cursor: not-allowed;
-}
-
-/* === Notice Styles === */
-.pin-notice,
-.paymentWarnings {
-  text-align: center;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-/* === Standardized Styles for Recharge and Withdraw === */
-.Recharge,
-.Withdraw {
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  overflow-y: scroll;
-  scrollbar-width: none;
-
-  .paymentWarnings {
-    width: 100%;
-    max-width: 600px;
-    background-color: rgba(11, 51, 29, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    color: #0b331d;
-  }
-
-  .paymentWarnings li {
-    margin-bottom: 10px;
-    list-style: none;
-    position: relative;
-    padding-left: 20px;
-  }
-
-  .paymentWarnings li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #0b331d;
-  }
-
-  .gst-notice {
-    margin-top: 25px;
-    padding: 20px;
-    background-color: rgba(11, 51, 29, 0.05);
-    border-left: 4px solid #0b331d;
-    border-radius: 0 8px 8px 0;
-  }
-
-  .gst-notice h4 {
-    color: #0b331d;
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: 600;
-  }
-
-  .gst-notice p {
-    color: #0b331d;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-  }
-
-  .gst-notice p:last-child {
-    margin-bottom: 0;
-    font-weight: 500;
-  }
-
-  .paymentSection {
-    background-color: #0b331d;
-    padding: 30px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 600px;
-  }
-
-  .paymentSection h3 {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
-  .paymentSection input[type="number"] {
-    width: 100%;
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-
-  .paymentSection input[type="number"]::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .wallet-selection {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px 0;
-    width: 100%;
-  }
-
-  .wallet-selection label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 15px 20px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    color: white;
-    transition: all 0.3s ease;
-    gap: 12px;
-  }
-  @media (max-width: 768px) {
-    .wallet-selection label {
-      gap: 16px;
-      font-size: 16px;
-    }
-  }
-
-  .wallet-selection label:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .wallet-selection input[type="radio"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid white;
-    border-radius: 50%;
-    margin: 0;
-    position: relative;
-    cursor: pointer;
-  }
-
-  .wallet-selection input[type="radio"]:checked {
-    background-color: white;
-    border: 2px solid white;
-  }
-
-  .wallet-selection input[type="radio"]:checked::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    background-color: #0b331d;
-    border-radius: 50%;
-  }
-
-  .btn {
-    width: 100%;
-    padding: 15px;
-    background-color: #1a5f36;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-  }
-
-  .btn:hover {
-    background-color: #237544;
-  }
-  -ms-overflow-style: none;
-  padding-bottom: 50px;
-}
-
-.Recharge .paymentSection,
-.Withdraw .paymentSection {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.Recharge .paymentSection .amountWrap,
-.Withdraw .paymentSection .amountWrap {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  /* background-color: #05451091; */
-  background-color: #022308f5;
-  border-radius: 20px;
-  padding: 30px;
-
-  h3 {
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-    line-height: 21px;
-  }
-
-  hr {
-    width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.295);
-  }
-}
-
-.paymentSection .amountWrap .amountDiv {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  button {
-    width: 33.3333333%;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-
-    h3 {
-      width: 90%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
-  .amountButtonSelected {
-    border: 2px solid teal;
-    border-radius: 20px;
-  }
-}
-
-.paymentSection section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  /* background-color: #05451091; */
-  background-color: #022308f5;
-  border-radius: 20px;
-  padding: 30px;
-
-  h3 {
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-    line-height: 21px;
-  }
-
-  hr {
-    width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.295);
-  }
-
-  input {
-    width: 100%;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.295);
-    color: white;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  select {
-    width: 100%;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.295);
-    color: white;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  select option {
-    background-color: teal;
-    color: white;
-    padding: 10px;
-  }
-
-  select option:hover {
-    background-color: darkcyan;
-  }
-}
-
-.paymentSection .btn {
-  width: 100%;
-  padding: 20px;
-  background: linear-gradient(135deg, #008080, #005555);
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  transition: background 0.3s ease-in-out;
-}
-
-.paymentSection .btn:hover {
-  background: linear-gradient(135deg, #00a0a0, #006666);
-}
-
-.paymentSection .btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 150%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: skewX(-25deg);
-  transition: left 0.5s ease-in-out;
-}
-
-.paymentSection .btn:hover::before {
-  left: 100%;
-}
-
-@keyframes shine {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-.paymentSection .btn:active {
-  transform: scale(0.95);
-}
-
-.paymentWarnings {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  color: grey;
-  gap: 10px;
-  font-size: 16px;
-  line-height: 21px;
-}
-
-.chanPass {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.Bank,
-.Change {
-  width: 45%;
-  height: 70vh;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-  h3 {
-    color: black;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 21px;
-  }
-}
-
-.Bank section,
-.Change section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-
-  .inputWrapper {
-    position: relative;
-    width: 80%;
-    border: 2px solid grey;
-  }
-
-  .inputDiv {
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    padding-right: 20px;
-    border-radius: 20px;
-    /* background-color: grey; */
-    border: 1px solid grey;
-
-    span {
-      color: gray;
-    }
-  }
-
-  .inputIcon {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: gray;
-    font-size: 25px;
-  }
-
-  .inputDiv aside {
-    width: 90%;
-    /* padding: 20px; */
-    height: 60px;
-    border-radius: 20px;
-    color: white;
-    background: none;
-    font-size: 18px;
-    font-weight: 600;
-    border: none;
-    background: none;
-    outline: none;
-  }
-
-  .inputDiv input {
-    width: 90%;
-    padding: 20px;
-    padding-left: 50px;
-    color: gray;
-    font-size: 18px;
-    font-weight: 600;
-    border: none;
-    background: none;
-    outline: none;
-  }
-
-  .inputDiv aside input {
-    width: 90%;
-    padding: 20px;
-    padding-left: 50px;
-    color: gray;
-    font-size: 18px;
-    font-weight: 600;
-    border: none;
-    border: none;
-    background: none;
-    outline: none;
-  }
-  .inputWrapper input,
-  .inputWrapper select {
-    width: 100%;
-    padding: 20px;
-    padding-left: 50px;
-    /* background-color: rgba(255, 255, 255, 0.295); */
-    background: none;
-    height: 60px;
-    border-radius: 20px;
-    color: grey;
-    font-size: 18px;
-    font-weight: 600;
-    /* border: 2px solid grey; */
-    outline: none;
-
-    border: none;
-  }
-
-  .inputWrapper select option {
-    background-color: teal;
-    color: white;
-    padding: 10px;
-  }
-
-  .inputWrapper select option:hover {
-    background-color: darkcyan;
-  }
-}
-
-.buttTag {
-  width: 80%;
-  padding: 20px;
-  background: linear-gradient(135deg, green, rgb(11, 43, 17));
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  transition: background 250ms ease-in-out;
-}
-
-.buttTag:hover {
-  background: linear-gradient(135deg, rgb(11, 43, 17), green);
-}
-
-.Bank section .buttTag,
-.Change section button {
-  width: 80%;
-  padding: 20px;
-  background: linear-gradient(135deg, green, rgb(11, 43, 17));
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  transition: background 250ms ease-in-out;
-}
-
-.Bank section .buttTag:hover,
-.Change section button:hover {
-  background: linear-gradient(135deg, rgb(11, 43, 17), green);
-}
-
-.Bank section button::before,
-.Change section button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 150%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: skewX(-25deg);
-  transition: left 0.5s ease-in-out;
-}
-
-.Bank section button,
-.Change section button:hover::before {
-  left: 100%;
-}
-
-@keyframes shine {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-.Bank section button,
-.Change section button:active {
-  transform: scale(0.95);
-}
-
-/* Transaction PIN Styles */
-.transaction-pin-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 50px; /* Adjusted padding to reduce space at the top */
-  width: 100%;
-  height: 100vh;
-  background-color: #f3f4f6;
-}
-
-.transaction-pin-form {
-  width: 100%;
-  max-width: 400px;
-  background-color: #022308f5;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+/* ---- Card header ---- */
 .form-header {
   text-align: center;
-
-  & h2 {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f0f4f0;
+}
+.form-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #022308;
+  margin: 0 0 4px;
+}
+.form-header p {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 0;
 }
 
 .lock-icon {
   font-size: 40px;
   color: #10b981;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
+/* ---- Section heading ---- */
+.paymentSection h3,
+.paymentSection section h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #022308;
+  margin: 0;
+}
+.paymentSection hr,
+.paymentSection section hr {
+  border: none;
+  border-top: 1px solid #f0f4f0;
+  margin: 0;
+}
+
+/* ---- PIN inputs ---- */
 .pin-inputs {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .input-group {
   display: flex;
   align-items: center;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 10px;
+  border: 1.5px solid #e2e8e4;
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 50px;
+  background: #f8faf8;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
-
+.input-group:focus-within {
+  border-color: #065f46;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.1);
+}
 .input-group input {
   flex: 1;
   border: none;
   outline: none;
-  font-size: 16px;
-  padding: 5px;
+  font-size: 15px;
+  background: transparent;
+  color: #022308;
+  font-weight: 600;
 }
-
-/* .input-group .toggle-visibility {
-  background: yellow;
-  border: none;
-  cursor: pointer;
-} */
-
+.input-group input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
 .eye-icon {
-  font-size: 20px;
-  color: #6b7280;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #10b981;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 18px;
+  color: #9ca3af;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
-  background-color: #059669;
+/* ---- Generic text inputs inside paymentSection ---- */
+.paymentSection input[type="text"],
+.paymentSection input[type="number"],
+.paymentSection section input {
+  width: 100%;
+  height: 50px;
+  padding: 0 14px;
+  border: 1.5px solid #e2e8e4;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #022308;
+  background: #f8faf8;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-sizing: border-box;
+  font-weight: 600;
+}
+.paymentSection input[type="text"]::placeholder,
+.paymentSection input[type="number"]::placeholder,
+.paymentSection section input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+.paymentSection input[type="text"]:focus,
+.paymentSection input[type="number"]:focus,
+.paymentSection section input:focus {
+  border-color: #065f46;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.1);
 }
 
-.submit-button:disabled {
-  background-color: #9ca3af;
+/* Select */
+.paymentSection select,
+.paymentSection section select {
+  width: 100%;
+  height: 50px;
+  padding: 0 14px;
+  border: 1.5px solid #e2e8e4;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #022308;
+  background: #f8faf8;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 600;
+  transition: border-color 0.2s;
+}
+.paymentSection select:focus,
+.paymentSection section select:focus {
+  border-color: #065f46;
+}
+.paymentSection select option,
+.paymentSection section select option {
+  background: #022308;
+  color: #fff;
+}
+
+/* ---- Wallet selection ---- */
+.wallet-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wallet-selection label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  background: #f8faf8;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8e4;
+  color: #022308;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  word-break: break-word;
+}
+.wallet-selection label:hover {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+.wallet-selection input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.wallet-selection input[type="radio"]:checked {
+  border-color: #065f46;
+}
+.wallet-selection input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background: #065f46;
+  border-radius: 50%;
+}
+
+/* ---- Amount chips ---- */
+.paymentSection .amountWrap {
+  background: #f8faf8;
+  border: 1px solid #e2e8e4;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.paymentSection .amountWrap h3 {
+  font-size: 14px;
+}
+.paymentSection .amountWrap hr {
+  border-top: 1px solid #e2e8e4;
+}
+.paymentSection .amountDiv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.paymentSection .amountDiv button {
+  flex: 1 1 30%;
+  min-width: 76px;
+  padding: 11px 8px;
+  background: #fff;
+  border: 1.5px solid #e2e8e4;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #022308;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paymentSection .amountDiv button:hover {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+.paymentSection .amountDiv .amountButtonSelected {
+  border-color: #065f46;
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+/* ---- CTA Button ---- */
+.submit-button,
+.btn,
+.paymentSection .btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #022308 0%, #065f46 100%);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(2, 35, 8, 0.2);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  letter-spacing: 0.02em;
+  margin: 0;
+  position: static;
+  overflow: visible;
+}
+.submit-button:hover:not(:disabled),
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.submit-button:disabled,
+.btn:disabled {
+  background: #9ca3af;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
+/* ---- Notice / warnings ---- */
 .pin-notice {
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   color: #6b7280;
 }
 
-.custom-phone-input {
-  width: 100% !important;
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 8px !important;
-  height: 45px !important;
-  padding-left: 50px !important;
+.paymentWarnings {
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  border: 1px solid #e2e8e4;
+  box-shadow: 0 2px 10px rgba(2, 35, 8, 0.05);
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.paymentWarnings li {
+  list-style: none;
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.55;
+}
+.paymentWarnings li::before {
+  content: "•";
+  position: absolute;
+  left: 3px;
+  color: #10b981;
+  font-weight: 700;
 }
 
-.custom-phone-button {
-  background-color: transparent !important;
-  border: none !important;
-  color: rgba(255, 255, 255, 0.6) !important;
-  position: absolute !important;
-  left: 10px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
+/* GST notice */
+.gst-notice {
+  background: #f0fdf4;
+  border-left: 4px solid #065f46;
+  border-radius: 0 12px 12px 0;
+  padding: 14px 16px;
+}
+.gst-notice h4 {
+  color: #022308;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+.gst-notice p {
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0 0 6px;
+}
+.gst-notice p:last-child {
+  margin: 0;
+  font-weight: 600;
 }
 
-.custom-phone-dropdown {
-  background-color: #0b331d !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-/* ✅ Mobile responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+  .transaction-pin-container,
   .Recharge,
   .Withdraw {
-    padding: 10px;
-    gap: 20px;
+    padding: 12px 12px 32px;
   }
-
+  .transaction-pin-form,
   .paymentSection {
-    padding: 20px;
-    max-width: 100%;
-  }
-
-  .paymentSection h3 {
-    font-size: 18px;
-  }
-
-  .paymentSection input[type="number"],
-  .paymentSection select,
-  .paymentSection section input {
-    font-size: 14px;
-    padding: 12px;
-  }
-
-  .wallet-selection label {
-    font-size: 14px;
-    padding: 12px;
-  }
-
-  .paymentSection .btn,
-  .buttTag {
-    font-size: 16px;
-    padding: 12px;
-  }
-
-  .paymentWarnings {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  .paymentSection .amountWrap {
-    padding: 20px;
-    gap: 15px;
-  }
-
-  .paymentSection .amountWrap h3,
-  .paymentSection section h3 {
-    font-size: 16px;
-  }
-
-  .paymentSection .amountWrap .amountDiv button {
-    width: 100%; /* stack vertically on small screens */
-    padding: 15px;
-  }
-
-  .Bank,
-  .Change {
-    width: 100%;
-    height: auto;
-    padding: 20px;
-    box-shadow: none;
-  }
-
-  .Bank section,
-  .Change section {
-    width: 100%;
-    gap: 15px;
-  }
-
-  .Bank section .inputWrapper,
-  .Change section .inputWrapper {
-    width: 100%;
-  }
-
-  .Bank section button,
-  .Change section button {
-    font-size: 16px;
-    padding: 15px;
-  }
-}
-
-/* ✅ Very small devices */
-@media (max-width: 480px) {
-  .paymentSection h3 {
-    font-size: 16px !important;
-  }
-
-  .paymentSection input,
-  .paymentSection select {
-    font-size: 12px;
-    padding: 10px;
-  }
-
-  .wallet-selection label {
-    font-size: 12px;
-    padding: 10px;
-  }
-
-  .paymentWarnings {
-    font-size: 12px;
-  }
-
-  .paymentSection .btn,
-  .buttTag {
-    font-size: 14px;
-    padding: 12px;
+    padding: 18px 14px;
   }
 }

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 
 const AdminDashboard = () => {
+  const alert = useAlert();
   const [deposits, setDeposits] = useState([]);
   const [withdrawals, setWithdrawals] = useState([]);
   const [users, setUsers] = useState([]);
@@ -25,7 +26,7 @@ const AdminDashboard = () => {
         // setWithdrawals(withdrawalRes.data);
         // setUsers(usersRes.data);
       } catch {
-        toast.error("Failed to fetch data");
+        alert.error("Failed to fetch data");
         navigate("/admin/login");
       }
     };
@@ -38,10 +39,10 @@ const AdminDashboard = () => {
       const token = localStorage.getItem("adminToken");
       const config = { headers: { Authorization: `Bearer ${token}` } };
       await axios.post(`/api/admin/approve-deposit/${id}`, {}, config);
-      toast.success("Deposit approved");
+      alert.success("Deposit approved");
       setDeposits(deposits.filter((deposit) => deposit.id !== id));
     } catch {
-      toast.error("Failed to approve deposit");
+      alert.error("Failed to approve deposit");
     }
   };
 
@@ -50,10 +51,10 @@ const AdminDashboard = () => {
       const token = localStorage.getItem("adminToken");
       const config = { headers: { Authorization: `Bearer ${token}` } };
       await axios.post(`/api/admin/approve-withdrawal/${id}`, {}, config);
-      toast.success("Withdrawal approved");
+      alert.success("Withdrawal approved");
       setWithdrawals(withdrawals.filter((withdrawal) => withdrawal.id !== id));
     } catch {
-      toast.error("Failed to approve withdrawal");
+      alert.error("Failed to approve withdrawal");
     }
   };
 

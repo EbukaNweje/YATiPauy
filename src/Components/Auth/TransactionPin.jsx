@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { PuffLoader } from "react-spinners";
 import "./AuthStyle.css";
 
 const TransactionPin = () => {
+  const alert = useAlert();
   const Nav = useNavigate();
   const [showPin, setShowPin] = useState(false);
   const [showConfirmPin, setShowConfirmPin] = useState(false);
@@ -32,17 +33,17 @@ const TransactionPin = () => {
 
   const submitPin = async () => {
     if (!userInput.pin || !userInput.confirmPin) {
-      toast.error("Please enter both PIN fields");
+      alert.error("Please enter both PIN fields");
       return;
     }
 
     if (!validatePin(userInput.pin)) {
-      toast.error("PIN must be exactly 4 digits");
+      alert.error("PIN must be exactly 4 digits");
       return;
     }
 
     if (userInput.pin !== userInput.confirmPin) {
-      toast.error("PINs do not match");
+      alert.error("PINs do not match");
       return;
     }
 
@@ -54,7 +55,7 @@ const TransactionPin = () => {
       );
 
       if (response.data) {
-        toast.success("Transaction PIN created successfully");
+        alert.success("Transaction PIN created successfully");
         setUserInput({
           pin: "",
           confirmPin: "",
@@ -73,7 +74,7 @@ const TransactionPin = () => {
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "Failed to create PIN";
-      toast.error(errorMessage);
+      alert.error(errorMessage);
       console.error("PIN creation error:", error);
     } finally {
       setLoading(false);

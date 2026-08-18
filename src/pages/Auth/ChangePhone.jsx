@@ -3,11 +3,12 @@ import "../pageCss/Recharge.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoCallSharp } from "react-icons/io5";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 const ChangePhone = () => {
+  const alert = useAlert();
   const user = useSelector((state) => state.YATipauy.user);
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
@@ -22,12 +23,12 @@ const ChangePhone = () => {
         `https://yaticare-backend.onrender.com/api/user/changePhonenumber/${user.user._id}`,
         userInput
       );
-      toast.success(
+      alert.success(
         response.data.message || "Phone number updated successfully"
       );
       setUserInput({ phoneNumber: "" });
     } catch (error) {
-      toast.error(
+      alert.error(
         error.response?.data?.message || "Failed to update phone number"
       );
     } finally {

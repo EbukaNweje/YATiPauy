@@ -3,10 +3,11 @@ import { FaLock } from "react-icons/fa";
 import "./pageCss/Recharge.css";
 import { useSelector } from "react-redux";
 import { PuffLoader } from "react-spinners";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 import axios from "axios";
 
 const ChangePin = () => {
+  const alert = useAlert();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.YATipauy?.user);
 
@@ -21,26 +22,26 @@ const ChangePin = () => {
 
   const changePin = async () => {
     if (!userInput.oldPin || !userInput.newPin) {
-      toast.error("Please fill in all fields");
+      alert.error("Please fill in all fields");
       return;
     } else if (userInput.oldPin === userInput.newPin) {
-      toast.error("New PIN must be different from the old PIN");
+      alert.error("New PIN must be different from the old PIN");
       return;
     } else if (
       !validatePin(userInput.oldPin) ||
       !validatePin(userInput.newPin)
     ) {
-      toast.error("PIN must be a 4-digit number");
+      alert.error("PIN must be a 4-digit number");
       return;
     }
 
     setLoading(true);
     try {
       const response = await axios.post(API_URL, userInput);
-      toast.success(response.data?.message || "PIN changed successfully");
+      alert.success(response.data?.message || "PIN changed successfully");
       setUserInput({ oldPin: "", newPin: "" });
     } catch (error) {
-      toast.error(error.response?.data?.message || "Error changing PIN");
+      alert.error(error.response?.data?.message || "Error changing PIN");
     } finally {
       setLoading(false);
     }

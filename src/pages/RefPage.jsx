@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 import { FaUsers, FaGift } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { VscLiveShare } from "react-icons/vsc";
 import "./pageCss/refpage.css";
 
 const RefPage = () => {
+  const alert = useAlert();
   const user = useSelector((state) => state.YATipauy.user);
   const [referrals, setReferrals] = useState([]);
   const [refBonus, setRefBonus] = useState(0);
@@ -54,12 +55,12 @@ const RefPage = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink);
-    toast.success("Referral link copied!");
+    alert.success("Referral link copied!");
   };
 
   const handleWithdraw = async () => {
     if (refBonus <= 0) {
-      toast.error("No referral bonus to withdraw.");
+      alert.error("No referral bonus to withdraw.");
       return;
     }
     setWithdrawing(true);
@@ -68,12 +69,12 @@ const RefPage = () => {
         `https://yaticare-backend.onrender.com/api/user/withdraw-referral-bonus/${finalId}`,
         { amount: refBonus },
       );
-      toast.success("Referral bonus withdrawn successfully!");
+      alert.success("Referral bonus withdrawn successfully!");
       setRefBonus(0); // Reset bonus after withdrawal
       // Optionally refetch user data if needed
     } catch (error) {
       console.error("Withdrawal error:", error);
-      toast.error("Failed to withdraw referral bonus. Please try again.");
+      alert.error("Failed to withdraw referral bonus. Please try again.");
     } finally {
       setWithdrawing(false);
     }

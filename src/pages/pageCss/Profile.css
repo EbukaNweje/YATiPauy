@@ -1,52 +1,55 @@
+/* =============================================
+   PROFILE & PROFILE SETTINGS
+   ============================================= */
+
 .Profile {
   width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  align-items: center;
-  padding: 40px 20px;
+  gap: 16px;
+  align-items: stretch;
+  padding: 20px 16px 40px;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  background: #f5f7fa; /* Light clean background */
 }
-
 .Profile::-webkit-scrollbar {
   display: none;
 }
 
-/* Top user box */
+/* ---- User info card ---- */
 .Profile .smallBox {
   width: 100%;
-  max-width: 450px;
-  padding: 25px;
+  padding: 22px 20px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  background: linear-gradient(135deg, #022308f5, #034d15);
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  gap: 18px;
+  background: linear-gradient(135deg, #022308 0%, #065f46 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(2, 35, 8, 0.22);
   color: white;
 }
 
 .Profile .smallBox section {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .Profile .smallBox section .profile {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  flex-shrink: 0;
 }
-
 .Profile .smallBox section .profile img {
   width: 100%;
   height: 100%;
@@ -56,106 +59,122 @@
 .Profile .smallBox section .profileI {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 16px;
+  gap: 4px;
+  font-size: 14px;
   font-weight: 600;
   text-transform: capitalize;
 }
+.Profile .smallBox section .profileI h3 {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
 
-/* Balance Box */
+/* Balance button */
 .Profile .smallBox .balance button {
   width: 100%;
-  padding: 20px;
+  padding: 16px 18px;
   border: none;
   outline: none;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  border-radius: 12px;
+  gap: 6px;
+  border-radius: 14px;
   cursor: default;
-  transition: background 0.3s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 0.2s;
 }
-
 .Profile .smallBox .balance button:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
 }
-
 .Profile .smallBox .balance button h3 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
 }
-
 .Profile .smallBox .balance button span {
-  font-size: 15px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
 }
 
-/* Profile Options */
+/* ---- Menu sections ---- */
 .Profile .profileInfo {
   width: 100%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 2px 14px rgba(2, 35, 8, 0.07);
+  border: 1px solid #e2e8e4;
+  overflow: hidden;
 }
 
 .Profile .profileInfo section {
   width: 100%;
-  padding: 18px 20px;
-  background: #fff;
+  padding: 15px 18px;
+  background: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   color: #022308;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-bottom: 1px solid #f0f4f0;
+  transition: background 0.15s;
 }
-
+.Profile .profileInfo section:last-child {
+  border-bottom: none;
+}
 .Profile .profileInfo section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  background-color: #022308;
-  color: #f5f7fa;
+  background: #f0fdf4;
 }
 
 .Profile .profileInfo .iconBox {
   display: flex;
-  gap: 15px;
+  gap: 14px;
   align-items: center;
+}
+.Profile .profileInfo .iconBox h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #1f2937;
+}
+.Profile .profileInfo section:hover .iconBox h3 {
+  color: #022308;
 }
 
 .Profile .profileInfo .profileIcon {
-  font-size: 26px;
-  color: #066a18;
-  transition: transform 0.3s ease-in-out;
+  font-size: 20px;
+  color: #065f46;
+  transition: transform 0.2s;
+  flex-shrink: 0;
 }
-
 .Profile .profileInfo section:hover .profileIcon {
   transform: scale(1.1);
 }
 
-.Profile .profileInfo .logoutIcon {
-  color: #c53030;
+.Profile .profileInfo .arrowIcon {
+  color: #d1d5db;
+  font-size: 13px;
+}
+.Profile .profileInfo section:hover .arrowIcon {
+  color: #065f46;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
+.Profile .profileInfo .logoutIcon {
+  color: #dc2626;
+}
+.Profile .profileInfo section:hover .logoutIcon {
+  color: #dc2626;
+}
+
+@media (max-width: 480px) {
   .Profile {
-    padding: 20px;
-    gap: 30px;
-  }
-
-  .Profile .smallBox {
-    width: 100%;
-  }
-
-  .Profile .profileInfo {
-    width: 100%;
+    padding: 12px 12px 32px;
   }
 }

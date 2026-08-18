@@ -7,10 +7,11 @@ import { useDispatch } from "react-redux";
 import Logo from "../../assets/logo.png";
 import { loginSuccess } from "../../pages/Global/Slice";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 // import { isAuth } from '../../Pages/global/features'; // Uncomment when needed
 
 const Login = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const Nav = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ const Login = () => {
         "https://yaticare-backend.onrender.com/api/auth/login",
         data,
       );
-      toast.success("Login Successfull");
+      alert.success("Login Successfull");
       dispatch(loginSuccess(response.data.data));
       localStorage.setItem(
         "refLink",
@@ -39,7 +40,7 @@ const Login = () => {
       }
     } catch (error) {
       setLoading(false);
-      toast.error(error?.response?.data?.message || error?.response?.data);
+      alert.error(error?.response?.data?.message || error?.response?.data);
     }
   };
 

@@ -3,9 +3,10 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../pageCss/Recharge.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 
 const Change = () => {
+  const alert = useAlert();
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -24,12 +25,12 @@ const Change = () => {
 
   const changePassword = async () => {
     // if (!validatePassword(userInput.newPassword)) {
-    //   toast.error("Password must be at least 8 characters long");
+    //   alert.error("Password must be at least 8 characters long");
     //   return;
     // }
 
     if (userInput.newPassword !== userInput.confirmNewPassword) {
-      toast.error("New passwords do not match!");
+      alert.error("New passwords do not match!");
       return;
     }
 
@@ -39,14 +40,14 @@ const Change = () => {
         `https://yaticare-backend.onrender.com/api/auth/change-password/${user.user._id}`,
         userInput
       );
-      toast.success(response?.data?.message || "Password updated successfully");
+      alert.success(response?.data?.message || "Password updated successfully");
       setUserInput({
         oldPassword: "",
         newPassword: "",
         confirmNewPassword: "",
       });
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
+      alert.error(error?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }

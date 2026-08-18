@@ -1,179 +1,170 @@
-/* === Container Card === */
+/* =============================================
+   PROFILE INFO PAGE
+   ============================================= */
+
 .informationdetailcont {
   width: 100%;
-  max-width: 700px;
+  max-width: 580px;
   margin: 0 auto;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  padding: 20px 16px 40px;
   display: flex;
   flex-direction: column;
-  padding: 32px;
-  transition: box-shadow 0.25s ease, transform 0.2s ease;
+  gap: 16px;
 }
 
-.informationdetailcont:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+.informationdetailcont > h1 {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #022308 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-left: 12px !important;
+  position: relative;
+}
+.informationdetailcont > h1::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 2px;
+  width: 4px;
+  background: #10b981;
+  border-radius: 2px;
 }
 
-/* === Form === */
+/* Form card */
 .profileform {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  width: 100%;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(2, 35, 8, 0.08);
+  border: 1px solid #e2e8e4;
+  overflow: hidden;
 }
 
-/* === Section Labels === */
+/* Field rows */
+.inforcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0f4f0;
+}
+.inforcontainer:last-child {
+  border-bottom: none;
+}
+
 .inforcontainer h2 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 8px;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #6b7280 !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
 }
 
-/* === Inputs === */
-.containerwrap {
-  height: 48px;
-  padding: 0 14px;
-  font-size: 15px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background: #f9fafb;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-.containerwrap:focus {
-  border-color: #2563eb;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-}
-
-/* === Input Row (Origin Details) === */
-.origindetailswrap {
-  display: flex;
-  gap: 20px;
-}
-
-/* === Buttons Section === */
-.actionbtn {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.cancelbtn1 {
-  background: #ffffff;
-  border: 1.5px solid #d1d5db;
-  color: #374151;
-  transition: all 0.25s ease;
-}
-
-.cancelbtn1:hover {
-  background: #f3f4f6;
-  border-color: #9ca3af;
-}
-
-.submitbtn {
-  background: #2563eb;
-  border: none;
-  color: #ffffff;
-  transition: all 0.25s ease;
-}
-
-.submitbtn:hover {
-  background: #1d4ed8;
-}
-
-/* === Readonly Field === */
+/* Read-only field */
 .readonly-field {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  background-color: #f9fafb;
-  color: #374151;
-  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8e4;
+  border-radius: 10px;
+  background: #f8faf8;
+  color: #022308;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 42px;
+}
+.readonly-field span {
+  flex: 1;
+  word-break: break-all;
+  line-height: 1.4;
 }
 
-/* === Overlay for File Upload / Modals === */
-.uploadOverlay {
-  position: fixed;
-  inset: 0;
+.edit-icon {
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-left: 8px;
+  transition: color 0.2s;
+}
+.edit-icon:hover {
+  color: #065f46;
+}
+
+/* Editable input */
+.containerwrap {
+  height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8e4;
+  background: #f8faf8;
+  outline: none;
   width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.45);
+  box-sizing: border-box;
+  color: #022308;
+  font-weight: 600;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.containerwrap:focus {
+  border-color: #065f46;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.1);
+}
+
+/* Action buttons */
+.actionbtn {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 50;
-  backdrop-filter: blur(4px);
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  border-top: 1px solid #f0f4f0;
 }
-
-/* === Responsive Layout === */
-@media (max-width: 1024px) {
-  .informationdetailcont {
-    max-width: 90%;
-    padding: 24px;
-  }
-
-  .profileform {
-    gap: 20px;
-  }
-
-  .readonly-field {
-    font-size: 14px;
-  }
+.cancelbtn1,
+.submitbtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
 }
-
-@media (max-width: 768px) {
-  .informationdetailcont {
-    max-width: 95%;
-    padding: 20px;
-  }
-
-  .origindetailswrap {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .actionbtn {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .cancelbtn1,
-  .submitbtn {
-    width: 100%;
-    min-width: unset;
-  }
+.cancelbtn1 {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1.5px solid #e2e8e4;
+}
+.cancelbtn1:hover {
+  background: #e5e7eb;
+}
+.submitbtn {
+  background: linear-gradient(135deg, #022308, #065f46);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(2, 35, 8, 0.2);
+}
+.submitbtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 480px) {
   .informationdetailcont {
-    max-width: 90%;
-    padding: 16px;
+    padding: 12px 12px 32px;
   }
-
-  .readonly-field {
-    font-size: 13px;
-    padding: 10px;
+  .actionbtn {
+    flex-direction: column;
   }
-
   .cancelbtn1,
   .submitbtn {
-    font-size: 12px;
-    height: 40px;
-  }
-
-  .field-container {
-    gap: 6px;
+    width: 100%;
   }
 }

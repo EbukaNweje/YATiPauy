@@ -7,9 +7,10 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import planLogo from "../assets/logo.png";
 import { PuffLoader } from "react-spinners";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 
 const Vip = () => {
+  const alert = useAlert();
   const user = useSelector((state) => state.YATipauy.user);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -67,7 +68,7 @@ const Vip = () => {
 
       setAvailablePlans(Array.isArray(plans) ? plans : []);
     } catch (error) {
-      toast.error("Failed to load available plans");
+      alert.error("Failed to load available plans");
       console.error("Error fetching plans:", error);
       setAvailablePlans([]);
     } finally {
@@ -91,7 +92,7 @@ const Vip = () => {
       const response = await axios.patch(
         `https://yaticare-backend.onrender.com/api/recycleSubscription/${subscriptionId}`,
       );
-      toast.success(
+      alert.success(
         response?.data?.message ||
           "Subscription Recapitalize and restarted successfully",
       );
@@ -102,13 +103,13 @@ const Vip = () => {
       fetchSubscriptions();
     } catch (err) {
       setRecapitalizedLoading(false);
-      toast.error(err?.response?.data?.message);
+      alert.error(err?.response?.data?.message);
     }
   };
 
   const handleUpgrade = async () => {
     if (!selectedPlan) {
-      toast.error("Please select a plan");
+      alert.error("Please select a plan");
       return;
     }
 
@@ -122,7 +123,7 @@ const Vip = () => {
           newAmount: selectedPlan.maximumDeposit,
         },
       );
-      toast.success(response?.data?.message || "Plan upgraded successfully!");
+      alert.success(response?.data?.message || "Plan upgraded successfully!");
       setShowDialog(false);
       setShowUpgradeStep(false);
       setSelectedSubscription(null);
@@ -132,7 +133,7 @@ const Vip = () => {
       fetchSubscriptions();
     } catch (err) {
       setUpgradeLoading(false);
-      toast.error(err?.response?.data?.message || "Failed to upgrade plan");
+      alert.error(err?.response?.data?.message || "Failed to upgrade plan");
     }
   };
 

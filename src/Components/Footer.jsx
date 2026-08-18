@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { FaHome, FaShoppingBag, FaCrown, FaUser } from "react-icons/fa";
+import { HiMiniChatBubbleOvalLeft } from "react-icons/hi2";
 import "../pages/pageCss/Layout.css";
 import { useSelector } from "react-redux";
-import { HiMiniChatBubbleOvalLeft } from "react-icons/hi2";
 import axios from "axios";
+
+const NAV_ITEMS = [
+  { to: "/dashboard", icon: <FaHome size={20} />, label: "Home" },
+  { to: "plan", icon: <FaShoppingBag size={20} />, label: "Plans" },
+  { to: "/dashboard/myPlans", icon: <FaCrown size={20} />, label: "Mine" },
+  {
+    to: "/dashboard/Chat",
+    icon: null /* chat uses special wrapper */,
+    label: "Chat",
+    isChat: true,
+  },
+  { to: "/dashboard/Profile", icon: <FaUser size={20} />, label: "Profile" },
+];
 
 const Footer = () => {
   const location = useLocation();
@@ -16,7 +29,6 @@ const Footer = () => {
     currentUser?.user?.email ||
     "";
   const [chatCount, setChatCount] = useState(0);
-
   const API_BASE = "https://yaticare-backend.onrender.com/api/chat";
 
   useEffect(() => {
@@ -24,113 +36,52 @@ const Footer = () => {
       setChatCount(0);
       return;
     }
-
-    const fetchChatCount = async () => {
-      try {
-        const res = await axios.get(
-          `${API_BASE}/user/${encodeURIComponent(userEmail)}`,
-        );
-        const conversation = res?.data?.data;
-        setChatCount(conversation?.unreadByUser || 0);
-      } catch (error) {
-        console.error("Error fetching chat count:", error);
-        setChatCount(0);
-      }
-    };
-
-    fetchChatCount();
+    axios
+      .get(`${API_BASE}/user/${encodeURIComponent(userEmail)}`)
+      .then((res) => setChatCount(res?.data?.data?.unreadByUser || 0))
+      .catch(() => setChatCount(0));
   }, [userEmail]);
 
   useEffect(() => {
-    const onChatRead = () => setChatCount(0);
-    const onChatNewMessage = (event) => {
-      const isChatOpen = location.pathname
-        .toLowerCase()
-        .includes("/dashboard/chat");
-      if (isChatOpen) return;
-
-      const increment = Number(event?.detail?.count || 1);
-      setChatCount((current) => current + increment);
+    const onRead = () => setChatCount(0);
+    const onNew = (e) => {
+      if (location.pathname.toLowerCase().includes("/dashboard/chat")) return;
+      setChatCount((c) => c + Number(e?.detail?.count || 1));
     };
-
-    window.addEventListener("chat:read", onChatRead);
-    window.addEventListener("chat:new-message", onChatNewMessage);
+    window.addEventListener("chat:read", onRead);
+    window.addEventListener("chat:new-message", onNew);
     return () => {
-      window.removeEventListener("chat:read", onChatRead);
-      window.removeEventListener("chat:new-message", onChatNewMessage);
+      window.removeEventListener("chat:read", onRead);
+      window.removeEventListener("chat:new-message", onNew);
     };
   }, [location.pathname]);
 
   return (
-    <div className="Footer" style={{ height: "70px" }}>
+    <div className="Footer">
       <nav>
-        <li>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive ? "footer-link-active" : "footer-link"
-            }
-          >
-            <FaHome size={20} />
-            <h3>Home</h3>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="plan"
-            className={({ isActive }) =>
-              isActive ? "footer-link-active" : "footer-link"
-            }
-          >
-            <FaShoppingBag size={20} />
-            <h3>Plans</h3>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/myPlans"
-            className={({ isActive }) =>
-              isActive ? "footer-link-active" : "footer-link"
-            }
-          >
-            <FaCrown size={20} />
-            <h3>My Subscriptions</h3>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/Chat"
-            className={({ isActive }) =>
-              isActive ? "footer-link-active" : "footer-link"
-            }
-          >
-            <div className="chat-icon-wrapper">
-              <HiMiniChatBubbleOvalLeft size={20} />
-              {chatCount > 0 && <span className="chat-badge">{chatCount}</span>}
-            </div>
-            <h3>Chat</h3>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/Profile"
-            className={({ isActive }) =>
-              isActive ? "footer-link-active" : "footer-link"
-            }
-          >
-            <FaUser size={20} />
-            <h3>Profile</h3>
-          </NavLink>
-        </li>
-
-        {/* <li>
-          <NavLink 
-          onClick={handleLogout}
-          className={({ isActive }) => isActive ? "footer-link-active" : "footer-link"}>
-            <FaPowerOff size={30} />
-            <h3>Logout</h3>
-          </NavLink>
-        </li> */}
+        {NAV_ITEMS.map(({ to, icon, label, isChat }) => (
+          <li key={to}>
+            <NavLink
+              to={to}
+              end={to === "/dashboard"}
+              className={({ isActive }) =>
+                isActive ? "footer-link-active" : "footer-link"
+              }
+            >
+              {isChat ? (
+                <div className="chat-icon-wrapper">
+                  <HiMiniChatBubbleOvalLeft size={20} />
+                  {chatCount > 0 && (
+                    <span className="chat-badge">{chatCount}</span>
+                  )}
+                </div>
+              ) : (
+                icon
+              )}
+              <h3>{label}</h3>
+            </NavLink>
+          </li>
+        ))}
       </nav>
     </div>
   );

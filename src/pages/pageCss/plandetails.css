@@ -1,151 +1,176 @@
-/* Plan Details - plain CSS (no nesting) */
+/* =============================================
+   PLAN DETAILS PAGE
+   ============================================= */
+
 .planDetails {
   width: 100%;
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding: 40px 16px;
-  background: #f8fafc;
-  color: #0f172a;
-}
-
-.planDetails > h2 {
-  font-size: 28px;
-  margin: 0;
-  color: #0f172a;
-  font-weight: 700;
-}
-
-.cardsPlan {
-  width: 100%;
-  max-width: 760px;
-  background-color: #ffffff;
+  max-width: 720px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
-  padding: 20px;
-  gap: 12px;
+  gap: 16px;
+  padding: 20px 16px 40px;
+  background: transparent;
 }
 
-.cardsPlan .profit {
+/* Page header row */
+.planDetails > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.planDetails > h2,
+.planDetails > div:first-child h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #022308;
+  margin: 0;
+}
+.planDetails > div:first-child button {
+  background: #fff;
+  border: 1.5px solid #e2e8e4;
+  color: #065f46;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 6px rgba(2, 35, 8, 0.06);
+}
+.planDetails > div:first-child button:hover {
+  background: #022308;
+  color: #fff;
+  border-color: #022308;
+}
+
+/* Main card */
+.cardsPlan {
   width: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(2, 35, 8, 0.09);
+  border: 1px solid #e2e8e4;
+  overflow: hidden;
+}
+
+/* Profit header */
+.cardsPlan .profit {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 8px 4px;
+  gap: 14px;
+  padding: 22px 22px 18px;
+  background: linear-gradient(135deg, #022308 0%, #065f46 100%);
 }
-
 .cardsPlan .invest {
-  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-left: 8px;
+  gap: 5px;
 }
-
 .cardsPlan .invest h2 {
-  font-size: 28px;
+  font-size: 34px;
   margin: 0;
-  color: #065f46; /* brand green */
+  color: #fff;
   font-weight: 800;
+  letter-spacing: -1px;
 }
-
 .cardsPlan .invest p {
-  margin: 6px 0 0;
-  color: #6b7280;
-  font-size: 14px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .cardsPlan .earned {
-  width: 190px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: linear-gradient(90deg, #ecfccb 0%, #bbf7d0 100%);
-  padding: 12px 14px;
-  border-radius: 10px;
-  justify-content: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 16px;
+  border-radius: 14px;
 }
-
 .cardsPlan .earned span {
   font-size: 26px;
-  color: #065f46;
+  color: #6ee7b7;
   font-weight: 800;
 }
-
 .cardsPlan .earned h3 {
   margin: 0;
-  font-size: 15px;
-  color: #065f46;
+  font-size: 14px;
+  color: #d1fae5;
   font-weight: 700;
 }
 
+/* Detail rows */
 .duration {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 15px 22px;
   align-items: center;
-  border-bottom: 1px solid #eef2f7;
+  border-bottom: 1px solid #f0f4f0;
+  box-sizing: border-box;
 }
-
+.duration:last-of-type {
+  border-bottom: none;
+}
 .duration h3 {
   margin: 0;
-  font-size: 15px;
-  color: #111827;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.duration p {
+  margin: 0;
+  color: #022308;
+  font-size: 14px;
   font-weight: 700;
 }
 
-.duration p {
-  margin: 0;
-  color: #374151;
-  font-size: 14px;
+/* Total row */
+.duration.Total {
+  background: #f0fdf4;
 }
-
-.cardsPlan .duration:last-of-type {
-  border-bottom: none;
+.duration.Total h3 {
+  color: #065f46;
 }
-
 .Total p {
-  font-size: 28px;
+  font-size: 22px;
   margin: 0;
   color: #065f46;
   font-weight: 800;
 }
 
-/* Responsive tweaks */
-@media (max-width: 640px) {
-  .cardsPlan {
-    padding: 16px;
+/* Responsive */
+@media (max-width: 580px) {
+  .planDetails {
+    padding: 12px 12px 32px;
   }
-
   .cardsPlan .profit {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
+    padding: 18px 16px 14px;
   }
-
   .cardsPlan .earned {
     width: 100%;
+    box-sizing: border-box;
   }
-}
-
-@media (max-width: 420px) {
-  .planDetails {
-    padding: 24px 12px;
-    gap: 12px;
-  }
-
   .cardsPlan .invest h2 {
-    font-size: 22px;
+    font-size: 26px;
   }
-
-  .cardsPlan .earned span {
-    font-size: 22px;
+  .duration {
+    padding: 13px 16px;
   }
 }

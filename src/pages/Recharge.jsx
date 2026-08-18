@@ -4,9 +4,10 @@ import { FaCircleCheck } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { depositedAmount } from "./Global/Slice";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 
 const Recharge = () => {
+  const alert = useAlert();
   // const amounts = [5000, 10000, 20000, 50000, 100000, 150000];
   // const amount = useSelector((state) => state.YATipauy.depositAmount);
 
@@ -15,13 +16,13 @@ const Recharge = () => {
 
   const handleSelectAmount = () => {
     if (!selectedAmount) {
-      return toast.error("Amount is required");
+      return alert.error("Amount is required");
     }
     if (Number(selectedAmount) < 2) {
-      return toast.error("Minimum Recharge is $2");
+      return alert.error("Minimum Recharge is $2");
     }
     // if (Number(selectedAmount) > 5000) {
-    //   return toast.error("Maximum Recharge is $5,000");
+    //   return alert.error("Maximum Recharge is $5,000");
     // }
     dispatch(depositedAmount(selectedAmount));
     navigate("/dashboard/deposit");

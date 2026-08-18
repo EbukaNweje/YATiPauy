@@ -2,7 +2,7 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from "./AlertModal";
 import { logout } from "../pages/Global/Slice";
 
 const isAdminOrSuperAdmin = (userRecord) => {
@@ -26,6 +26,7 @@ const isAdminOrSuperAdmin = (userRecord) => {
 };
 
 const PrivateRoute = () => {
+  const alert = useAlert();
   const { isLoggedIn, user } = useSelector((state) => state.YATipauy || {});
   const reduxId = useSelector((state) => state?.YATipauy?.id);
   const finalId = user?.user?._id || reduxId;
@@ -61,7 +62,7 @@ const PrivateRoute = () => {
 
         if (isBlockedUser && !canBypassBlock) {
           dispatch(logout());
-          toast.error("Your account has been blocked. Please contact support.");
+          alert.error("Your account has been blocked. Please contact support.");
           navigate("/", { replace: true });
         }
       } catch (err) {

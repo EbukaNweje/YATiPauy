@@ -5,9 +5,10 @@ import { Button, Form, Input } from "antd";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 
 const Resetpassword = () => {
+  const alert = useAlert();
   const Nav = useNavigate();
   const { id } = useParams(); // Get user ID from URL params
   const [searchParams] = useSearchParams();
@@ -20,7 +21,7 @@ const Resetpassword = () => {
     const userIdFromParams = id || searchParams.get("id");
 
     if (!userIdFromParams) {
-      toast.error("Invalid reset link. Please request a new password reset.");
+      alert.error("Invalid reset link. Please request a new password reset.");
       setTimeout(() => {
         Nav("/auth/forgotpassword");
       }, 2000);
@@ -31,7 +32,7 @@ const Resetpassword = () => {
 
   const onFinish = async (values) => {
     if (!userId) {
-      toast.error("Invalid reset link. Please try again.");
+      alert.error("Invalid reset link. Please try again.");
       return;
     }
 
@@ -45,7 +46,7 @@ const Resetpassword = () => {
       );
 
       if (response.data) {
-        toast.success(response.data.message || "Password reset successful!");
+        alert.success(response.data.message || "Password reset successful!");
         form.resetFields();
 
         // Navigate to login after successful reset
@@ -55,7 +56,7 @@ const Resetpassword = () => {
       }
     } catch (error) {
       console.error("Reset password error:", error);
-      toast.error(
+      alert.error(
         error.response?.data?.message ||
           error.response?.data?.error ||
           "Failed to reset password. Please try again.",

@@ -5,9 +5,10 @@ import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 
 const Forgotpassword = () => {
+  const alert = useAlert();
   const Nav = useNavigate();
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
@@ -23,7 +24,7 @@ const Forgotpassword = () => {
       );
 
       if (response.data) {
-        toast.success(
+        alert.success(
           response.data.message ||
             "Password reset instructions sent to your email. Please check your inbox.",
         );
@@ -41,7 +42,7 @@ const Forgotpassword = () => {
       }
     } catch (error) {
       console.error("Forgot password error:", error);
-      toast.error(
+      alert.error(
         error.response?.data?.message ||
           error.response?.data?.error ||
           "Failed to send reset link. Please try again.",

@@ -5,9 +5,10 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { depositedAmount } from "./Global/Slice";
-import toast from "react-hot-toast";
+import { useAlert } from "../Components/AlertModal";
 
 const Plan = () => {
+  const alert = useAlert();
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
@@ -47,7 +48,7 @@ const Plan = () => {
 
         setPlansData(mappedPlans);
       } catch {
-        toast.error("Failed to load plans");
+        alert.error("Failed to load plans");
       } finally {
         setLoading(false);
       }
@@ -85,14 +86,14 @@ const Plan = () => {
 
   const handleSubscribeClick = () => {
     if (!selectedPlan || !selectedAmount) {
-      toast.error("Please select a plan and amount.");
+      alert.error("Please select a plan and amount.");
       return;
     }
 
     // const amountNum = Number(selectedAmount);
 
     if (!user?.user?._id) {
-      toast.error("User not logged in.");
+      alert.error("User not logged in.");
       return;
     }
 
@@ -116,17 +117,17 @@ const Plan = () => {
       );
 
       if (response.data.message.includes("created")) {
-        toast.success("Subscription created successfully!");
+        alert.success("Subscription created successfully!");
         setSelectedPlan(null);
         setSelectedAmount(null);
         setCustomAmount("");
         setShowConfirmation(false);
         dispatch(depositedAmount(Date.now()));
       } else {
-        toast.error(response.data.data.message || "Subscription failed");
+        alert.error(response.data.data.message || "Subscription failed");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
+      alert.error(error?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }

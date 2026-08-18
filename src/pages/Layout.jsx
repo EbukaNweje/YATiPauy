@@ -2,18 +2,27 @@ import Header from "../Components/Header";
 import { Outlet } from "react-router-dom";
 import Footer from "../Components/Footer";
 import "./pageCss/Layout.css";
-// Telegram popup is handled in pages that need it
 
 const Layout = () => {
-  // Layout renders header/footer and outlet only
-
   return (
     <div className="Layout">
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
+      {/* Top header bar */}
+      <div className="layout-header">
+        <Header />
+      </div>
+
+      {/* Page body: sidebar + main content */}
+      <div className="layout-body">
+        {/* Left sidebar (desktop) / bottom tab bar (mobile) */}
+        <aside className="layout-sidebar">
+          <Footer />
+        </aside>
+
+        {/* Main scrollable content area */}
+        <main className="layout-main">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

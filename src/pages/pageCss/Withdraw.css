@@ -1,217 +1,20 @@
-/* Popup Overlay Styles */
+/* =============================================
+   WITHDRAW — Popup / Modal Styles
+   ============================================= */
+
+/* Overlay */
 .popup-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.2s ease;
+  padding: 16px;
 }
-
-/* Popup Card Styles */
-.popup-card {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  transform: translateY(0);
-  animation: slideUp 0.4s ease;
-}
-
-/* Popup Header */
-.popup-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #1a1a1a;
-}
-
-.popup-header h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-/* Amount Display */
-.amount-display {
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-.amount-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
-}
-
-.amount-label {
-  color: #666;
-}
-
-.amount-value {
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-.total-amount {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 2px dashed #e0e0e0;
-}
-
-/* Button Styles */
-.popup-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.popup-btn {
-  flex: 1;
-  padding: 1rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.confirm-btn {
-  background: #10b981;
-  color: white;
-}
-
-.confirm-btn:hover {
-  background: #059669;
-}
-
-.close-btn {
-  background: #ef4444;
-  color: white;
-}
-
-.close-btn:hover {
-  background: #dc2626;
-}
-
-/* PIN Input Styles */
-.pin-input-container {
-  width: 100%;
-  max-width: 300px;
-  margin: 2rem auto;
-}
-
-.pin-input {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.5rem;
-  letter-spacing: 1rem;
-  text-align: center;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-}
-
-.pin-input:focus {
-  outline: none;
-  border-color: #10b981;
-}
-
-/* Close Popup Button */
-.close-popup {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: red;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-.close-popup:hover {
-  color: #1a1a1a;
-}
-.pin-toggle {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #666;
-  transition: color 0.3s ease;
-}
-
-.pin-toggle:hover {
-  color: #1a1a1a;
-}
-
-/* WALLET SELECTION */
-.wallet-selection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-top: 0.6rem;
-}
-
-.wallet-selection label {
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  word-break: break-word;
-  background: #f8f9fa;
-  padding: 0.8rem 0.6rem;
-  border-radius: 10px;
-  border: 1px solid #dadada;
-  cursor: pointer;
-  position: relative;
-}
-
-/* RADIO BUTTONS */
-.wallet-selection label input[type="radio"] {
-  width: 2rem;
-  height: 2rem;
-  margin: 0;
-  flex-shrink: 0;
-  appearance: none;
-  border: 2px solid #777;
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.wallet-selection label input[type="radio"]:checked {
-  border-color: #10b981;
-}
-
-.wallet-selection label input[type="radio"]:checked::after {
-  content: "";
-  width: 1rem;
-  height: 1rem;
-  background: #10b981;
-  position: absolute;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -221,9 +24,20 @@
   }
 }
 
+/* Popup card */
+.popup-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
 @keyframes slideUp {
   from {
-    transform: translateY(20px);
+    transform: translateY(28px);
     opacity: 0;
   }
   to {
@@ -232,186 +46,276 @@
   }
 }
 
-/* Responsive Design */
-@media (max-width: 480px) {
-  .popup-card {
-    padding: 1.5rem;
-  }
-
-  .popup-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .amount-row {
-    font-size: 1rem;
-  }
-
-  .popup-buttons {
-    flex-direction: column;
-  }
-
-  .popup-btn {
-    width: 100%;
-  }
-
-  .wallet-selection label {
-    padding: 0.7rem;
-    font-size: 0.95rem;
-  }
-  .wallet-selection label input[type="radio"] {
-    width: 2rem;
-    height: 2rem;
-  }
-  .wallet-selection label input[type="radio"]:checked::after {
-    width: 1rem;
-    height: 1rem;
-  }
+/* Header */
+.popup-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.popup-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #022308;
+  margin: 0 0 5px;
+}
+.popup-header p {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 0;
 }
 
-/* Wallet Warning Modal Styles */
-.wallet-instructions {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 16px;
-  padding: 2rem;
-  margin: 1.5rem 0;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+/* Amount display */
+.amount-display {
+  background: #f8faf8;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 18px;
+  border: 1px solid #e2e8e4;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
-
-.wallet-instructions h3 {
-  font-size: 1.3rem;
-  color: #212529;
-  margin-bottom: 1.2rem;
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+.amount-label {
+  color: #6b7280;
   font-weight: 600;
+}
+.amount-value {
+  font-weight: 700;
+  color: #022308;
+}
+.total-amount {
+  padding-top: 10px;
+  border-top: 2px dashed #e2e8e4;
+  margin-top: 4px;
+}
+.total-amount .amount-value {
+  color: #065f46;
+  font-size: 16px;
+}
+
+/* Buttons */
+.popup-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+.popup-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+.confirm-btn {
+  background: linear-gradient(135deg, #022308, #065f46);
+  color: white;
+  box-shadow: 0 5px 16px rgba(2, 35, 8, 0.2);
+}
+.confirm-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.confirm-btn:disabled {
+  background: #9ca3af;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.close-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1.5px solid #e2e8e4;
+}
+.close-btn:hover {
+  background: #e5e7eb;
+}
+
+/* PIN input */
+.pin-input-container {
+  width: 100%;
+  max-width: 260px;
+  margin: 18px auto;
+}
+.pin-input {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 1.5rem;
+  letter-spacing: 0.8rem;
+  text-align: center;
+  border: 2px solid #e2e8e4;
+  border-radius: 12px;
+  outline: none;
+  color: #022308;
+  font-weight: 700;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.pin-input:focus {
+  border-color: #065f46;
+  box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.1);
+}
+
+.close-popup {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #9ca3af;
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.close-popup:hover {
+  color: #374151;
+}
+
+.pin-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+.pin-toggle:hover {
+  color: #374151;
+}
+
+/* Wallet selection inside Withdraw page */
+.Withdraw .wallet-selection {
+  width: 100%;
+  flex-direction: column;
+  gap: 0;
+}
+.Withdraw .wallet-selection label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  padding: 12px 14px;
+  background: #f8faf8;
+  border: 1px solid #e2e8e4;
+  border-radius: 10px;
+  cursor: default;
+  word-break: break-word;
+  line-height: 1.5;
+  display: block;
+}
+
+/* Loading dots */
+.loading-dots::after {
+  content: "...";
+  animation: dots 1.2s steps(3, end) infinite;
+}
+@keyframes dots {
+  0%,
+  20% {
+    content: "";
+  }
+  40% {
+    content: ".";
+  }
+  60% {
+    content: "..";
+  }
+  80%,
+  100% {
+    content: "...";
+  }
+}
+
+/* Wallet warning */
+.wallet-instructions {
+  background: #f8faf8;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 14px 0;
+  border: 1px solid #e2e8e4;
+}
+.wallet-instructions h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #022308;
+  margin: 0 0 12px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
 }
-
 .wallet-instructions h3::before {
   content: "📋";
-  font-size: 1.5rem;
 }
-
 .wallet-instructions ol {
-  margin-left: 0;
-  padding-left: 0;
-  counter-reset: step-counter;
   list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
-
 .wallet-instructions ol li {
-  margin: 1rem 0;
-  line-height: 1.7;
-  font-size: 1rem;
-  color: #495057;
-  padding-left: 3rem;
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.55;
+  padding-left: 32px;
   position: relative;
-  counter-increment: step-counter;
+  counter-increment: step;
 }
-
 .wallet-instructions ol li::before {
-  content: counter(step-counter);
+  content: counter(step);
   position: absolute;
   left: 0;
   top: 0;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, #022308, #065f46);
   color: white;
-  width: 2rem;
-  height: 2rem;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+  font-weight: 700;
+  font-size: 11px;
 }
-
 .wallet-notice {
-  background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
-  border-left: 5px solid #ffc107;
-  padding: 1.2rem;
-  margin-top: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.15);
-  position: relative;
-  overflow: hidden;
+  background: #fefce8;
+  border-left: 4px solid #f59e0b;
+  padding: 12px 14px;
+  margin-top: 12px;
+  border-radius: 0 10px 10px 0;
 }
-
-.wallet-notice::before {
-  content: "⚠️";
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 3rem;
-  opacity: 0.2;
-}
-
 .wallet-notice p {
   margin: 0;
-  color: #856404;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  position: relative;
-  z-index: 1;
+  color: #78350f;
+  font-size: 13px;
+  line-height: 1.55;
 }
-
 .wallet-notice strong {
-  font-weight: 700;
-  color: #664d03;
+  color: #451a03;
 }
 
-/* Enhanced popup header for wallet warning */
-.popup-card .popup-header h2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Responsive for wallet warning */
 @media (max-width: 480px) {
-  .wallet-instructions {
-    padding: 1.2rem;
-    margin: 1rem 0;
+  .popup-card {
+    padding: 22px 16px;
+    border-radius: 16px;
   }
-
-  .wallet-instructions h3 {
-    font-size: 1.1rem;
+  .popup-buttons {
+    flex-direction: column;
   }
-
-  .wallet-instructions h3::before {
-    font-size: 1.2rem;
-  }
-
-  .wallet-instructions ol li {
-    font-size: 0.95rem;
-    padding-left: 2.5rem;
-    margin: 0.8rem 0;
-  }
-
-  .wallet-instructions ol li::before {
-    width: 1.8rem;
-    height: 1.8rem;
-    font-size: 0.85rem;
-  }
-
-  .wallet-notice {
-    padding: 1rem;
-  }
-
-  .wallet-notice::before {
-    font-size: 2rem;
-    right: 0.5rem;
-  }
-
-  .wallet-notice p {
-    font-size: 0.9rem;
+  .popup-btn {
+    padding: 13px;
   }
 }

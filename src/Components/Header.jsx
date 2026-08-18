@@ -1,61 +1,69 @@
-import React, { use, useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
-  FaArrowLeft,
-  FaHeadphones,
   FaUser,
   FaBars,
   FaRegCopy,
-} from "react-icons/fa";
-// import '../pages/pageCss/Layout.css';
-import "./ComponentCss/Header.css";
-import { IoMdArrowDropleft } from "react-icons/io";
-import {
   FaWallet,
   FaMoneyBillWave,
   FaUniversity,
-  FaUsers,
-  FaBell,
-  FaFileContract,
-  FaShieldAlt,
+  FaChartLine,
+  FaTimes,
 } from "react-icons/fa";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { FaNairaSign } from "react-icons/fa6";
-import toast from "react-hot-toast";
+import { IoMdArrowDropleft } from "react-icons/io";
 import { BsCurrencyDollar } from "react-icons/bs";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useAlert } from "./AlertModal";
+import "./ComponentCss/Header.css";
+
+/* Human-readable page title map */
+const PAGE_TITLES = {
+  plan: "Investment Plans",
+  myplans: "My Subscriptions",
+  recharge: "Add Funds",
+  withdraw: "Withdraw",
+  deposit: "Deposit",
+  history: "Transaction History",
+  profile: "My Profile",
+  profileinfo: "Personal Info",
+  accountsettings: "Account Settings",
+  referrals: "Referrals",
+  chat: "Support Chat",
+  walletaddress: "Wallet Address",
+  bankdetails: "Bank Details",
+  changepin: "Change PIN",
+  changepassword: "Change Password",
+  changephonenumber: "Change Phone",
+  plandetails: "Plan Details",
+  vip: "VIP Plans",
+};
+
+const getPageTitle = (pathname) => {
+  const segment = pathname
+    .replace("/dashboard/", "")
+    .toLowerCase()
+    .split("/")[0];
+  return (
+    PAGE_TITLES[segment] ||
+    segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  );
+};
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
+  const alert = useAlert();
+
   const user = useSelector((state) => state.YATipauy.user);
   const depositSignal = useSelector((state) => state.YATipauy.depositAmount);
-  const refLink = user?.referralLink;
   const reduxId = useSelector((state) => state?.YATipauy?.id);
-
-  useEffect(() => {
-    // dispatch(loginSuccess(userData));
-    const handleClickOutside = (event) => {
-      if (
-        !event.target.closest(".menu-container") &&
-        !event.target.closest(".dropdown-menu")
-      ) {
-        setMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [userData]);
-
-
-  // const id = useSelector((state) => state.id);
-
   const finalId = user?.user?._id || reduxId;
+  const refLink = user?.referralLink;
+
+  const isHomePage = location.pathname === "/dashboard";
 
   const formatCurrency = (val) => {
     const n = Number(val);
@@ -66,133 +74,116 @@ const Header = () => {
     });
   };
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(
-        `https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`
-      );
-      const data = response?.data?.data;
-      setUserData(data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+  /* close menu on outside click */
+  useEffect(() => {
+    const handler = (e) => {
+      if (
+        !e.target.closest(".menu-container") &&
+        !e.target.closest(".dropdown-menu")
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, []);
 
-  // safe debug - avoid accessing accountBalance on null
-
-  const copy = (refLink) => {
-    navigator.clipboard.writeText(refLink);
-    toast.success("copied successfully");
-  };
-
-  React.useEffect(() => {
-    // fetch when user logs in or when a deposit/withdraw/subscription updates the signal
-    if (user?.user?._id || finalId) {
-      fetchUserData();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  /* fetch user data */
+  useEffect(() => {
+    if (!finalId) return;
+    axios
+      .get(`https://yaticare-backend.onrender.com/api/user/userdata/${finalId}`)
+      .then((res) => setUserData(res?.data?.data))
+      .catch(() => {});
   }, [user, finalId, depositSignal]);
 
-  React.useEffect(() => {}, [userData]);
+  const copy = () => {
+    if (!refLink) return;
+    alert.success("Referral link copied!");
+  };
 
-  const isHomePage = location.pathname === "/dashboard";
+  const menuItems = [
+    { icon: <FaWallet />, label: "Add Funds", path: "recharge" },
+    { icon: <FaMoneyBillWave />, label: "Withdraw", path: "withdraw" },
+    { icon: <FaUniversity />, label: "Wallet Address", path: "WalletAddress" },
+    { icon: <FaChartLine />, label: "Plans", path: "plan" },
+  ];
 
   return (
     <div className="Header">
       {isHomePage ? (
+        /* ---- Home header ---- */
         <div className="homeHcontent">
           <div className="header-content">
             <div
               className="profileler"
               onClick={() => navigate("Profile")}
-              title="Go to Profile"
+              title="Profile"
             >
-              <FaUser size={20} color="grey" />
+              <FaUser size={18} color="#065f46" />
             </div>
+
             <div className="info">
-              <h3>Hello, {userData ? userData.userName : "Loading..."}</h3>
+              <h3>
+                Welcome, <strong>{userData?.userName ?? "..."}</strong>
+              </h3>
               <div className="refinfo">
-                <button disabled className="Btn">
-                  Available Balance:
+                <button className="Btn" disabled>
+                  <BsCurrencyDollar />
                   <span>
-                    <BsCurrencyDollar />
                     {userData
                       ? formatCurrency(userData.accountBalance)
                       : "0.00"}
                   </span>
                 </button>
-                <div className="reflink">
-                  Referral Link
-                  <span onClick={() => copy(refLink)}>
-                    <FaRegCopy />
-                  </span>
+                <div
+                  className="reflink"
+                  onClick={copy}
+                  title="Copy referral link"
+                >
+                  <FaRegCopy /> Referral Link
                 </div>
               </div>
             </div>
           </div>
-
+          {/* 
           <div className="menu-container">
             <div
               className="Menu"
-              onClick={() => setMenuOpen(!menuOpen)}
-              title="Toggle Menu"
+              onClick={() => setMenuOpen((o) => !o)}
+              title="Menu"
             >
-              <FaBars size={35} color="white" />
+              {menuOpen ? (
+                <FaTimes size={20} color="white" />
+              ) : (
+                <FaBars size={20} color="white" />
+              )}
             </div>
+
             {menuOpen && (
               <div className="dropdown-menu">
-                <button
-                  onClick={() => {
-                    navigate("recharge"), setMenuOpen(false);
-                  }}
-                >
-                  <FaWallet size={30} color="grey" />
-                  Add Funds
-                </button>
-                <button
-                  onClick={() => {
-                    navigate("withdraw"), setMenuOpen(false);
-                  }}
-                >
-                  <FaMoneyBillWave size={30} color="grey" />
-                  Withdraw
-                </button>
-                <button
-                  onClick={() => {
-                    navigate("WalletAddress"), setMenuOpen(false);
-                  }}
-                >
-                  <FaUniversity size={30} color="grey" />
-                  Wallet Address
-                </button>
-                <button
-                  onClick={() => {
-                    navigate("plan"), setMenuOpen(false);
-                  }}
-                >
-                  <FaUniversity size={30} color="grey" />
-                  Plans
-                </button>
-                {/* <button onClick={() => navigate("community")}>
-                  <FaUsers size={30} color="grey" />
-                  Community
-                </button>
-                <button onClick={() => navigate("Privacy")}>
-                  <FaShieldAlt size={30} color="grey" />
-                  Privacy Policy
-                </button> */}
+                {menuItems.map((item) => (
+                  <button
+                    key={item.path}
+                    onClick={() => {
+                      navigate(item.path);
+                      setMenuOpen(false);
+                    }}
+                  >
+                    {item.icon} {item.label}
+                  </button>
+                ))}
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       ) : (
+        /* ---- Sub-page header ---- */
         <div className="pageContent">
           <div className="navBack" onClick={() => navigate(-1)} title="Go Back">
-            <IoMdArrowDropleft size={40} />
+            <IoMdArrowDropleft size={28} />
           </div>
-          <h3 style={{ color: "white", fontSize: "20px" }}>
-            {location.pathname.replace("/dashboard/", "").toUpperCase()}
-          </h3>
+          <h3>{getPageTitle(location.pathname)}</h3>
         </div>
       )}
     </div>

@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState, useRef } from "react";
 import {
   FaWallet,
   FaMoneyBillWave,
+  FaChartLine,
+  FaHistory,
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
@@ -36,9 +38,7 @@ const Home = () => {
   useEffect(() => {
     const durations = [4000, 3000, 3000];
     const interval = setInterval(
-      () => {
-        setIndex((prev) => (prev + 1) % images.length);
-      },
+      () => setIndex((prev) => (prev + 1) % images.length),
       durations[index % durations.length],
     );
     return () => clearInterval(interval);
@@ -57,66 +57,47 @@ const Home = () => {
     return filtered.length > 0 ? filtered : marqueeTestimonials;
   }, [marqueeTestimonials, currentUserId]);
 
-  const Nav = useNavigate();
-
   useEffect(() => {
     const prev = prevLoggedRef.current;
-    if (!prev && isLoggedIn) {
-      setTgTrigger((t) => t + 1);
-    }
+    if (!prev && isLoggedIn) setTgTrigger((t) => t + 1);
     prevLoggedRef.current = isLoggedIn;
   }, [isLoggedIn]);
 
   useEffect(() => {
     const prev = prevLoggedRefTestimonial.current;
     if (!prev && isLoggedIn) {
-      // Check if user has already submitted a testimonial
       axios
         .get(
           `https://yaticare-backend.onrender.com/api/user/userdata/${currentUserId}`,
         )
         .then((response) => {
-          if (!response.data.data.userTestimonial) {
-            // User has testimonials, do not show modal
-            setIsTestimonialModalOpen(false);
-          } else {
-            // No testimonials, show modal
-            setIsTestimonialModalOpen(true);
-          }
+          setIsTestimonialModalOpen(
+            !response.data.data.userTestimonial ? false : true,
+          );
         })
-        .catch((error) => {
-          console.error("Error checking testimonials:", error);
-          // If error, don't show modal to be safe
-        });
+        .catch(() => {});
     }
-
     prevLoggedRefTestimonial.current = isLoggedIn;
   }, [isLoggedIn, currentUserId]);
 
   useEffect(() => {
-    const fetchTestimonialsForMarquee = async () => {
-      try {
-        const response = await axios.get(
-          "https://yaticare-backend.onrender.com/api/user/testimonials/approved",
-        );
-        setMarqueeTestimonials(response.data.data || []);
-      } catch (error) {
-        console.error("Error fetching marquee testimonials:", error);
-      }
-    };
-
-    fetchTestimonialsForMarquee();
+    axios
+      .get(
+        "https://yaticare-backend.onrender.com/api/user/testimonials/approved",
+      )
+      .then((res) => setMarqueeTestimonials(res.data.data || []))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
     if (!testimonialsToShow.length || isTestimonialCarouselPaused) return;
-
-    const timer = setInterval(() => {
-      setActiveTestimonialIndex(
-        (prev) => (prev + 1) % testimonialsToShow.length,
-      );
-    }, 4500);
-
+    const timer = setInterval(
+      () =>
+        setActiveTestimonialIndex(
+          (prev) => (prev + 1) % testimonialsToShow.length,
+        ),
+      4500,
+    );
     return () => clearInterval(timer);
   }, [testimonialsToShow, isTestimonialCarouselPaused]);
 
@@ -127,11 +108,34 @@ const Home = () => {
         (prev - 1 + testimonialsToShow.length) % testimonialsToShow.length,
     );
   };
-
   const handleNextTestimonial = () => {
     if (!testimonialsToShow.length) return;
     setActiveTestimonialIndex((prev) => (prev + 1) % testimonialsToShow.length);
   };
+
+  /* Quick-action items */
+  const quickActions = [
+    {
+      icon: <FaWallet size={20} color="#065f46" />,
+      label: "Add Funds",
+      path: "recharge",
+    },
+    {
+      icon: <FaMoneyBillWave size={20} color="#065f46" />,
+      label: "Withdraw",
+      path: "withdraw",
+    },
+    {
+      icon: <FaChartLine size={20} color="#065f46" />,
+      label: "Plans",
+      path: "plan",
+    },
+    {
+      icon: <FaHistory size={20} color="#065f46" />,
+      label: "History",
+      path: "history",
+    },
+  ];
 
   return (
     <div className="Home">
@@ -141,68 +145,37 @@ const Home = () => {
         onClose={() => setIsTestimonialModalOpen(false)}
         userId={currentUserId}
       />
-      {/* Carousel */}
-      {/* <div className="carousel-container"> */}
-      <div
-        className="relative flex items-center justify-center text-white h-[300px] w-[100%] md:h-[400px] lg:h-[500px] bg-cover bg-center mb-10"
-        style={{ backgroundImage: `url(${Bg})` }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50 z-10"></div>
 
-        {/* Content */}
-        <div className="relative z-20 text-center px-6 max-w-2xl flex flex-col items-center gap-6 mx-auto">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-            Welcome To A Movement Built On Humanity.
-          </h1>
-          <p className="text-lg md:text-xl mb-6" style={{ color: "white" }}>
-            Every step you take empowers a community, bridges an economic gap,
-            and helps write a story of shared success.
+      {/* ---- Hero Banner ---- */}
+      <div className="home-hero" style={{ backgroundImage: `url(${Bg})` }}>
+        <div className="home-hero-overlay" />
+        <div className="home-hero-content">
+          <p className="home-hero-label">YATiCare Investment Platform</p>
+          <h1>Built On Humanity. Powered By Growth.</h1>
+          <p className="home-hero-sub">
+            Every step you take empowers a community and helps write a story of
+            shared success.
           </p>
           <button
+            className="home-hero-btn"
             onClick={() => navigate("/dashboard/plan")}
-            className="bg-green-600 hover:bg-green-700 w-[150px] h-[40px] text-white font-semibold px-6 py-2 rounded shadow-lg transition duration-300"
           >
-            Get Started
+            Start Investing
           </button>
         </div>
       </div>
 
-      {/* </div> */}
-
-      {/* Navigation */}
+      {/* ---- Quick Actions ---- */}
       <nav>
-        <ul onClick={() => Nav("recharge")}>
-          <div className="iconBox">
-            <FaWallet size={25} color="grey" />
-          </div>
-          <li>Add Funds</li>
-        </ul>
-        <ul onClick={() => Nav("withdraw")}>
-          <div className="iconBox">
-            <FaMoneyBillWave size={25} color="grey" />
-          </div>
-          <li>Withdraw</li>
-        </ul>
-        {/* <ul onClick={() => Nav('bankDetails')}>
-          <div className="iconBox"><FaUniversity size={25} color="grey" /></div>
-          <li>Bank Account</li>
-        </ul>
-        <ul onClick={() => Nav('plan')}>
-          <div className="iconBox"><FaUniversity size={25} color="grey" /></div>
-          <li>Plans</li>
-        </ul>
-        <ul>
-          <div className="iconBox"><FaUsers size={25} color="grey" /></div>
-          <li>Community</li>
-        </ul>
-        <ul onClick={() => Nav('Privacy')}>
-          <div className="iconBox"><FaShieldAlt size={25} color="grey" /></div>
-          <li>Privacy Policy</li>
-        </ul> */}
+        {quickActions.map((a) => (
+          <ul key={a.path} onClick={() => navigate(a.path)}>
+            <div className="iconBox">{a.icon}</div>
+            <li>{a.label}</li>
+          </ul>
+        ))}
       </nav>
 
-      {/* Testimonials Carousel */}
+      {/* ---- Testimonials Carousel ---- */}
       <div
         className="testimonialCarousel"
         onMouseEnter={() => setIsTestimonialCarouselPaused(true)}
@@ -210,7 +183,7 @@ const Home = () => {
       >
         <div className="testimonialCarouselHeader">
           <div>
-            <div className="testimonialCarouselLabel">Official update</div>
+            <div className="testimonialCarouselLabel">Official Update</div>
             <p className="testimonialCarouselText">
               Officially launched 14th of February. Join YATiCare Telegram for
               more updates!
@@ -220,14 +193,14 @@ const Home = () => {
             <button
               onClick={handlePrevTestimonial}
               className="testimonialCarouselBtn"
-              aria-label="Previous testimonial"
+              aria-label="Previous"
             >
               <FaChevronLeft />
             </button>
             <button
               onClick={handleNextTestimonial}
               className="testimonialCarouselBtn"
-              aria-label="Next testimonial"
+              aria-label="Next"
             >
               <FaChevronRight />
             </button>
@@ -243,15 +216,10 @@ const Home = () => {
                     "Anonymous"}
                 </h4>
                 <p className="testimonialDate">
-                  {testimonialsToShow[activeTestimonialIndex].createdAt
-                    ? new Date(
-                        testimonialsToShow[activeTestimonialIndex].createdAt,
-                      ).toLocaleDateString()
-                    : testimonialsToShow[activeTestimonialIndex].date
-                      ? new Date(
-                          testimonialsToShow[activeTestimonialIndex].date,
-                        ).toLocaleDateString()
-                      : "Date not available"}
+                  {new Date(
+                    testimonialsToShow[activeTestimonialIndex].createdAt ||
+                      testimonialsToShow[activeTestimonialIndex].date,
+                  ).toLocaleDateString()}
                 </p>
               </div>
               <p className="testimonialCarouselTextBody">
@@ -262,8 +230,7 @@ const Home = () => {
             </>
           ) : (
             <div className="testimonialEmptyState">
-              <p>No testimonials available right now.</p>
-              <p>Be the first to share your experience!</p>
+              <p>No testimonials yet. Be the first to share your experience!</p>
             </div>
           )}
         </div>
@@ -272,22 +239,18 @@ const Home = () => {
           {testimonialsToShow.map((_, idx) => (
             <button
               key={`dot-${idx}`}
-              className={`testimonialCarouselDot ${
-                activeTestimonialIndex === idx ? "active" : ""
-              }`}
+              className={`testimonialCarouselDot${activeTestimonialIndex === idx ? " active" : ""}`}
               onClick={() => setActiveTestimonialIndex(idx)}
-              aria-label={`Go to testimonial ${idx + 1}`}
+              aria-label={`Testimonial ${idx + 1}`}
             />
           ))}
         </div>
       </div>
 
-      {/* Products */}
+      {/* ---- Products ---- */}
       <div className="productDiv">
         <h3>Top Rated Products</h3>
         <Product displayedProducts={displayedProducts} />
-
-        {/* Pagination */}
         <div className="pagination">
           {Array.from({ length: totalPages }, (_, i) => (
             <button

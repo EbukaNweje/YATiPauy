@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./pageCss/Recharge.css";
 import "./pageCss/Withdraw.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import toast from "react-hot-toast";
+import { useAlert } from '../Components/AlertModal';
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ import { depositedAmount } from "./Global/Slice";
 import { useDispatch } from "react-redux";
 
 const Withdraw = () => {
+  const alert = useAlert();
   const user = useSelector((state) => state.YATipauy.user);
   const [selectedAmount, setSelectedAmount] = useState("");
   const [bankDetails, setBankDetails] = useState("");
@@ -148,21 +149,21 @@ const Withdraw = () => {
     }
 
     if (!selectedAmount) {
-      toast.error("Please fill in amount before proceeding.");
+      alert.error("Please fill in amount before proceeding.");
       return;
     }
     if (walletType === "other" && !bankDetails) {
-      toast.error("Please enter bank details before proceeding.");
+      alert.error("Please enter bank details before proceeding.");
       return;
     }
     if (selectedAmount < 30) {
-      toast.error("Minimum withdrawal amount is $30.00");
+      alert.error("Minimum withdrawal amount is $30.00");
       return;
     }
 
     // Check if old member is trying to withdraw more than refBonus
     if (isOldMember && selectedAmount > availableBalance) {
-      toast.error(
+      alert.error(
         `You can only withdraw up to $${refBonus.toFixed(2)} (your referral bonus).`,
       );
       return;
@@ -182,7 +183,7 @@ const Withdraw = () => {
 
   const confirmWithdraw = async () => {
     if (!pin || pin.length !== 4) {
-      toast.error("Please enter your 4-digit PIN.");
+      alert.error("Please enter your 4-digit PIN.");
       return;
     }
 
@@ -203,7 +204,7 @@ const Withdraw = () => {
         userId: user.user._id,
         withdrawalDate: date,
       });
-      toast.success(res.data.message);
+      alert.success(res.data.message);
       setShowPinPopup(false);
       setSelectedAmount("");
       setPin("");
@@ -211,7 +212,7 @@ const Withdraw = () => {
       dispatch(depositedAmount(Date.now()));
     } catch (error) {
       // console.error("Withdraw error:", error.response?.data || error.message);
-      toast.error(error.response?.data?.error || "Withdrawal failed");
+      alert.error(error.response?.data?.error || "Withdrawal failed");
     } finally {
       setLoading(false);
     }

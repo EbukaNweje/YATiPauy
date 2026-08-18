@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from './AlertModal';
 import "./TestimonialModal.css"; // We'll create this CSS files for styling the modal
 
 const TestimonialModal = ({ isOpen, onClose, userId }) => {
+  const alert = useAlert();
   const [testimonial, setTestimonial] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -13,7 +14,7 @@ const TestimonialModal = ({ isOpen, onClose, userId }) => {
     setLoading(true);
 
     if (!testimonial.trim()) {
-      toast.error("Please enter a testimonial");
+      alert.error("Please enter a testimonial");
       setLoading(false);
       return;
     }
@@ -26,12 +27,12 @@ const TestimonialModal = ({ isOpen, onClose, userId }) => {
         },
       );
 
-      toast.success("Thank you for your testimonial!");
+      alert.success("Thank you for your testimonial!");
       setTestimonial("");
       onClose();
     } catch (error) {
       console.error("Error submitting testimonial:", error);
-      toast.error("Failed to submit testimonial. Please try again.");
+      alert.error("Failed to submit testimonial. Please try again.");
     } finally {
       setLoading(false);
     }

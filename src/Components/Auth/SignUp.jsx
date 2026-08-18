@@ -6,13 +6,14 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { useAlert } from '../../Components/AlertModal';
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../pages/Global/Slice";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 const SignUp = () => {
+  const alert = useAlert();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [referralCode, setReferralCode] = useState("");
@@ -45,21 +46,21 @@ const SignUp = () => {
 
   const onFinish = async (values) => {
     if (values.password !== values.confirmpassword) {
-      toast.error("Passwords do not match.");
+      alert.error("Passwords do not match.");
       return;
     } else if (values.userName.length < 3) {
-      toast.error("UserName must be at least 3 characters long");
+      alert.error("UserName must be at least 3 characters long");
       return;
     } else if (!phone || phone.length < 11) {
-      toast.error("PhoneNumber must be valid and at least 11 digits");
+      alert.error("PhoneNumber must be valid and at least 11 digits");
       return;
     } else if (values.password.length < 6) {
-      toast.error("Password must be at least 6 characters long.");
+      alert.error("Password must be at least 6 characters long.");
       return;
     } else if (
       !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(values.email)
     ) {
-      toast.error("Email must be valid");
+      alert.error("Email must be valid");
       return;
     }
     setLoading(true);
@@ -69,12 +70,12 @@ const SignUp = () => {
         "https://yaticare-backend.onrender.com/api/auth/register",
         { ...values, phoneNumber: phone },
       );
-      toast.success(response.data.message);
+      alert.success(response.data.message);
       dispatch(loginSuccess(response.data.data));
       Nav("/auth/Pin");
     } catch (error) {
       setLoading(false);
-      toast.error(error?.response?.data?.message);
+      alert.error(error?.response?.data?.message);
     }
   };
 
