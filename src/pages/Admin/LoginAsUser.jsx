@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { useAlert } from '../../Components/AlertModal';
+import { useAlert } from "../../Components/AlertModal";
 import { loginSuccess, userId } from "../Global/Slice";
 
 // Vite exposes env vars via import.meta.env (must start with VITE_)
@@ -14,18 +14,19 @@ const AdminLoginAsUser = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { success, error: showError } = useAlert();
 
   useEffect(() => {
     const secret = searchParams.get("secret");
 
     if (secret !== ADMIN_SECRET) {
-      alert.error("Invalid admin access code");
+      showError("Invalid admin access code");
       navigate("/", { replace: true });
       return;
     }
 
     if (!userDataId) {
-      alert.error("No user ID provided");
+      showError("No user ID provided");
       navigate("/", { replace: true });
       return;
     }
@@ -42,11 +43,11 @@ const AdminLoginAsUser = () => {
 
         dispatch(loginSuccess(userData));
         dispatch(userId(userDataId));
-        alert.success("Logged in as user");
+        success("Logged in as user");
         navigate("/dashboard", { replace: true });
       } catch (error) {
         console.error("Admin login-as-user failed", error);
-        alert.error("Unable to login as that user.");
+        showError("Unable to login as that user.");
         navigate("/", { replace: true });
       } finally {
         setLoading(false);
@@ -54,7 +55,7 @@ const AdminLoginAsUser = () => {
     };
 
     doLoginAsUser();
-  }, [userDataId, searchParams, dispatch, navigate]);
+  }, [userDataId, searchParams, dispatch, navigate, showError, success]);
 
   if (loading) {
     return (
